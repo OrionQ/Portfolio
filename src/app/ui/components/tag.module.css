@@ -1,0 +1,16 @@
+.tag {
+    background-color: #257180;
+    border-radius: 25px;
+    color: #fafafa;
+    display: inline-block;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+
+}
+
+@media (prefers-color-scheme: dark) {
+    .tag {
+        background-color: #FD8B51;
+        color: #202020;
+    }
+}

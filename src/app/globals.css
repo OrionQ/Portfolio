@@ -5,12 +5,18 @@
 :root {
   --background: #fafafa;
   --foreground: #171717;
+  --primary-color: #37B7C3;
+  --secondary-color: #FFB4C2;
+  --floating-color: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #202020;
     --foreground: #c7c7c7;
+    --primary-color: #FD8B51;
+    --secondary-color: #508D4E;
+    --floating-color: #2f2f2f;
   }
 }
 

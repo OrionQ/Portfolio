@@ -1,0 +1,26 @@
+.tag {
+  border-radius: 1.5rem;
+  border-width:  2px;
+  display: flex;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  align-items: center;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--background);
+}
+
+.secondary {
+  background-color: var(--background-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.tertiary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--background);
+}

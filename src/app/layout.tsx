@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Gabarito } from 'next/font/google'
 import "./globals.css";
+import ThemeProvider from "../app/ui/utils/ThemeProvider";
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body
         className={gabarito.className}
       >
-        {children}
+        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
+          {children}
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

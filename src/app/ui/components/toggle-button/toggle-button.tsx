@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import styles from './toggle.module.css';
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ToggleButtonProps {
     options: string[];
@@ -17,12 +17,12 @@ export default function ToggleButton({ options, onChange }: ToggleButtonProps) {
         onChange(option);
     };
 
-    const updateSliderWidth = () => {
+    const updateSliderWidth = useCallback(() => {
         const selectedLabel = labelRefs.current.find((label) => label?.textContent === selectedOption);
         if (selectedLabel) {
             setSliderWidth(selectedLabel.offsetWidth);
         }
-    };
+    }, [selectedOption, labelRefs]);
 
     useEffect(() => {
         updateSliderWidth(); // Update slider width when option changes
@@ -35,7 +35,7 @@ export default function ToggleButton({ options, onChange }: ToggleButtonProps) {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    }, [selectedOption]);
+    }, [selectedOption, updateSliderWidth]);
 
     return (
         <div className={styles.container}>

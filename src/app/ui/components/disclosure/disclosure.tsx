@@ -25,7 +25,7 @@ export default function Disclosure({ className, children, company, date, isOpen 
     // Sync the internal state with the open prop if it's passed
     useEffect(() => {
         setIsOpen(isOpen);
-    }, [open]);
+    }, [open, isOpen]);
 
     const handleToggle = () => {
         setIsOpen((prev) => !prev);

@@ -81,7 +81,7 @@ export default function Experience() {
                         <Image style={{ borderRadius: "1.5rem", margin: ".25rem", objectFit: "cover" }} src={circulationThumbnail} alt="Circulation project's thumbnail" width={250} placeholder='blur' />
                     </Card>
                     <Card title="iTrust Medical Web Portal" className="flex flex-col lg:flex-row gap-4 justify-between">
-                        <p>This is a medical portal for the hospital and users are allowed to login with their credentials. We integrated 4 more use cases to the protal that read in a list of individuals' data and calculate the infection rate.
+                        <p>This is a medical portal for the hospital and users are allowed to login with their credentials. We integrated 4 more use cases to the protal that read in a list of individuals&apos; data and calculate the infection rate.
                             I was focusing on the testing and debugging, and we learned to implement and to utilize testing automation with Selenium and Cucumber.
                             To acheive the functionality of the web app, and I was learning what each part of code was responsible and try to fix all the bugs.
                             Meanwhile, since it is a team project, I also need to manage and coordinate with other tema members virtually to accomplish the result.

@@ -22,7 +22,7 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:px-12 sm:px-10 ">
         <section className='flex flex-row flex-wrap-reverse flex-1 w-full gap-4 items-center justify-center lg:justify-between'>
           <div className='flex flex-col'>
-            <h1 style={{ fontWeight: 700, fontSize: 72 }}>Orion<span style={{ fontWeight: 400, fontSize: 72 }}>'s Portfolio</span></h1>
+            <h1 style={{ fontWeight: 700, fontSize: 72 }}>Orion<span style={{ fontWeight: 400, fontSize: 72 }}>&apos;s Portfolio</span></h1>
             <div className="roles flex flex-row gap-2">
               <Tag>Software Engineer</Tag>
               <Tag tagType="secondary">UX Designer</Tag>

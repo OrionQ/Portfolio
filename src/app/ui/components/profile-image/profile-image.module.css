@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 8px solid var(--foreground);
+    border: 6px solid var(--foreground);
 }
 
 .profileImg {

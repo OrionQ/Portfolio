@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    position: relative;
+    inline-size: 100%;
+    max-inline-size: 40rem;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .label {
+    flex: 1;
+    padding-inline: 0.25rem;
+    padding-block: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10;
+    position: relative;
+  }
+  .label:hover {
+    color: var(--primary-color);
+  }
+  
+  /* Focus-visible for keyboard navigation */
+  .label:focus-within {
+      border-radius: 1.1rem;
+      outline: dashed 2px var(--primary-color); /* Customize focus outline */
+      outline-offset: -2px;
+  }
+  
+  .active {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  .inactive {
+    color: var(--foreground);
+  }
+  
+  .slider {
+    position: absolute;
+    inset-block-start: 4px;
+    border: 2px solid var(--primary-color);
+    height: calc(100% - 8px);
+    background-color: var(--background);
+    border-radius: 1.0rem; /* Match the radius to the label */
+    transition: left 0.2s, width 0.2s; /* Add transition for width change */
+    z-index: 0; /* Make sure the slider is behind the labels */
+  }
+  
+  .sliderLeft {
+    left: 4px;
+  }
+  
+  .sliderRight {
+    left: calc(50% - 16px);
+  }

@@ -1,0 +1,29 @@
+.disclosure {
+    background-color: var(--floating-color);
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    inline-size: 100%;
+    
+}
+.summary {
+    border-radius: 1.5rem;
+    border: 3px solid var(--floating-color);
+    background-color: var(--floating-color);
+    min-inline-size: 100%;
+    padding: 1.5rem;
+    cursor: pointer;
+}
+
+.summary:hover {
+    outline: 3px solid var(--primary-color);
+}
+
+.summary:focus-visible {
+    outline: 3px dashed var(--primary-color);
+    outline-offset: 4px;
+}
+
+.content {
+    background-color: var(--background);
+    border-radius: 0 0 1.5rem 1.5rem;
+}

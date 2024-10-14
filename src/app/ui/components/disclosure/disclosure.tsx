@@ -35,7 +35,7 @@ export default function Disclosure({ className, children, company, date, isOpen 
             <div className="flex flex-grow justify-between items-center">
                 <div className="flex flex-col">
                     <h3 style={{ fontWeight: 400, fontSize: 36 }}>{title}</h3>
-                    {company && <h4>@ {company}</h4>}
+                    {company && <h4 style={{color: "var(--secondary-color)"}}>@ {company}</h4>}
                 </div>
                 <p style={{ fontWeight: 300, fontSize: 20 }}>{date}</p>
             </div>

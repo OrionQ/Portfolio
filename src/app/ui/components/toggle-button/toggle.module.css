@@ -26,7 +26,7 @@
   /* Focus-visible for keyboard navigation */
   .label:focus-within {
       border-radius: 1.1rem;
-      outline: dashed 2px var(--primary-color); /* Customize focus outline */
+      outline: dashed 2px var(--secondary-color); /* Customize focus outline */
       outline-offset: -2px;
   }
   

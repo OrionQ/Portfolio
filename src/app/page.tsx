@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-between justify-items-center min-h-screen px-8 pb-16 gap-16">
       <Header />
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:px-12 sm:px-10 ">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start lg:px-60 sm:px-10 ">
         <section className='flex flex-row flex-wrap-reverse flex-1 w-full gap-4 items-center justify-center lg:justify-between'>
           <div className='flex flex-col'>
             <h1 style={{ fontWeight: 700, fontSize: 72 }}>Orion<span style={{ fontWeight: 400, fontSize: 72 }}>&apos;s Portfolio</span></h1>
@@ -40,7 +40,7 @@ export default function Home() {
             I was previously a software engineer who was really into design, and now I am learning about it! I enjoy learning new technologies and designing things, and I care about user experience deeply.
             I am eager to provide my unique perspectives and to become a bridge between engineering and designing!</span>
         </div>
-        <Divider dividerType="secondary" />
+        <Divider dividerType="primary" />
         {/* Experience */}
         <div className='flex w-full justify-between gap-24'>
           <h2 style={{ fontWeight: 400, fontSize: 36 }} className='flex gap-4 items-center'><FontAwesomeIcon icon={faTimeline} />Experience</h2>
@@ -48,13 +48,13 @@ export default function Home() {
             <CustomLink underline newTab href="/Xiaolei_Qin_Resume.pdf"><FontAwesomeIcon icon={faFileLines} /> Download PDF</CustomLink></p>
         </div>
         <Experience />
-        <Divider dividerType='secondary' />
+        <Divider dividerType='primary' />
         {/* Education */}
         <h2 style={{ fontWeight: 400, fontSize: 36 }} className='flex gap-4 items-center'><FontAwesomeIcon icon={faGraduationCap} />Education</h2>
         <div className='flex flex-col lg:flex-row gap-4 items-center justify-center w-full flex-1'>
-          <Card>
+          <Card style={{ border: "2px solid #bf5700" }}>
             <div className='flex items-center justify-between'>
-              <h3 style={{ fontWeight: 400, fontSize: 24, color: "#bf5700" }}>University of Texas at Austin</h3>
+              <h3 style={{ fontWeight: 400, fontSize: 24 }}>University of Texas at Austin</h3>
             </div>
             <div className='flex justify-start'><Tag className='text-xs' style={{ paddingBlock: 4, paddingInline: 4 }}>Current</Tag></div>
 
@@ -64,8 +64,8 @@ export default function Home() {
               <span>Aug 2024 - May 2026 (expected)</span>
             </p>
           </Card>
-          <Card>
-            <h3 style={{ fontWeight: 400, fontSize: 24, color: "#CC0000" }}>North Carolina State University</h3>
+          <Card style={{ border: "2px solid #CC0000" }}>
+            <h3 style={{ fontWeight: 400, fontSize: 24 }}>North Carolina State University</h3>
             <br />
             <p className='flex flex-col justify-between'>
               <CustomLink href='https://www.csc.ncsu.edu/' newTab underline>B.S. Computer Science</CustomLink>

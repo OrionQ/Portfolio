@@ -20,7 +20,7 @@
 }
 
 .tertiary {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
-  color: var(--background);
+  background-color: var(--floating-color);
+  border-color: var(--floating-color);
+  color: var(--primary-color);
 }

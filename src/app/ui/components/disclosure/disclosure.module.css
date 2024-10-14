@@ -19,7 +19,7 @@
 }
 
 .summary:focus-visible {
-    outline: 3px dashed var(--primary-color);
+    outline: 3px dashed var(--secondary-color);
     outline-offset: 4px;
 }
 

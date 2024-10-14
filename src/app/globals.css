@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f6f6;
+  --background: #faf9f9;
   --foreground: #171717;
   --primary-color: #18afbd;
-  --secondary-color: #e9899b;
+  --secondary-color: #17656c;
   --floating-color: #ececec;
 }
 
@@ -19,8 +19,8 @@ img {
   :root {
     --background: #202020;
     --foreground: #d5d5d5;
-    --primary-color: #fd8b51;
-    --secondary-color: #508d4e;
+    --primary-color: #f568a5;
+    --secondary-color: #f899c2;
     --floating-color: #2f2f2f;
   }
 }

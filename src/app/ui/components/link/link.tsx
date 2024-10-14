@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import React from "react";
+import styles from "./link.module.css";
 
 interface LinkProps {
     /** URL the link points to */
@@ -18,7 +19,7 @@ export default function Link({ href, children, newTab = false, underline = false
     return (
         <a
             href={href}
-            className={clsx("flex items-center gap-2 hover:underline hover:underline-offset-4 hover:opacity-60", underline && 'underline underline-offset-4', className)}
+            className={clsx("flex items-center gap-2 hover:underline hover:underline-offset-4 hover:opacity-60", underline && 'underline underline-offset-4', className, styles.link)}
             target={newTab ? "_blank" : "_self"}
             rel={newTab ? "noopener noreferrer" : undefined} // for security when opening new tabs
         >

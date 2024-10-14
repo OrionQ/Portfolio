@@ -5,7 +5,7 @@
 }
 
 .primary {
-    border-color: var(--primary-color);
+    border-color: var(--secondary-color);
 }
 
 .secondary {

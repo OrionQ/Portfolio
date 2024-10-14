@@ -1,0 +1,7 @@
+.link {
+    color: var(--secondary-color)
+}
+
+.link:focus {
+    outline: 2px dashed var(--secondary-color);
+}

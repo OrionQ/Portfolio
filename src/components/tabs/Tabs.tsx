@@ -1,7 +1,6 @@
 // Tabs.tsx
-import clsx from "clsx";
 import React, { Fragment, useState, type ReactNode } from 'react';
-import styles from "./tabs.module.css";
+import styles from "./Tabs.module.css";
 
 type TabsProps = {
     titles: string[]; // Array of titles for the tabs

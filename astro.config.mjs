@@ -10,7 +10,7 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://orionq.github.io',
-  base: 'my-repo',
+  base: '',
   integrations: [
     tailwind(),
     react({ experimentalReactChildren: true }),

@@ -11,7 +11,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
     <div class="flex flex-grow justify-between items-center">
       <div class="flex gap-2 items-center">
         <div class="flex flex-col">
-          <h3 class="font-normal text-3xl">{title}</h3>
+          <h3 class="font-normal text-xl md:text-3xl">{title}</h3>
           {
             company && (
               <h4 class="text-[var(--secondary-color)]">@ {company}</h4>
@@ -20,13 +20,13 @@ const { className, company, date, open = false, tag, title } = Astro.props;
         </div>
         {
           tag && (
-            <Tag className="text-xs py-1 px-1" tagType="tertiary">
+            <Tag className="text-xs" tagType="tertiary">
               {tag}
             </Tag>
           )
         }
       </div>
-      <p class="font-light text-xl">{date}</p>
+      <p class="font-light text-sm md:text-xl">{date}</p>
     </div>
     <Icon
       name="chevron-down"

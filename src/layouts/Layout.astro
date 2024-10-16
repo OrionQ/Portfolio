@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  :root {
+    --background: #faf9f9;
+    --foreground: #171717;
+    --primary-color: #18afbd;
+    --secondary-color: #186167;
+    --floating-color: #ececec;
+    --ambience-color: #bfe0e3;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #202020;
+      --foreground: #d5d5d5;
+      --primary-color: #f568a5;
+      --secondary-color: #e59fbd;
+      --floating-color: #2f2f2f;
+      --ambience-color: #593a47;
+    }
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  }
+
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+</style>

@@ -1,0 +1,34 @@
+---
+
+interface ProfileImageProps {
+  alt: string;
+  width: number; // Desired width
+  height: number; // Desired height
+}
+
+const { alt, width, height } = Astro.props as ProfileImageProps;
+---
+
+<div class="profileImgMask">
+  <img
+    src="/profile-pic.jpeg"
+    alt={alt}
+    width={width}
+    height={height}
+    class="profileImg"
+  />
+</div>
+<style>
+  .profileImgMask {
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 6px solid var(--secondary-color);
+  }
+
+  .profileImg {
+    object-fit: cover;
+  }
+</style>

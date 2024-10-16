@@ -1,0 +1,132 @@
+---
+// Import necessary components
+import { Icon } from "astro-icon/components";
+
+import Card from "../components/card/Card.astro";
+import Divider from "../components/divider/Divider.astro";
+import Link from "../components/link/Link.astro";
+import ProfileImage from "../components/profile-image/ProfileImage.astro";
+import Tag from "../components/tag/Tag.astro";
+
+import Layout from "../layouts/Layout.astro";
+import Footer from "../section/Footer.astro";
+import Header from "../section/Header.astro";
+import Experience from "../section/Experience.astro";
+import OtherProjects from "../section/OtherProjects.astro";
+import ProfessionalExperience from "../section/ProfessionalExperience.astro";
+// import Experience from './ui/pages/experience.astro';
+---
+
+<Layout title="Orion's Portfolio">
+  <div
+    class="flex flex-col justify-between items-center min-h-screen px-8 pb-16 gap-16"
+  >
+    <Header />
+    <main
+      class="flex flex-col gap-8 row-start-2 items-center sm:items-start xl:px-[15%] lg:px-36 sm:px-10"
+    >
+      <section
+        class="flex flex-row flex-wrap-reverse flex-1 w-full gap-x-24 items-center justify-center"
+      >
+        <div class="flex flex-col">
+          <h1 style={{ fontWeight: "700", fontSize: "72px" }}>
+            Orion<span style={{ fontWeight: "400", fontSize: "72px" }}
+              >&apos;s Portfolio</span
+            >
+          </h1>
+          <div
+            class="roles flex flex-row gap-2 justify-center xl:justify-start"
+          >
+            <Tag>Software Engineer</Tag>
+            <Tag tagType="secondary">UX Designer</Tag>
+            <Tag tagType="tertiary">Photographer</Tag>
+          </div>
+        </div>
+        <div class="px-16">
+          <ProfileImage
+            alt="Orion's profile picture"
+            width={300}
+            height={300}
+          />
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <div class="intro flex flex-col gap-4">
+        <h2 class="flex gap-4 items-center text-4xl">
+          <Icon name="id-card" />
+          About Me
+        </h2>
+        <span
+          >Hey! My name is <span class="underline underline-offset-2"
+            >Xiaolei Qin (秦啸雷 to be precise)</span
+          >, but you may call me Orion. I am currently a HCI/UX master student
+          at UT Austin. I was previously a software engineer who was really into
+          design, and now I am learning about it! I enjoy learning new
+          technologies and designing things, and I care about user experience
+          deeply. I am eager to provide my unique perspectives and to become a
+          bridge between engineering and designing!</span
+        >
+      </div>
+      <Divider dividerType="primary" />
+
+      <!-- Experience Section -->
+      <div class="flex w-full justify-between gap-8 flex-wrap">
+        <h2 class="text-4xl flex gap-4 items-center">
+          <Icon name="timeline" />Professional Experience
+        </h2>
+        <p class="whitespace-nowrap flex items-center gap-2">
+          Here is the PDF version:
+          <Link underline newTab href="/Xiaolei_Qin_Resume.pdf"
+            ><Icon name="file-lines" />Download PDF</Link
+          >
+        </p>
+      </div>
+      <ProfessionalExperience />
+      <Divider dividerType="primary" />
+      <div class="flex w-full justify-between gap-8 flex-wrap">
+        <h2 class="text-4xl flex gap-4 items-center">
+          <Icon name="diagram-project" />Other Projects
+        </h2>
+      </div>
+      <OtherProjects />
+      <Divider dividerType="primary" />
+
+      <!-- Education Section -->
+      <h2 class="text-4xl flex gap-4 items-center">
+        <Icon name="graduation-cap" />Education
+      </h2>
+      <div
+        class="flex flex-col lg:flex-row gap-4 justify-center w-full flex-1 items-stretch"
+      >
+        <Card style={{ border: "2px solid #bf5700" }}>
+          <div class="flex items-center justify-between">
+            <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
+          </div>
+          <div class="flex justify-start">
+            <Tag className="text-xs py-1 px-1" tagType="tertiary">Current</Tag>
+          </div>
+          <p class="flex flex-col justify-between">
+            <Link href="https://www.ischool.utexas.edu/" newTab underline
+              >M.S. Information Studies</Link
+            >
+            <strong>Human-Computer Interaction & UX Design</strong>
+            <span>Aug 2024 - May 2026 (expected)</span>
+          </p>
+        </Card>
+        <Card style={{ border: "2px solid #CC0000" }}>
+          <h3 class="font-normal text-2xl">North Carolina State University</h3>
+          <br />
+          <p class="flex flex-col justify-between">
+            <Link href="https://www.csc.ncsu.edu/" newTab underline
+              >B.S. Computer Science</Link
+            >
+            Minor in Art & Design
+            <span>Aug 2017 - May 2021</span>
+          </p>
+        </Card>
+      </div>
+    </main>
+    <Footer />
+  </div>
+</Layout>

@@ -1,0 +1,45 @@
+.tabsContainer {
+    align-items: center;
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+    max-inline-size: 40rem;
+    padding: 0.25rem;
+    position: relative;
+    gap: 4px;
+  }
+
+  .tabButton {
+    flex: 1;
+    color: var(--foreground);
+    cursor: pointer;
+    padding-block: 1rem;
+    padding-inline: 0.25rem;
+    position: relative;
+    text-align: center;
+    transition: color 0.2s;
+    transition:
+      left 0.2s,
+      width 0.2s; /* Add transition for width change */
+  }
+
+  .tabButton:hover {
+    color: var(--primary-color);
+  }
+
+  /* Focus-visible for keyboard navigation */
+  .tabButton:focus-visible {
+    border-radius: 1.1rem;
+    outline: dashed 2px var(--secondary-color); /* Customize focus outline */
+    outline-offset: 2px;
+  }
+
+  .tabButton[aria-selected="true"] {
+    background-color: var(--background);
+    border: 2px solid var(--primary-color);
+    border-radius: 1.1rem; /* Match the radius to the label */
+    color: var(--primary-color);
+    font-weight: 500;
+  }

@@ -1,0 +1,30 @@
+---
+interface DividerProps {
+  /** type of divider */
+  dividerType?: "primary" | "secondary" | "tertiary";
+}
+
+const { dividerType = "primary" } = Astro.props as DividerProps;
+---
+
+<hr class={`divider ${dividerType}`} />
+<style>
+  .divider {
+    border-radius: 1.5rem;
+    border-width: 0.5px;
+    inline-size: 100%;
+  }
+
+  .primary {
+    border-color: var(--secondary-color);
+  }
+
+  .secondary {
+    border-color: var(--forground);
+  }
+
+  .tertiary {
+    border-color: var(--floating-color);
+    border-width: 2px;
+  }
+</style>

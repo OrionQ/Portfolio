@@ -1,0 +1,78 @@
+---
+import { Icon } from "astro-icon/components";
+import Tag from "../tag/Tag.astro";
+const { className, company, date, open = false, tag, title } = Astro.props;
+---
+
+<details class="disclosure group" open={open}>
+  <summary
+    class={`flex flex-row flex-grow justify-between items-center gap-4 summary`}
+  >
+    <div class="flex flex-grow justify-between items-center">
+      <div class="flex gap-2 items-center">
+        <div class="flex flex-col">
+          <h3 class="font-normal text-4xl">{title}</h3>
+          {
+            company && (
+              <h4 class="text-[var(--secondary-color)]">@ {company}</h4>
+            )
+          }
+        </div>
+        {
+          tag && (
+            <Tag className="text-xs py-1 px-1" tagType="tertiary">
+              {tag}
+            </Tag>
+          )
+        }
+      </div>
+      <p class="font-light text-xl">{date}</p>
+    </div>
+    <Icon
+      name="chevron-down"
+      size={20}
+      class="flex-shrink-0 inline group-open:hidden"
+      aria-hidden
+    />
+    <Icon
+      name="chevron-up"
+      size={20}
+      class="flex-shrink-0 hidden group-open:inline"
+      aria-hidden
+    />
+  </summary>
+  <div class={`${className || ""} content`}>
+    <slot />
+  </div>
+</details>
+
+<style>
+  .disclosure {
+    background-color: var(--floating-color);
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    inline-size: 100%;
+  }
+  .summary {
+    border-radius: 1.5rem;
+    border: 3px solid var(--floating-color);
+    background-color: var(--floating-color);
+    min-inline-size: 100%;
+    padding: 1.5rem;
+    cursor: pointer;
+  }
+
+  .summary:hover {
+    outline: 3px solid var(--primary-color);
+  }
+
+  .summary:focus-visible {
+    outline: 3px dashed var(--secondary-color);
+    outline-offset: 4px;
+  }
+
+  .content {
+    background-color: var(--background);
+    border-radius: 0 0 1.5rem 1.5rem;
+  }
+</style>

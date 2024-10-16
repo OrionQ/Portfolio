@@ -1,0 +1,26 @@
+---
+const {
+  href,
+  newTab = false,
+  underline = false,
+  className,
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class={`link flex items-center gap-2 hover:underline hover:underline-offset-4 hover:opacity-60 ${underline ? "underline underline-offset-4" : ""} ${className}`}
+  target={newTab ? "_blank" : "_self"}
+  rel={newTab ? "noopener noreferrer" : undefined}
+>
+  <slot />
+</a>
+<style>
+  .link {
+    color: var(--secondary-color);
+  }
+
+  .link:focus {
+    outline: 2px dashed var(--secondary-color);
+  }
+</style>

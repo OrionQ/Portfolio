@@ -1,0 +1,17 @@
+---
+const { className, title, style } = Astro.props;
+---
+
+<div class="card w-full" style={style}>
+  {title && <h3 class="font-light text-[2.25rem]">{title}</h3>}
+  <div class:list={[`${className || ""}`]}>
+    <slot />
+  </div>
+</div>
+<style>
+  .card {
+    background-color: var(--floating-color);
+    padding: 2rem;
+    border-radius: 1.5rem;
+  }
+</style>

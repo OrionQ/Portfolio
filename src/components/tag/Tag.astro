@@ -1,44 +1,19 @@
 ---
-interface TagProps {
-  /** type of the tag */
-  tagType?: "primary" | "secondary" | "tertiary";
-  /** additional inline style */
-  style?: string; // Use string for inline styles
-  /** extra className */
-  className?: string;
-}
-
-const { tagType = "primary", style, className = "" } = Astro.props as TagProps;
+const { style, className = "" } = Astro.props;
 ---
 
-<div class={`tag ${tagType} ${className}`} style={style}>
+<div class:list={`tag ${className}`} style={style}>
   <slot />
 </div>
 <style>
   .tag {
-    border-radius: 1.5rem;
-    border-width: 2px;
-    display: flex;
-    padding-inline: 0.75rem;
-    padding-block: 0.25rem;
     align-items: center;
-  }
-
-  .primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: var(--background);
-  }
-
-  .secondary {
-    background-color: var(--background-color);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-  }
-
-  .tertiary {
     background-color: var(--ambience-color);
     border-color: var(--ambience-color);
+    border-radius: 9999px;
     color: var(--secondary-color);
+    display: flex;
+    padding-inline: 0.75rem;
+    padding-block: 0.5rem;
   }
 </style>

@@ -2,17 +2,18 @@
 // Import necessary components
 import { Icon } from "astro-icon/components";
 
-import Card from "../components/card/Card.astro";
 import Divider from "../components/divider/Divider.astro";
 import Link from "../components/link/Link.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 import Tag from "../components/tag/Tag.astro";
 
 import Layout from "../layouts/Layout.astro";
+import Education from "../section/Education.astro";
 import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
 import OtherProjects from "../section/OtherProjects.astro";
 import ProfessionalExperience from "../section/ProfessionalExperience.astro";
+import UXProjects from "../section/UXProjects.astro";
 // import Experience from './ui/pages/experience.astro';
 ---
 
@@ -37,8 +38,8 @@ import ProfessionalExperience from "../section/ProfessionalExperience.astro";
             class="roles flex flex-row gap-2 justify-center xl:justify-start"
           >
             <Tag>Software Engineer</Tag>
-            <Tag tagType="secondary">UX Designer</Tag>
-            <Tag tagType="tertiary">Photographer</Tag>
+            <Tag>UX Designer</Tag>
+            <Tag>Photographer</Tag>
           </div>
         </div>
         <div class="px-16">
@@ -77,13 +78,17 @@ import ProfessionalExperience from "../section/ProfessionalExperience.astro";
         <p class="whitespace-nowrap flex items-center gap-2">
           Here is the PDF version:
           <Link underline newTab href="/Portfolio/Xiaolei_Qin_Resume.pdf"
-            ><Icon name="file-lines" />Download PDF</Link
+            ><Icon name="file-lines" />View PDF</Link
           >
         </p>
       </div>
       <ProfessionalExperience />
       <Divider dividerType="primary" />
-
+      <h2 class="text-4xl flex gap-4 items-center">
+        <Icon name="layer-group" />UX Projects
+      </h2>
+      <UXProjects />
+      <Divider dividerType="primary" />
       <h2 class="text-4xl flex gap-4 items-center">
         <Icon name="diagram-project" />Other Projects
       </h2>
@@ -95,36 +100,7 @@ import ProfessionalExperience from "../section/ProfessionalExperience.astro";
       <h2 class="text-4xl flex gap-4 items-center">
         <Icon name="graduation-cap" />Education
       </h2>
-      <div
-        class="flex flex-col lg:flex-row gap-4 justify-center w-full flex-1 items-stretch"
-      >
-        <Card style={{ border: "2px solid #bf5700" }}>
-          <div class="flex items-center justify-between">
-            <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
-          </div>
-          <div class="flex justify-start">
-            <Tag className="text-xs py-1 px-1" tagType="tertiary">Current</Tag>
-          </div>
-          <p class="flex flex-col justify-between">
-            <Link href="https://www.ischool.utexas.edu/" newTab underline
-              >M.S. Information Studies</Link
-            >
-            <strong>Human-Computer Interaction & UX Design</strong>
-            <span>Aug 2024 - May 2026 (expected)</span>
-          </p>
-        </Card>
-        <Card style={{ border: "2px solid #CC0000" }}>
-          <h3 class="font-normal text-2xl">North Carolina State University</h3>
-          <br />
-          <p class="flex flex-col justify-between">
-            <Link href="https://www.csc.ncsu.edu/" newTab underline
-              >B.S. Computer Science</Link
-            >
-            Minor in Art & Design
-            <span>Aug 2017 - May 2021</span>
-          </p>
-        </Card>
-      </div>
+      <Education />
     </main>
     <Footer />
   </div>

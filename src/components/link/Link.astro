@@ -1,10 +1,5 @@
 ---
-const {
-  href,
-  newTab = false,
-  underline = false,
-  className,
-} = Astro.props;
+const { href, newTab = false, underline = false, className } = Astro.props;
 ---
 
 <a
@@ -20,7 +15,7 @@ const {
     color: var(--secondary-color);
   }
 
-  .link:focus {
+  .link:focus-visible {
     outline: 2px dashed var(--secondary-color);
   }
 </style>

@@ -1,0 +1,36 @@
+---
+import Card from "../components/card/Card.astro";
+import Link from "../components/link/Link.astro";
+import Tag from "../components/tag/Tag.astro";
+---
+
+<div
+  class="flex flex-col lg:flex-row gap-4 justify-center w-full flex-1 items-stretch"
+>
+  <Card style={{ border: "2px solid #bf5700" }}>
+    <div class="flex items-center justify-between">
+      <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
+    </div>
+    <div class="flex justify-start">
+      <Tag className="text-xs">Current</Tag>
+    </div>
+    <p class="flex flex-col justify-between">
+      <Link href="https://www.ischool.utexas.edu/" newTab underline
+        >M.S. Information Studies</Link
+      >
+      <strong>Human-Computer Interaction & UX Design</strong>
+      <span>Aug 2024 - May 2026 (expected)</span>
+    </p>
+  </Card>
+  <Card style={{ border: "2px solid #CC0000" }}>
+    <h3 class="font-normal text-2xl">North Carolina State University</h3>
+    <br />
+    <p class="flex flex-col justify-between">
+      <Link href="https://www.csc.ncsu.edu/" newTab underline
+        >B.S. Computer Science</Link
+      >
+      Minor in Art & Design
+      <span>Aug 2017 - May 2021</span>
+    </p>
+  </Card>
+</div>

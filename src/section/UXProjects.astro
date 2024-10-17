@@ -1,0 +1,52 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Card from "../components/card/Card.astro";
+import PageLink from "../components/page-link/PageLink.astro";
+
+import trustyPic from "../images/Trusty.png";
+import Link from "../components/link/Link.astro";
+import Tag from "../components/tag/Tag.astro";
+---
+
+<div class="flex flex-col gap-4">
+  <Card title="Trusty">
+    <div class="flex flex-row gap-2">
+      <div class="flex flex-col gap-4 justify-between">
+        <div>
+          <p>
+            During the 2021 Adobe Creative Jam in partnership with The New York
+            Times, my teammate and I designed a mobile app prototype. Our goal
+            was to create a user-friendly app experience that focused on
+            transparency in news sourcing, making it easy for users to verify
+            the credibility of information directly within the app interface.
+            <br />
+            <br />
+            Though this is our first Creative Jam, we receive an honorable mention,
+            placing in the top 20 out of 315 teams in the competition!
+          </p>
+          <div class="flex flex-row gap-2 pt-2">
+            <Tag>#UI design</Tag><Tag>#Adobe XD</Tag>
+          </div>
+        </div>
+        <div class="flex flex-row gap-4">
+          <PageLink href="/Portfolio"
+            >Read more<Icon name="arrow-right-long" class="page-link-icon" />
+          </PageLink>
+          <Link
+            aria-label="See prototype (opens a new window)"
+            href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
+            newTab
+            >See prototype <Icon name="up-right-from-square" />
+          </Link>
+        </div>
+      </div>
+      <Image
+        class="rounded-2xl m-1 object-cover"
+        src={trustyPic}
+        alt="Trusty app thumbnail"
+        width={150}
+      />
+    </div>
+  </Card>
+</div>

@@ -2,7 +2,7 @@
 const { style, className = "" } = Astro.props;
 ---
 
-<div class:list={`tag ${className}`} style={style}>
+<div class:list={["tag", `${className}`, "text-sm sm:text-md"]} style={style}>
   <slot />
 </div>
 <style>

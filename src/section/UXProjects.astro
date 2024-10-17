@@ -29,7 +29,7 @@ import Tag from "../components/tag/Tag.astro";
             <Tag>#UI design</Tag><Tag>#Adobe XD</Tag>
           </div>
         </div>
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-row flex-wrap gap-4">
           <PageLink href="/Portfolio"
             >Read more<Icon name="arrow-right-long" class="page-link-icon" />
           </PageLink>
@@ -42,10 +42,11 @@ import Tag from "../components/tag/Tag.astro";
         </div>
       </div>
       <Image
-        class="rounded-2xl m-1 object-cover"
+        class="rounded-2xl m-1 object-cover hidden sm:block"
         src={trustyPic}
         alt="Trusty app thumbnail"
         width={150}
+        quality={100}
       />
     </div>
   </Card>

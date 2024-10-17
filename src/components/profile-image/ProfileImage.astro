@@ -1,12 +1,5 @@
 ---
-
-interface ProfileImageProps {
-  alt: string;
-  width: number; // Desired width
-  height: number; // Desired height
-}
-
-const { alt, width, height } = Astro.props as ProfileImageProps;
+const { alt, width, height } = Astro.props;
 ---
 
 <div class="profileImgMask">

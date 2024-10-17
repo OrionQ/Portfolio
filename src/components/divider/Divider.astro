@@ -1,10 +1,5 @@
 ---
-interface DividerProps {
-  /** type of divider */
-  dividerType?: "primary" | "secondary" | "tertiary";
-}
-
-const { dividerType = "primary" } = Astro.props as DividerProps;
+const { dividerType = "primary" } = Astro.props;
 ---
 
 <hr class={`divider ${dividerType}`} />

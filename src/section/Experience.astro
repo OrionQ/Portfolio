@@ -1,0 +1,207 @@
+---
+import { Icon } from "astro-icon/components";
+import Divider from "../components/divider/Divider.astro";
+import Link from "../components/link/Link.astro";
+import OtherProjects from "./OtherProjects.astro";
+import ProfessionalExperience from "./ProfessionalExperience.astro";
+import UXProjects from "./UXProjects.astro";
+---
+
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const categories: Record<string, boolean> = {
+        professionalExperience: true,
+        uxProjects: false,
+        otherProjects: false,
+      };
+
+      const showCategory = (category: keyof typeof categories) => {
+        Object.keys(categories).forEach((key) => (categories[key] = false));
+        categories[category] = true;
+        document
+          .querySelectorAll(".category")
+          .forEach((el) => el.classList.add("hidden"));
+        document.getElementById(category)?.classList.remove("hidden");
+
+        // Update aria-selected attribute on buttons
+        document.querySelectorAll('[role="tab"]').forEach((button) => {
+          button.setAttribute(
+            "aria-selected",
+            button.getAttribute("data-category") === category ? "true" : "false"
+          );
+        });
+      };
+
+      // Initialize: Set aria-selected and hidden based on the categories object
+      Object.keys(categories).forEach((category) => {
+        const isActive = categories[category as keyof typeof categories];
+        const element = document.getElementById(category);
+
+        // Show or hide the category section
+        if (element) {
+          element.classList.toggle("hidden", !isActive); // Hide if not active
+        }
+
+        // Set aria-selected for the corresponding tab button
+        const button = document.querySelector(`[data-category="${category}"]`);
+        if (button) {
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        }
+      });
+
+      // Attach event listeners to buttons to switch between categories
+      document
+        .getElementById("tab-professional-experience")
+        ?.addEventListener("click", () => {
+          showCategory("professionalExperience");
+        });
+      document
+        .getElementById("tab-ux-projects")
+        ?.addEventListener("click", () => {
+          showCategory("uxProjects");
+        });
+      document
+        .getElementById("tab-other-projects")
+        ?.addEventListener("click", () => {
+          showCategory("otherProjects");
+        });
+      //     window.addEventListener("keydown", (event) => {
+      //       let nextButton: HTMLElement | null = null;
+
+      //       if (event.key === "ArrowRight") {
+      //         nextButton =
+      //           (button.nextElementSibling as HTMLElement) ||
+      //           (tabButtons[0] as HTMLElement); // Loop back to first tab
+      //       } else if (event.key === "ArrowLeft") {
+      //         nextButton =
+      //           (button.previousElementSibling as HTMLElement) ||
+      //           (tabButtons[tabButtons.length - 1] as HTMLElement); // Loop to last tab
+      //       }
+
+      //       if (nextButton) {
+      //         nextButton.focus(); // Set focus to the next button
+      //         const nextCategory = nextButton.getAttribute("data-category");
+      //         if (nextCategory) {
+      //           showCategory(nextCategory); // Show the corresponding category
+      //         }
+      //         event.preventDefault(); // Prevent default behavior
+      //       }
+      //     });
+      //   });
+    });
+  }
+</script>
+<div class="flex w-full justify-between gap-8 flex-wrap">
+  <h2 class="text-4xl flex gap-4 items-center">
+    <Icon name="timeline" />Experience
+  </h2>
+  <p class="whitespace-nowrap flex items-center gap-2">
+    Here is the PDF version:
+    <Link underline newTab href="/Portfolio/Xiaolei_Qin_Resume.pdf"
+      ><Icon name="file-lines" />View PDF</Link
+    >
+  </p>
+</div>
+<div class="flex flex-col w-full gap-4">
+  <div class="tabs-container flex flex-row flex-wrap" role="tablist">
+    <button
+      aria-controls="professionalExperience"
+      aria-selected="true"
+      class="tab-button"
+      data-category="professionalExperience"
+      id="tab-professional-experience"
+      role="tab"
+      ><h3>
+        <Icon name="briefcase" class="hidden sm:block flex-shrink-0" />Professional Experience
+      </h3></button
+    >
+    <button
+      aria-controls="uxProjects"
+      aria-selected="false"
+      class="tab-button"
+      data-category="uxProjects"
+      id="tab-ux-projects"
+      role="tab"
+      ><h3>
+        <Icon name="layer-group" class="hidden sm:block flex-shrink-0" />UX Projects
+      </h3></button
+    >
+    <button
+      aria-controls="otherProjects"
+      aria-selected="false"
+      class="tab-button"
+      data-category="otherProjects"
+      id="tab-other-projects"
+      role="tab"
+      ><h3>
+        <Icon name="diagram-project" class="hidden sm:block flex-shrink-0" />Other Projects
+      </h3></button
+    >
+  </div>
+  <div id="professionalExperience" class="category">
+    <ProfessionalExperience />
+  </div>
+  <div id="uxProjects" class="category hidden"><UXProjects /></div>
+  <div id="otherProjects" class="category hidden"><OtherProjects /></div>
+</div>
+<Divider dividerType="primary" />
+<style>
+  .tabs-container {
+    align-items: center;
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+    padding: 0.25rem;
+    position: relative;
+    gap: 8px;
+    transition:
+    all 0.2s,
+  }
+
+  .tab-button {
+    color: var(--foreground);
+    cursor: pointer;
+    flex: 1;
+
+    padding-block: 1rem;
+    padding-inline: 0.75rem;
+    position: relative;
+    text-align: center;
+    transition: color 0.2s;
+    transition:
+      all 0.2s,
+  }
+
+  .tab-button h3 {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .tab-button:hover {
+    color: var(--primary-color);
+  }
+
+  .tab-button:active {
+    opacity: 0.75;
+  }
+
+  /* Focus-visible for keyboard navigation */
+  .tab-button:focus-visible {
+    border-radius: 1.1rem;
+    outline: dashed 2px var(--secondary-color); /* Customize focus outline */
+    outline-offset: 2px;
+  }
+
+  .tab-button[aria-selected="true"] {
+    background-color: var(--background);
+    border: 2px solid var(--primary-color);
+    border-radius: 1.1rem; /* Match the radius to the label */
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+</style>

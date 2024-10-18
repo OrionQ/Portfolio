@@ -2,29 +2,26 @@
 import { Icon } from "astro-icon/components";
 
 import Divider from "../components/divider/Divider.astro";
-import Link from "../components/link/Link.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 import Tag from "../components/tag/Tag.astro";
 
 import Layout from "../layouts/Layout.astro";
 import Education from "../section/Education.astro";
+import Experience from "../section/Experience.astro";
 import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
-import OtherProjects from "../section/OtherProjects.astro";
-import ProfessionalExperience from "../section/ProfessionalExperience.astro";
-import UXProjects from "../section/UXProjects.astro";
 ---
 
 <Layout title="Orion's Portfolio">
   <Header />
   <div
-    class="flex flex-col justify-between items-center min-h-screen px-4 pb-16 gap-16"
+    class="flex flex-col justify-between items-center min-h-screen px-6 pb-16 gap-16"
   >
     <main
-      class="flex flex-col gap-8 sm:items-start xl:px-[15%] lg:px-36 sm:px-10"
+      class="flex flex-col gap-8 sm:items-start 2xl:px-[15%] xl:px-[10%] lg:px-30 sm:px-10"
     >
       <section
-        class="flex flex-row flex-wrap-reverse flex-1 w-full gap-x-24 items-center justify-center"
+        class="flex flex-row flex-wrap-reverse w-full items-center justify-center"
       >
         <div class="flex flex-col">
           <h1 style={{ fontWeight: "700", fontSize: "64px" }}>
@@ -33,7 +30,7 @@ import UXProjects from "../section/UXProjects.astro";
             >
           </h1>
           <div
-            class="roles flex flex-row gap-2 justify-center xl:justify-start"
+            class="roles flex flex-row gap-2 justify-center lg:justify-start"
           >
             <Tag>Software Engineer</Tag>
             <Tag>UX Designer</Tag>
@@ -43,8 +40,8 @@ import UXProjects from "../section/UXProjects.astro";
         <div class="px-16">
           <ProfileImage
             alt="Orion's profile picture"
-            width={300}
-            height={300}
+            width={250}
+            height={250}
           />
         </div>
       </section>
@@ -67,34 +64,9 @@ import UXProjects from "../section/UXProjects.astro";
         >
       </div>
       <Divider dividerType="primary" />
-
       <!-- Experience Section -->
-      <div class="flex w-full justify-between gap-8 flex-wrap">
-        <h2 class="text-4xl flex gap-4 items-center">
-          <Icon name="timeline" />Professional Experience
-        </h2>
-        <p class="whitespace-nowrap flex items-center gap-2">
-          Here is the PDF version:
-          <Link underline newTab href="/Portfolio/Xiaolei_Qin_Resume.pdf"
-            ><Icon name="file-lines" />View PDF</Link
-          >
-        </p>
-      </div>
-      <ProfessionalExperience />
-      <Divider dividerType="primary" />
-      <h2 class="text-4xl flex gap-4 items-center">
-        <Icon name="layer-group" />UX Projects
-      </h2>
-      <UXProjects />
-      <Divider dividerType="primary" />
-      <h2 class="text-4xl flex gap-4 items-center">
-        <Icon name="diagram-project" />Other Projects
-      </h2>
-
-      <OtherProjects />
-      <Divider dividerType="primary" />
+      <Experience />
       <!-- Education Section -->
-
       <h2 class="text-4xl flex gap-4 items-center">
         <Icon name="graduation-cap" />Education
       </h2>

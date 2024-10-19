@@ -1,4 +1,7 @@
 ---
+import Footer from "../section/Footer.astro";
+import Header from "../section/Header.astro";
+
 const { title } = Astro.props;
 ---
 
@@ -19,7 +22,17 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <Header />
+    <div
+      class="flex flex-col justify-between items-center min-h-screen px-6 pb-16 gap-16"
+    >
+      <main
+        class="flex flex-col gap-8 sm:items-start 2xl:px-[15%] xl:px-[10%] lg:px-30 sm:px-10"
+      >
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
 <style is:global>
@@ -31,9 +44,9 @@ const { title } = Astro.props;
     --background: #faf9f9;
     --foreground: #171717;
     --primary-color: #18afbd;
-    --secondary-color: #186167;
+    --secondary-color:#186168;
     --floating-color: #ececec;
-    --ambience-color: #bfe0e3;
+    --ambience-color: #bde5e9;
   }
 
   @media (prefers-color-scheme: dark) {

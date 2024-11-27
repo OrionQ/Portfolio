@@ -1,10 +1,9 @@
 ---
-import { Icon } from "astro-icon/components";
-
 import Divider from "../components/divider/Divider.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 import Tag from "../components/tag/Tag.astro";
 
+import Card from "../components/card/Card.astro";
 import Layout from "../layouts/Layout.astro";
 import Education from "../section/Education.astro";
 import Experience from "../section/Experience.astro";
@@ -13,46 +12,56 @@ import Experience from "../section/Experience.astro";
 <Layout title="Hi! I'm Orion!">
   <!-- About Section -->
   <section
-    class="flex flex-row flex-wrap-reverse w-full items-center justify-center"
+    class="flex flex-row flex-wrap-reverse md:flex-nowrap w-full items-center justify-center lg:justify-between gap-4"
   >
-    <div class="flex flex-col">
-      <h1 style={{ fontWeight: "700", fontSize: "64px" }}>
-        Orion<span style={{ fontWeight: "400", fontSize: "64px" }}
-          >&apos;s Portfolio</span
-        >
-      </h1>
+    <div class="flex flex-col items-center md:items-start">
+      <h1 class="text-4xl">Orion&apos;s Portfolio</h1>
+      <p
+        style={{
+          fontWeight: "500",
+          fontSize: "64px",
+          color: "var(--primary-color)",
+        }}
+        class="flex flex-wrap"
+      >
+        A developer-turned designer.
+      </p>
       <div class="roles flex flex-row gap-2 justify-center lg:justify-start">
         <Tag>Software Engineer</Tag>
         <Tag>UX Designer</Tag>
         <Tag>Photographer</Tag>
       </div>
     </div>
-    <div class="px-16">
-      <ProfileImage alt="Orion's profile picture" width={250} height={250} />
+    <div>
+      <ProfileImage alt="Orion's profile picture" width={350} />
     </div>
   </section>
-  <div class="intro flex flex-col gap-4">
-    <h2 class="flex gap-4 items-center text-4xl">
-      <Icon name="id-card" />
-      About Me
-    </h2>
-    <span
-      >Hey! My name is <span class="underline underline-offset-2"
-        >Xiaolei Qin (秦啸雷 to be precise)</span
-      >, but you may call me Orion. I am currently a HCI/UX master student at UT
-      Austin. I was previously a software engineer who was really into design,
-      and now I am learning about it! I enjoy learning new technologies and
-      designing things, and I care about user experience deeply. I am eager to
-      provide my unique perspectives and to become a bridge between engineering
-      and designing!</span
-    >
-  </div>
+  <Card
+    style={{
+      backgroundColor: "var(--primary-color)",
+      color: "var(--background)",
+    }}
+  >
+    <div class="intro flex flex-col gap-4">
+      <h2 class="flex gap-4 items-center text-4xl">
+        Here I am, compressed in to a paragraph.
+      </h2>
+      <span
+        >My name is <span class="underline underline-offset-2"
+          >Xiaolei Qin (秦啸雷 if you read Chinese)</span
+        >, but you may call me Orion. I am currently a HCI/UX master student at
+        UT Austin. I was previously a software engineer who was really into
+        design, and now I am learning about it! I enjoy learning new
+        technologies and designing things, and I care about user experience
+        deeply. I am eager to provide my unique perspectives and to become a
+        bridge between engineers and designers!</span
+      >
+    </div>
+  </Card>
   <Divider dividerType="primary" />
   <!-- Experience Section -->
   <Experience />
+  <Divider dividerType="primary" />
   <!-- Education Section -->
-  <h2 class="text-4xl flex gap-4 items-center">
-    <Icon name="graduation-cap" />Education
-  </h2>
   <Education />
 </Layout>

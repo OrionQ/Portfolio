@@ -16,12 +16,18 @@ import UXProjects from "./UXProjects.astro";
       };
 
       const showCategory = (category: keyof typeof categories) => {
-        Object.keys(categories).forEach((key) => (categories[key] = false));
-        categories[category] = true;
-        document
-          .querySelectorAll(".category")
-          .forEach((el) => el.classList.add("hidden"));
-        document.getElementById(category)?.classList.remove("hidden");
+        // Hide all categories
+        document.querySelectorAll(".category").forEach((el) => {
+          el.classList.remove("active");
+          el.classList.add("immediate");
+        });
+
+        // Show the selected category
+        const selectedCategory = document.getElementById(category);
+        if (selectedCategory) {
+          selectedCategory.classList.add("active");
+          selectedCategory.classList.remove("immediate");
+        }
 
         // Update aria-selected attribute on buttons
         document.querySelectorAll('[role="tab"]').forEach((button) => {
@@ -37,12 +43,10 @@ import UXProjects from "./UXProjects.astro";
         const isActive = categories[category as keyof typeof categories];
         const element = document.getElementById(category);
 
-        // Show or hide the category section
         if (element) {
-          element.classList.toggle("hidden", !isActive); // Hide if not active
+          element.classList.toggle("active", isActive);
         }
 
-        // Set aria-selected for the corresponding tab button
         const button = document.querySelector(`[data-category="${category}"]`);
         if (button) {
           button.setAttribute("aria-selected", isActive ? "true" : "false");
@@ -65,50 +69,27 @@ import UXProjects from "./UXProjects.astro";
         ?.addEventListener("click", () => {
           showCategory("otherProjects");
         });
-      //     window.addEventListener("keydown", (event) => {
-      //       let nextButton: HTMLElement | null = null;
-
-      //       if (event.key === "ArrowRight") {
-      //         nextButton =
-      //           (button.nextElementSibling as HTMLElement) ||
-      //           (tabButtons[0] as HTMLElement); // Loop back to first tab
-      //       } else if (event.key === "ArrowLeft") {
-      //         nextButton =
-      //           (button.previousElementSibling as HTMLElement) ||
-      //           (tabButtons[tabButtons.length - 1] as HTMLElement); // Loop to last tab
-      //       }
-
-      //       if (nextButton) {
-      //         nextButton.focus(); // Set focus to the next button
-      //         const nextCategory = nextButton.getAttribute("data-category");
-      //         if (nextCategory) {
-      //           showCategory(nextCategory); // Show the corresponding category
-      //         }
-      //         event.preventDefault(); // Prevent default behavior
-      //       }
-      //     });
-      //   });
     });
   }
 </script>
 <div class="flex flex-row flex-wrap lg:flex-nowrap gap-12">
   <div
-    class="flex flex-col items-center md:items-start lg:basis-1/3 justify-start"
+    class="flex flex-col items-center md:items-start lg:basis-1/3 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
     <h2 class="text-4xl">Experience</h2>
     <p
       style={{
         fontWeight: "500",
-        fontSize: "64px",
+        fontSize: "4rem",
         color: "var(--primary-color)",
+        lineHeight: "normal",
       }}
-      class="flex flex-wrap"
+      class="flex flex-wrap items-center"
     >
       All about my past.
     </p>
     <p class="flex items-center gap-2">
-      From developing design systems
-      to making VR experience.
+      From developing design systems to making VR experience.
     </p>
     <br />
     <p class="whitespace-nowrap flex items-center gap-2">
@@ -118,11 +99,13 @@ import UXProjects from "./UXProjects.astro";
       >
     </p>
   </div>
-  <div class="flex flex-col w-full gap-4 lg:basis-2/3 justify-between">
+  <div
+    class="flex flex-col w-full gap-4 lg:basis-2/3 justify-between scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
     <div class="tabs-container flex flex-row flex-wrap" role="tablist">
       <button
         aria-controls="professionalExperience"
-        aria-selected="true"
+        aria-selected="false"
         class="tab-button"
         data-category="professionalExperience"
         id="tab-professional-experience"
@@ -136,7 +119,7 @@ import UXProjects from "./UXProjects.astro";
       >
       <button
         aria-controls="uxProjects"
-        aria-selected="false"
+        aria-selected="true"
         class="tab-button"
         data-category="uxProjects"
         id="tab-ux-projects"
@@ -164,11 +147,36 @@ import UXProjects from "./UXProjects.astro";
     <div id="professionalExperience" class="category">
       <ProfessionalExperience />
     </div>
-    <div id="uxProjects" class="category hidden"><UXProjects /></div>
-    <div id="otherProjects" class="category hidden"><OtherProjects /></div>
+    <div id="uxProjects" class="category"><UXProjects /></div>
+    <div id="otherProjects" class="category"><OtherProjects /></div>
   </div>
 </div>
 <style>
+  .category {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+    pointer-events: none; /* Prevent interaction when hidden */
+    position: relative;
+    height: 0;
+    overflow: hidden; /* Hide content during transition */
+  }
+
+  .category.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto; /* Enable interaction */
+    height: auto; /* Allow content height to adjust dynamically */
+    overflow: visible;
+  }
+
+  .category.immediate {
+    opacity: 0; /* Immediate hide */
+    transform: translateY(10px);
+    transition: none; /* Skip transition for immediate hiding */
+  }
   .tabs-container {
     align-items: stretch;
     border: 3px solid var(--floating-color);

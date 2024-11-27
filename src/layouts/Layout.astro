@@ -33,8 +33,29 @@ const { title } = Astro.props;
       </main>
       <Footer />
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+                entry.target.classList.remove("opacity-0", "translate-y-10");
+              }
+            });
+          },
+          {
+            threshold: 0.2, // Trigger when 20% of the element is visible
+          }
+        );
+  
+        // Select all scroll-content elements to observe
+        document.querySelectorAll(".scroll-content").forEach((el) => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
+
 <style is:global>
   @tailwind base;
   @tailwind components;

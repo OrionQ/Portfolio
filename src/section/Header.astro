@@ -1,18 +1,25 @@
 ---
 import { Icon } from "astro-icon/components";
+import ThemeSwitcher from "../components/theme-switcher/ThemeSwitcher.astro";
 ---
 
-<nav class={`header px-8 py-4 flex justify-between sticky top-0 mb-8`}>
+<nav
+  class={`header px-8 py-4 flex justify-between sticky top-0 mb-8 items-center`}
+>
   <div>
-    <a href="/" class="flex gap-4 items-center">
-      <Icon name="orion-logo" size={24} color="var(--primary-color)"/>
+    <a href="/" class="flex gap-4 items-center home-link">
+      <Icon name="orion-logo" size={24} color="var(--primary-color)" />
       Xiaolei Qin
     </a>
   </div>
+  <ThemeSwitcher />
 </nav>
 <style>
   .header {
     background-color: var(--background);
     z-index: 1;
+  }
+  .home-link:focus-visible {
+    outline: 2px dashed var(--secondary-color);
   }
 </style>

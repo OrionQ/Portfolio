@@ -2,7 +2,7 @@
 
 ---
 
-<button id="themeToggle">
+<button id="themeToggle" aria-label="toggle light and dark mode">
   <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path
       class="sun"
@@ -51,7 +51,20 @@
   #themeToggle {
     border: 0;
     background: none;
+    border-radius: 50%;
+    padding: 0.25rem;
+    transition: background-color 0.25s;
   }
+
+  #themeToggle:hover {
+    background-color: var(--ambience-color);
+  }
+
+
+  #themeToggle:focus-visible {
+    outline: 2px dashed var(--secondary-color);
+  }
+  
   .sun {
     fill: var(--primary-color);
   }

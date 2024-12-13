@@ -18,9 +18,9 @@
 </button>
 <script is:inline>
   const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
+    // if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+    //   return localStorage.getItem("theme");
+    // }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return "dark";
     }
@@ -33,7 +33,7 @@
     document.documentElement.classList.add("dark");
   }
 
-  window.localStorage.setItem("theme", theme);
+  // window.localStorage.setItem("theme", theme);
 
   const handleToggleClick = () => {
     const element = document.documentElement;
@@ -52,12 +52,16 @@
     border: 0;
     background: none;
     border-radius: 50%;
-    padding: 0.25rem;
+    padding: 0.5rem;
     transition: background-color 0.25s;
   }
 
   #themeToggle:hover {
     background-color: var(--ambience-color);
+  }
+
+  #themeToggle:active {
+    opacity: 0.75;
   }
 
 

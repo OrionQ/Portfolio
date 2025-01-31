@@ -1,9 +1,10 @@
 ---
-const { href, className } = Astro.props;
+const { href, newTab, className } = Astro.props;
 ---
 
 <a
   href={href}
+  target={newTab ? "_blank" : "_self"}
   class={`page-link flex items-center gap-2 justify-start ${className}`}
 >
   <slot />

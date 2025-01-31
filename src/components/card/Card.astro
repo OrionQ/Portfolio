@@ -14,4 +14,10 @@ const { className, title, style } = Astro.props;
     padding: 2rem;
     border-radius: 1.5rem;
   }
+
+  @media (prefers-contrast: more) {
+  .card {
+    border: 2px solid black;
+  }
+}
 </style>

@@ -1,9 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "../components/link/Link.astro";
+import DesignProjects from "./DesignProjects.astro";
 import OtherProjects from "./OtherProjects.astro";
 import ProfessionalExperience from "./ProfessionalExperience.astro";
-import UXProjects from "./UXProjects.astro";
 ---
 
 <script>
@@ -93,9 +93,13 @@ import UXProjects from "./UXProjects.astro";
     </p>
     <br />
     <p class="whitespace-nowrap flex items-center gap-2">
-      Here is the PDF version:
-      <Link underline newTab href="/Xiaolei_Qin_Resume.pdf"
-        ><Icon name="file-lines" />View PDF</Link
+      Here is the PDF versions:
+      <span
+        ><Link underline newTab href="/Xiaolei_Qin_SDE_Resume.pdf"
+          ><Icon name="file-lines" />View my SDE resume</Link
+        ><Link underline newTab href="/Xiaolei_Qin_UX_Resume.pdf"
+          ><Icon name="file-lines" />View my UI/UX resume</Link
+        ></span
       >
     </p>
   </div>
@@ -125,8 +129,10 @@ import UXProjects from "./UXProjects.astro";
         id="tab-ux-projects"
         role="tab"
         ><h3>
-          <Icon name="layer-group" class="hidden sm:block flex-shrink-0" />UX
-          Projects
+          <Icon
+            name="layer-group"
+            class="hidden sm:block flex-shrink-0"
+          />Design Projects
         </h3></button
       >
       <button
@@ -147,7 +153,7 @@ import UXProjects from "./UXProjects.astro";
     <div id="professionalExperience" class="category">
       <ProfessionalExperience />
     </div>
-    <div id="uxProjects" class="category"><UXProjects /></div>
+    <div id="uxProjects" class="category"><DesignProjects /></div>
     <div id="otherProjects" class="category"><OtherProjects /></div>
   </div>
 </div>

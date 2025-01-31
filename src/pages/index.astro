@@ -1,9 +1,11 @@
 ---
+import { Icon } from "astro-icon/components";
 import Divider from "../components/divider/Divider.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 import Tag from "../components/tag/Tag.astro";
 
 import Card from "../components/card/Card.astro";
+import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Education from "../section/Education.astro";
 import Experience from "../section/Experience.astro";
@@ -14,7 +16,9 @@ import Experience from "../section/Experience.astro";
   <section
     class="flex flex-row flex-wrap-reverse md:flex-nowrap w-full items-center justify-center lg:justify-between gap-4"
   >
-    <div class="flex flex-col items-center md:items-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500">
+    <div
+      class="flex flex-col items-center md:items-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
       <h1 class="text-4xl">Orion&apos;s Portfolio</h1>
       <p
         style={{
@@ -41,15 +45,8 @@ import Experience from "../section/Experience.astro";
     class="scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
     <Card
-      style={{
-        backgroundColor: "var(--primary-color)",
-        color: "var(--background)",
-      }}
     >
       <div class="intro flex flex-col gap-4">
-        <h2 class="flex gap-4 items-center text-4xl">
-          Hey! Get to know my career path in one short paragraph.
-        </h2>
         <span
           >My name is <span class="underline underline-offset-2"
             >Xiaolei Qin (秦啸雷 if you read Chinese)</span
@@ -70,4 +67,15 @@ import Experience from "../section/Experience.astro";
   <Divider dividerType="primary" />
   <!-- Education Section -->
   <Education />
+  <Divider dividerType="primary" />
+  <div class="flex gap-4">
+    <p style={{ color: "var(--primary-color)", fontSize: "2rem" }}>
+      (Also, I designed and coded this website using <Link
+        className="inline-flex"
+        href="https://astro.build/"
+        newTab
+        underline>Astro.js! <Icon name="up-right-from-square" /></Link
+      >)
+    </p>
+  </div>
 </Layout>

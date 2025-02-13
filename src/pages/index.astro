@@ -4,22 +4,43 @@ import Divider from "../components/divider/Divider.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 import Tag from "../components/tag/Tag.astro";
 
-import Card from "../components/card/Card.astro";
 import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Education from "../section/Education.astro";
 import Experience from "../section/Experience.astro";
+import WhoIAm from "../section/WhoIAm.astro";
 ---
+<script>
+  const arrow = document.getElementById("scroll-arrow");
+  const targetSection = document.querySelector("#experience"); // Adjust based on your section ID
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        console.log(arrow);
+        arrow?.classList.add("opacity-0");
+      } else {
+        arrow?.classList.remove("opacity-0");
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  if (targetSection) {
+    observer.observe(targetSection);
+  }
+</script>
 
 <Layout title="Hi! I'm Orion!">
   <!-- About Section -->
   <section
-    class="flex flex-row flex-wrap-reverse md:flex-nowrap w-full items-center justify-center lg:justify-between gap-4"
+    class="flex flex-row flex-wrap md:flex-nowrap w-full items-center justify-center lg:justify-between gap-4 md:py-32"
   >
     <div
       class="flex flex-col items-center md:items-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
     >
-      <h1 class="text-4xl">Orion&apos;s Portfolio</h1>
+      <h1 class="text-5xl py-12">Orion&apos;s Portfolio</h1>
+      <p class="flex items-center">Ignore my cheesey one-liners, but I am</p>
       <p
         style={{
           fontWeight: "500",
@@ -27,11 +48,13 @@ import Experience from "../section/Experience.astro";
           color: "var(--primary-color)",
           lineHeight: "normal",
         }}
-        class="flex flex-wrap"
+        class="flex flex-wrap items-center text-center md:text-start"
       >
         A developer-turned designer.
       </p>
-      <div class="roles flex flex-row gap-2 justify-center lg:justify-start">
+      <div
+        class="roles flex flex-row gap-2 justify-center lg:justify-start py-12"
+      >
         <Tag>Software Engineer</Tag>
         <Tag>UX Designer</Tag>
         <Tag>Photographer</Tag>
@@ -41,26 +64,13 @@ import Experience from "../section/Experience.astro";
       <ProfileImage alt="Orion's profile picture" width={350} />
     </div>
   </section>
-  <div
-    class="scroll-content opacity-0 translate-y-10 transition-all duration-500"
-  >
-    <Card
-    >
-      <div class="intro flex flex-col gap-4">
-        <span
-          >My name is <span class="underline underline-offset-2"
-            >Xiaolei Qin (秦啸雷 if you read Chinese)</span
-          >, but you may call me Orion. I am currently a HCI/UX master student
-          at UT Austin. I was previously a software engineer who was really into
-          design, and now I am learning about it! I enjoy learning new
-          technologies and designing things, and I care about user experience
-          deeply. I am eager to provide my unique perspectives and to become a
-          bridge between engineers and designers!</span
-        >
-      </div>
-    </Card>
-  </div>
-
+  <Icon
+    name="chevron-down"
+    id="scroll-arrow"
+    size={32}
+    class="flex-shrink-0 inline animate-float-slow transition-opacity duration-500"
+    aria-hidden
+  />
   <Divider dividerType="primary" />
   <!-- Experience Section -->
   <Experience />
@@ -68,7 +78,8 @@ import Experience from "../section/Experience.astro";
   <!-- Education Section -->
   <Education />
   <Divider dividerType="primary" />
-  <div class="flex gap-4">
+  <WhoIAm />
+  <div class="flex gap-4 pt-12">
     <p style={{ color: "var(--primary-color)", fontSize: "2rem" }}>
       (Also, I designed and coded this website using <Link
         className="inline-flex"

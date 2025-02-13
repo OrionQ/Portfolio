@@ -48,9 +48,36 @@ const { title } = Astro.props;
             threshold: 0.2, // Trigger when 20% of the element is visible
           }
         );
-  
+
         // Select all scroll-content elements to observe
-        document.querySelectorAll(".scroll-content").forEach((el) => observer.observe(el));
+        document
+          .querySelectorAll(".scroll-content")
+          .forEach((el) => observer.observe(el));
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".scroll-link").forEach((link) => {
+          link.addEventListener(
+            "click",
+            function (this: HTMLAnchorElement, event) {
+              event.preventDefault(); // Prevent default jump
+
+              const href = this.getAttribute("href");
+              if (href) {
+                const offset = 80; // Adjust this value based on your header height
+              }
+              const targetId = this.getAttribute("href")?.substring(1);
+              const target = targetId
+                ? document.getElementById(targetId)
+                : null;
+              const offset = 120; // Adjust this value based on your header height
+
+              if (target) {
+                const topPosition = target.offsetTop - offset;
+                window.scrollTo({ top: topPosition, behavior: "smooth" });
+              }
+            }
+          );
+        });
       });
     </script>
   </body>
@@ -61,23 +88,27 @@ const { title } = Astro.props;
   @tailwind components;
   @tailwind utilities;
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   :root {
     --background: #ffffff;
     --foreground: #003669;
     --primary-color: #0070e1;
-    --secondary-color:#004b95;
+    --secondary-color: #004b95;
     --floating-color: #ecf5fd;
     --ambience-color: #bcd7f3;
   }
 
-    :root.dark {
-      --background: #202020;
-      --foreground: #d5d5d5;
-      --primary-color: #f568a5;
-      --secondary-color: #e59fbd;
-      --floating-color: #2f2f2f;
-      --ambience-color: #593a47;
-    }
+  :root.dark {
+    --background: #202020;
+    --foreground: #f2cbdc;
+    --primary-color: #f568a5;
+    --secondary-color: #e59fbd;
+    --floating-color: #2e2227;
+    --ambience-color: #3a2f34;
+  }
 
   body {
     color: var(--foreground);

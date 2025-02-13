@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import Card from "../components/card/Card.astro";
+import hikingPic from "../images/Hiking-pic.jpeg";
+---
+
+<div class="flex flex-row flex-wrap lg:flex-nowrap gap-24" id="about-me">
+  <div
+    class="flex flex-col items-center md:items-start lg:basis-2/5 justify-start gap-8 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
+    <h2 class="text-4xl">Who Am I?</h2>
+    <p
+      style={{
+        fontWeight: "500",
+        fontSize: "4rem",
+        color: "var(--primary-color)",
+        lineHeight: "normal",
+      }}
+      class="flex flex-wrap items-center text-center md:text-start"
+    >
+      Occasionally funny, self-claimed creative, and genuinely curious.
+    </p>
+  </div>
+  <div
+    class="scroll-content opacity-0 translate-y-10 transition-all duration-500 flex-col flex lg:basis-4/5 gap-4"
+  >
+    <div class="flex flex-row gap-4 flex-wrap sm:flex-nowrap">
+      <Card cardType="secondary" className="flex-1 w-full sm:w-auto">
+        <div class="intro flex flex-col gap-4 text-xl">
+          <span
+            >My name is <span class="underline underline-offset-2"
+              >Xiaolei Qin (秦啸雷 if you read Chinese)</span
+            >, but you may call me Orion. I am currently a HCI/UX master student
+            at UT Austin. I was previously a software engineer who was really
+            into design, and now I am learning about it! I care about user
+            experience deeply, and I am eager to provide my unique perspectives
+            and to become a bridge between engineers and designers!</span
+          >
+        </div>
+      </Card>
+      <div class="flex w-full sm:basis-2/5">
+        <Card className="flex flex-1">
+          <div class="flex flex-col gap-4">
+            <p class="flex flex-wrap items-center text-2xl">
+              I cook home cuisine a lot.<br />
+              I hang out with friends a lot.<br />
+            </p>
+          </div></Card
+        >
+      </div>
+    </div>
+    <div class="flex flex-row gap-4 flex-wrap sm:flex-nowrap justify-center">
+      <Card className="flex-1 w-full sm:w-auto">
+        <div class="flex flex-col gap-4">
+          <p class="flex flex-wrap items-center text-2xl">
+            I am from Kunming, Yunnan, China.
+          </p>
+        </div>
+      </Card>
+      <Image
+        class="rounded-2xl m-1 object-cover"
+        src={hikingPic}
+        alt="I got caught taking a photo"
+        width={250}
+        quality={100}
+      />
+      <Card>
+        <div class="flex flex-col gap-4">
+          <p class="flex flex-wrap items-center text-2xl">
+            Traveling is how I learn about the world. I am always down to travel
+            somewhere new, and there are so many views and stories are waiting
+            for me to discover.
+          </p>
+        </div>
+      </Card>
+    </div>
+  </div>
+</div>

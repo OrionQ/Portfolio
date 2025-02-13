@@ -1,8 +1,8 @@
 ---
-const { className, title, style } = Astro.props;
+const { className, title, cardType = 'primary', style } = Astro.props;
 ---
 
-<div class="card" style={style}>
+<div class:list={["card", `${className}`, `card-${cardType}`]} style={style}>
   {title && <h3 class="font-light text-[2.25rem] pb-2 pr-2">{title}</h3>}
   <div class:list={[`${className || ""}`]}>
     <slot />
@@ -10,9 +10,15 @@ const { className, title, style } = Astro.props;
 </div>
 <style>
   .card {
-    background-color: var(--floating-color);
     padding: 2rem;
     border-radius: 1.5rem;
+  }
+  .card-primary {
+    background-color: var(--floating-color);
+  }
+  .card-secondary {
+    background-color: var(--background);
+    outline: 3px solid var(--secondary-color);
   }
 
   @media (prefers-contrast: more) {

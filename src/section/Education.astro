@@ -4,11 +4,11 @@ import Link from "../components/link/Link.astro";
 import Tag from "../components/tag/Tag.astro";
 ---
 
-<div class="flex flex-row flex-wrap-reverse lg:flex-nowrap gap-12">
+<div class="flex flex-row flex-wrap-reverse lg:flex-nowrap gap-12 w-full">
   <div
-    class="flex flex-col gap-4 justify-center w-full flex-1 items-stretch lg:basis-1/2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch  scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
-    <Card style={{ border: "2px solid #bf5700", inlineSize: "100%" }}>
+    <Card style={{ border: "3px solid #bf5700", inlineSize: "100%", backgroundColor:"var(--bacground)"}} >
       <div class="flex items-center justify-between">
         <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
       </div>
@@ -23,7 +23,7 @@ import Tag from "../components/tag/Tag.astro";
         <span>Aug 2024 - May 2026 (expected)</span>
       </p>
     </Card>
-    <Card style={{ border: "2px solid #CC0000", inlineSize: "100%" }}>
+    <Card style={{ border: "3px solid #CC0000", inlineSize: "100%", backgroundColor:"var(--bacground)" }}>
       <h3 class="font-normal text-2xl">North Carolina State University</h3>
       <br />
       <p class="flex flex-col justify-between">
@@ -36,7 +36,7 @@ import Tag from "../components/tag/Tag.astro";
     </Card>
   </div>
   <div
-    class="flex flex-col items-center md:items-start lg:basis-1/2 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    class="flex flex-col items-center md:items-end lg:basis-1/2 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
     <h2 class="text-4xl">Education</h2>
     <p
@@ -46,7 +46,7 @@ import Tag from "../components/tag/Tag.astro";
         color: "var(--primary-color)",
         lineHeight: "normal",
       }}
-      class="flex flex-wrap"
+      class="flex flex-wrap items-center text-center md:text-end"
     >
       The bedrock of my curiosity.
     </p>

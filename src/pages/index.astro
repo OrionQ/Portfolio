@@ -10,6 +10,7 @@ import Education from "../section/Education.astro";
 import Experience from "../section/Experience.astro";
 import WhoIAm from "../section/WhoIAm.astro";
 ---
+
 <script>
   const arrow = document.getElementById("scroll-arrow");
   const targetSection = document.querySelector("#experience"); // Adjust based on your section ID
@@ -34,33 +35,35 @@ import WhoIAm from "../section/WhoIAm.astro";
 <Layout title="Hi! I'm Orion!">
   <!-- About Section -->
   <section
-    class="flex flex-row flex-wrap md:flex-nowrap w-full items-center justify-center lg:justify-between gap-4 md:py-32"
+    class="flex flex-row flex-wrap-reverse md:flex-nowrap w-full items-center md:items-stretch justify-center lg:justify-between gap-4 md:py-24"
   >
     <div
-      class="flex flex-col items-center md:items-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+      class="flex flex-col justify-between items-center md:items-start gap-12 scroll-content opacity-0 translate-y-10 transition-all duration-500"
     >
-      <h1 class="text-5xl py-12">Orion&apos;s Portfolio</h1>
-      <p class="flex items-center">Ignore my cheesey one-liners, but I am</p>
-      <p
-        style={{
-          fontWeight: "500",
-          fontSize: "4rem",
-          color: "var(--primary-color)",
-          lineHeight: "normal",
-        }}
-        class="flex flex-wrap items-center text-center md:text-start"
-      >
-        A developer-turned designer.
-      </p>
+      <h1 class="text-5xl py-8 md:py-0">Orion&apos;s Portfolio</h1>
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <p class="flex items-center">Ignore my cheesey one-liners, but I am</p>
+        <p
+          style={{
+            fontWeight: "500",
+            fontSize: "4rem",
+            color: "var(--primary-color)",
+            lineHeight: "normal",
+          }}
+          class="flex flex-wrap items-center text-center md:text-start"
+        >
+          A developer-turned designer.
+        </p>
+      </div>
       <div
-        class="roles flex flex-row gap-2 justify-center lg:justify-start py-12"
+        class="roles flex flex-row gap-2 justify-center lg:justify-start"
       >
         <Tag>Software Engineer</Tag>
         <Tag>UX Designer</Tag>
         <Tag>Photographer</Tag>
       </div>
     </div>
-    <div>
+    <div class="flex-shrink-0">
       <ProfileImage alt="Orion's profile picture" width={350} />
     </div>
   </section>

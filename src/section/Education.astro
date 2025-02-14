@@ -6,9 +6,15 @@ import Tag from "../components/tag/Tag.astro";
 
 <div class="flex flex-row flex-wrap-reverse lg:flex-nowrap gap-12 w-full">
   <div
-    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch  scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
-    <Card style={{ border: "3px solid #bf5700", inlineSize: "100%", backgroundColor:"var(--bacground)"}} >
+    <Card
+      style={{
+        border: "3px solid #bf5700",
+        inlineSize: "100%",
+        backgroundColor: "var(--bacground)",
+      }}
+    >
       <div class="flex items-center justify-between">
         <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
       </div>
@@ -23,7 +29,13 @@ import Tag from "../components/tag/Tag.astro";
         <span>Aug 2024 - May 2026 (expected)</span>
       </p>
     </Card>
-    <Card style={{ border: "3px solid #CC0000", inlineSize: "100%", backgroundColor:"var(--bacground)" }}>
+    <Card
+      style={{
+        border: "3px solid #CC0000",
+        inlineSize: "100%",
+        backgroundColor: "var(--bacground)",
+      }}
+    >
       <h3 class="font-normal text-2xl">North Carolina State University</h3>
       <br />
       <p class="flex flex-col justify-between">

@@ -1,105 +1,48 @@
 ---
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import Card from "../components/card/Card.astro";
-import PageLink from "../components/page-link/PageLink.astro";
 
-import trustyPic from "../images/Trusty-Loading-screen.png";
-import lavenderTeaPic from "../images/Lavender-tea.png";
-import Link from "../components/link/Link.astro";
+import ClickableCard from "../components/clickable-card/ClickableCard.astro";
 import Tag from "../components/tag/Tag.astro";
+import bloomPic from "../images/Bloom-web_thumbnail.jpeg";
+import trustyPic from "../images/Trusty_thumbnail.jpeg";
 ---
 
-<div class="flex flex-col gap-4">
-  <Card title="Bloom co.">
-    <div class="flex flex-row gap-2">
-      <div class="flex flex-col gap-4 justify-between">
-        <div>
-          <p>
-            Tea is often seen as old-fashioned and boring. How can we make tea
-            more appealing to Gen-Z consumers? And how can we refresh the
-            branding of packaged tea?
-            <br />
-            <br />
-            Meet Bloom co.—a contemporary tea brand that gives tea a modern, vibrant
-            twist. Our rebranding focuses on eye-catching visuals in both the website
-            and packaging, making it fun and engaging for Gen-Z consumers to explore
-            and purchase their perfect tea.
-            <br />
-          </p>
-          <div class="flex flex-row gap-2 pt-2">
-            <Tag>User research</Tag>
-            <Tag>Prototyping</Tag>
-          </div>
-        </div>
-        <div class="flex flex-row flex-wrap gap-4">
-          <PageLink
-            aria-label="View Tea project case study (opens a new window)"
-            href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
-            newTab
-            >View case study<Icon name="up-right-from-square" />
-          </PageLink>
-          <Link
-            aria-label="See Tea project prototype (opens a new window)"
-            href="https://www.figma.com/proto/tY7e1uZKMTqGAiQvO6gKKt/Tea%3A-Nikolette%2C-Emma%2C-Caroline%2C-and-Orion?node-id=683-1137&node-type=frame&t=KKeLkya1sN9rkLPo-1&scaling=min-zoom&content-scaling=fixed&page-id=1%3A4"
-            newTab
-            underline
-            >See prototype <Icon name="up-right-from-square" />
-          </Link>
-        </div>
-      </div>
-      <Image
-        class="rounded-2xl m-1 object-cover hidden sm:block"
-        src={lavenderTeaPic}
-        alt="Bloom co. tea thumbnail"
-        width={200}
-        quality={100}
-      />
+<div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+  <ClickableCard
+    title="Bloom co."
+    description="Have fun drinking tea."
+    newTab
+    href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
+  >
+    <Image
+      slot="image"
+      class="w-full h-full"
+      src={bloomPic}
+      alt="Bloom app thumbnail"
+      width={375}
+      quality={100}
+    />
+    <div slot="tags" class="flex flex-row gap-2 pt-2">
+      <Tag>User research</Tag>
+      <Tag>Design system</Tag>
     </div>
-  </Card>
-  <Card title="Trusty">
-    <div class="flex flex-row gap-2">
-      <div class="flex flex-col gap-4 justify-between">
-        <div>
-          <p>
-            How do we design a news app that is trustworthy and unbiased? How
-            can we reduce users' mental load while seeing news from all over the
-            world? We created a user-friendly app experience that focused on
-            transparency in news sourcing, making it easy for users to verify
-            the credibility of information directly within the app interface.
-            <br />
-            <br />
-            As our first Creative Jam, we receive an honorable mention,
-            placing in the top 20 out of 315 teams in the competition!
-          </p>
-          <div class="flex flex-row gap-2 pt-2">
-            <Tag>UI design</Tag>
-            <Tag>Prototyping</Tag>
-          </div>
-        </div>
-        <div class="flex flex-row flex-wrap gap-4">
-          <PageLink href="/ux-projects/trusty"
-            >View case study<Icon
-              name="arrow-right-long"
-              class="page-link-icon"
-            />
-          </PageLink>
-          <Link
-            aria-label="See Trusty prototype (opens a new window)"
-            href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
-            newTab
-            underline
-            >See prototype <Icon name="up-right-from-square" />
-          </Link>
-        </div>
-      </div>
-      <Image
-        class="rounded-2xl m-1 object-cover hidden sm:block"
-        src={trustyPic}
-        alt="Trusty app thumbnail"
-        width={200}
-        quality={100}
-      />
+  </ClickableCard>
+  <ClickableCard
+    title="Trusty"
+    description="Let news be trusted."
+    href="/ux-projects/trusty"
+  >
+    <Image
+      slot="image"
+      class="w-full h-full"
+      src={trustyPic}
+      alt="Trusty app thumbnail"
+      width={375}
+      quality={100}
+    />
+    <div slot="tags" class="flex flex-row gap-2 pt-2">
+      <Tag>UI design</Tag>
+      <Tag>Prototyping</Tag>
     </div>
-  </Card>
+  </ClickableCard>
 </div>

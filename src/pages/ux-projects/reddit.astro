@@ -1,0 +1,257 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Link from "../../components/link/Link.astro";
+import Layout from "../../layouts/Layout.astro";
+import Tag from "../../components/tag/Tag.astro";
+import Divider from "../../components/divider/Divider.astro";
+
+import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
+import redditHE from "../../images/Reddit-common-HEs.png";
+import redditCA from "../../images/Reddit-competitive-analysis.png";
+import PageLink from "../../components/page-link/PageLink.astro";
+---
+
+<Layout title="Orion's UX Projects - Reddit Usability Testing">
+  <div class="project-container">
+    <Link href="/" underline
+      ><Icon name="arrow-left-long" />Go back to the home page</Link
+    >
+    <h1 class="project-title">Reddit Usability Test (Ongoing project)</h1>
+    <p class="project-introduction">
+      A comprehensive usability test with the Reddit mobile app.
+    </p>
+    <div class="flex flex-row flex-wrap gap-2">
+      <Tag>Mobile app</Tag>
+      <Tag>Usability testing</Tag>
+      <Tag>User research</Tag>
+      <Tag>Heuritstic evaluation</Tag>
+      <Tag>Competitive analysis</Tag>
+      <Tag>Screening</Tag>
+      <Tag>Interviewing</Tag>
+    </div>
+
+    <Divider />
+    <h2 class="project-subtitle">Challenge</h2>
+    <p class="project-description">
+      We know that Reddit is one of the largest and most active social media
+      platforms, where users connect with communities that share their interests
+      and engage in discussions. However, my team and I realized that the Reddit
+      mobile app has some unconventional features and behaviors that impact its
+      usability in our everyday use.
+    </p>
+    <h2 class="project-subtitle">Goal</h2>
+    <p class="project-description">
+      To address these issues, we conducted a comprehensive usability test with
+      the Reddit mobile app. Our research process included a heuristic
+      evaluation, competitive analysis, and user interviews. We aimed to
+      identify the app&apos;s usability issues and gather insights from users to
+      improve their experience.
+
+      <div
+        class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4"
+      >
+        <Image
+          src={redditThumbnail}
+          alt="first page of the Reddit app in a phone mock up"
+          width={800}
+          class="rounded-2xl object-cover"
+        />
+      </div>
+      <div class="process-section lg:px-2">
+        <h2 class="project-subtitle flex">UX Research Process</h2>
+        <div
+          class="flex lg:flex-row w-full gap-4 flex-col align-center justify-center"
+        >
+          <div class="process-item justify-between flex flex-col">
+            <div>
+              <h3>1. Heurtistic evaluation</h3>
+              <br />
+              <p>
+                Referring to Nielsen&apos;s 10 usability heuristics, we
+                conducted a thorough evaluation of the Reddit mobile app. We
+                identified <strong>27 usability issues</strong>, and utilize
+                Jakob Nielsen&apos;s severity rating scale to rate each one of
+                them. We finalized 5 criteiria that might impact the usability
+                the most, including
+                <br />
+                <br />
+                <ul>
+                  <li><strong>Consisitency and standards</strong></li>
+                  <li><strong>Aesthetics</strong></li>
+                  <li>
+                    <strong>Flexibility and efficiency of use</strong>
+                  </li>
+                  <li><strong>User control and freedom</strong></li>
+                  <li><strong>Help and documentation</strong></li>
+                </ul>
+                <br />
+
+                After collecting all the information, we found that many
+                usability issues violated multiple heuristics. While some may
+                appear to be low severity, certain features were unnecessarily
+                complex, which could unintentionally overwhelm users over time.
+                <br />
+                <br />
+              </p>
+            </div>
+            <PageLink
+              aria-label="Full Heuristic Evaluation Report(opens a new window)"
+              href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
+              newTab
+              underline
+              >Full heuristic evaluation report <Icon
+                name="up-right-from-square"
+              />
+            </PageLink>
+          </div>
+          <Image
+            src={redditHE}
+            alt="five criteria of heuristic evaluation we picked"
+            width={300}
+            class="rounded-2xl object-cover w-full h-full"
+          />
+        </div>
+        <div class="flex w-full gap-4 flex-col">
+          <div class="process-item">
+            <h3>2. Competitive analysis</h3>
+            <br />
+            <p>
+              By comparing Reddit to other popular platforms with similar
+              features, we identified both unique features Reddit offers and
+              potential additions it could adopt. Our analysis included three
+              direct competitors—<strong
+                >Quora, Stack Exchange, and X (Twitter)</strong
+              >—as well as three indirect competitors—<strong
+                >Discord, Tumblr, and TikTok</strong
+              >. After the comparison, we gathered some takeaways, highlighting
+              features Reddit could integrate and common usability issues from
+              other platforms/apps to avoid.
+              <br />
+              <br />
+              Overall, we conclude that Reddit app stands out as a leading community-driven
+              platform, catering to a diverse audience across various interests.
+              However, its user interface and user flows presents usability challenges
+              that could further enhance the user experience. Another key finding
+              for us is that there is room for growth in content management and user
+              engagement strategies.
+              <br />
+              <br />
+            </p>
+            <PageLink
+              aria-label="Full Competitve Analysis Report(opens a new window)"
+              href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
+              newTab
+              underline
+              >Full competitive analysis report <Icon
+                name="up-right-from-square"
+              />
+            </PageLink>
+          </div>
+          <Image
+            src={redditCA}
+            alt="Competitive analysis thumbnail of Reddit"
+            width={2000}
+            quality={100}
+            class="rounded-2xl object-cover w-full h-full"
+          />
+        </div>
+        <div class="flex gap-4">
+          <div class="process-item flex flex-col justify-center w-full">
+            <div>
+              <h3>3. Usability Testing</h3>
+              <br />
+              <h4 class="font-bold text-lg">3.1 Screener</h4>
+              <p>
+                We first need to figure out who we can recruit for this project,
+                We come together to figure out the criteria for the participants
+                that could help us with the usablity result the most. For the
+                limited amount of time and resources, we decided to focus on
+                users between <strong> 18-35 years old</strong>, since this is
+                the majority of the user group. We are splitting them into to
+                groups--<strong
+                  >users who have used Reddit for at least 6 months, and users
+                  who have never used Reddit before but know what it is.</strong
+                > In this way, we can compare how experienced user and inexperienced
+                user interact with the app differently, and we can gether those essential
+                information to pinpoint some of the higher-severity usability issues.
+              </p>
+              <br />
+              <PageLink
+                aria-label="Full Screener script(opens a new window)"
+                href="https://docs.google.com/document/d/1x-zslARgMfu9iEPc4ffhQpUENTSlQ9qVtZLiQgEm2c4/edit?usp=sharing"
+                newTab
+                underline
+                >Screener script <Icon name="up-right-from-square" />
+              </PageLink>
+              <br />
+              <h4 class="font-bold text-lg">3.2 Interviews</h4>
+              <p>
+                We are in the processing of creating the essential tasks for
+                participants to test how they interact with the app. The goal to
+                the app is to find out the most critical usability issues that
+                appear in the daily usage. Each of our interview session is
+                aimed to be 45 minutes and we are trying to interview at least 6
+                participants to cover most of the usability issues.
+                <br />
+                <br />
+                I am excited to update our progress as soon as possible!
+              </p>
+              <br />
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-4 w-full">
+          <div class="process-item w-full">
+            <h3>4. Final Report</h3>
+            <p>
+              After we are done with the interviews, I will be adding the final
+              report to this section as soon as possible! Stay tuned!
+            </p>
+          </div>
+        </div>
+      </div>
+    </p>
+  </div>
+  <Link href="/" underline
+    ><Icon name="arrow-left-long" />Go back to the home page</Link
+  >
+</Layout>
+
+<style>
+  .project-container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .project-title {
+    font-size: 3rem;
+  }
+  .project-introduction {
+    font-size: 1.5rem;
+  }
+  .process-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .project-subtitle {
+    color: var(--primary-color);
+    font-size: 2rem;
+  }
+  .process-item {
+    background-color: var(--floating-color);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+  .process-item h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+</style>

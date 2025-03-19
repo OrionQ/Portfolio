@@ -5,44 +5,91 @@ import ClickableCard from "../components/clickable-card/ClickableCard.astro";
 import Tag from "../components/tag/Tag.astro";
 import bloomPic from "../images/Bloom-web_thumbnail.jpeg";
 import trustyPic from "../images/Trusty_thumbnail.jpeg";
+import redditPic from "../images/Reddit_thumbnail.jpeg";
+import venusPic from "../images/Venus_thumbnail.png";
 ---
 
-<div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
-  <ClickableCard
-    title="Bloom co."
-    description="Have fun drinking tea."
-    newTab
-    href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
-  >
-    <Image
-      slot="image"
-      class="w-full h-full"
-      src={bloomPic}
-      alt="Bloom app thumbnail"
-      width={375}
-      quality={100}
-    />
-    <div slot="tags" class="flex flex-row gap-2 pt-2">
-      <Tag>User research</Tag>
-      <Tag>Design system</Tag>
-    </div>
-  </ClickableCard>
-  <ClickableCard
-    title="Trusty"
-    description="Let news be trusted."
-    href="/ux-projects/trusty"
-  >
-    <Image
-      slot="image"
-      class="w-full h-full"
-      src={trustyPic}
-      alt="Trusty app thumbnail"
-      width={375}
-      quality={100}
-    />
-    <div slot="tags" class="flex flex-row gap-2 pt-2">
-      <Tag>UI design</Tag>
-      <Tag>Prototyping</Tag>
-    </div>
-  </ClickableCard>
+<div class="flex flex-col gap-4">
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Reddit Usability Test (Ongoing)"
+      description="A usability test with the mobile app."
+      href="/ux-projects/reddit"
+    >
+      <Image
+        slot="image"
+        class="w-full h-full"
+        src={redditPic}
+        alt="Reddit thumbnail"
+        width={800}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
+        <Tag>UX research</Tag>
+        <Tag>Usability testing</Tag>
+        <Tag>Heuristic evaluation</Tag>
+      </div>
+    </ClickableCard>
+  </div>
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Venus (Ongoing)"
+      description="Let us be your best matchmaker."
+      href="https://uxerrrs.framer.website/"
+      newTab
+    >
+      <Image
+        slot="image"
+        class="w-full h-full"
+        src={venusPic}
+        alt="Venus thumbnail"
+        width={800}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
+        <Tag>UX prototyping</Tag>
+        <Tag>Figma</Tag>
+        <Tag>Interaction design</Tag>
+      </div>
+    </ClickableCard>
+  </div>
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Bloom co."
+      description="Have fun drinking tea."
+      newTab
+      href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
+    >
+      <Image
+        slot="image"
+        class="w-full h-full"
+        src={bloomPic}
+        alt="Bloom app thumbnail"
+        width={375}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2">
+        <Tag>User research</Tag>
+        <Tag>Design system</Tag>
+      </div>
+    </ClickableCard>
+    <ClickableCard
+      title="Trusty"
+      description="Let news be trusted."
+      href="/ux-projects/trusty"
+    >
+      <Image
+        slot="image"
+        class="w-full h-full"
+        src={trustyPic}
+        alt="Trusty app thumbnail"
+        width={375}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2">
+        <Tag>UI design</Tag>
+        <Tag>Prototyping</Tag>
+      </div>
+    </ClickableCard>
+  </div>
 </div>

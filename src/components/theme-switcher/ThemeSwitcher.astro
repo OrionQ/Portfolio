@@ -18,8 +18,9 @@
 </button>
 <script is:inline>
   const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
+    const localStorageTheme = localStorage?.getItem("theme") ?? "";
+    if (["dark", "light"].includes(localStorageTheme)) {
+      return localStorageTheme;
     }
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
       return "dark";
@@ -45,7 +46,7 @@
 
   document
     .getElementById("themeToggle")
-    .addEventListener("click", handleToggleClick);
+    ?.addEventListener("click", handleToggleClick);
 </script>
 <style>
   #themeToggle {
@@ -64,11 +65,10 @@
     opacity: 0.75;
   }
 
-
   #themeToggle:focus-visible {
     outline: 2px dashed var(--secondary-color);
   }
-  
+
   .sun {
     fill: var(--primary-color);
   }

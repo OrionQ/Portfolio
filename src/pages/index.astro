@@ -18,7 +18,6 @@ import WhoIAm from "../section/WhoIAm.astro";
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
-        console.log(arrow);
         arrow?.classList.add("opacity-0");
       } else {
         arrow?.classList.remove("opacity-0");

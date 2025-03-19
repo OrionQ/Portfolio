@@ -59,17 +59,16 @@ const { title } = Astro.props;
           link.addEventListener(
             "click",
             function (this: HTMLAnchorElement, event) {
-              event.preventDefault(); // Prevent default jump
-
-              const href = this.getAttribute("href");
-              if (href) {
-                const offset = 80; // Adjust this value based on your header height
+              const isHomePage = window.location.pathname === "/";
+              if (isHomePage) {
+                event.preventDefault(); // Prevent default jump
               }
+              const href = this.getAttribute("href");
               const targetId = this.getAttribute("href")?.substring(1);
               const target = targetId
                 ? document.getElementById(targetId)
                 : null;
-              const offset = 120; // Adjust this value based on your header height
+              const offset = 150; // Adjust this value based on your header height
 
               if (target) {
                 const topPosition = target.offsetTop - offset;

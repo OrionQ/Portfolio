@@ -1,0 +1,188 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Link from "../../components/link/Link.astro";
+import Layout from "../../layouts/Layout.astro";
+import Tag from "../../components/tag/Tag.astro";
+import Divider from "../../components/divider/Divider.astro";
+
+import trustyLoading from "../../images/Trusty-Loading-screen.png";
+import trustyLanding from "../../images/Trusty-Landing-page.png";
+import trustyExplain from "../../images/Trusty-Explanation.png";
+import trustyDS from "../../images/Trusty-design-system.png";
+import trustyBranding from "../../images/Trusty-Branding.png";
+import trustyFlow from "../../images/Trusty-flow.png";
+import trustyNewsPage from "../../images/Trusty-News-page.png";
+import trustyPersonalization from "../../images/Trusty-personalization.png";
+---
+
+<Layout title="Orion's UX Projects - Venus">
+  <div class="project-container">
+    <Link href="/" underline
+      ><Icon name="arrow-left-long" />Go back to the home page</Link
+    >
+    <h1 class="project-title">Venus</h1>
+    <p class="project-introduction">Let us do the match making for you.</p>
+    <div class="flex flex-row flex-wrap gap-2">
+      <Tag>Mobile UI Design</Tag>
+      <Tag>Interaction Design</Tag>
+      <Tag>Design system</Tag>
+      <Tag>Figma</Tag>
+    </div>
+
+    <Divider />
+    <p class="project-description">
+     
+      <br />
+      <br />
+      
+    </p>
+
+    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4">
+      <Image
+        src={trustyLoading}
+        alt="first page of the app in a phone mock up"
+        width={250}
+      />
+      <Image
+        src={trustyLanding}
+        alt="landing page of the app in a phone mock up"
+        width={250}
+      />
+      <Image
+        src={trustyExplain}
+        alt="explanation page of the app in a phone mock up"
+        width={250}
+      />
+    </div>
+    <div class="process-section lg:px-2">
+      <h2 class="project-subtitle">Design Process</h2>
+      <div>
+        <div class="process-item">
+          <h3>1. Research</h3>
+          <p>
+            
+          </p>
+        </div>
+      </div>
+      <div class="flex lg:flex-row w-full gap-4 flex-col">
+        <div class="process-item">
+          <h3>2. Design</h3>
+          <br />
+          <h4 class="font-bold text-lg">2.1 Branding</h4>
+          <p>
+            
+          </p>
+          <br />
+          <h4 class="font-bold text-lg">2.2 Design System</h4>
+          <p>
+            
+          </p>
+        </div>
+        <div
+          class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
+        >
+          <Image
+            src={trustyBranding}
+            alt="Branding of Trusty app"
+            width={250}
+            class="rounded-2xl m-1 object-cover"
+          />
+          <Image
+            src={trustyDS}
+            alt="Design system of Trusty app"
+            width={250}
+            class="rounded-2xl m-1 object-cover"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col-reverse lg:flex-row w-full gap-4">
+        <div
+          class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
+        >
+          <Image
+            src={trustyPersonalization}
+            alt="On the category preference setting page"
+            width={250}
+            class="rounded-2xl m-1 object-cover"
+          />
+          <Image
+            src={trustyNewsPage}
+            alt="Example news page with verification"
+            width={250}
+            class="rounded-2xl m-1 object-cover"
+          />
+        </div>
+        <div class="process-item flex flex-col justify-between">
+          <div>
+            <h3>3. User Flow</h3>
+            <br />
+            
+            <br />
+          </div>
+          <p>
+            Click this link to try out the prototype: <Link
+              aria-label="Adobe XD Prototype(opens a new window)"
+              href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
+              newTab
+              underline
+              >Adobe XD Prototype <Icon name="up-right-from-square" />
+            </Link>
+          </p>
+        </div>
+      </div>
+      <Image
+        src={trustyFlow}
+        alt="Flow of Trusty app"
+        class="rounded-2xl m-1 object-cover"
+      />
+      <div class="process-item">
+        <h3>4. What I learned</h3>
+        <p>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+  <Link href="/" underline
+    ><Icon name="arrow-left-long" />Go back to the home page</Link
+  >
+</Layout>
+
+<style>
+  .project-container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .project-title {
+    font-size: 3rem;
+  }
+  .project-introduction {
+    font-size: 1.5rem;
+  }
+  .process-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .project-subtitle {
+    color: var(--primary-color);
+    font-size: 2rem;
+  }
+  .process-item {
+    background-color: var(--floating-color);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+  }
+  .process-item h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+</style>

@@ -47,6 +47,17 @@
   document
     .getElementById("themeToggle")
     ?.addEventListener("click", handleToggleClick);
+  // Optionally, update the theme if the system preference changes after the page is loaded
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      const newTheme = e.matches ? "dark" : "light";
+      if (localStorage.getItem("theme") !== newTheme) {
+        // Update the theme only if it differs from the localStorage setting
+        document.documentElement.classList.toggle("dark", e.matches);
+        localStorage.setItem("theme", newTheme);
+      }
+    });
 </script>
 <style>
   #themeToggle {

@@ -40,7 +40,7 @@ const {
     overflow: hidden;
     border-radius: 1.5rem;
     background-color: var(--floating-color);
-    transition: transform 0.2s ease-in;
+    transition: transform 0.15s ease-in-out;
   }
 
   .clickable-card:focus-visible {
@@ -48,7 +48,7 @@ const {
   }
 
   .clickable-card:hover {
-    transform: scale(1.02); /* Slight zoom effect on hover */
+    transform: scale(1.01); /* Slight zoom effect on hover */
   }
 
   .clickable-card-image {
@@ -68,6 +68,9 @@ const {
   }
 
   .clickable-card:hover .clickable-card-overlay {
+    background: rgba(var(--tint-color), 0.4);
+  }
+  .clickable-card:focus-visible .clickable-card-overlay {
     background: rgba(var(--tint-color), 0.4);
   }
 

@@ -6,35 +6,14 @@ import Tag from "../components/tag/Tag.astro";
 import bloomPic from "../images/Bloom-web_thumbnail.jpeg";
 import trustyPic from "../images/Trusty_thumbnail.jpeg";
 import redditPic from "../images/Reddit_thumbnail.jpeg";
-import venusPic from "../images/Venus_thumbnail.png";
+import venusPic from "../images/Venus_thumbnail.jpeg";
 ---
 
 <div class="flex flex-col gap-4">
   <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
     <ClickableCard
-      title="Reddit Usability Test (Ongoing)"
-      description="A usability test with the mobile app."
-      href="/ux-projects/reddit"
-    >
-      <Image
-        slot="image"
-        class="w-full h-full"
-        src={redditPic}
-        alt="Reddit thumbnail"
-        width={800}
-        quality={100}
-      />
-      <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
-        <Tag>UX research</Tag>
-        <Tag>Usability testing</Tag>
-        <Tag>Heuristic evaluation</Tag>
-      </div>
-    </ClickableCard>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
-    <ClickableCard
-      title="Venus (Ongoing)"
-      description="Let us be your best matchmaker."
+      title="Venus"
+      description="No more swiping, let us help you plan it out."
       href="https://uxerrrs.framer.website/"
       newTab
     >
@@ -53,6 +32,28 @@ import venusPic from "../images/Venus_thumbnail.png";
       </div>
     </ClickableCard>
   </div>
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Reddit Usability Test"
+      description="A usability test with the mobile app."
+      href="/ux-projects/reddit"
+    >
+      <Image
+        slot="image"
+        class="w-full h-full"
+        src={redditPic}
+        alt="Reddit thumbnail"
+        width={800}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
+        <Tag>UX research</Tag>
+        <Tag>Usability testing</Tag>
+        <Tag>Heuristic evaluation</Tag>
+      </div>
+    </ClickableCard>
+  </div>
+
   <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
     <ClickableCard
       title="Bloom co."

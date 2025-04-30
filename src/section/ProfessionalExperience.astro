@@ -1,5 +1,7 @@
 ---
 import Disclosure from "../components/disclosure/Disclosure.astro";
+import Link from "../components/link/Link.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <div class="flex flex-col justify-center items-center w-full gap-4">
@@ -14,27 +16,37 @@ import Disclosure from "../components/disclosure/Disclosure.astro";
     >
       <ul role="list" class="flex list-['•'] flex-col gap-3 p-6">
         <li class="pl-4">
-          Spearheaded the creation and management as the lead engineer for Visa
-          Design System React library–Nova, enhancing collaboration between
-          designers and engineers to deliver seamless user experiences.
+          Spearheaded the creation and management as the lead engineer for
+          <Link
+            className="inline-flex"
+            href="https://design.visa.com/"
+            newTab
+            underline
+            inline
+            >Visa Design System React library <Icon
+              name="up-right-from-square"
+            /></Link
+          >
+          , enhancing collaboration between designers and engineers to deliver seamless
+          user experiences.
         </li>
         <li class="pl-4">
-          Achieved industry-level accessibility (WCAG 2.1) compliance for Nova,
+          Achieved industry-level accessibility (WCAG 2.1) compliance for VPDS,
           significantly improving accessibility and inclusivity, in
           collaboration with A11y researchers.
         </li>
         <li class="pl-4">
-          Authored comprehensive documentation of Nova in React and led
+          Authored comprehensive documentation of VPDS in React and led
           knowledge-sharing sessions, resulting in a 50% time reduction in
           onboarding time for new developers.
         </li>
         <li class="pl-4">
-          Identified and implemented process improvements for VaultKey+ Design
-          system in both React and Angular.
+          Identified and implemented process improvements for Visa VaultKey+
+          Design system in both React and Angular.
         </li>
         <li class="pl-4">
           Facilitated cross-functional communication and problem-solving,
-          leading to a 30% decrease in bug resolution time in VaultKey+.
+          leading to a 30% decrease in bug resolution time in Visa VaultKey+.
         </li>
         <li class="pl-4">
           Provided critical support for North American and Asia-Pacific regions,

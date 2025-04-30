@@ -10,6 +10,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 import redditHE from "../../images/Reddit-common-HEs.png";
 import redditCA from "../../images/Reddit-competitive-analysis.png";
 import PageLink from "../../components/page-link/PageLink.astro";
+import Card from "../../components/card/Card.astro";
 ---
 
 <Layout title="Orion's UX Projects - Reddit Usability Testing">
@@ -17,9 +18,10 @@ import PageLink from "../../components/page-link/PageLink.astro";
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
     >
-    <h1 class="project-title">Reddit Usability Test (Ongoing project)</h1>
+    <h1 class="project-title">Reddit Usability Test</h1>
     <p class="project-introduction">
-      A comprehensive usability test with the Reddit mobile app.
+      They might be the one of the best, but it could be better--a comprehensive
+      usability test with the Reddit mobile app.
     </p>
     <div class="flex flex-row flex-wrap gap-2">
       <Tag>Mobile app</Tag>
@@ -32,6 +34,21 @@ import PageLink from "../../components/page-link/PageLink.astro";
     </div>
 
     <Divider />
+    <h2 class="project-subtitle">Project Overview</h2>
+    <p class="project-description">
+      <strong>My Role:</strong> UX Researcher, Interviewer, Note-taker, Observer
+      <br />
+      <strong>Tools Used:</strong> Figma, Miro, Canva, Google Docs, Google Forms
+      <br />
+      <p>Prefer a presentation style? Click <Link
+        className="inline-flex"
+        aria-label="Final report(opens a new window)"
+        href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
+        newTab
+        underline
+        >Final report<Icon name="up-right-from-square" />
+      </Link></p>
+    </p>
     <h2 class="project-subtitle">Challenge</h2>
     <p class="project-description">
       We know that Reddit is one of the largest and most active social media
@@ -49,7 +66,7 @@ import PageLink from "../../components/page-link/PageLink.astro";
       improve their experience.
 
       <div
-        class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4"
+        class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center"
       >
         <Image
           src={redditThumbnail}
@@ -58,7 +75,7 @@ import PageLink from "../../components/page-link/PageLink.astro";
           class="rounded-2xl object-cover"
         />
       </div>
-      <div class="process-section lg:px-2">
+      <div class="process-section">
         <h2 class="project-subtitle flex">UX Research Process</h2>
         <div
           class="flex lg:flex-row w-full gap-4 flex-col align-center justify-center"
@@ -130,11 +147,16 @@ import PageLink from "../../components/page-link/PageLink.astro";
               <br />
               <br />
               Overall, we conclude that Reddit app stands out as a leading community-driven
-              platform, <strong>catering to a diverse audience across various interests</strong>.
-              However, <strong>its user interface and user flows presents usability challenges</strong>
+              platform, <strong
+                >catering to a diverse audience across various interests</strong
+              >. However, <strong
+                >its user interface and user flows presents usability challenges</strong
+              >
               that could further enhance the user experience. Another key finding
-              for us is that there is <strong>room for growth in content management and user
-              engagement strategies</strong>.
+              for us is that there is <strong
+                >room for growth in content management and user engagement
+                strategies</strong
+              >.
               <br />
               <br />
             </p>
@@ -161,7 +183,7 @@ import PageLink from "../../components/page-link/PageLink.astro";
             <div>
               <h3>3. Usability Testing</h3>
               <br />
-              <h4 class="font-bold text-lg">3.1 Screener</h4>
+              <h4 class="font-bold text-xl">3.1 Screener</h4>
               <p>
                 We first need to figure out who we can recruit for this project,
                 We come together to figure out the criteria for the participants
@@ -185,73 +207,200 @@ import PageLink from "../../components/page-link/PageLink.astro";
                 >Screener script <Icon name="up-right-from-square" />
               </PageLink>
               <br />
-              <h4 class="font-bold text-lg">3.2 Interviews</h4>
+              <h4 class="font-bold text-xl">3.2 Interviews</h4>
               <p>
-                We are in the processing of creating the essential tasks for
-                participants to test how they interact with the app. The goal to
-                the app is to find out the most critical usability issues that
-                appear in the daily usage. Each of our interview session is
-                aimed to be 45 minutes and we are trying to interview at least 6
-                participants to cover most of the usability issues.
-                <br />
-                <br />
-                I am excited to update our progress as soon as possible!
+                We created 6 tasks, and tested out the app with 5 participants,
+                and each session lasted about 45 minutes. During each session, I
+                played the role of <strong> note taker </strong> and <strong
+                  >observer</strong
+                >, while my teammate was the facilitator. We recorded the
+                session and took notes to capture the participants' thoughts and
+                behaviors. After each session, we debriefed to discuss our
+                observations and insights. We also asked participants to fill
+                out the SUS (System Usability Scale) questionnaire to gather
+                quantitative data on their experience with the app at the end,
+                which to gain an overview of the usability issues.
               </p>
               <br />
+              <PageLink
+                aria-label="Interview notes and affiniity diagram(opens a new window)"
+                href="https://www.figma.com/board/8dh600rWLY9PgjRnjfmTAQ/Testing---Affinity-Map?node-id=0-1&t=Dv4R52kVhPGPJI0m-1"
+                newTab
+                underline
+                >Interview notes and affinity diagram <Icon
+                  name="up-right-from-square"
+                />
+              </PageLink>
             </div>
           </div>
         </div>
-        <div class="flex gap-4 w-full">
-          <div class="process-item w-full">
+        <div class="flex gap-4">
+          <div class="process-item flex flex-col justify-center w-full">
             <h3>4. Final Report</h3>
             <p>
-              After we are done with the interviews, I will be adding the final
-              report to this section as soon as possible! Stay tuned!
+              To unwrap all of this, I first calculated average score of the
+              SUS, which is 74--not bad, but not great either.
+              <br />
+              <br />
+              For the insights, we found out that even though the app is usable and
+              most participants will be able to complete the tasks eventually, there
+              are small hiccups that bother them, and maninly in those 4 areas:
             </p>
+            <br />
+            <br />
+            <div class="flex flex-col gap-8">
+              <div class="flex flex-row gap-8 flex-wrap md:flex-nowrap">
+                <Card
+                  cardType="secondary"
+                  className="flex flex-col gap-4 basis-full md:basis-1/2"
+                  ><h3>
+                    1 Reddit makes itself usable for browsing for all, but not
+                    as much for creating for all
+                  </h3>
+                  <p>
+                    Participants knows how to search for content, whether from
+                    Google or within the app itself, but they struggles to use
+                    the Reddit-specific features like awarding badges, and
+                    creating communities. They believe that the platform or the
+                    app is for "more skilled users".
+                  </p>
+                </Card>
+                <Card
+                  cardType="secondary"
+                  className="flex flex-col gap-4 basis-full md:basis-1/2"
+                  ><h3>
+                    2 Overwhelming design structure for content heavy platform--
+                    takes time to find the right info
+                  </h3>
+                  <p>
+                    searching for content is more complicated than other
+                    platforms, and everything is showing up all at once is
+                    overwhelming; The content is not well organized and it often
+                    taks too many clicks to get to the right place. Plus,
+                    showing that many of selections for community topics is not
+                    helpful.
+                  </p>
+                </Card>
+              </div>
+              <div class="flex flex-row gap-8 flex-wrap md:flex-nowrap">
+                <Card
+                  cardType="secondary"
+                  className="flex flex-col gap-4 basis-full md:basis-1/2"
+                  ><h3>
+                    3 Platform-wide terminology/design systems aren’t clear, or
+                    universal in their meaning = various rounds of trial and
+                    error
+                  </h3>
+                  <p>
+                    Sorting terminology is not universal, what is the difference
+                    between reply and join a conversation; and who can help me
+                    understand "upvote" and "awards"?
+                  </p>
+                </Card>
+                <Card
+                  cardType="secondary"
+                  className="flex flex-col gap-4 basis-full md:basis-1/2"
+                  ><h3>
+                    4 Various functions that are hard to identify and fail to
+                    signify their affordances
+                  </h3>
+                  <p>
+                    Some functions are not clear, such as collapsing and
+                    expanding comments; adding the moderator rules are just
+                    breaking the whole flow of creating the commnuity; and error
+                    messages are never clear to the participants.
+                  </p>
+                </Card>
+              </div>
+            </div>
+            <br />
+            <PageLink
+              aria-label="Final report(opens a new window)"
+              href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
+              newTab
+              underline
+              >Final report<Icon name="up-right-from-square" />
+            </PageLink>
           </div>
         </div>
+        <div class="flex gap-4">
+          <div class="process-item flex flex-col justify-center w-full">
+            <div>
+              <h3>5. What I learned from this experience</h3>
+              <br />
+              <h4 class="font-bold text-xl">
+                1, our hypothesis can be very inaccurate.
+              </h4>
+              <p>
+                What I predicted for some of the tasks were much worse, but
+                users were able to learn it much faster than we thought, and
+                some of them might not experience that issue at all.
+              </p>
+              <br />
+              <h4 class="font-bold text-xl">2, pilot testing is essential.</h4>
+              <p>
+                We did our pilot testing before we started the actual testing,
+                and even so, we still found out that there are so many little
+                issues that could go wrong, resulting in breaking the flow of
+                testing.
+              </p>
+              <br />
+              <h4 class="font-bold text-xl">
+                3, 5 participants can uncover a lot of usability issues, but
+                more is better.
+              </h4>
+              <p>
+                We were able to find out a lot of usability issues with only 5
+                participants, and during each session, the unwanted behavior of
+                the app also provided us a lot more insights than we expected,
+                but we also believe that more participants could help us find
+                more usability issues.
+              </p>
+            </div>
+          </div>
+        </div>
+        <Link href="/" underline
+          ><Icon name="arrow-left-long" />Go back to the home page</Link
+        >
       </div>
+
+      <style>
+        .project-container {
+          padding: 0.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .project-title {
+          font-size: 3rem;
+        }
+        .project-introduction {
+          font-size: 1.5rem;
+        }
+        .process-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+        .project-subtitle {
+          color: var(--primary-color);
+          font-size: 2rem;
+        }
+        .process-item {
+          background-color: var(--floating-color);
+          border-radius: 1.5rem;
+          padding: 1.5rem;
+        }
+        .process-item h3 {
+          color: var(--primary-color);
+          font-size: 1.5rem;
+        }
+        .gallery img {
+          width: 100%;
+          border-radius: 0.5rem;
+        }
+      </style>
     </p>
   </div>
-  <Link href="/" underline
-    ><Icon name="arrow-left-long" />Go back to the home page</Link
-  >
 </Layout>
-
-<style>
-  .project-container {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .project-title {
-    font-size: 3rem;
-  }
-  .project-introduction {
-    font-size: 1.5rem;
-  }
-  .process-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .project-subtitle {
-    color: var(--primary-color);
-    font-size: 2rem;
-  }
-  .process-item {
-    background-color: var(--floating-color);
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-  }
-  .process-item h3 {
-    color: var(--primary-color);
-    font-size: 1.5rem;
-  }
-  .gallery img {
-    width: 100%;
-    border-radius: 0.5rem;
-  }
-</style>

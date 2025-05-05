@@ -1,16 +1,16 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import Link from "../../components/link/Link.astro";
-import Layout from "../../layouts/Layout.astro";
-import Tag from "../../components/tag/Tag.astro";
 import Divider from "../../components/divider/Divider.astro";
+import Link from "../../components/link/Link.astro";
+import Tag from "../../components/tag/Tag.astro";
+import Layout from "../../layouts/Layout.astro";
 
-import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
+import Card from "../../components/card/Card.astro";
+import PageLink from "../../components/page-link/PageLink.astro";
 import redditHE from "../../images/Reddit-common-HEs.png";
 import redditCA from "../../images/Reddit-competitive-analysis.png";
-import PageLink from "../../components/page-link/PageLink.astro";
-import Card from "../../components/card/Card.astro";
+import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 ---
 
 <Layout title="Orion's UX Projects - Reddit Usability Testing">
@@ -36,18 +36,32 @@ import Card from "../../components/card/Card.astro";
     <Divider />
     <h2 class="project-subtitle">Project Overview</h2>
     <p class="project-description">
-      <strong>My Role:</strong> UX Researcher, Interviewer, Note-taker, Observer
+      <strong>My Role:</strong><div class="flex flex-row flex-wrap gap-2">
+        <Tag>UX researcher</Tag>
+        <Tag>Interviewer</Tag>
+        <Tag>Note taker</Tag>
+        <Tag>Observer</Tag>
+      </div>
       <br />
-      <strong>Tools Used:</strong> Figma, Miro, Canva, Google Docs, Google Forms
+      <strong>Tools Used:</strong><div class="flex flex-row flex-wrap gap-2">
+        <Tag>Figma</Tag>
+        <Tag>Miro</Tag>
+        <Tag>Canva</Tag>
+        <Tag>Google docs</Tag>
+        <Tag>Google forms</Tag>
+        <Tag>Zoom</Tag>
+      </div>
       <br />
-      <p>Prefer a presentation style? Click <Link
-        className="inline-flex"
-        aria-label="Final report(opens a new window)"
-        href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
-        newTab
-        underline
-        >Final report<Icon name="up-right-from-square" />
-      </Link></p>
+      <p>
+        Prefer a presentation style? Click <Link
+          className="inline-flex"
+          aria-label="Final report(opens a new window)"
+          href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
+          newTab
+          underline
+          >Final report<Icon name="up-right-from-square" />
+        </Link>
+      </p>
     </p>
     <h2 class="project-subtitle">Challenge</h2>
     <p class="project-description">
@@ -65,9 +79,7 @@ import Card from "../../components/card/Card.astro";
       identify the app&apos;s usability issues and gather insights from users to
       improve their experience.
 
-      <div
-        class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center"
-      >
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
         <Image
           src={redditThumbnail}
           alt="first page of the Reddit app in a phone mock up"

@@ -12,13 +12,14 @@ const { className, title, cardType = 'primary', style } = Astro.props;
   .card {
     padding: 2rem;
     border-radius: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
   }
   .card-primary {
     background-color: var(--floating-color);
   }
   .card-secondary {
     background-color: var(--background);
-    outline: 3px solid var(--secondary-color);
+    outline: 2px solid var(--secondary-color);
   }
 
   @media (prefers-contrast: more) {

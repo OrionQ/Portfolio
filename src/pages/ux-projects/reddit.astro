@@ -134,6 +134,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
             </PageLink>
           </div>
           <Image
+            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
             src={redditHE}
             alt="five criteria of heuristic evaluation we picked: Consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, & recover from errors; help and documentation"
             width={500}
@@ -182,6 +183,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
             </PageLink>
           </div>
           <Image
+            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
             src={redditCA}
             alt="Competitive analysis thumbnail of Reddit"
             width={2000}
@@ -373,7 +375,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         </div>
         <div class="flex gap-4 w-full">
           <div class="process-item flex flex-col justify-center w-full">
-            <di>
+            <div>
               <h3>6. Supplemental Materials</h3>
               <br />
               <Link
@@ -420,9 +422,10 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
                   name="up-right-from-square"
                 />
               </Link>
-            </di>
+            </div>
           </div>
         </div>
+        <br />
         <Link href="/" underline
           ><Icon name="arrow-left-long" />Go back to the home page</Link
         >
@@ -454,6 +457,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           background-color: var(--floating-color);
           border-radius: 1.5rem;
           padding: 1.5rem;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
         }
         .process-item h3 {
           color: var(--primary-color);

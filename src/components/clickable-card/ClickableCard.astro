@@ -41,7 +41,7 @@ const {
     border-radius: 1.5rem;
     background-color: var(--floating-color);
     transition: all 0.15s ease-in-out;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 4px rgba(var(--shadow-color));
   }
 
   .clickable-card:focus-visible {
@@ -50,7 +50,7 @@ const {
 
   .clickable-card:hover {
     transform: scale(1.005); /* Slight zoom effect on hover */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(var(--shadow-color));
   }
 
   .clickable-card-image {

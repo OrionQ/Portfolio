@@ -36,6 +36,31 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <Divider />
     <h2 class="project-subtitle">Project Overview</h2>
     <p class="project-description">
+      <ul>
+        <li>
+          <Link href="#heuristic-evaluation" className="scroll-link" underline
+            >1. Heuristic evaluation</Link
+          >
+          <Link href="#competitive-analysis" className="scroll-link" underline
+            >2. Competitive analysis</Link
+          >
+          <Link href="#usability-testing" className="scroll-link" underline
+            >3. Usability testing</Link
+          >
+          <Link href="#final-report" className="scroll-link" underline
+            >4. Final report</Link
+          >
+          <Link
+            href="#what-i-learned-from-this-experience"
+            className="scroll-link"
+            underline>5. What I learned from this experience</Link
+          >
+          <Link href="#supplemental-materials" className="scroll-link" underline
+            >6. Supplemental materials</Link
+          >
+        </li>
+      </ul>
+
       <strong>My Role:</strong><div class="flex flex-row flex-wrap gap-2">
         <Tag>UX researcher</Tag>
         <Tag>Interviewer</Tag>
@@ -88,102 +113,108 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       </div>
       <div class="process-section">
         <h2 class="project-subtitle flex">UX Research Process</h2>
-        <div
-          class="flex lg:flex-row w-full gap-4 flex-col items-center justify-center"
-        >
-          <div class="process-item justify-between flex flex-col">
-            <div>
-              <h3>1. Heurtistic evaluation</h3>
-              <br />
-              <p>
-                Referring to Nielsen&apos;s 10 usability heuristics, we
-                conducted a thorough evaluation of the Reddit mobile app. We
-                identified <strong>27 usability issues</strong>, and utilize
-                Jakob Nielsen&apos;s severity rating scale to rate each one of
-                them. We finalized 5 criteiria that might impact the usability
-                the most, including
-                <br />
-                <br />
-                <ul>
-                  <li><strong>Consisitency and standards</strong></li>
-                  <li><strong>Aesthetics</strong></li>
-                  <li>
-                    <strong>Flexibility and efficiency of use</strong>
-                  </li>
-                  <li><strong>User control and freedom</strong></li>
-                  <li><strong>Help and documentation</strong></li>
-                </ul>
-                <br />
 
-                After collecting all the information, we found that many
-                usability issues violated multiple heuristics. While some may
-                appear to be low severity, certain features were unnecessarily
-                complex, which could unintentionally overwhelm users over time.
+        <div
+          class="process-item-odd w-full items-center justify-center"
+          id="heuristic-evaluation"
+        >
+          <div class="flex lg:flex-row flex-col gap-4">
+            <div class="justify-between flex flex-col">
+              <div>
+                <h3>1. Heurtistic evaluation</h3>
                 <br />
-                <br />
-              </p>
+                <p>
+                  Referring to Nielsen&apos;s 10 usability heuristics, we
+                  conducted a thorough evaluation of the Reddit mobile app. We
+                  identified <strong>27 usability issues</strong>, and utilize
+                  Jakob Nielsen&apos;s severity rating scale to rate each one of
+                  them. We finalized 5 criteiria that might impact the usability
+                  the most, including
+                  <br />
+                  <br />
+                  <ul>
+                    <li><strong>Consisitency and standards</strong></li>
+                    <li><strong>Aesthetics</strong></li>
+                    <li>
+                      <strong>Flexibility and efficiency of use</strong>
+                    </li>
+                    <li><strong>User control and freedom</strong></li>
+                    <li><strong>Help and documentation</strong></li>
+                  </ul>
+                  <br />
+
+                  After collecting all the information, we found that many
+                  usability issues violated multiple heuristics. While some may
+                  appear to be low severity, certain features were unnecessarily
+                  complex, which could unintentionally overwhelm users over
+                  time.
+                  <br />
+                  <br />
+                </p>
+              </div>
+              <PageLink
+                aria-label="Full Heuristic Evaluation Report(opens a new window)"
+                href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
+                newTab
+                underline
+                >Full heuristic evaluation report <Icon
+                  name="up-right-from-square"
+                />
+              </PageLink>
             </div>
-            <PageLink
-              aria-label="Full Heuristic Evaluation Report(opens a new window)"
-              href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
-              newTab
-              underline
-              >Full heuristic evaluation report <Icon
-                name="up-right-from-square"
-              />
-            </PageLink>
+            <Image
+              src={redditHE}
+              alt="five criteria of heuristic evaluation we picked: Consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, & recover from errors; help and documentation"
+              width={500}
+              class="rounded-2xl object-cover w-full h-full"
+            />
           </div>
-          <Image
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-            src={redditHE}
-            alt="five criteria of heuristic evaluation we picked: Consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, & recover from errors; help and documentation"
-            width={500}
-            class="rounded-2xl object-cover w-full h-full"
-          />
         </div>
-        <div class="flex w-full gap-4 flex-col">
-          <div class="process-item">
-            <h3>2. Competitive analysis</h3>
+
+        <div
+          class="process-item-even flex flex-col justify-center w-full"
+          id="competitive-analysis"
+        >
+          <h3>2. Competitive analysis</h3>
+          <br />
+          <p>
+            By comparing Reddit to other popular platforms with similar
+            features, we identified both unique features Reddit offers and
+            potential additions it could adopt. Our analysis included three
+            direct competitors—<strong
+              >Quora, Stack Exchange, and X (Twitter)</strong
+            >—as well as three indirect competitors—<strong
+              >Discord, Tumblr, and TikTok</strong
+            >. After the comparison, we gathered some takeaways, highlighting
+            features Reddit could integrate and common usability issues from
+            other platforms/apps to avoid.
             <br />
-            <p>
-              By comparing Reddit to other popular platforms with similar
-              features, we identified both unique features Reddit offers and
-              potential additions it could adopt. Our analysis included three
-              direct competitors—<strong
-                >Quora, Stack Exchange, and X (Twitter)</strong
-              >—as well as three indirect competitors—<strong
-                >Discord, Tumblr, and TikTok</strong
-              >. After the comparison, we gathered some takeaways, highlighting
-              features Reddit could integrate and common usability issues from
-              other platforms/apps to avoid.
-              <br />
-              <br />
-              Overall, we conclude that Reddit app stands out as a leading community-driven
-              platform, <strong
-                >catering to a diverse audience across various interests</strong
-              >. However, <strong
-                >its user interface and user flows presents usability challenges</strong
-              >
-              that could further enhance the user experience. Another key finding
-              for us is that there is <strong
-                >room for growth in content management and user engagement
-                strategies</strong
-              >.
-              <br />
-              <br />
-            </p>
-            <PageLink
-              aria-label="Full Competitve Analysis Report(opens a new window)"
-              href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
-              newTab
-              underline
-              >Full competitive analysis report <Icon
-                name="up-right-from-square"
-              />
-            </PageLink>
-          </div>
+            <br />
+            Overall, we conclude that Reddit app stands out as a leading community-driven
+            platform, <strong
+              >catering to a diverse audience across various interests</strong
+            >. However, <strong
+              >its user interface and user flows presents usability challenges</strong
+            >
+            that could further enhance the user experience. Another key finding for
+            us is that there is <strong
+              >room for growth in content management and user engagement
+              strategies</strong
+            >.
+            <br />
+            <br />
+          </p>
+          <PageLink
+            aria-label="Full Competitve Analysis Report(opens a new window)"
+            href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
+            newTab
+            underline
+            >Full competitive analysis report <Icon
+              name="up-right-from-square"
+            />
+          </PageLink>
+          <br />
           <Image
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
             src={redditCA}
             alt="Competitive analysis thumbnail of Reddit"
             width={2000}
@@ -191,10 +222,14 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
             class="rounded-2xl object-cover w-full h-full"
           />
         </div>
+
         <div class="flex gap-4">
-          <div class="process-item flex flex-col justify-center w-full">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="usability-testing"
+          >
             <div>
-              <h3>3. Usability Testing</h3>
+              <h3>3. Usability testing</h3>
               <br />
               <h4 class="font-bold text-xl">3.1 Screener</h4>
               <p>
@@ -248,7 +283,10 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="process-item flex flex-col justify-center w-full">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="final-report"
+          >
             <h3>4. Final Report</h3>
             <p>
               To unwrap all of this, I first calculated average score of the
@@ -338,9 +376,12 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         </div>
 
         <div class="flex gap-4">
-          <div class="process-item flex flex-col justify-center w-full">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="what-i-learned-from-this-experience"
+          >
             <div>
-              <h3>6. What I learned from this experience</h3>
+              <h3>5. What I learned from this experience</h3>
               <br />
               <h4 class="font-bold text-xl">
                 1, our hypothesis can be very inaccurate.
@@ -374,7 +415,10 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           </div>
         </div>
         <div class="flex gap-4 w-full">
-          <div class="process-item flex flex-col justify-center w-full">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="supplemental-materials"
+          >
             <div>
               <h3>6. Supplemental Materials</h3>
               <br />
@@ -453,13 +497,20 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           color: var(--primary-color);
           font-size: 2rem;
         }
-        .process-item {
+        .process-item-odd {
           background-color: var(--floating-color);
           border-radius: 1.5rem;
           padding: 1.5rem;
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
         }
-        .process-item h3 {
+        .process-item-even {
+          background-color: var(--background);
+          border-radius: 1.5rem;
+          padding: 1.5rem;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+        .process-item-odd h3,
+        .process-item-even h3 {
           color: var(--primary-color);
           font-size: 1.5rem;
         }

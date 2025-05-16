@@ -9,6 +9,9 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
+  build: {
+    assetsPrefix: '/assets/',
+  },
   site: 'https://orionq.github.io',
   base: '',
   integrations: [

@@ -4,37 +4,20 @@ import Card from "../components/card/Card.astro";
 import hikingPic from "../images/Hiking-pic.jpeg";
 ---
 
-<div class="flex flex-row flex-wrap lg:flex-nowrap gap-24" id="about-me">
-  <div
-    class="flex flex-col items-center md:items-start lg:basis-2/5 justify-start gap-8 scroll-content opacity-0 translate-y-10 transition-all duration-500"
-  >
-    <h2 class="text-4xl">Who Am I?</h2>
-    <p
-      style={{
-        fontWeight: "500",
-        fontSize: "3rem",
-        color: "var(--primary-color)",
-        lineHeight: "normal",
-      }}
-      class="flex flex-wrap items-center text-center md:text-start"
-    >
-      Occasionally funny, self-claimed creative, and genuinely curious.
-    </p>
-  </div>
+<div class="flex flex-row flex-wrap-reverse lg:flex-nowrap gap-24 py-8" id="about-me">
   <div
     class="scroll-content opacity-0 translate-y-10 transition-all duration-500 flex-col flex lg:basis-4/5 gap-4"
   >
     <div class="flex flex-row gap-4 flex-wrap sm:flex-nowrap">
       <Card cardType="secondary" className="flex-1 w-full sm:w-auto">
-        <div class="intro flex flex-col gap-4 text-xl">
+        <div class="intro flex flex-col gap-4 text-2xl">
           <span
             >My name is <span class="underline underline-offset-2"
-              >Xiaolei Qin (秦啸雷 if you read Chinese)</span
-            >, but you may call me Orion. I am currently a HCI/UX master student
-            at UT Austin. I was previously a software engineer who was really
-            into design, and now I am learning about it! I care about user
-            experience deeply, and I am eager to provide my unique perspectives
-            and to become a bridge between engineers and designers!</span
+              >Xiaolei Qin (秦啸雷)</span
+            >, but you may call me Orion. I’m a HCI/UX master student at UT
+            Austin. I used to be a software engineer passionate about design,
+            and now I’m learning about it! I care deeply about user experience
+            and aim to bridge the gap between engineers and designers.</span
           >
         </div>
       </Card>
@@ -90,5 +73,20 @@ import hikingPic from "../images/Hiking-pic.jpeg";
         </div>
       </Card>
     </div>
+  </div><div
+    class="flex flex-col items-center md:items-end lg:basis-2/5 justify-start gap-8 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
+    <h2 class="text-4xl">Who Am I?</h2>
+    <p
+      style={{
+        fontWeight: "500",
+        fontSize: "3rem",
+        color: "var(--primary-color)",
+        lineHeight: "normal",
+      }}
+      class="flex flex-wrap items-center text-center md:text-end"
+    >
+      Occasionally funny, self-claimed creative, and genuinely curious.
+    </p>
   </div>
 </div>

@@ -6,14 +6,15 @@ import Tag from "../components/tag/Tag.astro";
 
 import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
-import Education from "../section/Education.astro";
-import Experience from "../section/Experience.astro";
+import Projects from "../section/Projects.astro";
 import WhoIAm from "../section/WhoIAm.astro";
+import Experience from "../section/Experience.astro";
+import Education from "../section/Education.astro";
 ---
 
 <script>
   const arrow = document.getElementById("scroll-arrow");
-  const targetSection = document.querySelector("#experience"); // Adjust based on your section ID
+  const targetSection = document.querySelector("#projects"); // Adjust based on your section ID
 
   const observer = new IntersectionObserver(
     ([entry]) => {
@@ -41,7 +42,9 @@ import WhoIAm from "../section/WhoIAm.astro";
     >
       <h1 class="text-5xl py-8 md:py-0">Orion&apos;s Portfolio</h1>
       <div class="flex flex-col items-center md:items-start gap-2">
-        <p class="flex items-center">If I am not hanging out with my friends,</p>
+        <p class="flex items-center">
+          If I am not hanging out with my friends,
+        </p>
         <p
           style={{
             fontWeight: "500",
@@ -54,9 +57,7 @@ import WhoIAm from "../section/WhoIAm.astro";
           I am probably stuck between Figma and VS Code.
         </p>
       </div>
-      <div
-        class="roles flex flex-row gap-2 justify-center lg:justify-start"
-      >
+      <div class="roles flex flex-row gap-2 justify-center lg:justify-start">
         <Tag>Software Engineer</Tag>
         <Tag>UX Designer</Tag>
         <Tag>Photographer</Tag>
@@ -72,14 +73,16 @@ import WhoIAm from "../section/WhoIAm.astro";
     size={32}
     class="flex-shrink-0 inline animate-float-slow transition-opacity duration-500"
     aria-hidden
+    color="var(--floating-color)"
   />
-  <Divider dividerType="primary" />
+  <Divider dividerType="tertiary" />
+  <!-- Projects Section -->
+  <Projects />
   <!-- Experience Section -->
   <Experience />
-  <Divider dividerType="primary" />
   <!-- Education Section -->
   <Education />
-  <Divider dividerType="primary" />
+  <!-- Introduction Section -->
   <WhoIAm />
   <div class="flex gap-4 pt-12">
     <p style={{ color: "var(--primary-color)", fontSize: "1.5rem" }}>

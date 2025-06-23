@@ -22,17 +22,18 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <Header />
-    <div
-      class="flex flex-col justify-between items-center min-h-screen px-4 pb-16 gap-16"
-    >
-      <main
-        class="flex flex-col gap-8 items-center lg:px-30 sm:px-10 max-w-6xl"
-      >
-        <slot />
-      </main>
-      <Footer />
+    <div class="flex flex-col items-center pb-16">
+      <Header />
+      <div class="justify-between min-h-screen px-4 gap-16">
+        <main
+          class="flex flex-col gap-8 items-center lg:px-30 sm:px-10 max-w-6xl"
+        >
+          <slot />
+        </main>
+        <Footer />
+      </div>
     </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver(

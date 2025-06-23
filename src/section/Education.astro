@@ -4,51 +4,9 @@ import Link from "../components/link/Link.astro";
 import Tag from "../components/tag/Tag.astro";
 ---
 
-<div class="flex flex-row flex-wrap-reverse lg:flex-nowrap gap-12 w-full">
+<div class="flex flex-row flex-wrap lg:flex-nowrap gap-12 w-full pt-8 pb-12">
   <div
-    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch scroll-content opacity-0 translate-y-10 transition-all duration-500"
-  >
-    <Card
-      style={{
-        border: "3px solid #bf5700",
-        inlineSize: "100%",
-        backgroundColor: "var(--bacground)",
-      }}
-    >
-      <div class="flex items-center justify-between">
-        <h3 class="font-normal text-2xl">University of Texas at Austin</h3>
-      </div>
-      <div class="flex justify-start">
-        <Tag className="text-xs">Current</Tag>
-      </div>
-      <p class="flex flex-col justify-between">
-        <Link href="https://www.ischool.utexas.edu/" newTab underline
-          >M.S. Information Studies</Link
-        >
-        <span>Human-Computer Interaction & UX Design</span>
-        <span>Aug 2024 - May 2026 (expected)</span>
-      </p>
-    </Card>
-    <Card
-      style={{
-        border: "3px solid #CC0000",
-        inlineSize: "100%",
-        backgroundColor: "var(--bacground)",
-      }}
-    >
-      <h3 class="font-normal text-2xl">North Carolina State University</h3>
-      <br />
-      <p class="flex flex-col justify-between">
-        <Link href="https://www.csc.ncsu.edu/" newTab underline
-          >B.S. Computer Science</Link
-        >
-        Minor in Art & Design
-        <span>Aug 2017 - May 2021</span>
-      </p>
-    </Card>
-  </div>
-  <div
-    class="flex flex-col items-center md:items-end lg:basis-1/2 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    class="flex flex-col items-center md:items-start lg:basis-1/3 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
     <h2 class="text-4xl">Education</h2>
     <p
@@ -58,12 +16,48 @@ import Tag from "../components/tag/Tag.astro";
         color: "var(--primary-color)",
         lineHeight: "normal",
       }}
-      class="flex flex-wrap items-center text-center md:text-end"
+      class="flex flex-wrap items-center text-center md:text-start"
     >
       Still learning, always learning.
     </p>
-    <p class="flex items-center gap-2 text-center md:text-end">
+    <p class="flex flex-wrap items-center gap-2 text-center md:text-start">
       Once belonged to a Wolfpack, now becoming one of the Longhorns.
     </p>
+  </div>
+  <div
+    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
+    <div
+      class="education flex flex-col gap-4 justify-center items-center w-full"
+    >
+      <Card cardType="secondary" className="flex gap-4 w-full justify-between">
+        <div class="flex-col">
+          <h3 class="text-2xl">University of Texas at Austin</h3>
+          <Link href="https://www.ischool.utexas.edu/" newTab underline
+            >M.S. Information Studies</Link
+          >
+          <span>Human-Computer Interaction & UX Design</span>
+        </div>
+        <div class="flex items-center">
+          <Tag className="text-xs">Current</Tag>
+        </div>
+        <p class="flex flex-col justify-center text-end">
+          <span>Aug 2024 - May 2026 (expected)</span>
+        </p>
+      </Card>
+      <Card cardType="secondary" className="flex gap-4 w-full justify-between">
+        <div class="flex-col">
+          <h3 class="text-2xl">North Carolina State University</h3>
+          <Link href="https://www.csc.ncsu.edu/" newTab underline
+            >B.S. Computer Science</Link
+          >
+          Minor in Art & Design
+        </div>
+        <div class="flex items-center"></div>
+        <p class="flex flex-col justify-center text-end">
+          <span>Aug 2017 - May 2021</span>
+        </p>
+      </Card>
+    </div>
   </div>
 </div>

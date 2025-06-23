@@ -5,7 +5,7 @@ import ThemeSwitcher from "../components/theme-switcher/ThemeSwitcher.astro";
 const isHomePage = Astro.url.pathname === "/";
 ---
 
-<nav class="header px-10 py-6 sticky top-0 flex flex-col gap-8">
+<nav class="header px-10 py-6 sticky top-0 flex flex-col lg:px-30 sm:px-10 max-w-6xl w-full">
   <div class="flex justify-between flex-row items-center gap-12">
     <div>
       <a href="/" class="flex gap-4 items-center home-link text-xl">
@@ -15,6 +15,10 @@ const isHomePage = Astro.url.pathname === "/";
     </div>
     <div class="flex gap-12 flex-row items-center">
       <div class="gap-12 items-center hidden sm:flex sm:flex-row">
+        <Link
+          href={isHomePage ? "#projects" : "/#projects"}
+          className="text-xl scroll-link">Projects</Link
+        >
         <Link
           href={isHomePage ? "#experience" : "/#experience"}
           className="text-xl scroll-link">Experience</Link
@@ -28,6 +32,10 @@ const isHomePage = Astro.url.pathname === "/";
     </div>
   </div>
   <div class="gap-12 items-center flex sm:hidden justify-center">
+    <Link
+          href={isHomePage ? "#projects" : "/#projects"}
+          className="text-xl scroll-link">Projects</Link
+        >
     <Link
           href={isHomePage ? "#experience" : "/#experience"}
           className="text-md scroll-link">Experience</Link

@@ -1,0 +1,206 @@
+---
+import { Icon } from "astro-icon/components";
+import DesignProjects from "./DesignProjects.astro";
+import OtherProjects from "./OtherProjects.astro";
+---
+
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const categories: Record<string, boolean> = {
+        uxProjects: true,
+        otherProjects: false,
+      };
+
+      const showCategory = (category: keyof typeof categories) => {
+        // Hide all categories
+        document.querySelectorAll(".category").forEach((el) => {
+          el.classList.remove("active");
+          el.classList.add("immediate");
+        });
+
+        // Show the selected category
+        const selectedCategory = document.getElementById(category);
+        if (selectedCategory) {
+          selectedCategory.classList.add("active");
+          selectedCategory.classList.remove("immediate");
+        }
+
+        // Update aria-selected attribute on buttons
+        document.querySelectorAll('[role="tab"]').forEach((button) => {
+          button.setAttribute(
+            "aria-selected",
+            button.getAttribute("data-category") === category ? "true" : "false"
+          );
+        });
+      };
+
+      // Initialize: Set aria-selected and hidden based on the categories object
+      Object.keys(categories).forEach((category) => {
+        const isActive = categories[category as keyof typeof categories];
+        const element = document.getElementById(category);
+
+        if (element) {
+          element.classList.toggle("active", isActive);
+        }
+
+        const button = document.querySelector(`[data-category="${category}"]`);
+        if (button) {
+          button.setAttribute("aria-selected", isActive ? "true" : "false");
+        }
+      });
+
+      // Attach event listeners to buttons to switch between categories
+      document
+        .getElementById("tab-ux-projects")
+        ?.addEventListener("click", () => {
+          showCategory("uxProjects");
+        });
+      document
+        .getElementById("tab-other-projects")
+        ?.addEventListener("click", () => {
+          showCategory("otherProjects");
+        });
+    });
+  }
+</script>
+<div
+  class="flex flex-row flex-wrap lg:flex-nowrap gap-12 justify-center md:justify-start py-8"
+  id="projects"
+>
+  <div
+    class="flex flex-col items-center md:items-start lg:basis-1/3 justify-start gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
+    <h2 class="text-4xl">Projects</h2>
+    <p
+      style={{
+        fontWeight: "500",
+        fontSize: "3rem",
+        color: "var(--primary-color)",
+        lineHeight: "normal",
+      }}
+      class="flex flex-wrap items-center text-center md:text-start"
+    >
+      Design and technology, better together.
+    </p>
+    <p class="flex items-center gap-2 text-center md:text-start">
+      From designing mobile app interfaces to creating VR experiences.
+    </p>
+  </div>
+  <div
+    class="flex flex-col w-full gap-4 lg:basis-2/3 justify-start scroll-content opacity-0 translate-y-10 transition-all duration-500"
+  >
+    <div class="tabs-container flex flex-row flex-wrap" role="tablist">
+      <button
+        aria-controls="uxProjects"
+        aria-selected="true"
+        class="tab-button"
+        data-category="uxProjects"
+        id="tab-ux-projects"
+        role="tab"
+        ><h3>
+          <Icon
+            name="layer-group"
+            class="hidden sm:block flex-shrink-0"
+          />Design Projects
+        </h3></button
+      >
+      <button
+        aria-controls="otherProjects"
+        aria-selected="false"
+        class="tab-button"
+        data-category="otherProjects"
+        id="tab-other-projects"
+        role="tab"
+        ><h3>
+          <Icon
+            name="diagram-project"
+            class="hidden sm:block flex-shrink-0"
+          />Other Projects
+        </h3></button
+      >
+    </div>
+    <div id="uxProjects" class="category"><DesignProjects /></div>
+    <div id="otherProjects" class="category"><OtherProjects /></div>
+  </div>
+</div>
+<style>
+  .category {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+    pointer-events: none;
+    position: absolute; /* Prevents layout shifting */
+    visibility: hidden; /* Prevents focus on hidden elements */
+    width: 100%; /* Ensure consistent layout */
+  }
+
+  .category.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+    visibility: visible;
+  }
+
+  .category.immediate {
+    opacity: 0; /* Immediate hide */
+    transform: translateY(10px);
+    transition: none; /* Skip transition for immediate hiding */
+  }
+  .tabs-container {
+    align-items: stretch;
+    border: 3px solid var(--floating-color);
+    border-radius: 1.5rem;
+    display: flex;
+    inline-size: 100%;
+    justify-content: center;
+    padding: 0.25rem;
+    position: relative;
+    gap: 8px;
+  }
+
+  .tab-button {
+    align-items: center;
+    color: var(--foreground);
+    cursor: pointer;
+    flex: 1;
+    padding-block: 1rem;
+    padding-inline: 0.75rem;
+    position: relative;
+    text-align: center;
+    transition: color 0.25s;
+  }
+
+  .tab-button h3 {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .tab-button:hover {
+    color: var(--primary-color);
+  }
+
+  .tab-button:active {
+    opacity: 0.75;
+  }
+
+  /* Focus-visible for keyboard navigation */
+  .tab-button:focus-visible {
+    border-radius: 1.1rem;
+    outline: dashed 2px var(--secondary-color); /* Customize focus outline */
+    outline-offset: 2px;
+  }
+
+  .tab-button[aria-selected="true"] {
+    background-color: var(--background);
+    border: 2px solid var(--primary-color);
+    border-radius: 1.1rem; /* Match the radius to the label */
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+</style>

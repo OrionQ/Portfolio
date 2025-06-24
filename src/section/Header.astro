@@ -2,19 +2,51 @@
 import { Icon } from "astro-icon/components";
 import Link from "../components/link/Link.astro";
 import ThemeSwitcher from "../components/theme-switcher/ThemeSwitcher.astro";
+
 const isHomePage = Astro.url.pathname === "/";
 ---
 
-<nav class="header px-10 py-6 sticky top-0 flex flex-col lg:px-30 sm:px-10 max-w-6xl w-full">
-  <div class="flex justify-between flex-row items-center gap-12">
+<script>
+  // Auto-close mobile menu when clicking on links or outside the menu
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenu = document.querySelector(".mobile-menu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    // Close menu when clicking on links
+    mobileLinks?.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (mobileMenu) {
+          mobileMenu.removeAttribute("open");
+        }
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (event) => {
+      if (mobileMenu && mobileMenu.hasAttribute("open")) {
+        // Check if click is outside the mobile menu
+        if (!mobileMenu.contains(event.target as Node)) {
+          mobileMenu.removeAttribute("open");
+        }
+      }
+    });
+  });
+</script>
+
+<nav
+  class="header px-10 py-6 sticky top-0 flex flex-col lg:px-30 sm:px-10 max-w-6xl w-full"
+>
+  <div class="flex justify-between flex-row items-center gap-8">
     <div>
       <a href="/" class="flex gap-4 items-center home-link text-xl">
         <Icon name="orion-logo" size={24} color="var(--primary-color)" />
         Xiaolei Qin
       </a>
     </div>
-    <div class="flex gap-12 flex-row items-center">
-      <div class="gap-12 items-center hidden sm:flex sm:flex-row">
+
+    <!-- Desktop Navigation -->
+    <div class="flex gap-8 flex-row items-center">
+      <div class="gap-8 items-center hidden sm:flex sm:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
           className="text-xl scroll-link">Projects</Link
@@ -29,29 +61,93 @@ const isHomePage = Astro.url.pathname === "/";
         >
       </div>
       <ThemeSwitcher />
+      <!-- Mobile Menu Button -->
+      <details class="sm:hidden mobile-menu">
+        <summary class="mobile-menu-button">
+          <Icon name="bars" size={24} class="menu-icon" />
+          <Icon name="xmark" size={24} class="close-icon" />
+        </summary>
+        <div class="mobile-menu-content">
+          <Link
+            href={isHomePage ? "#projects" : "/#projects"}
+            className="text-xl scroll-link">Projects</Link
+          >
+          <Link
+            href={isHomePage ? "#experience" : "/#experience"}
+            className="text-xl scroll-link">Experience</Link
+          >
+          <Link
+            href={isHomePage ? "#about-me" : "/#about-me"}
+            className="text-xl scroll-link">About Me</Link
+          >
+        </div>
+      </details>
     </div>
   </div>
-  <div class="gap-12 items-center flex sm:hidden justify-center">
-    <Link
-          href={isHomePage ? "#projects" : "/#projects"}
-          className="text-xl scroll-link">Projects</Link
-        >
-    <Link
-          href={isHomePage ? "#experience" : "/#experience"}
-          className="text-md scroll-link">Experience</Link
-        >
-        <Link
-          href={isHomePage ? "#about-me" : "/#about-me"}
-          className="text-md scroll-link">About Me</Link
-        >
-  </div>
+
   <style>
     .header {
       background-color: var(--background);
-      z-index: 1;
+      z-index: 1000;
     }
+
     .home-link:focus-visible {
       outline: 2px dashed var(--secondary-color);
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu {
+      position: relative;
+    }
+
+    .mobile-menu-button {
+      list-style: none;
+      cursor: pointer;
+      border: 0;
+
+      border-radius: 50%;
+      padding: 0.5rem;
+      transition: background-color 0.25s;
+    }
+
+    .mobile-menu-button:hover {
+      background-color: var(--ambience-color);
+    }
+
+    .mobile-menu-button:focus-visible {
+      outline: 2px dashed var(--secondary-color);
+    }
+    .mobile-menu-button svg {
+      color: var(--primary-color);
+    }
+
+    .mobile-menu-button::-webkit-details-marker {
+      display: none;
+    }
+
+    /* Toggle between menu and close icons */
+    .mobile-menu[open] .menu-icon {
+      display: none;
+    }
+
+    .mobile-menu:not([open]) .close-icon {
+      display: none;
+    }
+
+    .mobile-menu-content {
+      font-size: 2rem;
+      position: fixed;
+      inset-block-start: 0;
+      inset-inline: 0;
+      block-size: 12.5rem;
+      background-color: var(--background);
+      box-shadow: 0 4px 6px rgba(var(--shadow-color));
+      margin-block-start: 5rem; /* Space for header */
+      padding-inline: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
     }
   </style>
 </nav>

@@ -4,12 +4,36 @@ import { Image } from "astro:assets";
 import ClickableCard from "../components/clickable-card/ClickableCard.astro";
 import Tag from "../components/tag/Tag.astro";
 import bloomPic from "../images/Bloom-web_thumbnail.jpeg";
-import trustyPic from "../images/Trusty_thumbnail.jpeg";
 import redditPic from "../images/Reddit_thumbnail.jpeg";
+import SagePic from "../images/Sage_thumbnail.jpeg";
+import trustyPic from "../images/Trusty_thumbnail.jpeg";
 import venusPic from "../images/Venus_thumbnail.jpeg";
 ---
 
 <div class="flex flex-col gap-4">
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Sage (currently updating...coming soon!)"
+      description="vitrual instructional designer and AI tutor for students and professors."
+      newTab
+      href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+    >
+      <Image
+        format="jpeg"
+        slot="image"
+        class="w-full h-full"
+        src={SagePic}
+        alt="UT Sage Tutor thumbnail"
+        width={1200}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
+        <Tag>Professional experience</Tag>
+        <Tag>AI chatbot</Tag>
+        <Tag>Design system</Tag>
+      </div>
+    </ClickableCard>
+  </div>
   <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
     <ClickableCard
       title="Venus"

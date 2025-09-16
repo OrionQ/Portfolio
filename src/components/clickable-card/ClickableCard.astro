@@ -39,13 +39,13 @@ const {
     position: relative;
     overflow: hidden;
     border-radius: 1.5rem;
-    background-color: var(--floating-color);
+    background-color: rgba(var(--floating-color), 1);
     transition: all 0.15s ease-in-out;
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
   }
 
   .clickable-card:focus-visible {
-    outline: 5px dashed var(--secondary-color);
+    outline: 5px dashed rgba(var(--secondary-color), 1);
   }
 
   .clickable-card:hover {
@@ -92,7 +92,7 @@ const {
 
   @media (prefers-contrast: more) {
     .card {
-      border: 5px solid var(--foreground);
+      border: 5px solid rgba(var(--foreground), 1);
     }
   }
 </style>

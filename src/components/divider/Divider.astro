@@ -11,15 +11,15 @@ const { dividerType = "primary" } = Astro.props;
   }
 
   .primary {
-    border-color: var(--secondary-color);
+    border-color: rgba(var(--secondary-color), 1);
   }
 
   .secondary {
-    border-color: var(--forground);
+    border-color: rgba(var(--forground), 1);
   }
 
   .tertiary {
-    border-color: var(--floating-color);
+    border-color: rgba(var(--floating-color), 1);
     border-width: 1.5px;
   }
 </style>

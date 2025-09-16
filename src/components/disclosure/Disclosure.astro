@@ -15,7 +15,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
           <h3 class="font-normal text-2xl">{title}</h3>
           {
             company && (
-              <h4 class="text-[var(--primary-color)]">@ {company}</h4>
+              <h4 class="text-[rgba(var(--primary-color), 1)]">@ {company}</h4>
             )
           }
         </div>
@@ -43,32 +43,32 @@ const { className, company, date, open = false, tag, title } = Astro.props;
 
 <style>
   .disclosure {
-    background-color: var(--floating-color);
-    border: 3px solid var(--floating-color);
+    background-color: rgba(var(--floating-color), 1);
+    border: 3px solid rgba(var(--floating-color), 1);
     border-radius: 1.5rem;
     inline-size: 100%;
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
   }
   .summary {
     border-radius: 1.5rem;
-    border: 3px solid var(--floating-color);
-    background-color: var(--floating-color);
+    border: 3px solid rgba(var(--floating-color), 1);
+    background-color: rgba(var(--floating-color), 1);
     min-inline-size: 100%;
     padding: 1.5rem;
     cursor: pointer;
   }
 
   .summary:hover {
-    outline: 3px solid var(--primary-color);
+    outline: 3px solid rgba(var(--primary-color), 1);
   }
 
   .summary:focus-visible {
-    outline: 3px dashed var(--secondary-color);
+    outline: 3px dashed rgba(var(--secondary-color), 1);
     outline-offset: 4px;
   }
 
   .content {
-    background-color: var(--background);
+    background-color: rgba(var(--background), 1);
     border-radius: 0 0 1.5rem 1.5rem;
   }
 

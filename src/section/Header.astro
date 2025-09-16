@@ -39,7 +39,11 @@ const isHomePage = Astro.url.pathname === "/";
   <div class="flex justify-between flex-row items-center gap-8">
     <div>
       <a href="/" class="flex gap-4 items-center home-link text-xl">
-        <Icon name="orion-logo" size={24} color="var(--primary-color)" />
+        <Icon
+          name="orion-logo"
+          size={24}
+          color="rgba(var(--primary-color), 1)"
+        />
         Xiaolei Qin
       </a>
     </div>
@@ -87,12 +91,18 @@ const isHomePage = Astro.url.pathname === "/";
 
   <style>
     .header {
-      background-color: var(--background);
+      background-color: rgba(var(--background), 0.8);
       z-index: 1000;
+      backdrop-filter: blur(10px);
+
+      &:has(.mobile-menu[open]) {
+        background-color: rgba(var(--background), 1);
+        backdrop-filter: none;
+      }
     }
 
     .home-link:focus-visible {
-      outline: 2px dashed var(--secondary-color);
+      outline: 2px dashed rgba(var(--secondary-color), 1);
     }
 
     /* Mobile Menu Styles */
@@ -111,14 +121,14 @@ const isHomePage = Astro.url.pathname === "/";
     }
 
     .mobile-menu-button:hover {
-      background-color: var(--ambience-color);
+      background-color: rgba(var(--ambience-color), 1);
     }
 
     .mobile-menu-button:focus-visible {
-      outline: 2px dashed var(--secondary-color);
+      outline: 2px dashed rgba(var(--secondary-color), 1);
     }
     .mobile-menu-button svg {
-      color: var(--primary-color);
+      color: rgba(var(--primary-color), 1);
     }
 
     .mobile-menu-button::-webkit-details-marker {
@@ -139,15 +149,15 @@ const isHomePage = Astro.url.pathname === "/";
       position: fixed;
       inset-block-start: 0;
       inset-inline: 0;
-      block-size: 12.5rem;
-      background-color: var(--background);
+      block-size: 15rem;
+      background-color: rgba(var(--background), 1);
       box-shadow: 0 4px 6px rgba(var(--shadow-color));
       margin-block-start: 5rem; /* Space for header */
       padding-inline: 2.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 2rem;
     }
   </style>
 </nav>

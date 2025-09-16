@@ -15,11 +15,11 @@ const { className, title, cardType = 'primary', style } = Astro.props;
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
   }
   .card-primary {
-    background-color: var(--floating-color);
+    background-color: rgba(var(--floating-color), 1);
   }
   .card-secondary {
-    background-color: var(--background);
-    outline: 2px solid var(--secondary-color);
+    background-color: rgba(var(--background), 1);
+    outline: 2px solid rgba(var(--secondary-color), 1);
   }
 
   @media (prefers-contrast: more) {

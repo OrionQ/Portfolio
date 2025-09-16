@@ -76,7 +76,7 @@ import OtherProjects from "./OtherProjects.astro";
       style={{
         fontWeight: "500",
         fontSize: "3rem",
-        color: "var(--primary-color)",
+        color: "rgba(var(--primary-color), 1)",
         lineHeight: "normal",
       }}
       class="flex flex-wrap items-center text-center md:text-start"
@@ -152,7 +152,7 @@ import OtherProjects from "./OtherProjects.astro";
   }
   .tabs-container {
     align-items: stretch;
-    border: 3px solid var(--floating-color);
+    border: 3px solid rgba(var(--floating-color), 1);
     border-radius: 1.5rem;
     display: flex;
     inline-size: 100%;
@@ -164,7 +164,7 @@ import OtherProjects from "./OtherProjects.astro";
 
   .tab-button {
     align-items: center;
-    color: var(--foreground);
+    color: rgba(var(--foreground), 1);
     cursor: pointer;
     flex: 1;
     padding-block: 1rem;
@@ -182,7 +182,7 @@ import OtherProjects from "./OtherProjects.astro";
   }
 
   .tab-button:hover {
-    color: var(--primary-color);
+    color: rgba(var(--primary-color), 1);
   }
 
   .tab-button:active {
@@ -192,15 +192,15 @@ import OtherProjects from "./OtherProjects.astro";
   /* Focus-visible for keyboard navigation */
   .tab-button:focus-visible {
     border-radius: 1.1rem;
-    outline: dashed 2px var(--secondary-color); /* Customize focus outline */
+    outline: dashed 2px rgba(var(--secondary-color), 1); /* Customize focus outline */
     outline-offset: 2px;
   }
 
   .tab-button[aria-selected="true"] {
-    background-color: var(--background);
-    border: 2px solid var(--primary-color);
+    background-color: rgba(var(--background), 1);
+    border: 2px solid rgba(var(--primary-color), 1);
     border-radius: 1.1rem; /* Match the radius to the label */
-    color: var(--primary-color);
+    color: rgba(var(--primary-color), 1);
     font-weight: 500;
   }
 </style>

@@ -69,7 +69,7 @@
   }
 
   #themeToggle:hover {
-    background-color: var(--ambience-color);
+    background-color: rgba(var(--ambience-color), 1);
   }
 
   #themeToggle:active {
@@ -77,11 +77,11 @@
   }
 
   #themeToggle:focus-visible {
-    outline: 2px dashed var(--secondary-color);
+    outline: 2px dashed rgba(var(--secondary-color), 1);
   }
 
   .sun {
-    fill: var(--primary-color);
+    fill: rgba(var(--primary-color), 1);
   }
   .moon {
     fill: transparent;
@@ -91,6 +91,6 @@
     fill: transparent;
   }
   :global(.dark) .moon {
-    fill: var(--primary-color);
+    fill: rgba(var(--primary-color), 1);
   }
 </style>

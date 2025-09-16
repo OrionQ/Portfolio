@@ -49,7 +49,7 @@ import Education from "../section/Education.astro";
           style={{
             fontWeight: "500",
             fontSize: "3rem",
-            color: "var(--primary-color)",
+            color: "rgba(var(--primary-color), 1)",
             lineHeight: "normal",
           }}
           class="flex flex-wrap items-center text-center md:text-start"
@@ -73,7 +73,7 @@ import Education from "../section/Education.astro";
     size={32}
     class="flex-shrink-0 inline animate-float-slow transition-opacity duration-500"
     aria-hidden
-    color="var(--floating-color)"
+    color="rgba(var(--floating-color), 1)"
   />
   <Divider dividerType="tertiary" />
   <!-- Projects Section -->
@@ -85,7 +85,7 @@ import Education from "../section/Education.astro";
   <!-- Introduction Section -->
   <WhoIAm />
   <div class="flex gap-4 pt-12">
-    <p style={{ color: "var(--primary-color)", fontSize: "1.5rem" }}>
+    <p style={{ color: "rgba(var(--primary-color), 1)", fontSize: "1.5rem" }}>
       (In case you are wondering, I designed and coded this website using <Link
         className="inline-flex"
         href="https://astro.build/"

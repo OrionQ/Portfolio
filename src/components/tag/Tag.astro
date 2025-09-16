@@ -8,10 +8,11 @@ const { style, className = "" } = Astro.props;
 <style>
   .tag {
     align-items: center;
-    background-color: var(--ambience-color);
-    border-color: var(--ambience-color);
+    background-color: rgba(var(--ambience-color), 0.7);
+    backdrop-filter: blur(10px);
+    border-color: rgba(var(--ambience-color), 1);
     border-radius: 9999px;
-    color: var(--secondary-color);
+    color: rgba(var(--secondary-color), 1);
     display: flex;
     padding-inline: 0.75rem;
     padding-block: 0.5rem;

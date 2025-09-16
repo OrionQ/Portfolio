@@ -12,10 +12,10 @@ const { href, newTab = false, underline = false, className } = Astro.props;
 </a>
 <style>
   .link {
-    color: var(--primary-color);
+    color: rgba(var(--primary-color), 1);
   }
 
   .link:focus-visible {
-    outline: 2px dashed var(--secondary-color);
+    outline: 2px dashed rgba(var(--secondary-color), 1);
   }
 </style>

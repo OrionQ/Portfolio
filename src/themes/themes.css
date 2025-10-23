@@ -66,8 +66,8 @@
   --foreground: 23, 23, 23; /* #171717 */
   --primary-color: 64, 64, 64; /* #404040 */
   --secondary-color: 82, 82, 82; /* #525252 */
-  --floating-color: 240, 240, 240; /* #f0f0f0 — slightly darker */
-  --ambience-color: 229, 229, 229; /* #e5e5e5 */
+  --floating-color: 230, 230, 230; /* #e6e6e6 — darker for better contrast with white background */
+  --ambience-color: 210, 210, 210; /* #d2d2d2 — darker for accessibility */
   --tint-color: 64, 64, 64; /* #404040 */
   --shadow-color: 0, 0, 0, 0.15;
 }
@@ -77,11 +77,11 @@
   --background: 39, 39, 39; /* #272727 */
   --foreground: 245, 245, 245; /* #f5f5f5 */
   --primary-color: 212, 212, 212; /* #d4d4d4 */
-  --secondary-color: 163, 163, 163; /* #a3a3a3 */
-  --floating-color: 50, 50, 50; /* #323232 */
+  --secondary-color: 200, 200, 200; /* #c8c8c8 — brighter for accessibility */
+  --floating-color: 60, 60, 60; /* #3c3c3c — brighter for better contrast with dark background */
   --ambience-color: 82, 82, 82; /* #525252 */
   --tint-color: 212, 212, 212; /* #d4d4d4 */
-  --shadow-color: 0, 0, 0, 0.5;
+  --shadow-color: 0, 0, 0, 0.4;
 }
 
 /* ============================================
@@ -118,13 +118,13 @@
 
 :root[data-theme="pink"] {
   /* Light Mode */
-  --background: 255, 255, 255; /* #ffffff */
-  --foreground: 68, 22, 38; /* #441626 — softened but still accessible */
-  --primary-color: 194, 77, 107; /* #c24d6b — warmer, balanced pink */
-  --secondary-color: 166, 63, 91; /* #a63f5b — complementary tone */
-  --floating-color: 250, 238, 242; /* #faeef2 — soft backdrop */
-  --ambience-color: 238, 196, 207; /* #eec4cf — gentle pastel accent */
-  --tint-color: 194, 77, 107; /* #c24d6b */
+  --background: 255, 255, 255;
+  --foreground: 136, 19, 55;
+  --primary-color: 219, 39, 119;
+  --secondary-color: 190, 24, 93;
+  --floating-color: 253, 242, 248;
+  --ambience-color: 251, 207, 232;
+  --tint-color: 219, 39, 119;
   --shadow-color: 0, 0, 0, 0.15;
 }
 

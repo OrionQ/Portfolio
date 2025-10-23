@@ -163,7 +163,7 @@ import { Icon } from "astro-icon/components";
   </details>
 
   <button
-    id="themeToggle"
+    id="darkModeToggle"
     aria-label="Toggle light and dark mode"
     aria-pressed="false"
   >
@@ -229,7 +229,7 @@ import { Icon } from "astro-icon/components";
   // Toggle light/dark mode
   const handleToggleClick = () => {
     const element = document.documentElement;
-    const toggleButton = document.getElementById("themeToggle");
+    const toggleButton = document.getElementById("darkModeToggle");
 
     element.classList.toggle("dark");
     const isDark = element.classList.contains("dark");
@@ -269,12 +269,12 @@ import { Icon } from "astro-icon/components";
   };
 
   // Event listeners
-  const themeToggle = document.getElementById("themeToggle");
-  if (themeToggle) {
-    themeToggle.addEventListener("click", handleToggleClick);
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", handleToggleClick);
     // Set initial aria-pressed state
     const isDark = document.documentElement.classList.contains("dark");
-    themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+    darkModeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
   }
 
   // Add listeners to all theme buttons (both desktop and mobile)
@@ -321,7 +321,7 @@ import { Icon } from "astro-icon/components";
         localStorage.setItem("theme", newTheme);
 
         // Update toggle button state
-        const toggleButton = document.getElementById("themeToggle");
+        const toggleButton = document.getElementById("darkModeToggle");
         if (toggleButton) {
           toggleButton.setAttribute(
             "aria-pressed",
@@ -352,24 +352,24 @@ import { Icon } from "astro-icon/components";
     gap: 0.5rem;
   }
 
-  #themeToggle {
+  #darkModeToggle {
     border: 0;
     background: none;
     border-radius: 50%;
     padding: 0.5rem;
-    transition: background-color 0.25s;
     cursor: pointer;
+    transition: background-color 0s;
   }
 
-  #themeToggle:hover {
+  #darkModeToggle:hover {
     background-color: rgba(var(--ambience-color), 1);
   }
 
-  #themeToggle:active {
+  #darkModeToggle:active {
     opacity: 0.75;
   }
 
-  #themeToggle:focus-visible {
+  #darkModeToggle:focus-visible {
     outline: 2px dashed rgba(var(--secondary-color), 1);
     outline-offset: 2px;
   }
@@ -425,7 +425,6 @@ import { Icon } from "astro-icon/components";
     background: none;
     border-radius: 50%;
     padding: 0.5rem;
-    transition: background-color 0.25s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -458,7 +457,6 @@ import { Icon } from "astro-icon/components";
     border-radius: 25px;
     box-shadow: 0 0px 12px rgba(var(--shadow-color));
     z-index: 100;
-    backdrop-filter: blur(10px);
   }
 
   /* Shared Button Styles */
@@ -468,7 +466,7 @@ import { Icon } from "astro-icon/components";
     padding: 0.25rem;
     border-radius: 25px;
     cursor: pointer;
-    transition: border-color 0.25s;
+    transition: border-color 0s;
   }
 
   .theme-button:hover {

@@ -19,11 +19,11 @@
 :root[data-theme="blue"].dark {
   /* Dark Mode */
   --background: 39, 39, 39; /* #272727 */
-  --foreground: 229, 245, 251; /* #e5f5fb */
-  --primary-color: 102, 204, 238; /* #66ccee */
-  --secondary-color: 181, 223, 241; /* #b5dff1 */
-  --floating-color: 52, 73, 85; /* #344955 */
-  --ambience-color: 0, 73, 107; /* #00496b */
+  --foreground: 229, 245, 251; /* #e5f5fb - light, readable text */
+  --primary-color: 102, 204, 238; /* #66ccee - brighter primary */
+  --secondary-color: 153, 218, 243; /* #99daf3 - lighter secondary for better contrast */
+  --floating-color: 70, 100, 120; /* #466478 - brighter floating */
+  --ambience-color: 0, 100, 150; /* #006496 - brighter ambient */
   --tint-color: 102, 204, 238; /* #66ccee */
   --shadow-color: 0, 0, 0, 0.5;
 }
@@ -137,6 +137,35 @@
   --floating-color: 58, 44, 52;
   --ambience-color: 74, 46, 60;
   --tint-color: 245, 104, 165;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+
+/* ============================================
+   RETRO THEME
+   ============================================ */
+
+:root[data-theme="retro"] {
+  /* Light Mode */
+  --background: 253, 244, 227; /* #fdf4e3 - soft cream */
+  --foreground: 19, 70, 134; /* #134682 - muted navy */
+  --primary-color: 19, 70, 134; /* #134682 - same as foreground for consistency */
+  --secondary-color: 179, 21, 0; /* #b31500 - warm retro red */
+  --floating-color: 254, 178, 26; /* #feb216 - mustard yellow accent */
+  --ambience-color: 255, 219, 148; /* #ffdb94 - mustard yellow accent */
+  --tint-color: 19, 70, 134; /* #134682 - matches primary */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="retro"].dark {
+  /* Dark Mode */
+  --background: 19, 70, 134; /* #134682 - muted navy */
+  --foreground: 253, 244, 227; /* #fdf4e3 - light cream for readability */
+  --primary-color: 253, 244, 227; /* #fdf4e3 - light cream for readability */
+  --secondary-color: 254, 178, 26; /* #feb216 - mustard accent for visibility */
+  --floating-color: 92, 11, 0; /* #5c0b00 - retro red accent */
+  --ambience-color: 137, 26, 12; /* #891a0c - warm retro tone for depth */
+  --tint-color: 19, 70, 134; /* #134682 */
   --shadow-color: 0, 0, 0, 0.5;
 }
 

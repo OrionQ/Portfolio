@@ -1,6 +1,7 @@
 ---
 import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
+import '../themes/themes.css'; // adjust path as needed
 
 const { title } = Astro.props;
 ---
@@ -107,13 +108,13 @@ const { title } = Astro.props;
   :root.dark {
     /* Dark Mode - RGBA Format */
     --background: 39, 39, 39; /* #272727 */
-    --foreground: 242, 203, 220; /* #f2cbdc */
-    --primary-color: 245, 104, 165; /* #f568a5 */
-    --secondary-color: 229, 159, 189; /* #e59fbd */
-    --floating-color: 58, 44, 52; /* #3a2c34 */
-    --ambience-color: 74, 46, 60; /* #4a2e3c */
-    --tint-color: 245, 104, 165; /* RGB of primary-color */
-    --shadow-color: 0, 0, 0, 0.75;
+    --foreground: 229, 245, 251; /* #e5f5fb - light text */
+    --primary-color: 102, 204, 238; /* #66ccee - brighter, more vibrant */
+    --secondary-color: 181, 223, 241; /* #b5dff1 - softer blue */
+    --floating-color: 52, 73, 85; /* #344955 - lifted surface */
+    --ambience-color: 0, 73, 107; /* #00496b - muted deep blue */
+    --tint-color: 102, 204, 238; /* matches primary-color */
+    --shadow-color: 0, 0, 0, 0.4; /* deeper shadows for dark mode */
   }
 
   body {

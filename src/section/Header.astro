@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "../components/link/Link.astro";
-import ThemeSwitcher from "../components/theme-switcher/ThemeSwitcher.astro";
+import ThemeSelector from "../components/theme-selector/ThemeSelector.astro";
 
 const isHomePage = Astro.url.pathname === "/";
 ---
@@ -49,7 +49,7 @@ const isHomePage = Astro.url.pathname === "/";
     </div>
 
     <!-- Desktop Navigation -->
-    <div class="flex gap-8 flex-row items-center">
+    <div class="flex gap-6 flex-row items-center">
       <div class="gap-8 items-center hidden sm:flex sm:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
@@ -64,7 +64,7 @@ const isHomePage = Astro.url.pathname === "/";
           className="text-xl scroll-link">About Me</Link
         >
       </div>
-      <ThemeSwitcher />
+      <ThemeSelector />
       <!-- Mobile Menu Button -->
       <details class="sm:hidden mobile-menu">
         <summary class="mobile-menu-button">

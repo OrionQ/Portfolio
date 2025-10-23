@@ -1,0 +1,150 @@
+/* ============================================
+   BLUE THEME (Default)
+   ============================================ */
+
+:root,
+:root[data-theme="blue"] {
+  /* Light Mode */
+  --background: 255, 255, 255; /* #ffffff */
+  --foreground: 0, 49, 73; /* #003149 */
+  --primary-color: 0, 125, 179; /* #007db3 */
+  --secondary-color: 0, 90, 132; /* #005a84 */
+  --floating-color: 229, 245, 251; /* #e5f5fb */
+  --ambience-color: 181, 223, 241; /* #b5dff1 */
+  --tint-color: 0, 125, 179; /* #007db3 */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root.dark[data-theme="blue"],
+:root[data-theme="blue"].dark {
+  /* Dark Mode */
+  --background: 39, 39, 39; /* #272727 */
+  --foreground: 229, 245, 251; /* #e5f5fb */
+  --primary-color: 102, 204, 238; /* #66ccee */
+  --secondary-color: 181, 223, 241; /* #b5dff1 */
+  --floating-color: 52, 73, 85; /* #344955 */
+  --ambience-color: 0, 73, 107; /* #00496b */
+  --tint-color: 102, 204, 238; /* #66ccee */
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   GREEN THEME
+   ============================================ */
+
+:root[data-theme="green"] {
+  /* Light Mode */
+  --background: 255, 255, 255; /* #ffffff */
+  --foreground: 24, 48, 30; /* #18301E */
+  --primary-color: 76, 118, 59; /* #4C763B */
+  --secondary-color: 56, 99, 45; /* #38632D */
+  --floating-color: 229, 243, 232; /* #E5F3E8 */
+  --ambience-color: 176, 208, 181; /* #B0D0B5 */
+  --tint-color: 76, 118, 59; /* #4C763B */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="green"].dark {
+  /* Dark Mode */
+  --background: 39, 39, 39; /* #272727 */
+  --foreground: 229, 243, 232; /* #E5F3E8 */
+  --primary-color: 136, 179, 128; /* #88B380 */
+  --secondary-color: 176, 208, 181; /* #B0D0B5 */
+  --floating-color: 52, 70, 58; /* #34463A */
+  --ambience-color: 56, 99, 45; /* #38632D */
+  --tint-color: 136, 179, 128; /* #88B380 */
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   MONOCHROME THEME
+   ============================================ */
+
+:root[data-theme="mono"] {
+  /* Light Mode */
+  --background: 255, 255, 255; /* #ffffff */
+  --foreground: 23, 23, 23; /* #171717 */
+  --primary-color: 64, 64, 64; /* #404040 */
+  --secondary-color: 82, 82, 82; /* #525252 */
+  --floating-color: 240, 240, 240; /* #f0f0f0 — slightly darker */
+  --ambience-color: 229, 229, 229; /* #e5e5e5 */
+  --tint-color: 64, 64, 64; /* #404040 */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="mono"].dark {
+  /* Dark Mode */
+  --background: 39, 39, 39; /* #272727 */
+  --foreground: 245, 245, 245; /* #f5f5f5 */
+  --primary-color: 212, 212, 212; /* #d4d4d4 */
+  --secondary-color: 163, 163, 163; /* #a3a3a3 */
+  --floating-color: 50, 50, 50; /* #323232 */
+  --ambience-color: 82, 82, 82; /* #525252 */
+  --tint-color: 212, 212, 212; /* #d4d4d4 */
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   ORANGE THEME
+   ============================================ */
+
+:root[data-theme="orange"] {
+  /* Light Mode */
+  --background: 255, 255, 255; /* #ffffff */
+  --foreground: 95, 39, 0; /* #5f2700 */
+  --primary-color: 191, 87, 0; /* #bf5700 */
+  --secondary-color: 145, 65, 0; /* #914100 */
+  --floating-color: 255, 241, 230; /* #fff1e6 */
+  --ambience-color: 245, 204, 165; /* #f5cca5 */
+  --tint-color: 191, 87, 0; /* #bf5700 */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="orange"].dark {
+  /* Dark Mode */
+  --background: 39, 39, 39; /* #272727 */
+  --foreground: 255, 241, 230; /* #fff1e6 */
+  --primary-color: 230, 140, 77; /* #e68c4d */
+  --secondary-color: 245, 204, 165; /* #f5cca5 */
+  --floating-color: 66, 46, 36; /* #422e24 */
+  --ambience-color: 95, 39, 0; /* #5f2700 */
+  --tint-color: 230, 140, 77; /* #e68c4d */
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   PINK THEME
+   ============================================ */
+
+:root[data-theme="pink"] {
+  /* Light Mode */
+  --background: 255, 255, 255; /* #ffffff */
+  --foreground: 68, 22, 38; /* #441626 — softened but still accessible */
+  --primary-color: 194, 77, 107; /* #c24d6b — warmer, balanced pink */
+  --secondary-color: 166, 63, 91; /* #a63f5b — complementary tone */
+  --floating-color: 250, 238, 242; /* #faeef2 — soft backdrop */
+  --ambience-color: 238, 196, 207; /* #eec4cf — gentle pastel accent */
+  --tint-color: 194, 77, 107; /* #c24d6b */
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="pink"].dark {
+  /* Dark Mode */
+  --background: 39, 39, 39;
+  --foreground: 242, 203, 220;
+  --primary-color: 245, 104, 165;
+  --secondary-color: 229, 159, 189;
+  --floating-color: 58, 44, 52;
+  --ambience-color: 74, 46, 60;
+  --tint-color: 245, 104, 165;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}

@@ -9,9 +9,9 @@
   --foreground: 0, 49, 73; /* #003149 */
   --primary-color: 0, 125, 179; /* #007db3 */
   --secondary-color: 0, 90, 132; /* #005a84 */
-  --floating-color: 229, 245, 251; /* #e5f5fb */
+  --floating-color: 237, 248, 252; /* #edf8fc */
   --ambience-color: 181, 223, 241; /* #b5dff1 */
-  --tint-color: 0, 125, 179; /* #007db3 */
+  --tint-color: 0, 110, 158; /* #006e9e */
   --shadow-color: 0, 0, 0, 0.15;
 }
 
@@ -22,7 +22,7 @@
   --foreground: 229, 245, 251; /* #e5f5fb - light, readable text */
   --primary-color: 102, 204, 238; /* #66ccee - brighter primary */
   --secondary-color: 153, 218, 243; /* #99daf3 - lighter secondary for better contrast */
-  --floating-color: 70, 100, 120; /* #466478 - brighter floating */
+  --floating-color: 55, 80, 95; /* #37505f */
   --ambience-color: 0, 100, 150; /* #006496 - brighter ambient */
   --tint-color: 102, 204, 238; /* #66ccee */
   --shadow-color: 0, 0, 0, 0.5;
@@ -50,7 +50,7 @@
   --foreground: 229, 243, 232; /* #E5F3E8 */
   --primary-color: 136, 179, 128; /* #88B380 */
   --secondary-color: 176, 208, 181; /* #B0D0B5 */
-  --floating-color: 52, 70, 58; /* #34463A */
+  --floating-color: 42, 56, 47; /* #2a382f */
   --ambience-color: 56, 99, 45; /* #38632D */
   --tint-color: 136, 179, 128; /* #88B380 */
   --shadow-color: 0, 0, 0, 0.5;
@@ -66,8 +66,8 @@
   --foreground: 23, 23, 23; /* #171717 */
   --primary-color: 64, 64, 64; /* #404040 */
   --secondary-color: 82, 82, 82; /* #525252 */
-  --floating-color: 230, 230, 230; /* #e6e6e6 — darker for better contrast with white background */
-  --ambience-color: 210, 210, 210; /* #d2d2d2 — darker for accessibility */
+  --floating-color: 230, 230, 230; /* #e6e6e6 */
+  --ambience-color: 210, 210, 210; /* #d2d2d2 */
   --tint-color: 64, 64, 64; /* #404040 */
   --shadow-color: 0, 0, 0, 0.15;
 }
@@ -77,30 +77,30 @@
   --background: 39, 39, 39; /* #272727 */
   --foreground: 245, 245, 245; /* #f5f5f5 */
   --primary-color: 212, 212, 212; /* #d4d4d4 */
-  --secondary-color: 200, 200, 200; /* #c8c8c8 — brighter for accessibility */
-  --floating-color: 60, 60, 60; /* #3c3c3c — brighter for better contrast with dark background */
+  --secondary-color: 200, 200, 200; /* #c8c8c8 */
+  --floating-color: 60, 60, 60; /* #3c3c3c */
   --ambience-color: 82, 82, 82; /* #525252 */
   --tint-color: 212, 212, 212; /* #d4d4d4 */
   --shadow-color: 0, 0, 0, 0.4;
 }
 
 /* ============================================
-   ORANGE THEME
+   BROWN THEME
    ============================================ */
 
-:root[data-theme="orange"] {
+:root[data-theme="brown"] {
   /* Light Mode */
   --background: 255, 255, 255; /* #ffffff */
   --foreground: 95, 39, 0; /* #5f2700 */
-  --primary-color: 191, 87, 0; /* #bf5700 */
+  --primary-color: 166, 76, 0; /* #a64c00 */
   --secondary-color: 145, 65, 0; /* #914100 */
-  --floating-color: 255, 241, 230; /* #fff1e6 */
+  --floating-color: 253, 245, 237; /* #fdf5ed */
   --ambience-color: 245, 204, 165; /* #f5cca5 */
-  --tint-color: 191, 87, 0; /* #bf5700 */
+  --tint-color: 166, 76, 0; /* #a64c00 */
   --shadow-color: 0, 0, 0, 0.15;
 }
 
-:root[data-theme="orange"].dark {
+:root[data-theme="brown"].dark {
   /* Dark Mode */
   --background: 39, 39, 39; /* #272727 */
   --foreground: 255, 241, 230; /* #fff1e6 */
@@ -120,11 +120,11 @@
   /* Light Mode */
   --background: 255, 255, 255;
   --foreground: 136, 19, 55;
-  --primary-color: 219, 39, 119;
-  --secondary-color: 190, 24, 93;
-  --floating-color: 253, 242, 248;
+  --primary-color: 190, 24, 93; /* #be185d */
+  --secondary-color: 157, 23, 77; /* darker secondary */
+  --floating-color: 252, 246, 249; /* #fcf6f9 */
   --ambience-color: 251, 207, 232;
-  --tint-color: 219, 39, 119;
+  --tint-color: 190, 24, 93; /* #be185d */
   --shadow-color: 0, 0, 0, 0.15;
 }
 

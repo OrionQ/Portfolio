@@ -70,20 +70,28 @@ import { Icon } from "astro-icon/components";
       aria-pressed="false"
       title="Retro"
     >
-      <span class="color-swatch" style="background: linear-gradient(90deg, #134682 33%, #FEB216 33% 66%, #b31500 66%);" aria-hidden="true"
-      ></span>
+      <span
+        class="color-swatch"
+        style="background: linear-gradient(90deg, #134682 33%, #FEB216 33% 66%, #b31500 66%);"
+        aria-hidden="true"></span>
     </button>
   </div>
 
   <!-- Mobile: Dropdown color picker -->
-  <details class="theme-dropdown">
-    <summary class="theme-dropdown-button" aria-label="Open color theme menu">
+  <div class="theme-dropdown">
+    <button
+      class="theme-dropdown-button"
+      id="themeDropdownButton"
+      aria-label="Open color theme menu"
+      aria-expanded="false"
+    >
       <Icon name="swatch" size={24} aria-hidden="true" />
-    </summary>
+    </button>
 
     <div
       class="theme-picker-mobile"
-      role="group"
+      id="themePicker"
+      role="menu"
       aria-label="Color theme selector"
     >
       <button
@@ -92,6 +100,7 @@ import { Icon } from "astro-icon/components";
         aria-label="Select blue theme"
         aria-pressed="false"
         title="Blue"
+        role="menuitem"
       >
         <span
           class="color-swatch"
@@ -104,6 +113,7 @@ import { Icon } from "astro-icon/components";
         aria-label="Select pink theme"
         aria-pressed="false"
         title="Pink"
+        role="menuitem"
       >
         <span
           class="color-swatch"
@@ -116,6 +126,7 @@ import { Icon } from "astro-icon/components";
         aria-label="Select green theme"
         aria-pressed="false"
         title="Green"
+        role="menuitem"
       >
         <span
           class="color-swatch"
@@ -128,6 +139,7 @@ import { Icon } from "astro-icon/components";
         aria-label="Select orange theme"
         aria-pressed="false"
         title="Orange"
+        role="menuitem"
       >
         <span
           class="color-swatch"
@@ -140,6 +152,7 @@ import { Icon } from "astro-icon/components";
         aria-label="Select monochrome theme"
         aria-pressed="false"
         title="Monochrome"
+        role="menuitem"
       >
         <span
           class="color-swatch"
@@ -152,15 +165,15 @@ import { Icon } from "astro-icon/components";
         aria-label="Select retro theme"
         aria-pressed="false"
         title="Retro"
+        role="menuitem"
       >
         <span
           class="color-swatch"
           style="background: linear-gradient(90deg, #134682 33%, #FEB216 33% 66%, #b31500 66%);"
-          aria-hidden="true"
-        ></span>
+          aria-hidden="true"></span>
       </button>
     </div>
-  </details>
+  </div>
 
   <button
     id="darkModeToggle"
@@ -258,10 +271,12 @@ import { Icon } from "astro-icon/components";
     });
 
     // Close dropdown after selection on mobile
-    // const dropdown = document.querySelector(".theme-dropdown");
-    // if (dropdown) {
-    //   dropdown.removeAttribute("open");
-    // }
+    const dropdownButton = document.getElementById("themeDropdownButton");
+    const themePicker = document.getElementById("themePicker");
+    if (dropdownButton && themePicker) {
+      themePicker.classList.remove("show");
+      dropdownButton.setAttribute("aria-expanded", "false");
+    }
 
     // Announce change
     const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
@@ -291,25 +306,47 @@ import { Icon } from "astro-icon/components";
     }
   });
 
-  // Close dropdown when clicking outside
-  document.addEventListener("click", (event) => {
-    const dropdown = document.querySelector(".theme-dropdown");
-    if (dropdown && dropdown.hasAttribute("open")) {
-      if (!dropdown.contains(event.target)) {
-        dropdown.removeAttribute("open");
-      }
-    }
-  });
+  // Mobile dropdown functionality
+  const dropdownButton = document.getElementById("themeDropdownButton");
+  const themePicker = document.getElementById("themePicker");
 
-  // Handle Escape key to close dropdown
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      const dropdown = document.querySelector(".theme-dropdown");
-      if (dropdown && dropdown.hasAttribute("open")) {
-        dropdown.removeAttribute("open");
+  if (dropdownButton && themePicker) {
+    // Toggle dropdown
+    dropdownButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = themePicker.classList.contains("show");
+
+      if (isOpen) {
+        themePicker.classList.remove("show");
+        dropdownButton.setAttribute("aria-expanded", "false");
+      } else {
+        themePicker.classList.add("show");
+        dropdownButton.setAttribute("aria-expanded", "true");
       }
-    }
-  });
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", (event) => {
+      if (themePicker.classList.contains("show")) {
+        if (
+          !themePicker.contains(event.target) &&
+          event.target !== dropdownButton
+        ) {
+          themePicker.classList.remove("show");
+          dropdownButton.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
+
+    // Handle Escape key
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && themePicker.classList.contains("show")) {
+        themePicker.classList.remove("show");
+        dropdownButton.setAttribute("aria-expanded", "false");
+        dropdownButton.focus();
+      }
+    });
+  }
 
   // System preference listener
   window
@@ -330,6 +367,86 @@ import { Icon } from "astro-icon/components";
         }
       }
     });
+</script>
+
+<script>
+  // Floating UI positioning (only on mobile)
+  import {
+    computePosition,
+    flip,
+    shift,
+    offset,
+    autoUpdate,
+  } from "@floating-ui/dom";
+
+  let cleanup: (() => void) | null = null;
+
+  const updatePosition = () => {
+    const dropdownButton = document.getElementById("themeDropdownButton");
+    const themePicker = document.getElementById("themePicker");
+
+    if (
+      !dropdownButton ||
+      !themePicker ||
+      !themePicker.classList.contains("show")
+    )
+      return;
+
+    computePosition(dropdownButton, themePicker, {
+      placement: "bottom",
+      middleware: [
+        offset(12),
+        flip({
+          fallbackPlacements: ["top", "bottom-start", "bottom-end"],
+          padding: 8,
+        }),
+        shift({
+          padding: 8,
+        }),
+      ],
+    }).then(({ x, y }) => {
+      Object.assign(themePicker.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    });
+  };
+
+  // Set up positioning when dropdown opens
+  const observeDropdown = () => {
+    const dropdownButton = document.getElementById("themeDropdownButton");
+    const themePicker = document.getElementById("themePicker");
+
+    if (!dropdownButton || !themePicker) return;
+
+    // Watch for class changes on themePicker
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const isOpen = themePicker.classList.contains("show");
+
+          if (isOpen && window.innerWidth < 1000) {
+            // Start positioning
+            if (cleanup) cleanup();
+            cleanup = autoUpdate(dropdownButton, themePicker, updatePosition);
+          } else if (cleanup) {
+            // Stop positioning
+            cleanup();
+            cleanup = null;
+          }
+        }
+      });
+    });
+
+    observer.observe(themePicker, { attributes: true });
+  };
+
+  // Initialize
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", observeDropdown);
+  } else {
+    observeDropdown();
+  }
 </script>
 
 <style>
@@ -440,23 +557,25 @@ import { Icon } from "astro-icon/components";
     outline-offset: 2px;
   }
 
-  .theme-dropdown-button::-webkit-details-marker {
-    display: none;
-  }
-
   .theme-picker-mobile {
-    position: absolute;
-    inset-block-start: calc(100% + 1.5rem);
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
-    display: flex;
+    /* Changed from absolute to fixed for Floating UI */
+    position: fixed;
+    display: none;
     gap: 0.5rem;
     padding-block: 0.5rem;
     padding-inline: 0.5rem;
     background-color: rgba(var(--floating-color), 0.8);
     border-radius: 25px;
-    box-shadow: 0 0px 12px rgba(var(--shadow-color));
-    z-index: 100;
+    box-shadow: 0 4px 16px rgba(var(--shadow-color));
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    /* Floating UI will set left and top */
+    top: 0;
+    left: 0;
+  }
+
+  .theme-picker-mobile.show {
+    display: flex;
   }
 
   /* Shared Button Styles */
@@ -488,10 +607,5 @@ import { Icon } from "astro-icon/components";
     width: 24px;
     height: 24px;
     border-radius: 25px;
-  }
-
-  /* Close dropdown when not open */
-  .theme-dropdown:not([open]) .theme-picker-mobile {
-    display: none;
   }
 </style>

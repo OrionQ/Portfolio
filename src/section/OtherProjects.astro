@@ -1,7 +1,7 @@
 ---
 import circulationThumbnail from "../images/Circulation_Thumbnail.png";
 import gameEngineThumbnail from "../images/GameEngine_thumbnail.png";
-import iTrustThumbnail from "../images/iTrust_thumbnail.png";
+import bloomThumbnail from "../images/Bloom-web_thumbnail.jpeg";
 import paintWarThumbnail from "../images/PaintWar_thumbnail.png";
 import outlawThumbnail from "../images/Zodiac_thumbnail.png";
 
@@ -11,6 +11,36 @@ import Link from "../components/link/Link.astro";
 ---
 
 <div class="project-experience flex flex-wrap gap-4 justify-center">
+  <Disclosure
+    tag="Web"
+    title="Bloom.co Tea Website"
+    className="flex flex-col lg:flex-row gap-4 justify-between p-6"
+  >
+    <p>
+      Bloom Co. Tea is a UX-driven concept that reinvents the tea-buying
+      experience by blending botanical storytelling with digital interaction.
+      The brand invites Gen-Z customers to explore the origins, flavors, and
+      rituals of artisanal teas through a visually rich interface and
+      personalized recommendations. We aim to transform tea from a commodity for
+      older generation into a curated ritual—creating delight for Gen-Z
+      customers through elegant UX and meaningful content.
+      <br />
+      <br />
+      Presentation link: <Link
+        className="inline-flex"
+        href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
+        newTab
+        underline>Slides link</Link
+      >
+    </p>
+    <Image
+      format="jpeg"
+      class="rounded-2xl m-1 object-cover"
+      src={bloomThumbnail}
+      alt="Bloom.co's project thumbnail"
+      width={250}
+    />
+  </Disclosure>
   <Disclosure
     tag="C++"
     title="Game Engine"
@@ -72,30 +102,7 @@ import Link from "../components/link/Link.astro";
       width={250}
     />
   </Disclosure>
-  <Disclosure
-    tag="Web"
-    title="iTrust Medical Web Portal"
-    className="flex flex-col lg:flex-row gap-4 justify-between p-6"
-  >
-    <p>
-      This is a medical portal for the hospital and users are allowed to login
-      with their credentials. We integrated 4 more use cases to the protal that
-      read in a list of individuals&apos; data and calculate the infection rate.
-      I was focusing on the testing and debugging, and we learned to implement
-      and to utilize testing automation with Selenium and Cucumber. To acheive
-      the functionality of the web app, and I was learning what each part of
-      code was responsible and try to fix all the bugs. Meanwhile, since it is a
-      team project, I also need to manage and coordinate with other tema members
-      virtually to accomplish the result.
-    </p>
-    <Image
-      format="jpeg"
-      class="rounded-2xl m-1 object-cover"
-      src={iTrustThumbnail}
-      alt="iTrust project's thumbnail"
-      width={250}
-    />
-  </Disclosure>
+
   <Disclosure
     tag="Unity"
     title="Paint War Demo Game"

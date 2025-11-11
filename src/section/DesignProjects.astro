@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 
 import ClickableCard from "../components/clickable-card/ClickableCard.astro";
 import Tag from "../components/tag/Tag.astro";
-import bloomPic from "../images/Bloom-web_thumbnail.jpeg";
+import nexusPic from "../images/Nexus_thumbnail.jpeg";
 import redditPic from "../images/Reddit_thumbnail.jpeg";
 import SagePic from "../images/Sage_thumbnail.jpeg";
 import trustyPic from "../images/Trusty_thumbnail.jpeg";
@@ -31,6 +31,28 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
         <Tag>Professional experience</Tag>
         <Tag>AI chatbot</Tag>
         <Tag>Design system</Tag>
+      </div>
+    </ClickableCard>
+  </div>
+  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+    <ClickableCard
+      title="Nexus"
+      description="Design inspired by culture, not trends."
+      newTab
+      href="https://nexusbythecosmos.framer.website/"
+    >
+      <Image
+        format="jpeg"
+        slot="image"
+        class="w-full h-full"
+        src={nexusPic}
+        alt="Nexus thumbnail"
+        width={1200}
+        quality={100}
+      />
+      <div slot="tags" class="flex flex-row gap-2 pt-2">
+        <Tag>Designathon</Tag>
+        <Tag>Visual design</Tag>
       </div>
     </ClickableCard>
   </div>
@@ -74,30 +96,6 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
       <div slot="tags" class="flex flex-row gap-2 pt-2 flex-wrap">
         <Tag>UX research</Tag>
         <Tag>Usability testing</Tag>
-        <Tag>Heuristic evaluation</Tag>
-      </div>
-    </ClickableCard>
-  </div>
-
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
-    <ClickableCard
-      title="Bloom co."
-      description="Have fun drinking tea."
-      newTab
-      href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
-    >
-      <Image
-        format="jpeg"
-        slot="image"
-        class="w-full h-full"
-        src={bloomPic}
-        alt="Bloom app thumbnail"
-        width={1200}
-        quality={100}
-      />
-      <div slot="tags" class="flex flex-row gap-2 pt-2">
-        <Tag>User research</Tag>
-        <Tag>Design system</Tag>
       </div>
     </ClickableCard>
     <ClickableCard

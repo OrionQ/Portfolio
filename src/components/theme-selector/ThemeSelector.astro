@@ -394,6 +394,7 @@ import { Icon } from "astro-icon/components";
 
     computePosition(dropdownButton, themePicker, {
       placement: "bottom",
+      strategy: "absolute",
       middleware: [
         offset(12),
         flip({
@@ -558,8 +559,7 @@ import { Icon } from "astro-icon/components";
   }
 
   .theme-picker-mobile {
-    /* Changed from absolute to fixed for Floating UI */
-    position: fixed;
+    position: absolute;
     display: none;
     gap: 0.5rem;
     padding-block: 0.5rem;
@@ -570,8 +570,8 @@ import { Icon } from "astro-icon/components";
     backdrop-filter: blur(10px);
     z-index: 1000;
     /* Floating UI will set left and top */
-    top: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline-start: 0;
   }
 
   .theme-picker-mobile.show {

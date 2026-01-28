@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const { href, newTab = false, underline = false, className } = Astro.props;
 ---
 
@@ -9,6 +11,7 @@ const { href, newTab = false, underline = false, className } = Astro.props;
   rel={newTab ? "noopener noreferrer" : undefined}
 >
   <slot />
+  {newTab && <Icon name="up-right-from-square" size="1em" />}
 </a>
 <style>
   .link {

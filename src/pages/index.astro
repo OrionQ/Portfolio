@@ -24,7 +24,7 @@ import Education from "../section/Education.astro";
         arrow?.classList.remove("opacity-0");
       }
     },
-    { threshold: 0.1 }
+    { threshold: 0.1 },
   );
 
   if (targetSection) {
@@ -86,11 +86,11 @@ import Education from "../section/Education.astro";
   <WhoIAm />
   <div class="flex gap-4 pt-12">
     <p style={{ color: "rgba(var(--primary-color), 1)", fontSize: "1.5rem" }}>
-      (In case you are wondering, I designed and coded this website using <Link
+      (This website is designed and coded using <Link
         className="inline-flex"
         href="https://astro.build/"
         newTab
-        underline>Astro.js! <Icon name="up-right-from-square" /></Link
+        underline>Astro.js!</Link
       >)
     </p>
   </div>

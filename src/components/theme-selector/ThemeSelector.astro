@@ -451,36 +451,20 @@ import { Icon } from "astro-icon/components";
 </script>
 
 <style>
-  /* Screen reader only content */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
-
-  .theme-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  .color-swatch {
+    border-radius: 25px;
+    display: block;
+    height: 24px;
+    width: 24px;
   }
 
   #darkModeToggle {
-    border: 0;
     background: none;
+    border: 0;
     border-radius: 50%;
-    padding: 0.5rem;
     cursor: pointer;
+    padding: 0.5rem;
     transition: background-color 0s;
-  }
-
-  #darkModeToggle:hover {
-    background-color: rgba(var(--ambience-color), 1);
   }
 
   #darkModeToggle:active {
@@ -492,104 +476,37 @@ import { Icon } from "astro-icon/components";
     outline-offset: 2px;
   }
 
-  .sun {
-    fill: rgba(var(--primary-color), 1);
+  #darkModeToggle:hover {
+    background-color: rgba(var(--ambience-color), 1);
   }
+
   .moon {
     fill: transparent;
   }
 
-  :global(.dark) .sun {
-    fill: transparent;
-  }
-  :global(.dark) .moon {
+  .sun {
     fill: rgba(var(--primary-color), 1);
   }
 
-  /* Desktop Color Picker - Always Visible */
-  .theme-picker-desktop {
-    display: none;
-    gap: 0.5rem;
-    padding-block: 0.5rem;
-    padding-inline: 0.5rem;
-    background-color: rgba(var(--floating-color), 0.7);
-    border-radius: 25px;
-  }
-
-  /* Show desktop picker on larger screens */
-  @media (min-width: 1000px) {
-    .theme-picker-desktop {
-      display: flex;
-    }
-  }
-
-  /* Mobile Dropdown Styles */
-  .theme-dropdown {
-    position: relative;
-    display: block;
-  }
-
-  /* Hide dropdown on desktop */
-  @media (min-width: 1000px) {
-    .theme-dropdown {
-      display: none;
-    }
-  }
-
-  .theme-dropdown-button {
-    list-style: none;
-    cursor: pointer;
-    border: 0;
-    background: none;
-    border-radius: 50%;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(var(--primary-color), 1);
-  }
-
-  .theme-dropdown-button:hover {
-    background-color: rgba(var(--ambience-color), 1);
-  }
-
-  .theme-dropdown-button:focus-visible {
-    outline: 2px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 2px;
-  }
-
-  .theme-picker-mobile {
+  .sr-only {
+    border-width: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
     position: absolute;
-    display: none;
-    gap: 0.5rem;
-    padding-block: 0.5rem;
-    padding-inline: 0.5rem;
-    background-color: rgba(var(--floating-color), 0.8);
-    border-radius: 25px;
-    box-shadow: 0 4px 16px rgba(var(--shadow-color));
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    /* Floating UI will set left and top */
-    inset-block-start: 0;
-    inset-inline-start: 0;
+    white-space: nowrap;
+    width: 1px;
   }
 
-  .theme-picker-mobile.show {
-    display: flex;
-  }
-
-  /* Shared Button Styles */
   .theme-button {
-    border: 2px solid transparent;
     background: none;
-    padding: 0.25rem;
+    border: 2px solid transparent;
     border-radius: 25px;
     cursor: pointer;
+    padding: 0.25rem;
     transition: border-color 0s;
-  }
-
-  .theme-button:hover {
-    border-color: rgba(var(--primary-color), 0.5);
   }
 
   .theme-button.active,
@@ -602,10 +519,86 @@ import { Icon } from "astro-icon/components";
     outline-offset: 2px;
   }
 
-  .color-swatch {
+  .theme-button:hover {
+    border-color: rgba(var(--primary-color), 0.5);
+  }
+
+  .theme-controls {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .theme-dropdown {
     display: block;
-    width: 24px;
-    height: 24px;
+    position: relative;
+  }
+
+  .theme-dropdown-button {
+    align-items: center;
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    color: rgba(var(--primary-color), 1);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  .theme-dropdown-button:focus-visible {
+    outline: 2px dashed rgba(var(--secondary-color), 1);
+    outline-offset: 2px;
+  }
+
+  .theme-dropdown-button:hover {
+    background-color: rgba(var(--ambience-color), 1);
+  }
+
+  .theme-picker-desktop {
+    background-color: rgba(var(--floating-color), 0.7);
     border-radius: 25px;
+    display: none;
+    gap: 0.5rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+  }
+
+  .theme-picker-mobile {
+    background-color: rgba(var(--floating-color), 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    box-shadow: 0 4px 16px rgba(var(--shadow-color));
+    display: none;
+    gap: 0.5rem;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    padding-block: 0.5rem;
+    padding-inline: 0.5rem;
+    position: absolute;
+    z-index: 1000;
+  }
+
+  .theme-picker-mobile.show {
+    display: flex;
+  }
+
+  :global(.dark) .moon {
+    fill: rgba(var(--primary-color), 1);
+  }
+
+  :global(.dark) .sun {
+    fill: transparent;
+  }
+
+  @media (min-width: 1000px) {
+    .theme-dropdown {
+      display: none;
+    }
+
+    .theme-picker-desktop {
+      display: flex;
+    }
   }
 </style>

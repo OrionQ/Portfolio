@@ -1,40 +1,41 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const { href, newTab, className } = Astro.props;
 ---
 
 <a
   href={href}
   target={newTab ? "_blank" : "_self"}
+  rel={newTab ? "noopener noreferrer" : undefined}
   class={`page-link flex items-center gap-2 justify-start ${className}`}
 >
   <slot />
+  {newTab && <Icon name="up-right-from-square" size="1em" />}
 </a>
 <style>
   .page-link {
-    padding-inline: 1rem;
-    padding-block: 0.5rem;
     background-color: rgba(var(--primary-color), 1);
-    
     border-radius: 9999px;
     color: rgba(var(--background), 1);
-    transition:
-      background-color 0.2s,
-      gap 0.2s;
     max-inline-size: fit-content;
-  }
-
-  .page-link:hover {
-    gap: 1rem;
-    background-color: rgba(var(--secondary-color), 1);
+    padding-block: 0.5rem;
+    padding-inline: 1rem;
+    transition: background-color 0.2s, gap 0.2s;
   }
 
   .page-link:active {
-    gap: 1rem;
     background-color: rgba(var(--primary-color), 1);
+    gap: 1rem;
     opacity: 0.8;
   }
 
   .page-link:focus-visible {
     outline: 2px dashed rgba(var(--secondary-color), 1);
+  }
+
+  .page-link:hover {
+    background-color: rgba(var(--secondary-color), 1);
+    gap: 1rem;
   }
 </style>

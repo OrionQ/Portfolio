@@ -1,0 +1,103 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title: string;
+  level?: "novice" | "proficient" | "professional";
+  className?: string;
+}
+
+const { title, level = "proficient", className = "" } = Astro.props;
+
+const filledBars = {
+  novice: 1,
+  proficient: 2,
+  professional: 3,
+}[level];
+---
+
+<div class:list={["chip", className]} data-level={level}>
+  <div class="chip__header">
+    <div class="chip__icon" aria-hidden>
+      <slot name="icon">
+        <Icon name="swatch" size={18} aria-hidden />
+      </slot>
+    </div>
+    <span class="chip__title">{title}</span>
+  </div>
+  <div class="chip__bars" role="img" aria-label={`${level} proficiency`}>
+    <span class:list={["chip__bar", filledBars >= 1 && "chip__bar--filled"]} />
+    <span class:list={["chip__bar", filledBars >= 2 && "chip__bar--filled"]} />
+    <span class:list={["chip__bar", filledBars >= 3 && "chip__bar--filled"]} />
+  </div>
+</div>
+
+<style>
+  .chip {
+    backdrop-filter: blur(10px);
+    background: rgba(var(--floating-color), 0.6);
+    border: 2px solid rgba(var(--floating-color));
+    border-radius: 9999px;
+    box-shadow: 0 1px 4px rgba(var(--shadow-color));
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.75rem 1.5rem;
+    min-width: 8rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .chip:hover {
+    background: rgba(var(--floating-color), 1);
+    border-color: rgba(var(--tint-color), 1);
+  }
+
+  .chip__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .chip__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: rgba(var(--primary-color), 1);
+  }
+
+  .chip__title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(var(--foreground), 1);
+    line-height: 1.2;
+  }
+
+  .chip__bars {
+    display: flex;
+    gap: 0.2rem;
+    align-items: flex-end;
+  }
+
+  .chip__bar {
+    width: 100%;
+    height: 0.25rem;
+    border-radius: 2px;
+    background: rgba(var(--ambience-color), 0.5);
+    transition: background 0.2s;
+  }
+
+  .chip__bar--filled {
+    background: rgba(var(--primary-color), 0.8);
+  }
+
+  .chip__bar:nth-child(1) {
+    max-width: 0.75rem;
+  }
+  .chip__bar:nth-child(2) {
+    max-width: 1rem;
+  }
+  .chip__bar:nth-child(3) {
+    max-width: 1.25rem;
+  }
+</style>

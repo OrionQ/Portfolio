@@ -1,0 +1,132 @@
+---
+---
+<button
+  type="button"
+  class="back-to-top"
+  aria-label="Back to top"
+  title="Back to top"
+>
+  <span class="back-to-top-icon-wrap">
+    <svg class="back-to-top-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </span>
+  <span class="back-to-top-text">Back to top</span>
+</button>
+
+<script>
+  function updateBackToTopVisibility() {
+    const btn = document.querySelector(".back-to-top");
+    if (!btn || !(btn instanceof HTMLElement)) return;
+
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) {
+      btn.classList.remove("back-to-top-visible");
+      return;
+    }
+
+    const scrollRatio = window.scrollY / scrollHeight;
+    if (scrollRatio >= 0.5) {
+      btn.classList.add("back-to-top-visible");
+    } else {
+      btn.classList.remove("back-to-top-visible");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector(".back-to-top");
+    if (!btn || !(btn instanceof HTMLElement)) return;
+
+    window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
+    updateBackToTopVisibility();
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+</script>
+
+<style>
+  .back-to-top {
+    align-items: center;
+    background-color: rgba(var(--background), 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(var(--floating-color), 1);
+    border-radius: 2rem;
+    box-shadow: 0 2px 12px rgba(var(--shadow-color));
+    color: rgba(var(--primary-color), 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    inset-block-end: 2rem;
+    inset-inline-start: 50%;
+    justify-content: center;
+    opacity: 0;
+    padding: 0.75rem 1.25rem;
+    pointer-events: none;
+    position: fixed;
+    transform: translate(-50%, 0);
+    transition: opacity 0.35s ease, transform 0.2s ease, box-shadow 0.2s ease, visibility 0.35s ease;
+    visibility: hidden;
+    z-index: 50;
+  }
+
+  .back-to-top.back-to-top-visible {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    box-shadow: 0 4px 16px rgba(var(--shadow-color));
+    transform: translate(-50%, -2px);
+  }
+
+  .back-to-top:focus-visible {
+    outline: 2px dashed rgba(var(--secondary-color), 1);
+    outline-offset: 2px;
+  }
+
+  .back-to-top:hover .back-to-top-icon {
+    transform: translate(0, 0);
+  }
+
+  .back-to-top:hover .back-to-top-icon-wrap {
+    margin-block-end: 0.25rem;
+    max-height: 28px;
+    opacity: 1;
+  }
+
+  .back-to-top:focus-visible .back-to-top-icon {
+    transform: translate(0, 0);
+  }
+
+  .back-to-top:focus-visible .back-to-top-icon-wrap {
+    margin-block-end: 0.25rem;
+    max-height: 28px;
+    opacity: 1;
+  }
+
+  .back-to-top-icon {
+    flex-shrink: 0;
+    transform: translate(0, -6px);
+    transition: transform 0.3s ease;
+  }
+
+  .back-to-top-icon-wrap {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  }
+
+  @media (max-width: 640px) {
+    .back-to-top {
+      inset-block-end: 1.5rem;
+    }
+  }
+</style>

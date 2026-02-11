@@ -1,0 +1,73 @@
+/* Shared styles for UX project case study pages */
+
+.gallery img {
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.process-item {
+  background-color: rgba(var(--floating-color), 1);
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 4px rgba(var(--shadow-color));
+  padding: 1.5rem;
+}
+
+.process-item h3 {
+  color: rgba(var(--primary-color), 1);
+  font-size: 1.5rem;
+}
+
+.process-item-even {
+  background-color: rgba(var(--background), 1);
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 4px rgba(var(--shadow-color));
+  padding: 1.5rem;
+}
+
+.process-item-even h3,
+.process-item-odd h3 {
+  color: rgba(var(--primary-color), 1);
+  font-size: 1.5rem;
+}
+
+.process-item-odd {
+  background-color: rgba(var(--floating-color), 1);
+  border-radius: 1.5rem;
+  box-shadow: 0 1px 4px rgba(var(--shadow-color));
+  padding: 1.5rem;
+}
+
+.process-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+.project-introduction {
+  font-size: 1.5rem;
+}
+
+.project-subtitle {
+  color: rgba(var(--primary-color), 1);
+  font-size: 2rem;
+}
+
+.project-title {
+  font-size: 3rem;
+}
+
+.project-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  padding-left: 0;
+}

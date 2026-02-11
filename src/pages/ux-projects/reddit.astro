@@ -5,6 +5,7 @@ import Divider from "../../components/divider/Divider.astro";
 import Link from "../../components/link/Link.astro";
 import Tag from "../../components/tag/Tag.astro";
 import Layout from "../../layouts/Layout.astro";
+import "./ux-projects.css";
 
 import Card from "../../components/card/Card.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
@@ -27,7 +28,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       <Tag>Mobile app</Tag>
       <Tag>Usability testing</Tag>
       <Tag>User research</Tag>
-      <Tag>Heuritstic evaluation</Tag>
+      <Tag>Heuristic evaluation</Tag>
       <Tag>Competitive analysis</Tag>
       <Tag>Screening</Tag>
       <Tag>Interviewing</Tag>
@@ -35,6 +36,10 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 
     <h2 class="project-subtitle">Project Overview</h2>
     <p class="project-description">
+      This case study walks through our end-to-end research process, from first
+      principles to final recommendations. Here is the table of contents.
+      <br />
+      <br />
       <ul>
         <li>
           <Link href="#heuristic-evaluation" className="scroll-link" underline
@@ -86,21 +91,22 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         </Link>
       </p>
     </p>
-    <h2 class="project-subtitle">Challenge</h2>
+    <h2 class="project-subtitle">The Problem We Found</h2>
     <p class="project-description">
-      We know that Reddit is one of the largest and most active social media
-      platforms, where users connect with communities that share their interests
-      and engage in discussions. However, my team and I realized that the Reddit
-      mobile app has some unconventional features and behaviors that impact its
-      usability in our everyday use.
+      We’re all familiar with Reddit: endless threads, niche communities, and
+      that strange comfort of finding people who *get it*. But here’s the thing:
+      as we scrolled through our feeds day after day, my team and I kept bumping
+      into the same friction. Confusing icons. Unclear flows. Features that felt
+      like they belonged to another app entirely. Reddit is one of the largest
+      and most active platforms in the world, but why did it sometimes feel like
+      we don't even get the basic knowledge of using it?
     </p>
-    <h2 class="project-subtitle">Goal</h2>
+    <h2 class="project-subtitle">The Goal</h2>
     <p class="project-description">
-      To address these issues, we conducted a comprehensive usability test with
-      the Reddit mobile app. Our research process included a heuristic
-      evaluation, competitive analysis, and user interviews. We aimed to
-      identify the app&apos;s usability issues and gather insights from users to
-      improve their experience.
+      We decided to find out. Over the course of this project, we ran a full
+      usability study: heuristic evaluation, competitive analysis, and live user
+      interviews. Our goal was simple: understand what’s actually broken, who it
+      affects, and where the biggest opportunities for improvement lie.
 
       <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
         <Image
@@ -121,19 +127,19 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           <div class="flex lg:flex-row flex-col gap-4">
             <div class="justify-between flex flex-col">
               <div>
-                <h3>1. Heurtistic evaluation</h3>
+                <h3>1. Heuristic evaluation</h3>
                 <br />
                 <p>
-                  Referring to Nielsen&apos;s 10 usability heuristics, we
-                  conducted a thorough evaluation of the Reddit mobile app. We
-                  identified <strong>27 usability issues</strong>, and utilize
-                  Jakob Nielsen&apos;s severity rating scale to rate each one of
-                  them. We finalized 5 criteiria that might impact the usability
-                  the most, including
+                  Referring to Nielsen&apos;s 10 usability heuristics, we were
+                  spotting UX problems before users ever do. Screen by screen,
+                  flow by flow, we combed through the Reddit app. What we found
+                  surprised us: <strong>27 usability issues</strong>, each rated
+                  on Jakob Nielsen&apos;s severity scale. Five areas stood out
+                  as the most impactful:
                   <br />
                   <br />
                   <ul>
-                    <li><strong>Consisitency and standards</strong></li>
+                    <li><strong>Consistency and standards</strong></li>
                     <li><strong>Aesthetics</strong></li>
                     <li>
                       <strong>Flexibility and efficiency of use</strong>
@@ -156,9 +162,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
                 aria-label="Full heuristic evaluation(opens a new window)"
                 href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
                 newTab
-                underline
-                >Full heuristic evaluation />
-              </PageLink>
+                underline>Full heuristic evaluation</PageLink
+              >
             </div>
             <Image
               format="jpeg"
@@ -180,36 +185,29 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
             By comparing Reddit to other popular platforms with similar
             features, we identified both unique features Reddit offers and
             potential additions it could adopt. Our analysis included three
-            direct competitors—<strong
+            direct competitors: <strong
               >Quora, Stack Exchange, and X (Twitter)</strong
-            >—as well as three indirect competitors—<strong
+            >, and three indirect ones: <strong
               >Discord, Tumblr, and TikTok</strong
-            >. After the comparison, we gathered some takeaways, highlighting
-            features Reddit could integrate and common usability issues from
-            other platforms/apps to avoid.
+            >. The question: What does Reddit do well that others don&apos;t?
+            And where are others doing it better?
             <br />
             <br />
-            Overall, we conclude that Reddit app stands out as a leading community-driven
-            platform, <strong
-              >catering to a diverse audience across various interests</strong
-            >. However, <strong
-              >its user interface and user flows presents usability challenges</strong
-            >
-            that could further enhance the user experience. Another key finding for
-            us is that there is <strong
-              >room for growth in content management and user engagement
-              strategies</strong
-            >.
+            The verdict? Reddit remains a powerhouse for community-driven content,
+            <strong>serving a wildly diverse range of interests</strong>. But
+            its UI and flows lag behind. Navigation feels heavier. Key actions
+            take more effort. And there&apos;s
+            <strong>clear room to grow</strong>, especially in how users manage
+            content and stay engaged without feeling overwhelmed.
             <br />
             <br />
           </p>
           <PageLink
-            aria-label="Full Competitve analysis(opens a new window)"
+            aria-label="Full competitive analysis(opens a new window)"
             href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
             newTab
-            underline
-            >Full competitive analysis />
-          </PageLink>
+            underline>Full competitive analysis</PageLink
+          >
           <br />
           <Image
             format="jpeg"
@@ -231,52 +229,46 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
               <br />
               <h4 class="font-bold text-xl">3.1 Screener</h4>
               <p>
-                We first need to figure out who we can recruit for this project,
-                We come together to figure out the criteria for the participants
-                that could help us with the usablity result the most. For the
-                limited amount of time and resources, we decided to focus on
-                users between <strong> 18-35 years old</strong>, since this is
-                the majority of the user group. We are splitting them into to
-                groups--<strong
-                  >users who have used Reddit for at least 6 months, and users
-                  who have never used Reddit before but know what it is.</strong
-                > In this way, we can compare how experienced user and inexperienced
-                user interact with the app differently, and we can gether those essential
-                information to pinpoint some of the higher-severity usability issues.
+                Before we could test, we had to decide who to test with. With
+                limited time and resources, we narrowed down to <strong
+                  >18–35 year olds</strong
+                >, Reddit&apos;s core demographic. But we didn&apos;t want just
+                one type of user. We split participants into two groups: <strong
+                  >people who&apos;d used Reddit for at least 6 months</strong
+                >, and <strong
+                  >people who&apos;d never used it but knew what it was</strong
+                >. Because power users and newcomers experience the app
+                completely differently. Watching both navigate the same tasks
+                gave us a clearer picture of where the real friction lives.
               </p>
               <br />
               <PageLink
                 aria-label="Full Screener script(opens a new window)"
                 href="https://docs.google.com/document/d/1x-zslARgMfu9iEPc4ffhQpUENTSlQ9qVtZLiQgEm2c4/edit?usp=sharing"
                 newTab
-                underline
-                >Screener script />
-              </PageLink>
+                underline>Screener script</PageLink
+              >
               <br />
               <h4 class="font-bold text-xl">3.2 Interviews</h4>
               <p>
-                We created 6 tasks, and tested out the app with 5 participants,
-                and each session lasted about 45 minutes. During each session, I
-                played the role of <strong> note taker </strong> and <strong
-                  >observer</strong
-                >, while my teammate was the facilitator. We recorded the
-                session and took notes to capture the participants' thoughts and
-                behaviors. After each session, we debriefed to discuss our
-                observations and insights. We also asked participants to fill
-                out the SUS (System Usability Scale) questionnaire to gather
-                quantitative data on their experience with the app at the end,
-                which to gain an overview of the usability issues.
+                6 tasks. 5 participants. 45 minutes each. I took on the role of <strong
+                  >note taker</strong
+                > and <strong>observer</strong>, while my teammate facilitated.
+                We recorded the session and took notes to capture the
+                participants' thoughts and behaviors. After each run, we
+                debriefed, comparing what we saw and what surprised us. At the
+                end, participants completed the SUS (System Usability Scale)
+                questionnaire so we could quantify what we&apos;d observed
+                qualitatively. The numbers and the stories together told the
+                full picture.
               </p>
               <br />
               <PageLink
                 aria-label="Interview notes and affiniity diagram(opens a new window)"
                 href="https://www.figma.com/board/8dh600rWLY9PgjRnjfmTAQ/Testing---Affinity-Map?node-id=0-1&t=Dv4R52kVhPGPJI0m-1"
                 newTab
-                underline
-                >Interview notes and affinity diagram <Icon
-                  name="up-right-from-square"
-                />
-              </PageLink>
+                underline>Interview notes and affinity diagram</PageLink
+              >
             </div>
           </div>
         </div>
@@ -287,13 +279,14 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           >
             <h3>4. Final Report</h3>
             <p>
-              To unwrap all of this, I first calculated average score of the
-              SUS, which is 74--not bad, but not great either.
+              When I ran the numbers, the average SUS score came out to
+              <strong>74</strong>, not terrible but not great either.
               <br />
               <br />
-              For the insights, we found out that even though the app is usable and
-              most participants will be able to complete the tasks eventually, there
-              are small hiccups that bother them, and maninly in those 4 areas:
+              The tests told us what we suspected: the app works, but it doesn&apos;t
+              shine.The real story came from the sessions. Yes, most participants
+              finished the tasks, eventually. But the journey was bumpy. Small hiccups
+              piled up, mainly in 4 areas:
             </p>
             <br />
             <br />
@@ -302,32 +295,27 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
                 <Card
                   cardType="secondary"
                   className="flex flex-col gap-4 basis-full md:basis-1/2"
-                  ><h3>
-                    1 Reddit makes itself usable for browsing for all, but not
-                    as much for creating for all
-                  </h3>
+                  ><h3>1. Browsing works, creating doesn&apos;t</h3>
                   <p>
-                    Participants knows how to search for content, whether from
-                    Google or within the app itself, but they struggles to use
-                    the Reddit-specific features like awarding badges, and
-                    creating communities. They believe that the platform or the
-                    app is for "more skilled users".
+                    Everyone could find content, whether via Google or in-app
+                    search. But Reddit-specific actions, such as awarding badges,
+                    creating communities, tripped people up. More than once we
+                    heard the same sentiment: <em
+                      >&quot;This feels like it&apos;s for more skilled
+                      users.&quot;</em
+                    > The gap between consuming and contributing is too wide.
                   </p>
                 </Card>
                 <Card
                   cardType="secondary"
                   className="flex flex-col gap-4 basis-full md:basis-1/2"
-                  ><h3>
-                    2 Overwhelming design structure for content heavy platform--
-                    takes time to find the right info
-                  </h3>
+                  ><h3>2. Too much stuff, all at once</h3>
                   <p>
-                    searching for content is more complicated than other
-                    platforms, and everything is showing up all at once is
-                    overwhelming; The content is not well organized and it often
-                    taks too many clicks to get to the right place. Plus,
-                    showing that many of selections for community topics is not
-                    helpful.
+                    Search feels heavier than on other platforms. Content floods
+                    in without enough structure. Participants found themselves
+                    clicking through more screens than they expected just to
+                    land on the right thread. And the endless scroll of
+                    community topics? More noise than signal.
                   </p>
                 </Card>
               </div>
@@ -335,24 +323,19 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
                 <Card
                   cardType="secondary"
                   className="flex flex-col gap-4 basis-full md:basis-1/2"
-                  ><h3>
-                    3 Platform-wide terminology/design systems aren’t clear, or
-                    universal in their meaning = various rounds of trial and
-                    error
-                  </h3>
+                  ><h3>3. Terminology that doesn&apos;t travel</h3>
                   <p>
-                    Sorting terminology is not universal, what is the difference
-                    between reply and join a conversation; and who can help me
-                    understand "upvote" and "awards"?
+                    What&apos;s the difference between &quot;reply&quot; and
+                    &quot;join a conversation&quot;? What exactly does
+                    &quot;upvote&quot; or &quot;awards&quot; mean to a newcomer?
+                    Reddit has its own language that not a lot of people understand.
+                    Users resorted to trial and error instead of feeling guided.
                   </p>
                 </Card>
                 <Card
                   cardType="secondary"
                   className="flex flex-col gap-4 basis-full md:basis-1/2"
-                  ><h3>
-                    4 Various functions that are hard to identify and fail to
-                    signify their affordances
-                  </h3>
+                  ><h3>4. Hidden affordances, unclear feedback</h3>
                   <p>
                     Some functions are not clear, such as collapsing and
                     expanding comments; adding the moderator rules are just
@@ -367,9 +350,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
               aria-label="Final report(opens a new window)"
               href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
               newTab
-              underline
-              >Final report />
-            </PageLink>
+              underline>Final report</PageLink
+            >
           </div>
         </div>
 
@@ -382,32 +364,35 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
               <h3>5. What I learned from this experience</h3>
               <br />
               <h4 class="font-bold text-xl">
-                1. our hypothesis can be very inaccurate.
+                1. Our assumptions will surprise us.
               </h4>
               <p>
-                What I predicted for some of the tasks were much worse, but
-                users were able to learn it much faster than we thought, and
-                some of them might not experience that issue at all.
-              </p>
-              <br />
-              <h4 class="font-bold text-xl">2. pilot testing is essential.</h4>
-              <p>
-                We did our pilot testing before we started the actual testing,
-                and even so, we still found out that there are so many little
-                issues that could go wrong, resulting in breaking the flow of
-                testing.
+                I went in expecting certain tasks to be nightmares. But some
+                users were able to learn it much faster than we thought; others
+                don't even face that issue. Research reminds you that
+                you&apos;re not the user; watching real people is the only way
+                to know.
               </p>
               <br />
               <h4 class="font-bold text-xl">
-                3. 5 participants can uncover a lot of usability issues, but
-                more is better.
+                2. Pilot testing is non-negotiable.
               </h4>
               <p>
-                We were able to find out a lot of usability issues with only 5
-                participants, and during each session, the unwanted behavior of
-                the app also provided us a lot more insights than we expected,
-                but we also believe that more participants could help us find
-                more usability issues.
+                We ran pilots before the real sessions. And many small things
+                went wrong. A prompt that confused people. A flow that broke the
+                rhythm. Every pilot surfaced something we&apos;d have missed. It
+                would have cost us sessions and trust if we&apos;d skipped it.
+              </p>
+              <br />
+              <h4 class="font-bold text-xl">
+                3. 5 participants reveal A LOT. More would be better.
+              </h4>
+              <p>
+                With just 5 people, we uncovered plenty isseus, including unexpected
+                bugs and behaviors we hadn&apos;t anticipated. But research is
+                never &quot;done.&quot; More participants would have given us
+                stronger patterns and confidence. For this project, 5 was
+                enough to act on, but for production, we should aim for more.
               </p>
             </div>
           </div>
@@ -424,106 +409,51 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
                 aria-label="Heuristic evaluation(opens a new tab)"
                 href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
                 underline
-                newTab
-                >Heuristic evaluation />
-              </Link>
+                newTab>Heuristic evaluation</Link
+              >
               <Link
                 aria-label="Competitive analysis(opens a new tab)"
                 href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
                 underline
-                newTab
-                >Competitive analysis />
-              </Link>
+                newTab>Competitive analysis</Link
+              >
               <Link
                 aria-label="Screener(opens a new tab)"
                 href="https://docs.google.com/document/d/1LtwnCj-ok-7nD5Pt9-7qFHHo8eK8NdqqOsRqcrWa-Ns/edit?usp=sharing"
                 underline
-                newTab
-                >Screener />
-              </Link>
+                newTab>Screener</Link
+              >
               <Link
                 aria-label="Post-Test questions(opens a new tab)"
                 href="https://docs.google.com/spreadsheets/d/1N61k7fXKa3DLQw_cJo2crEmo1i1obXAgOhxCyB4QvT0/edit?gid=537614011#gid=537614011"
                 underline
-                newTab
-                >Post-Test questions />
-              </Link>
+                newTab>Post-Test questions</Link
+              >
               <Link
                 aria-label="Usability testing plan(opens a new tab)"
                 href="https://docs.google.com/document/d/10Vdr1UhB0GowFXRLcnvRKLVFrV9jSGjxi9GYmE5M-Ts/edit?usp=sharing"
                 underline
-                newTab
-                >Usability testing plan />
-              </Link>
+                newTab>Usability testing plan</Link
+              >
               <Link
                 aria-label="Usability testing affinity diagram(opens a new tab)"
                 href="https://www.figma.com/board/8dh600rWLY9PgjRnjfmTAQ/Testing---Affinity-Map?node-id=0-1&p=f"
                 underline
-                newTab
-                >Usability testing affinity diagram <Icon
-                  name="up-right-from-square"
-                />
-              </Link>
+                newTab>Usability testing affinity diagram</Link
+              >
             </div>
           </div>
         </div>
         <br />
         <div class="flex flex-row gap-8 justify-between w-full">
-          <Link href="/" underline
-            ><Icon name="arrow-left-long" />Go back to the home page</Link
+          <Link href="/ux-projects/venus" underline
+            ><Icon name="arrow-left-long" />Previous case study: Venus</Link
           >
-          <Link
-            href="https://www.figma.com/deck/al0HIY4mxXvO71nXE3wvhV/Bloom-co.-Tea?node-id=1-25&t=5bJp7x1FheuLZYYK-1"
-            newTab
-            underline>Go to next project /></Link
+          <Link href="https://nexusbythecosmos.framer.website/" newTab underline
+            >Next case study: Nexus</Link
           >
         </div>
       </div>
-
-      <style>
-        .project-container {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        .project-title {
-          font-size: 3rem;
-        }
-        .project-introduction {
-          font-size: 1.5rem;
-        }
-        .process-section {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-        }
-        .project-subtitle {
-          color: rgba(var(--primary-color), 1);
-          font-size: 2rem;
-        }
-        .process-item-odd {
-          background-color: rgba(var(--floating-color), 1);
-          border-radius: 1.5rem;
-          padding: 1.5rem;
-          box-shadow: 0 1px 4px rgba(var(--shadow-color));
-        }
-        .process-item-even {
-          background-color: rgba(var(--background), 1);
-          border-radius: 1.5rem;
-          padding: 1.5rem;
-          box-shadow: 0 1px 4px rgba(var(--shadow-color));
-        }
-        .process-item-odd h3,
-        .process-item-even h3 {
-          color: rgba(var(--primary-color), 1);
-          font-size: 1.5rem;
-        }
-        .gallery img {
-          width: 100%;
-          border-radius: 0.5rem;
-        }
-      </style>
     </p>
   </div>
 </Layout>

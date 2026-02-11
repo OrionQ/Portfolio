@@ -6,10 +6,10 @@ const { className, company, date, open = false, tag, title } = Astro.props;
 ---
 
 <details class="disclosure group" open={open}>
-  <summary
-    class={`flex flex-row flex-grow justify-between items-center gap-4 summary`}
-  >
-    <div class="flex flex-grow justify-between items-center gap-4">
+  <summary class="summary">
+    <div
+      class="summary-inner flex flex-grow justify-between items-center gap-4 min-w-0"
+    >
       <div class="flex gap-4 items-center">
         <div class="flex flex-col">
           <h3 class="font-normal text-2xl">{title}</h3>
@@ -19,22 +19,12 @@ const { className, company, date, open = false, tag, title } = Astro.props;
             )
           }
         </div>
-        {tag && <Tag className="text-xs">{tag}</Tag>}
+        {tag && <Tag className="text-xs flex-shrink-0">{tag}</Tag>}
       </div>
-      <p class="font-light">{date}</p>
+      {date && <p class="font-light flex-shrink-0">{date}</p>}
     </div>
-    <Icon
-      name="chevron-down"
-      size={20}
-      class="flex-shrink-0 inline group-open:hidden"
-      aria-hidden
-    />
-    <Icon
-      name="chevron-up"
-      size={20}
-      class="flex-shrink-0 hidden group-open:inline"
-      aria-hidden
-    />
+    <Icon name="chevron-down" size={20} class="chevron-down-icon" aria-hidden />
+    <Icon name="chevron-up" size={20} class="chevron-up-icon" aria-hidden />
   </summary>
   <div class={`${className || ""} content`}>
     <slot />
@@ -42,29 +32,13 @@ const { className, company, date, open = false, tag, title } = Astro.props;
 </details>
 
 <style>
-  .disclosure {
-    background-color: rgba(var(--floating-color), 1);
-    border: 3px solid rgba(var(--floating-color), 1);
-    border-radius: 1.5rem;
-    inline-size: 100%;
-    box-shadow: 0 1px 4px rgba(var(--shadow-color));
-  }
-  .summary {
-    border-radius: 1.5rem;
-    border: 3px solid rgba(var(--floating-color), 1);
-    background-color: rgba(var(--floating-color), 1);
-    min-inline-size: 100%;
-    padding: 1.5rem;
-    cursor: pointer;
+  .chevron-down-icon,
+  .chevron-up-icon {
+    flex-shrink: 0;
   }
 
-  .summary:hover {
-    outline: 3px solid rgba(var(--primary-color), 1);
-  }
-
-  .summary:focus-visible {
-    outline: 3px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 4px;
+  .chevron-up-icon {
+    display: none;
   }
 
   .content {
@@ -72,7 +46,52 @@ const { className, company, date, open = false, tag, title } = Astro.props;
     border-radius: 0 0 1.5rem 1.5rem;
   }
 
-  details summary::-webkit-details-marker {
+  .disclosure {
+    background-color: rgba(var(--floating-color), 1);
+    border: 3px solid rgba(var(--floating-color), 1);
+    border-radius: 1.5rem;
+    box-shadow: 0 1px 4px rgba(var(--shadow-color));
+    inline-size: 100%;
+  }
+
+  .disclosure[open] .chevron-down-icon {
+    display: none;
+  }
+
+  .disclosure[open] .chevron-up-icon {
+    display: inline-block;
+  }
+
+  .summary {
+    align-items: center;
+    background-color: rgba(var(--floating-color), 1);
+    border: 3px solid rgba(var(--floating-color), 1);
+    border-radius: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    list-style: none;
+    min-inline-size: 100%;
+    outline: 3px solid transparent;
+    outline-offset: 0;
+    padding: 1.5rem;
+    text-align: left;
+    transition: outline-color 0.25s ease, outline-offset 0.25s ease;
+    width: 100%;
+  }
+
+  .summary:focus-visible {
+    outline: 3px dashed rgba(var(--secondary-color), 1);
+    outline-offset: 4px;
+  }
+
+  .summary:hover {
+    outline-color: rgba(var(--primary-color), 1);
+    outline-offset: 2px;
+  }
+
+  .summary::-webkit-details-marker {
     display: none;
   }
 </style>

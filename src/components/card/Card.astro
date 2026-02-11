@@ -10,21 +10,23 @@ const { className, title, cardType = 'primary', style } = Astro.props;
 </div>
 <style>
   .card {
-    padding: 1.5rem;
     border-radius: 1.5rem;
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
+    padding: 1.5rem;
   }
+
   .card-primary {
     background-color: rgba(var(--floating-color), 1);
   }
+
   .card-secondary {
     background-color: rgba(var(--background), 1);
     outline: 2px solid rgba(var(--secondary-color), 1);
   }
 
   @media (prefers-contrast: more) {
-  .card {
-    border: 2px solid black;
+    .card {
+      border: 2px solid black;
+    }
   }
-}
 </style>

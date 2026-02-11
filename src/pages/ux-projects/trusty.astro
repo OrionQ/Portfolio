@@ -5,6 +5,7 @@ import Link from "../../components/link/Link.astro";
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/tag/Tag.astro";
 import Divider from "../../components/divider/Divider.astro";
+import "./ux-projects.css";
 
 import trustyLoading from "../../images/Trusty-Loading-screen.png";
 import trustyLanding from "../../images/Trusty-Landing-page.png";
@@ -215,8 +216,8 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
               href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
               newTab
               underline
-              >Adobe XD Prototype />
-            </Link>
+              >Adobe XD Prototype</Link
+            >
           </p>
         </div>
       </div>
@@ -250,41 +251,3 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
     ><Icon name="arrow-left-long" />Go back to the home page</Link
   >
 </Layout>
-
-<style>
-  .project-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .project-title {
-    font-size: 3rem;
-  }
-  .project-introduction {
-    font-size: 1.5rem;
-  }
-  .process-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .project-subtitle {
-    color: rgba(var(--primary-color), 1);
-    font-size: 2rem;
-  }
-  .process-item {
-    background-color: rgba(var(--floating-color), 1);
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 1px 4px rgba(var(--shadow-color));
-  }
-  .process-item h3 {
-    color: rgba(var(--primary-color), 1);
-    font-size: 1.5rem;
-  }
-  .gallery img {
-    width: 100%;
-    border-radius: 0.5rem;
-  }
-</style>

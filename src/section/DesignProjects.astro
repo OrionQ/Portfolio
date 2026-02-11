@@ -6,7 +6,6 @@ import Tag from "../components/tag/Tag.astro";
 import nexusPic from "../images/Nexus_thumbnail.jpeg";
 import redditPic from "../images/Reddit_thumbnail.jpeg";
 import SagePic from "../images/Sage_thumbnail.jpeg";
-import trustyPic from "../images/Trusty_thumbnail.jpeg";
 import venusPic from "../images/Venus_thumbnail.jpeg";
 ---
 
@@ -31,28 +30,6 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
         <Tag>Professional experience</Tag>
         <Tag>AI chatbot</Tag>
         <Tag>Design system</Tag>
-      </div>
-    </ClickableCard>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
-    <ClickableCard
-      title="Nexus"
-      description="Design inspired by culture, not trends."
-      newTab
-      href="https://nexusbythecosmos.framer.website/"
-    >
-      <Image
-        format="jpeg"
-        slot="image"
-        class="w-full h-full"
-        src={nexusPic}
-        alt="Nexus thumbnail"
-        width={1200}
-        quality={100}
-      />
-      <div slot="tags" class="flex flex-row gap-2 pt-2">
-        <Tag>Designathon</Tag>
-        <Tag>Visual design</Tag>
       </div>
     </ClickableCard>
   </div>
@@ -99,22 +76,23 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
       </div>
     </ClickableCard>
     <ClickableCard
-      title="Trusty"
-      description="Let news be trusted."
-      href="/ux-projects/trusty"
+      title="Nexus"
+      description="Design inspired by culture, not trends."
+      newTab
+      href="https://nexusbythecosmos.framer.website/"
     >
       <Image
         format="jpeg"
         slot="image"
         class="w-full h-full"
-        src={trustyPic}
-        alt="Trusty app thumbnail"
+        src={nexusPic}
+        alt="Nexus thumbnail"
         width={1200}
         quality={100}
       />
       <div slot="tags" class="flex flex-row gap-2 pt-2">
-        <Tag>UI design</Tag>
-        <Tag>Prototyping</Tag>
+        <Tag>Designathon</Tag>
+        <Tag>Visual design</Tag>
       </div>
     </ClickableCard>
   </div>

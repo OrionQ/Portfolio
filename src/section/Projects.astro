@@ -12,30 +12,40 @@ import OtherProjects from "./OtherProjects.astro";
         otherProjects: false,
       };
 
+      const container = document.querySelector(".tabs-container");
+      const indicator = document.getElementById("tab-indicator");
+
+      const updateIndicator = () => {
+        const selected = document.querySelector<HTMLButtonElement>(
+          '.tab-button[aria-selected="true"]'
+        );
+        if (!indicator || !container || !selected) return;
+        indicator.style.left = `${selected.offsetLeft}px`;
+        indicator.style.width = `${selected.offsetWidth}px`;
+      };
+
       const showCategory = (category: keyof typeof categories) => {
-        // Hide all categories
         document.querySelectorAll(".category").forEach((el) => {
           el.classList.remove("active");
           el.classList.add("immediate");
         });
 
-        // Show the selected category
         const selectedCategory = document.getElementById(category);
         if (selectedCategory) {
           selectedCategory.classList.add("active");
           selectedCategory.classList.remove("immediate");
         }
 
-        // Update aria-selected attribute on buttons
         document.querySelectorAll('[role="tab"]').forEach((button) => {
           button.setAttribute(
             "aria-selected",
             button.getAttribute("data-category") === category ? "true" : "false"
           );
         });
+
+        requestAnimationFrame(updateIndicator);
       };
 
-      // Initialize: Set aria-selected and hidden based on the categories object
       Object.keys(categories).forEach((category) => {
         const isActive = categories[category as keyof typeof categories];
         const element = document.getElementById(category);
@@ -50,7 +60,9 @@ import OtherProjects from "./OtherProjects.astro";
         }
       });
 
-      // Attach event listeners to buttons to switch between categories
+      updateIndicator();
+      window.addEventListener("resize", updateIndicator);
+
       document
         .getElementById("tab-ux-projects")
         ?.addEventListener("click", () => {
@@ -91,6 +103,7 @@ import OtherProjects from "./OtherProjects.astro";
     class="flex flex-col w-full gap-4 lg:basis-2/3 justify-start scroll-content opacity-0 translate-y-10 transition-all duration-500"
   >
     <div class="tabs-container flex flex-row flex-wrap" role="tablist">
+      <div class="tab-indicator" aria-hidden="true" id="tab-indicator"></div>
       <button
         aria-controls="uxProjects"
         aria-selected="true"
@@ -126,40 +139,27 @@ import OtherProjects from "./OtherProjects.astro";
 </div>
 <style>
   .category {
+    pointer-events: none;
+    position: absolute;
     opacity: 0;
     transform: translateY(10px);
-    transition:
-      opacity 0.5s ease,
-      transform 0.5s ease;
-    pointer-events: none;
-    position: absolute; /* Prevents layout shifting */
-    visibility: hidden; /* Prevents focus on hidden elements */
-    width: 100%; /* Ensure consistent layout */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    visibility: hidden;
+    width: 100%;
   }
 
   .category.active {
-    opacity: 1;
-    transform: translateY(0);
     pointer-events: auto;
     position: relative;
+    opacity: 1;
+    transform: translateY(0);
     visibility: visible;
   }
 
   .category.immediate {
-    opacity: 0; /* Immediate hide */
+    opacity: 0;
     transform: translateY(10px);
-    transition: none; /* Skip transition for immediate hiding */
-  }
-  .tabs-container {
-    align-items: stretch;
-    border: 3px solid rgba(var(--floating-color), 1);
-    border-radius: 1.5rem;
-    display: flex;
-    inline-size: 100%;
-    justify-content: center;
-    padding: 0.25rem;
-    position: relative;
-    gap: 8px;
+    transition: none;
   }
 
   .tab-button {
@@ -172,6 +172,7 @@ import OtherProjects from "./OtherProjects.astro";
     position: relative;
     text-align: center;
     transition: color 0.25s;
+    z-index: 1;
   }
 
   .tab-button h3 {
@@ -181,26 +182,47 @@ import OtherProjects from "./OtherProjects.astro";
     justify-content: center;
   }
 
-  .tab-button:hover {
+  .tab-button[aria-selected="true"] {
     color: rgba(var(--primary-color), 1);
+    font-weight: 500;
   }
 
   .tab-button:active {
     opacity: 0.75;
   }
 
-  /* Focus-visible for keyboard navigation */
   .tab-button:focus-visible {
     border-radius: 1.1rem;
-    outline: dashed 2px rgba(var(--secondary-color), 1); /* Customize focus outline */
+    outline: dashed 2px rgba(var(--secondary-color), 1);
     outline-offset: 2px;
   }
 
-  .tab-button[aria-selected="true"] {
+  .tab-button:hover {
+    color: rgba(var(--primary-color), 1);
+  }
+
+  .tab-indicator {
     background-color: rgba(var(--background), 1);
     border: 2px solid rgba(var(--primary-color), 1);
-    border-radius: 1.1rem; /* Match the radius to the label */
-    color: rgba(var(--primary-color), 1);
-    font-weight: 500;
+    border-radius: 1.1rem;
+    inset-block-end: 0.25rem;
+    inset-block-start: 0.25rem;
+    pointer-events: none;
+    position: absolute;
+    transition: left 0.3s ease-out, width 0.3s ease-out;
+    width: 0;
+    z-index: 0;
+  }
+
+  .tabs-container {
+    align-items: stretch;
+    border: 3px solid rgba(var(--floating-color), 1);
+    border-radius: 1.5rem;
+    display: flex;
+    gap: 8px;
+    inline-size: 100%;
+    justify-content: center;
+    padding: 0.25rem;
+    position: relative;
   }
 </style>

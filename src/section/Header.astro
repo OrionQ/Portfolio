@@ -92,12 +92,23 @@ const isHomePage = Astro.url.pathname === "/";
   <style>
     .header {
       background-color: rgba(var(--background), 0.8);
-      z-index: 1000;
       backdrop-filter: blur(10px);
+      border-radius: 9999px;
+      box-shadow: 0 2px 12px rgba(var(--shadow-color));
+      inset-block-start: 16px;
+      z-index: 1000;
 
       &:has(.mobile-menu[open]) {
         background-color: rgba(var(--background), 1);
         backdrop-filter: none;
+        border-radius: 2.5rem 2.5rem 0 0;
+      }
+    }
+
+    @media (max-width: 72rem) {
+      .header {
+        margin-inline: 1rem;
+        width: calc(100% - 2rem);
       }
     }
 
@@ -105,28 +116,19 @@ const isHomePage = Astro.url.pathname === "/";
       outline: 2px dashed rgba(var(--secondary-color), 1);
     }
 
-    /* Mobile Menu Styles */
     .mobile-menu {
       position: relative;
     }
 
     .mobile-menu-button {
-      list-style: none;
-      cursor: pointer;
       border: 0;
-
       border-radius: 50%;
+      cursor: pointer;
+      list-style: none;
       padding: 0.5rem;
       transition: background-color 0.25s;
     }
 
-    .mobile-menu-button:hover {
-      background-color: rgba(var(--ambience-color), 1);
-    }
-
-    .mobile-menu-button:focus-visible {
-      outline: 2px dashed rgba(var(--secondary-color), 1);
-    }
     .mobile-menu-button svg {
       color: rgba(var(--primary-color), 1);
     }
@@ -135,7 +137,14 @@ const isHomePage = Astro.url.pathname === "/";
       display: none;
     }
 
-    /* Toggle between menu and close icons */
+    .mobile-menu-button:focus-visible {
+      outline: 2px dashed rgba(var(--secondary-color), 1);
+    }
+
+    .mobile-menu-button:hover {
+      background-color: rgba(var(--ambience-color), 1);
+    }
+
     .mobile-menu[open] .menu-icon {
       display: none;
     }
@@ -145,19 +154,24 @@ const isHomePage = Astro.url.pathname === "/";
     }
 
     .mobile-menu-content {
-      font-size: 2rem;
-      position: fixed;
-      inset-block-start: 0;
-      inset-inline: 0;
-      block-size: 15rem;
-      background-color: rgba(var(--background), 1);
+      background-color: rgba(var(--background), 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 2.5rem 2.5rem;
       box-shadow: 0 4px 6px rgba(var(--shadow-color));
-      margin-block-start: 5rem; /* Space for header */
-      padding-inline: 2.5rem;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      font-size: 2rem;
       gap: 2rem;
+      justify-content: center;
+      left: 1rem;
+      padding-block: 1.5rem 2rem;
+      padding-inline: 2.5rem;
+      position: fixed;
+      right: 1rem;
+      top: 5.5rem;
+      width: calc(100% - 2rem);
+      z-index: 999;
     }
   </style>
 </nav>

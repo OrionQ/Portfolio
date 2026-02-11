@@ -170,6 +170,52 @@
 }
 
 /* ============================================
+   THEME SELECTOR SWATCHES (per-theme, light/dark)
+   ============================================ */
+
+:root {
+  --swatch-blue: #007db3;
+  --swatch-pink: #be185d;
+  --swatch-green: #4c763b;
+  --swatch-brown: #a64c00;
+  --swatch-mono: #404040;
+  --swatch-retro: linear-gradient(90deg, #b31500 33%, #fdf4e3 33% 66%, #134682 66%);
+}
+
+:root.dark {
+  --swatch-blue: #66ccee;
+  --swatch-pink: #f568a5;
+  --swatch-green: #88b380;
+  --swatch-brown: #e68c4d;
+  --swatch-mono: #d4d4d4;
+  --swatch-retro: linear-gradient(90deg, #feb216 33%, #134682 33% 66%, #fdf4e3 66%);
+}
+
+.theme-button[data-theme="blue"] .color-swatch {
+  background: var(--swatch-blue);
+}
+
+.theme-button[data-theme="pink"] .color-swatch {
+  background: var(--swatch-pink);
+}
+
+.theme-button[data-theme="green"] .color-swatch {
+  background: var(--swatch-green);
+}
+
+.theme-button[data-theme="brown"] .color-swatch {
+  background: var(--swatch-brown);
+}
+
+.theme-button[data-theme="mono"] .color-swatch {
+  background: var(--swatch-mono);
+}
+
+.theme-button[data-theme="retro"] .color-swatch {
+  background: var(--swatch-retro);
+}
+
+/* ============================================
    GLOBAL STYLES
    ============================================ */
 

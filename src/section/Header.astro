@@ -15,30 +15,25 @@ const isHomePage = Astro.url.pathname === "/";
     // Close menu when clicking on links
     mobileLinks?.forEach((link) => {
       link.addEventListener("click", () => {
-        if (mobileMenu) {
-          mobileMenu.removeAttribute("open");
-        }
+        if (mobileMenu) mobileMenu.removeAttribute("open");
       });
     });
 
     // Close menu when clicking outside
     document.addEventListener("click", (event) => {
-      if (mobileMenu && mobileMenu.hasAttribute("open")) {
-        // Check if click is outside the mobile menu
-        if (!mobileMenu.contains(event.target as Node)) {
-          mobileMenu.removeAttribute("open");
-        }
+      if (mobileMenu?.hasAttribute("open") && !mobileMenu.contains(event.target as Node)) {
+        mobileMenu.removeAttribute("open");
       }
     });
   });
 </script>
 
 <nav
-  class="header px-10 py-6 sticky top-0 flex flex-col lg:px-30 sm:px-10 max-w-6xl w-full"
+  class="header lg:px-10 px-4 py-2 sticky top-0 flex flex-col lg:px-30 max-w-6xl w-full"
 >
   <div class="flex justify-between flex-row items-center gap-8">
     <div>
-      <a href="/" class="flex gap-4 items-center home-link text-xl">
+      <a href="/" class="flex gap-4 items-center home-link">
         <Icon
           name="orion-logo"
           size={24}
@@ -53,15 +48,15 @@ const isHomePage = Astro.url.pathname === "/";
       <div class="gap-8 items-center hidden sm:flex sm:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
-          className="text-xl scroll-link">Projects</Link
+          className="scroll-link">Projects</Link
         >
         <Link
           href={isHomePage ? "#experience" : "/#experience"}
-          className="text-xl scroll-link">Experience</Link
+          className="scroll-link">Experience</Link
         >
         <Link
           href={isHomePage ? "#about-me" : "/#about-me"}
-          className="text-xl scroll-link">About Me</Link
+          className="scroll-link">About Me</Link
         >
       </div>
       <ThemeSelector />
@@ -74,15 +69,15 @@ const isHomePage = Astro.url.pathname === "/";
         <div class="mobile-menu-content">
           <Link
             href={isHomePage ? "#projects" : "/#projects"}
-            className="text-xl scroll-link">Projects</Link
+            className="scroll-link">Projects</Link
           >
           <Link
             href={isHomePage ? "#experience" : "/#experience"}
-            className="text-xl scroll-link">Experience</Link
+            className="scroll-link">Experience</Link
           >
           <Link
             href={isHomePage ? "#about-me" : "/#about-me"}
-            className="text-xl scroll-link">About Me</Link
+            className="scroll-link">About Me</Link
           >
         </div>
       </details>
@@ -94,6 +89,7 @@ const isHomePage = Astro.url.pathname === "/";
       background-color: rgba(var(--background), 0.8);
       backdrop-filter: blur(10px);
       border-radius: 9999px;
+      border: 1px solid rgba(var(--floating-color), 1);
       box-shadow: 0 2px 12px rgba(var(--shadow-color));
       inset-block-start: 16px;
       z-index: 1000;
@@ -101,7 +97,7 @@ const isHomePage = Astro.url.pathname === "/";
       &:has(.mobile-menu[open]) {
         background-color: rgba(var(--background), 1);
         backdrop-filter: none;
-        border-radius: 2.5rem 2.5rem 0 0;
+        border-radius: 1.75rem 1.75rem 0 0;
       }
     }
 
@@ -156,20 +152,21 @@ const isHomePage = Astro.url.pathname === "/";
     .mobile-menu-content {
       background-color: rgba(var(--background), 0.85);
       backdrop-filter: blur(10px);
-      border-radius: 0 0 2.5rem 2.5rem;
+      border-color: rgba(var(--floating-color), 1);
+      border-width: 0px 1px 1px 1px;
+      border-radius: 0 0 1.75rem 1.75rem;
       box-shadow: 0 4px 6px rgba(var(--shadow-color));
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      font-size: 2rem;
       gap: 2rem;
       justify-content: center;
       left: 1rem;
-      padding-block: 1.5rem 2rem;
-      padding-inline: 2.5rem;
+      padding-block: 1rem 1rem;
+      padding-inline: 1.25rem;
       position: fixed;
-      right: 1rem;
-      top: 5.5rem;
+      inset-inline-end: 1rem;
+      inset-block-start: 4.25rem;
       width: calc(100% - 2rem);
       z-index: 999;
     }

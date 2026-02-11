@@ -186,7 +186,7 @@ const highlightedSkills = [
     </div>
     <!-- Collapsed: highlighted skills (hidden when expanded) -->
     <div
-      class="skills-highlights flex flex-wrap gap-3 justify-center lg:justify-start"
+      class="skills-highlights flex flex-wrap gap-3 justify-start"
     >
       {
         highlightedSkills.map((skill) => (
@@ -219,7 +219,7 @@ const highlightedSkills = [
               >
                 {category.name}
               </h3>
-              <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+              <div class="flex flex-wrap gap-4 justify-start">
                 {category.skills.map((skill) => (
                   <Chip title={skill.title} level={skill.level}>
                     <Icon
@@ -260,7 +260,7 @@ const highlightedSkills = [
     .skills-expand__trigger:focus-visible {
       outline: 2px dashed rgba(var(--secondary-color), 1);
       outline-offset: 2px;
-      border-radius: 0.25rem;
+      border-radius: .5rem;
     }
     .skills-expand__trigger::-webkit-details-marker {
       display: none;

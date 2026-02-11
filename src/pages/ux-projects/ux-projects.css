@@ -7,7 +7,7 @@
 
 .process-item {
   background-color: rgba(var(--floating-color), 1);
-  border-radius: 1.5rem;
+  border-radius: 1.75rem;
   box-shadow: 0 1px 4px rgba(var(--shadow-color));
   padding: 1.5rem;
 }
@@ -19,7 +19,7 @@
 
 .process-item-even {
   background-color: rgba(var(--background), 1);
-  border-radius: 1.5rem;
+  border-radius: 1.75rem;
   box-shadow: 0 1px 4px rgba(var(--shadow-color));
   padding: 1.5rem;
 }
@@ -32,7 +32,7 @@
 
 .process-item-odd {
   background-color: rgba(var(--floating-color), 1);
-  border-radius: 1.5rem;
+  border-radius: 1.75rem;
   box-shadow: 0 1px 4px rgba(var(--shadow-color));
   padding: 1.5rem;
 }

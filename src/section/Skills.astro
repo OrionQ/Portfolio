@@ -1,0 +1,268 @@
+---
+import { Icon } from "astro-icon/components";
+import Chip from "../components/chip/Chip.astro";
+
+const levelOrder = { professional: 0, proficient: 1, novice: 2 } as const;
+
+const skillCategories = [
+  {
+    name: "Design Tools",
+    skills: [
+      { title: "Figma", level: "professional" as const, icon: "figma-brands-solid-full" },
+      { title: "Accessibility (WCAG 2.2)", level: "professional" as const, icon: "universal-access-solid-full" },
+      { title: "Lightroom", level: "professional" as const, icon: "lightroom" },
+      { title: "Framer", level: "proficient" as const, icon: "framer" },
+      { title: "Adobe XD", level: "proficient" as const, icon: "adobe-xd" },
+      { title: "Photoshop", level: "proficient" as const, icon: "photoshop" },
+      { title: "Illustrator", level: "proficient" as const, icon: "illustrator" },
+      { title: "After Effects", level: "proficient" as const, icon: "adobe-aftereffects" },
+    ],
+  },
+  {
+    name: "Development Tools",
+    skills: [
+      { title: "NPM", level: "professional" as const, icon: "npm-brands-solid-full" },
+      { title: "PNPM", level: "professional" as const, icon: "pnpm" },
+      { title: "Homebrew", level: "professional" as const, icon: "homebrew" },
+      { title: "GitHub", level: "professional" as const, icon: "github" },
+      { title: "Bitbucket", level: "professional" as const, icon: "bitbucket" },
+      { title: "Accessibility Insights", level: "professional" as const, icon: "universal-access-solid-full" },
+      { title: "Confluence", level: "professional" as const, icon: "confluence" },
+      { title: "Claude Code", level: "proficient" as const, icon: "claude-brands-solid-full" },
+      { title: "Cursor AI", level: "proficient" as const, icon: "cursor-ai" },
+      { title: "Tableau", level: "novice" as const, icon: "tableau" },
+      { title: "SharePoint", level: "novice" as const, icon: "sharepoint" },
+    ],
+  },
+  {
+    name: "Programming Languages",
+    skills: [
+      { title: "HTML", level: "professional" as const, icon: "html5-brands-solid-full" },
+      { title: "CSS", level: "professional" as const, icon: "css3-brands-solid-full" },
+      { title: "JavaScript", level: "professional" as const, icon: "square-js-brands-solid-full" },
+      { title: "TypeScript", level: "professional" as const, icon: "typescript-brands-solid-full" },
+      { title: "Python", level: "proficient" as const, icon: "python-brands-solid-full" },
+      { title: "Java", level: "proficient" as const, icon: "java-brands-solid-full" },
+      { title: "C", level: "proficient" as const, icon: "c-solid-full" },
+      { title: "C++", level: "proficient" as const, icon: "code-solid-full" },
+      { title: "C#", level: "novice" as const, icon: "code-solid-full" },
+    ],
+  },
+  {
+    name: "Frameworks",
+    skills: [
+      { title: "React", level: "professional" as const, icon: "react-brands-solid-full" },
+      { title: "Angular", level: "professional" as const, icon: "angular-brands-solid-full" },
+      { title: "Vite", level: "professional" as const, icon: "vite" },
+      { title: "Astro", level: "professional" as const, icon: "astro" },
+      { title: "REST", level: "professional" as const, icon: "rest-api" },
+      { title: "Express.js", level: "professional" as const, icon: "express-js" },
+      { title: "Node.js", level: "professional" as const, icon: "node-js-brands-solid-full" },
+      { title: "Next.js", level: "proficient" as const, icon: "next-js" },
+      { title: "Django", level: "proficient" as const, icon: "django" },
+      { title: "Microsoft Graph", level: "proficient" as const, icon: "ms-graph" },
+    ],
+  },
+].map((cat) => ({
+  ...cat,
+  skills: [...cat.skills].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]),
+}));
+
+const highlightedSkills = [
+  { title: "Figma", level: "professional" as const, icon: "figma-brands-solid-full" },
+  { title: "React", level: "professional" as const, icon: "react-brands-solid-full" },
+  { title: "TypeScript", level: "professional" as const, icon: "typescript-brands-solid-full" },
+  { title: "JavaScript", level: "professional" as const, icon: "square-js-brands-solid-full" },
+  { title: "HTML", level: "professional" as const, icon: "html5-brands-solid-full" },
+  { title: "CSS", level: "professional" as const, icon: "css3-brands-solid-full" },
+  { title: "Accessibility (WCAG 2.2)", level: "professional" as const, icon: "universal-access-solid-full" },
+  { title: "Design Systems", level: "professional" as const, icon: "layer-group" },
+  { title: "User Interface Design", level: "professional" as const, icon: "layer-group" },
+  { title: "Cursor AI", level: "proficient" as const, icon: "cursor-ai" },
+].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]);
+---
+
+<div
+  class="flex flex-row flex-wrap lg:flex-nowrap gap-12 w-full pt-12 pb-8 min-w-0"
+  id="skills"
+>
+  <div
+    class="flex flex-col items-center md:items-start w-full min-w-0 lg:w-auto lg:basis-1/3 justify-start gap-4"
+  >
+    <h2 class="text-4xl">Skills</h2>
+    <p
+      style={{
+        fontWeight: "500",
+        fontSize: "3rem",
+        color: "rgba(var(--primary-color), 1)",
+        lineHeight: "normal",
+      }}
+      class="flex flex-wrap items-center text-center md:text-start"
+    >
+      Learn, build, apply.
+    </p>
+    <div
+      class="skills-legend flex flex-wrap items-center gap-4 text-sm"
+      role="list"
+      aria-label="Skill level legend"
+    >
+      <span class="skills-legend__item flex items-center gap-2">
+        <span class="skills-legend__bars" aria-hidden>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+        </span>
+        Professional
+      </span>
+      <span class="skills-legend__item flex items-center gap-2">
+        <span class="skills-legend__bars" aria-hidden>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+          <span class="skills-legend__bar"></span>
+        </span>
+        Proficient
+      </span>
+      <span class="skills-legend__item flex items-center gap-2">
+        <span class="skills-legend__bars" aria-hidden>
+          <span class="skills-legend__bar skills-legend__bar--filled"></span>
+          <span class="skills-legend__bar"></span>
+          <span class="skills-legend__bar"></span>
+        </span>
+        Novice
+      </span>
+    </div>
+  </div>
+  <div
+    class="flex flex-col gap-4 justify-between w-full min-w-0 flex-1 items-stretch basis-full lg:basis-auto overflow-hidden"
+  >
+    <div class="skills-section flex flex-col gap-4 justify-center items-center w-full">
+      <!-- Collapsed: highlighted skills (hidden when expanded) -->
+      <div
+        class="skills-highlights flex flex-wrap gap-3 justify-start w-full min-w-0"
+      >
+        {
+          highlightedSkills.map((skill) => (
+            <Chip title={skill.title} level={skill.level}>
+              <Icon
+                slot="icon"
+                name={skill.icon ?? "swatch"}
+                size={18}
+                aria-hidden
+              />
+            </Chip>
+          ))
+        }
+      </div>
+      <!-- Expand to show all categories -->
+      <details class="skills-expand w-full">
+        <summary class="skills-expand__trigger">
+          <span class="skills-expand__expand-text">Expand all</span>
+          <span class="skills-expand__collapse-text">Collapse</span>
+          <Icon name="chevron-down" size={16} class="skills-expand__icon" aria-hidden />
+        </summary>
+        <!-- Expanded: full categorized skills -->
+        <div class="flex flex-col gap-6 py-4">
+          {
+            skillCategories.map((category) => (
+              <div class="flex flex-col gap-3">
+                <h3
+                  class="text-xl font-medium"
+                  style={{ color: "rgba(var(--primary-color), 1)" }}
+                >
+                  {category.name}
+                </h3>
+                <div class="flex flex-wrap gap-4 justify-start">
+                  {category.skills.map((skill) => (
+                    <Chip title={skill.title} level={skill.level}>
+                      <Icon
+                        slot="icon"
+                        name={skill.icon ?? "swatch"}
+                        size={18}
+                        aria-hidden
+                      />
+                    </Chip>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<style>
+  .skills-section:has(.skills-expand[open]) .skills-highlights {
+    display: none;
+  }
+  .skills-expand__trigger {
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: rgba(var(--primary-color), 1);
+    font-weight: 500;
+    padding: 0.25rem 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s;
+  }
+  .skills-expand__trigger:hover {
+    opacity: 0.75;
+    text-decoration: none;
+  }
+  .skills-expand__trigger:focus-visible {
+    outline: 2px dashed rgba(var(--secondary-color), 1);
+    outline-offset: 2px;
+    border-radius: .5rem;
+  }
+  .skills-expand__trigger::-webkit-details-marker {
+    display: none;
+  }
+  .skills-expand__icon {
+    flex-shrink: 0;
+    margin-inline-start: 0.35rem;
+    transition: transform 0.2s;
+  }
+  .skills-expand[open] .skills-expand__icon {
+    transform: rotate(180deg);
+  }
+  .skills-expand__collapse-text {
+    display: none;
+  }
+  .skills-expand[open] .skills-expand__collapse-text {
+    display: inline;
+  }
+  .skills-expand[open] .skills-expand__expand-text {
+    display: none;
+  }
+  .skills-legend {
+    color: rgba(var(--foreground), 0.8);
+  }
+  .skills-legend__bars {
+    display: flex;
+    gap: 0.2rem;
+    align-items: flex-end;
+  }
+  .skills-legend__bar {
+    width: 0.5rem;
+    height: 0.25rem;
+    border-radius: 2px;
+    background: rgba(var(--ambience-color), 0.5);
+  }
+  .skills-legend__bar--filled {
+    background: rgba(var(--primary-color), 0.8);
+  }
+  .skills-legend__bar:nth-child(1) {
+    max-width: 0.5rem;
+  }
+  .skills-legend__bar:nth-child(2) {
+    max-width: 0.65rem;
+  }
+  .skills-legend__bar:nth-child(3) {
+    max-width: 0.8rem;
+  }
+  .skills-highlights {
+    overflow-wrap: anywhere;
+  }
+</style>

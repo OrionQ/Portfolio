@@ -7,9 +7,6 @@ import Tag from "../components/tag/Tag.astro";
 import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Projects from "../section/Projects.astro";
-import WhoIAm from "../section/WhoIAm.astro";
-import Experience from "../section/Experience.astro";
-import Education from "../section/Education.astro";
 ---
 
 <script>
@@ -40,11 +37,8 @@ import Education from "../section/Education.astro";
     <div
       class="flex flex-col justify-between items-center md:items-start gap-12 scroll-content opacity-0 translate-y-10 transition-all duration-500"
     >
-      <h1 class="text-5xl py-8 md:py-0">Orion&apos;s Portfolio</h1>
+      <h1 class="text-5xl py-8 md:py-0">Hey, I'm Orion!</h1>
       <div class="flex flex-col items-center md:items-start gap-2">
-        <p class="flex items-center">
-          If I am not hanging out with my friends,
-        </p>
         <p
           style={{
             fontWeight: "500",
@@ -54,7 +48,10 @@ import Education from "../section/Education.astro";
           }}
           class="flex flex-wrap items-center text-center md:text-start"
         >
-          I am probably stuck between Figma and VS Code.
+          I am usually stuck between Figma and VS Code.
+        </p>
+        <p class="flex items-center">
+          but solving design challenges as a developer is my specialty. 
         </p>
       </div>
       <div class="roles flex flex-row gap-2 justify-center lg:justify-start">
@@ -64,7 +61,7 @@ import Education from "../section/Education.astro";
       </div>
     </div>
     <div class="flex-shrink-0">
-      <ProfileImage alt="Orion's profile picture" width={350} />
+      <ProfileImage alt="Orion's profile picture" width={250} />
     </div>
   </section>
   <Icon
@@ -78,20 +75,10 @@ import Education from "../section/Education.astro";
   <Divider dividerType="tertiary" />
   <!-- Projects Section -->
   <Projects />
-  <!-- Experience Section -->
-  <Experience />
-  <!-- Education & Skills Section -->
-  <Education />
-  <!-- Introduction Section -->
-  <WhoIAm />
-  <div class="flex gap-4 pt-12">
-    <p style={{ color: "rgba(var(--primary-color), 1)", fontSize: "1.5rem" }}>
-      (This website is designed and coded using <Link
-        className="inline-flex"
-        href="https://astro.build/"
-        newTab
-        underline>Astro.js!</Link
-      >)
-    </p>
-  </div>
+  <section class="flex justify-center py-12">
+    <Link underline href="/experience" className="text-xl font-medium inline-flex items-center gap-2">
+      Check out my past experiences
+      <Icon name="arrow-right-long" size={20} aria-hidden />
+    </Link>
+  </section>
 </Layout>

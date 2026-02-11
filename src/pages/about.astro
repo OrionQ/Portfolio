@@ -1,0 +1,32 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageLink from "../components/page-link/PageLink.astro";
+import WhoIAm from "../section/WhoIAm.astro";
+---
+
+<Layout title="About Me | Orion's Portfolio">
+  <section class="flex flex-col gap-8 w-full">
+    <div class="flex flex-col gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <h1 class="text-5xl py-8">About Me</h1>
+      <p
+        style={{
+          fontWeight: "500",
+          fontSize: "1.5rem",
+          color: "rgba(var(--primary-color), 1)",
+          lineHeight: "normal",
+        }}
+      >
+        Occasionally funny, self-claimed creative, and genuinely curious.
+      </p>
+    </div>
+    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <WhoIAm />
+    </div>
+    <div class="flex flex-col items-center gap-6 py-12 scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <p class="text-2xl text-center">
+        Thank you for visiting my site!
+      </p>
+      <PageLink href="/">Go back to Home page</PageLink>
+    </div>
+  </section>
+</Layout>

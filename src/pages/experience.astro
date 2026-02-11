@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+import Link from "../components/link/Link.astro";
+import Layout from "../layouts/Layout.astro";
+import Education from "../section/Education.astro";
+import ProfessionalExperience from "../section/ProfessionalExperience.astro";
+import Skills from "../section/Skills.astro";
+---
+
+<Layout title="Experience, Education & Skills | Orion's Portfolio">
+  <section class="flex flex-col gap-8 w-full">
+    <div class="flex flex-col gap-2 scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <h1 class="text-5xl py-8">My Experiences</h1>
+      <p
+        style={{
+          fontWeight: "500",
+          fontSize: "1.5rem",
+          color: "rgba(var(--primary-color), 1)",
+          lineHeight: "normal",
+        }}
+      >
+        My journey so far, from student to professional.
+      </p>
+    </div>
+    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <ProfessionalExperience />
+    </div>
+    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <Skills />
+    </div>
+    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+      <Education />
+    </div>
+    <section class="flex justify-center py-12">
+      <Link underline href="/about" className="text-xl font-medium inline-flex items-center gap-2">
+        Learn more about me
+        <Icon name="arrow-right-long" size={20} aria-hidden />
+      </Link>
+    </section>
+  </section>
+</Layout>

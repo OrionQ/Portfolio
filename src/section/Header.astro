@@ -21,7 +21,10 @@ const isHomePage = Astro.url.pathname === "/";
 
     // Close menu when clicking outside
     document.addEventListener("click", (event) => {
-      if (mobileMenu?.hasAttribute("open") && !mobileMenu.contains(event.target as Node)) {
+      if (
+        mobileMenu?.hasAttribute("open") &&
+        !mobileMenu.contains(event.target as Node)
+      ) {
         mobileMenu.removeAttribute("open");
       }
     });
@@ -44,23 +47,16 @@ const isHomePage = Astro.url.pathname === "/";
     </div>
 
     <!-- Desktop Navigation -->
-    <div class="flex gap-6 flex-row items-center">
+    <div class="flex gap-4 flex-row items-center">
       <div class="gap-8 items-center hidden sm:flex sm:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
           className="scroll-link">Projects</Link
         >
-        <Link
-          href={isHomePage ? "#experience" : "/#experience"}
-          className="scroll-link">Experience</Link
-        >
-        <Link
-          href={isHomePage ? "#about-me" : "/#about-me"}
-          className="scroll-link">About Me</Link
-        >
-      </div>
-      <ThemeSelector />
-      <!-- Mobile Menu Button -->
+        <Link href="/experience">Experience</Link>
+        <Link href="/about">About Me</Link>
+        <Link href="/Xiaolei Qin's Resume.pdf" newTab>Résumé</Link>
+      </div><!-- Mobile Menu Button -->
       <details class="sm:hidden mobile-menu">
         <summary class="mobile-menu-button">
           <Icon name="bars" size={24} class="menu-icon" />
@@ -71,16 +67,12 @@ const isHomePage = Astro.url.pathname === "/";
             href={isHomePage ? "#projects" : "/#projects"}
             className="scroll-link">Projects</Link
           >
-          <Link
-            href={isHomePage ? "#experience" : "/#experience"}
-            className="scroll-link">Experience</Link
-          >
-          <Link
-            href={isHomePage ? "#about-me" : "/#about-me"}
-            className="scroll-link">About Me</Link
-          >
+          <Link href="/experience">Experience</Link>
+          <Link href="/about">About Me</Link>
+          <Link href="/Xiaolei Qin's Resume.pdf" newTab>Résumé</Link>
         </div>
       </details>
+      <ThemeSelector />
     </div>
   </div>
 

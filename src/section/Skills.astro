@@ -155,7 +155,7 @@ const highlightedSkills = [
       </div>
       <!-- Expand to show all categories -->
       <details class="skills-expand w-full">
-        <summary class="skills-expand__trigger">
+        <summary class="skills-expand__trigger flex justify-center lg:justify-start">
           <span class="skills-expand__expand-text">Expand all</span>
           <span class="skills-expand__collapse-text">Collapse</span>
           <Icon name="chevron-down" size={16} class="skills-expand__icon" aria-hidden />
@@ -166,8 +166,8 @@ const highlightedSkills = [
             skillCategories.map((category) => (
               <div class="flex flex-col gap-3">
                 <h3
-                  class="text-xl font-medium"
-                  style={{ color: "rgba(var(--primary-color), 1)" }}
+                  class="text-xl flex justify-center lg:justify-start"
+                  style={{ color: "rgba(var(--foreground), 1)" }}
                 >
                   {category.name}
                 </h3>

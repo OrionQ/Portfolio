@@ -4,10 +4,17 @@ import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
 import "../themes/themes.css"; // adjust path as needed
 
-const { title, description = "Orion's Portfolio - Software Engineer, UX Designer, Photographer", image = "/profile-pic.jpeg" } = Astro.props;
+const {
+  title,
+  description = "Orion's Portfolio - Software Engineer, UX Designer, Photographer",
+  image = "/profile-pic.jpeg",
+} = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://orionq.github.io";
-const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+const siteUrl =
+  Astro.site?.toString().replace(/\/$/, "") ?? "https://orionq.github.io";
+const imageUrl = image.startsWith("http")
+  ? image
+  : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
 ---
 
 <!doctype html>
@@ -38,9 +45,7 @@ const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWit
     <div class="flex flex-col items-center pb-16">
       <Header />
       <div class="justify-between min-h-screen px-2 pt-6 gap-16">
-        <main
-          class="flex flex-col gap-8 items-center sm:px-10 max-w-6xl"
-        >
+        <main class="flex flex-col gap-8 items-center sm:px-10 max-w-6xl">
           <slot />
         </main>
         <Footer />
@@ -61,7 +66,7 @@ const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWit
           },
           {
             threshold: 0.1, // Trigger when 10% of the element is visible
-          }
+          },
         );
 
         // Select all scroll-content elements to observe
@@ -78,7 +83,6 @@ const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWit
               if (isHomePage) {
                 event.preventDefault(); // Prevent default jump
               }
-              const href = this.getAttribute("href");
               const targetId = this.getAttribute("href")?.substring(1);
               const target = targetId
                 ? document.getElementById(targetId)
@@ -89,7 +93,7 @@ const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWit
                 const topPosition = target.offsetTop - offset;
                 window.scrollTo({ top: topPosition, behavior: "smooth" });
               }
-            }
+            },
           );
         });
       });
@@ -123,7 +127,8 @@ const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image.startsWit
     --background: 39, 39, 39; /* #272727 */
     --foreground: 229, 245, 251; /* #e5f5fb - light, readable text */
     --primary-color: 102, 204, 238; /* #66ccee - brighter primary */
-    --secondary-color: 153, 218, 243; /* #99daf3 - lighter secondary for better contrast */
+    --secondary-color:
+      153, 218, 243; /* #99daf3 - lighter secondary for better contrast */
     --floating-color: 55, 80, 95; /* #37505f */
     --ambience-color: 0, 100, 150; /* #006496 - brighter ambient */
     --tint-color: 102, 204, 238; /* #66ccee */

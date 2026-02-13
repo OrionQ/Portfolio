@@ -48,7 +48,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
 
   .disclosure {
     background-color: rgba(var(--floating-color), 1);
-    border: 0px solid rgba(var(--floating-color), 1);
+    border: 3px solid rgba(var(--floating-color), 1);
     border-radius: 1.75rem;
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
     inline-size: 100%;
@@ -65,7 +65,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
   .summary {
     align-items: center;
     background-color: rgba(var(--floating-color), 1);
-    border: 2px solid rgba(var(--floating-color), 1);
+    outline: 1px solid rgba(var(--floating-color), 1);
     border-radius: 1.75rem;
     cursor: pointer;
     display: flex;
@@ -82,13 +82,13 @@ const { className, company, date, open = false, tag, title } = Astro.props;
   }
 
   .summary:focus-visible {
-    outline: 3px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 4px;
+    outline: 1px dashed rgba(var(--secondary-color), 1);
+    outline-offset: 2px;
   }
 
   .summary:hover, .summary:focus-visible {
-    border-color: rgba(var(--primary-color), 1);
-    transition: border-color 0.2s ease-in-out;
+    outline-color: rgba(var(--primary-color), 1);
+    transition: outline-color 0.2s ease-in-out;
     
   }
 

@@ -447,11 +447,12 @@ import { Icon } from "astro-icon/components";
 
   #darkModeToggle:focus-visible {
     outline: 2px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 2px;
+    outline-offset: 0px;
   }
 
-  #darkModeToggle:hover {
+  #darkModeToggle:hover, #darkModeToggle:focus-visible {
     background-color: rgba(var(--ambience-color), 1);
+    transition: background-color 0.2s ease-in-out;
   }
 
   .moon {
@@ -490,11 +491,12 @@ import { Icon } from "astro-icon/components";
 
   .theme-button:focus-visible {
     outline: 2px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 2px;
+    outline-offset: 0px;
   }
 
   .theme-button:hover {
     border-color: rgba(var(--primary-color), 0.5);
+    transition: border-color 0.2s ease-in-out;
   }
 
   .theme-controls {
@@ -523,11 +525,12 @@ import { Icon } from "astro-icon/components";
 
   .theme-dropdown-button:focus-visible {
     outline: 2px dashed rgba(var(--secondary-color), 1);
-    outline-offset: 2px;
+    outline-offset: 0px;
   }
 
-  .theme-dropdown-button:hover {
+  .theme-dropdown-button:hover, .theme-dropdown-button:focus-visible {
     background-color: rgba(var(--ambience-color), 1);
+    transition: background-color 0.2s ease-in-out;
   }
 
   .theme-picker-desktop {

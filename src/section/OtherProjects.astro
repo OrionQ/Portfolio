@@ -4,6 +4,7 @@ import gameEngineThumbnail from "../images/GameEngine_thumbnail.png";
 import bloomThumbnail from "../images/Bloom-web_thumbnail.jpeg";
 import paintWarThumbnail from "../images/PaintWar_thumbnail.png";
 import outlawThumbnail from "../images/Zodiac_thumbnail.png";
+import ecologyThumbnail from "../images/Ecology_thumbnail.png";
 
 import { Image } from "astro:assets";
 import Disclosure from "../components/disclosure/Disclosure.astro";
@@ -11,6 +12,37 @@ import Link from "../components/link/Link.astro";
 ---
 
 <div class="project-experience flex flex-wrap gap-4 justify-center">
+  <Disclosure
+    tag="Design thinking"
+    title="Enhance Engagement for Ecology Solution"
+    className="flex flex-col lg:flex-row gap-4 justify-between p-6"
+  >
+    <p>
+      This project involved working closely with Ecology Action in Austin,
+      Texas, to boost community engagement with the park despite a range of
+      practical constraints. We conducted in-depth user interviews, many field
+      visits, and empathy sessions with key stakeholders to deeply understand
+      their needs and challenges. Using design thinking methods, our team
+      generated and prototyped creative solutions tailored to the client's
+      needs, ensuring our recommendations were both innovative and grounded in
+      reality.
+      <br />
+      <br />
+      <Link
+        className="inline-flex"
+        href="https://utstudent.my.canva.site/enhance-engagement-for-ecology-solution"
+        newTab
+        underline>View case study</Link
+      >
+    </p>
+    <Image
+      format="png"
+      class="rounded-[1.75rem] m-1 object-cover"
+      src={ecologyThumbnail}
+      alt="Enhance Engagement for Ecology Solution project thumbnail"
+      width={500}
+    />
+  </Disclosure>
   <Disclosure
     tag="Web"
     title="Bloom.co Tea Website"
@@ -35,10 +67,10 @@ import Link from "../components/link/Link.astro";
     </p>
     <Image
       format="jpeg"
-      class="rounded-2xl m-1 object-cover"
+      class="rounded-[1.75rem] m-1 object-cover"
       src={bloomThumbnail}
       alt="Bloom.co's project thumbnail"
-      width={250}
+      width={500}
     />
   </Disclosure>
   <Disclosure
@@ -58,10 +90,10 @@ import Link from "../components/link/Link.astro";
     </p>
     <Image
       format="jpeg"
-      class="rounded-2xl m-1 object-cover"
+      class="rounded-[1.75rem] m-1 object-cover"
       src={gameEngineThumbnail}
       alt="Game engine project's thumbnail"
-      width={250}
+      width={500}
     />
   </Disclosure>
   <Disclosure
@@ -96,40 +128,10 @@ import Link from "../components/link/Link.astro";
     </p>
     <Image
       format="jpeg"
-      class="rounded-2xl m-1 object-cover"
+      class="rounded-[1.75rem] m-1 object-cover"
       src={circulationThumbnail}
       alt="Circulation project's thumbnail"
-      width={250}
-    />
-  </Disclosure>
-
-  <Disclosure
-    tag="Unity"
-    title="Paint War Demo Game"
-    className="flex flex-col lg:flex-row gap-4 justify-between p-6"
-  >
-    <p>
-      Paint War is a game that allows two players to catch and bounce paintballs
-      to each other, and if the ball splashed on the edge of the screen with
-      enough amount, the other side wins. This is a team project with Master
-      students from the Art and Design Department, and this is my first game
-      developed using Unity Engine. We learned and used particle system built
-      inside the engine and developed the mechanics using scripts.
-      <br />
-      <br />
-      Source code: <Link
-        className="inline-flex"
-        href="https://github.com/OrionQ/PaintWar"
-        newTab
-        underline>Github link</Link
-      >
-    </p>
-    <Image
-      format="jpeg"
-      class="rounded-2xl m-1 object-cover"
-      src={paintWarThumbnail}
-      alt="Paint War project's thumbnail"
-      width={250}
+      width={500}
     />
   </Disclosure>
   <Disclosure
@@ -155,10 +157,10 @@ import Link from "../components/link/Link.astro";
     </p>
     <Image
       format="jpeg"
-      class="rounded-2xl m-1 object-cover"
+      class="rounded-[1.75rem] m-1 object-cover"
       src={outlawThumbnail}
       alt="Outlaw Machinima project's thumbnail"
-      width={250}
+      width={500}
     />
   </Disclosure>
 </div>

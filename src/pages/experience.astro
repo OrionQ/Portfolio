@@ -1,38 +1,63 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "../components/link/Link.astro";
+import PageLink from "../components/page-link/PageLink.astro";
 import Layout from "../layouts/Layout.astro";
 import Education from "../section/Education.astro";
 import ProfessionalExperience from "../section/ProfessionalExperience.astro";
 import Skills from "../section/Skills.astro";
 ---
 
-<Layout title="Experience, Education & Skills | Orion's Portfolio">
+<Layout title="Experience | Xiaolei Qin's Portfolio">
   <section class="flex flex-col gap-8 w-full">
-    <div class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start scroll-content opacity-0 translate-y-10 transition-all duration-500">
-      <h1 class="text-5xl py-8">My Experiences</h1>
+    <div
+      class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
+      <h1 class="text-3xl py-8">Experiences</h1>
       <p
         style={{
           fontWeight: "500",
-          fontSize: "1.5rem",
+          fontSize: "2.5rem",
           color: "rgba(var(--primary-color), 1)",
           lineHeight: "normal",
         }}
       >
         My journey so far, from student to professional.
       </p>
+      <span class="inline-flex flex-wrap items-center gap-x-1">
+        <span>Here is the PDF version of my experiences: </span>
+        <Link underline href="/Xiaolei Qin's Resume.pdf" newTab>
+          <Icon name="file-lines" aria-hidden />
+          Résumé
+        </Link>
+      </span>
     </div>
-    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+
+    <div
+      class="flex justify-center lg:justify-start scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
+    </div>
+    <div
+      class="scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
       <ProfessionalExperience />
     </div>
-    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+    <div
+      class="scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
       <Skills />
     </div>
-    <div class="scroll-content opacity-0 translate-y-10 transition-all duration-500">
+    <div
+      class="scroll-content opacity-0 translate-y-10 transition-all duration-500"
+    >
       <Education />
     </div>
     <section class="flex justify-center py-12">
-      <Link underline href="/about" className="text-xl font-medium inline-flex items-center gap-2">
+      <Link
+        underline
+        href="/about"
+        className="text-xl font-medium inline-flex items-center gap-2"
+      >
         Learn more about me
         <Icon name="arrow-right-long" size={20} aria-hidden />
       </Link>

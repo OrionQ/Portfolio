@@ -18,76 +18,144 @@ const {
   target={newTab ? "_blank" : "_self"}
   rel={newTab ? "noopener noreferrer" : undefined}
 >
-  <slot class="clickable-card-image" name="image" />
-  <div class="clickable-card-overlay"></div>
-  <div class="clickable-card-title">
-    {
-      title && (
-        <h3 class="font-light text-2xl pb-2 pr-2 flex items-center gap-2">
-          {title} {newTab && <Icon name="up-right-from-square" />}
-        </h3>
-      )
-    }
-    {description && <p>{description}</p>}
-    <slot name="tags" />
+  <div class="clickable-card-image-wrapper">
+    <slot class="clickable-card-image" name="image" />
+  </div>
+  <div class="clickable-card-content">
+    <div class="clickable-card-text">
+      {
+        title && (
+          <h3 class="clickable-card-title text-2xl pb-2 flex items-center gap-2">
+            {title}
+          </h3>
+        )
+      }
+      {
+        description && (
+          <p class="clickable-card-description text-base opacity-90">
+            {description}
+          </p>
+        )
+      }
+      <div class="clickable-card-tags">
+        <slot name="tags" />
+      </div>
+    </div>
+    <span class="clickable-card-cta"
+      >View project {newTab ? <Icon name="up-right-from-square" /> : <Icon name="arrow-right-long" />}</span
+    >
   </div>
 </a>
 <style>
   .clickable-card {
-    background-color: rgba(var(--floating-color), 1);
+    background-color: transparent;
     border-radius: 1.75rem;
-    box-shadow: 0 1px 4px rgba(var(--shadow-color));
+    border: 2px solid transparent;
     display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     inline-size: 100%;
-    overflow: hidden;
+    padding: 1.25rem;
     position: relative;
-    transition: all 0.15s ease-in-out;
+    transition:
+      background-color 0.2s ease-in-out,
+      border-color 0.2s ease-in-out;
+  }
+
+  @media (min-width: 768px) {
+    .clickable-card {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
   }
 
   .clickable-card:focus-visible {
-    outline: 5px dashed rgba(var(--secondary-color), 1);
+    outline: 3px dashed rgba(var(--secondary-color), 1);
   }
 
-  .clickable-card:focus-visible .clickable-card-overlay {
-    background: rgba(var(--tint-color), 0.4);
-  }
-
-  .clickable-card:hover {
+  .clickable-card:hover,
+  .clickable-card:focus-visible {
+    background-color: rgba(var(--floating-color), 1);
+    border-color: rgba(var(--primary-color), 1);
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
-    transform: scale(1.005);
   }
 
-  .clickable-card:hover .clickable-card-overlay {
-    background: rgba(var(--tint-color), 0.4);
+  .clickable-card-image-wrapper {
+    aspect-ratio: 16 / 10;
+    border-radius: 1.75rem;
+    flex-shrink: 0;
+    inline-size: 100%;
+    overflow: hidden;
   }
 
-  .clickable-card-image {
+  @media (min-width: 640px) {
+    .clickable-card-image-wrapper {
+      aspect-ratio: auto;
+      flex: 1;
+      min-block-size: 0;
+      min-inline-size: 0;
+    }
+  }
+
+  .clickable-card-image-wrapper :global(img),
+  .clickable-card-image-wrapper :global(picture) {
+    block-size: 100%;
     display: block;
-    height: 100%;
+    inline-size: 100%;
     object-fit: cover;
-    width: 100%;
+    object-position: center;
   }
 
-  .clickable-card-overlay {
-    background: rgba(0, 0, 0, 0.5);
-    inset: 0;
-    pointer-events: none;
-    position: absolute;
-    transition: background 0.2s ease-in-out;
+  .clickable-card-content {
+    color: rgba(var(--foreground), 1);
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    min-inline-size: 0;
+    padding: 0;
+  }
+
+  .clickable-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
   .clickable-card-title {
-    color: #ffffff;
-    inset-block-end: 0;
-    inset-inline-start: 0;
-    padding: 2rem;
-    position: absolute;
-    width: 100%;
+    margin: 0;
+  }
+
+  .clickable-card-description {
+    margin: 0;
+  }
+
+  .clickable-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-block-start: 0.75rem;
+  }
+
+  .clickable-card-cta {
+    padding-block-start: 2rem;
+    align-self: flex-start;
+    color: rgba(var(--primary-color), 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .clickable-card:hover .clickable-card-cta,
+  .clickable-card:focus-visible .clickable-card-cta {
+    opacity: 1;
   }
 
   @media (prefers-contrast: more) {
-    .card {
-      border: 5px solid rgba(var(--foreground), 1);
+    .clickable-card {
+      border: 3px solid rgba(var(--foreground), 1);
     }
   }
 </style>

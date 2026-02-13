@@ -4,12 +4,32 @@ import { Image } from "astro:assets";
 import Link from "../../components/link/Link.astro";
 import Tag from "../../components/tag/Tag.astro";
 import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/card/Card.astro";
+import Chip from "../../components/chip/Chip.astro";
+import Divider from "../../components/divider/Divider.astro";
 import "./ux-projects.css";
 
-import sageThumbnail from "../../images/Sage_thumbnail.jpeg";
+import sageConfigurePage from "../../images/Sage_Edit_page.png";
+import sageOriginalDesign1 from "../../images/Sage_Original_issue_1.png";
+import sageOriginalDesign2 from "../../images/Sage_Original_issue_2.png";
+import sageOriginalIssueList from "../../images/Sage_Original_issue_list.png";
+import sageFoundations from "../../images/Sage_Foundations.png";
+import sageButtons from "../../images/Sage_Button_redesign.png";
+import sageExampleComponents from "../../images/Sage_Example_components.png";
+import sageLofi from "../../images/Sage_lofi.png";
+import sageOriginalToggle from "../../images/Sage_Toggle_issue.png";
+import sageToggleIteration from "../../images/Sage_Toggle_redesign.png";
+import sageHomepageTransition from "../../images/Sage_Home_screen_transition.png";
+import sageEditPage from "../../images/Sage_Edit_transition.png";
+import sageHelpCenterPage from "../../images/Sage_Help_center_transition.png";
+import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
+import sageHomepageProduction from "../../images/Sage_Home_screen_product.png";
+import sageEditPageProduction from "../../images/Sage_Edit_screen_product.png";
+import sageChatPageProduction from "../../images/Sage_Chat_screen_product.png";
+import sageSharingFlowProduction from "../../images/Sage_Sharing_screen_product.png";
 ---
 
-<Layout title="Orion's UX Projects - UT Sage">
+<Layout title="UT Sage - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
@@ -17,323 +37,491 @@ import sageThumbnail from "../../images/Sage_thumbnail.jpeg";
 
     <h1 class="project-title">UT Sage</h1>
     <p class="project-introduction">
-      A virtual AI tutor that supports students and instructors at The
-      University of Texas at Austin with just-in-time help.
+      Improve the user experience and user interface of the AI tutor platform
+      for students and professors using a design system.
     </p>
 
     <div class="flex flex-row flex-wrap gap-2 pb-12">
       <Tag>Professional experience</Tag>
       <Tag>AI chatbot</Tag>
       <Tag>Design system</Tag>
-      <Tag>UX research</Tag>
-      <Tag>Interaction design</Tag>
+      <Tag>UX design</Tag>
       <Tag>Prototyping</Tag>
     </div>
 
     <h2 class="project-subtitle">Project Overview</h2>
-    <p class="project-description">
-      A case study outlining how I helped design UT Sage—a campus-wide AI tutor
-      for The University of Texas at Austin. Below is a structure built for a
-      strong UX/UI portfolio: problem → research → solution → impact.
-    </p>
-
-    <ul class="project-toc">
-      <li>
-        <Link href="#the-problem" className="scroll-link" underline
-          >1. The problem</Link
-        >
-      </li>
-      <li>
-        <Link href="#goals-and-success-criteria" className="scroll-link" underline
-          >2. Goals and success criteria</Link
-        >
-      </li>
-      <li>
-        <Link href="#my-role-and-constraints" className="scroll-link" underline
-          >3. My role and constraints</Link
-        >
-      </li>
-      <li>
-        <Link href="#discovery-and-research" className="scroll-link" underline
-          >4. Discovery and research</Link
-        >
-      </li>
-      <li>
-        <Link href="#ideation-and-concepts" className="scroll-link" underline
-          >5. Ideation and concepts</Link
-        >
-      </li>
-      <li>
-        <Link href="#design-solution" className="scroll-link" underline
-          >6. Design solution</Link
-        >
-      </li>
-      <li>
-        <Link href="#validation-and-iteration" className="scroll-link" underline
-          >7. Validation and iteration</Link
-        >
-      </li>
-      <li>
-        <Link href="#outcomes-and-impact" className="scroll-link" underline
-          >8. Outcomes and impact</Link
-        >
-      </li>
-      <li>
-        <Link href="#reflection-and-next-steps" className="scroll-link" underline
-          >9. Reflection and next steps</Link
-        >
-      </li>
-    </ul>
-
-    <p class="project-description">
-      <strong>My Role:</strong>
-      <div class="flex flex-row flex-wrap gap-2">
-        <Tag>Product designer</Tag>
-        <Tag>Design system designer</Tag>
-        <Tag>UX researcher</Tag>
-      </div>
-      <strong>Tools Used:</strong>
-      <div class="flex flex-row flex-wrap gap-2">
-        <Tag>Figma</Tag>
-        <Tag>FigJam</Tag>
-        <Tag>Notion</Tag>
-      </div>
-      <br />
-      <p>
-        <Link
-          className="inline-flex"
-          aria-label="UT Sage website (opens a new window)"
-          href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
-          newTab
-          underline
-          >View live product: UT Sage</Link
-        >
-      </p>
-    </p>
-
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image
-        format="jpeg"
-        src={sageThumbnail}
-        alt="UT Sage product thumbnail"
-        width={1500}
-        class="rounded-2xl object-cover"
-      />
-    </div>
-
-    <div class="process-section">
-      <h2 class="project-subtitle flex">Case Study</h2>
-
-      <!-- 1. The Problem -->
-      <div
-        class="process-item-odd flex w-full gap-4 flex-col items-center justify-center"
-        id="the-problem"
+    <div class="project-overview w-full">
+      UT Sage is the University of Texas at Austin's new campus-wide AI tutor
+      platform. After the beta launch, I took over the design process to fully
+      redesign the interface, focusing on building a unified and user-friendly
+      experience through the development of a comprehensive design system. The
+      result is a more consistent, accessible, and visually appealing platform
+      for both students and faculty.
+      <Link
+        className="inline-flex"
+        aria-label="UT Sage website (opens a new window)"
+        href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+        newTab
+        underline>Learn more about UT Sage</Link
       >
-        <div class="flex flex-row gap-4 md:flex-nowrap flex-wrap w-full">
-          <div>
-            <h3>1. The problem</h3>
-            <br />
-            <p>
-              <strong>What to include:</strong> Who was affected (students, instructors, admins)?
-              What pain points or gaps existed before UT Sage—e.g. lack of 24/7 support,
-              inconsistent answers, scaling tutoring, or confusion about AI use?
-              One or two concrete examples or quotes make the problem feel real.
-            </p>
-            <p class="pt-4">
-              <em>Replace this prompt with 1–2 short paragraphs and optional artifact (e.g. problem statement, journey snippet).</em>
-            </p>
+      <Divider dividerType="tertiary" />
+      <div
+        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+      >
+        <div class="project-toc flex-1 min-w-0">
+          <strong>Table of Contents</strong>
+          <ul class="project-toc-list">
+            <li>
+              <Link href="#where-do-i-start" className="scroll-link" underline
+                >1. Where do I start?</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#get-feedback-from-the-users-and-stakeholders"
+                className="scroll-link"
+                underline>2. Get feedback from the users and stakeholders</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#rebuild-the-design-system"
+                className="scroll-link"
+                underline>3. Rebuild the design system</Link
+              >
+            </li>
+            <li>
+              <Link href="#create-new-pages" className="scroll-link" underline
+                >4. Create new pages</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#validation-and-results"
+                className="scroll-link"
+                underline>5. Validation and results</Link
+              >
+            </li>
+            <li>
+              <Link href="#outcomes" className="scroll-link" underline
+                >6. Outcomes</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#reflection-and-next-steps"
+                className="scroll-link"
+                underline>7. Reflection and next steps</Link
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-meta flex-1 min-w-0">
+          <div class="project-description flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <strong>My Role:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>Product designer</Tag>
+                <Tag>Design system designer</Tag>
+                <Tag>UI/UX designer</Tag>
+                <Tag>Interaction designer</Tag>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <strong>Tools Used:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Chip title="Figma" level="professional">
+                  <Icon
+                    slot="icon"
+                    name="figma-brands-solid-full"
+                    size={18}
+                    aria-hidden
+                  />
+                </Chip>
+                <Chip title="GitHub" level="professional">
+                  <Icon slot="icon" name="github" size={18} aria-hidden />
+                </Chip>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 2. Goals and success criteria -->
-      <div class="flex gap-4 flex-col">
-        <div
-          class="process-item-even flex flex-col justify-center w-full"
-          id="goals-and-success-criteria"
-        >
-          <h3>2. Goals and success criteria</h3>
-          <br />
-          <p>
-            <strong>What to include:</strong> What the team set out to achieve (e.g. “Provide
-            just-in-time academic support at scale”) and how you defined success—e.g.
-            adoption targets, satisfaction scores, task completion, or qualitative
-            goals like “students feel confident using Sage for homework help.”
-          </p>
-          <p class="pt-4">
-            <em>Replace with your project goals and 2–3 success metrics or KPIs if you have them.</em>
-          </p>
-        </div>
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+        <Image
+          src={sageConfigurePage}
+          alt="UT Sage product sample page"
+          width={2000}
+          class="rounded-xl object-cover"
+        />
       </div>
 
-      <!-- 3. My role and constraints -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-odd flex flex-col justify-center w-full"
-          id="my-role-and-constraints"
-        >
-          <div>
-            <h3>3. My role and constraints</h3>
-            <br />
-            <p>
-              <strong>What to include:</strong> Your specific responsibilities (e.g. end-to-end
-              UI for the chat experience, design system, research plan). Timeline and
-              team size. Constraints that shaped the work: brand/accessibility requirements,
-              technical limits, or institutional policies (e.g. FERPA, acceptable use).
-            </p>
-            <p class="pt-4">
-              <em>Replace with 1–2 paragraphs; bullet list for role + constraints works well.</em>
-            </p>
+      <h2 class="project-subtitle">The Problem</h2>
+      <p class="project-description">
+        When I joined UT Sage as the sole designer, the platform had just
+        launched its beta to faculty and students across UT Austin. While UT
+        Sage's core features were functional, the user interface felt fragmented
+        and lacked visual cohesion. Inconsistent design elements, gaps in
+        accessibility, and missed UI details made faculty and students confused
+        and frustrated.
+      </p>
+      <p class="project-description">
+        <strong>The challenge:</strong> How could I elevate UT Sage's design quality
+        and accessibility to create a polished, professional experience worthy of
+        a college-level learning platform?
+      </p>
+
+      <h2 class="project-subtitle">The Goal</h2>
+      <p class="project-description">
+        My goal was to overhaul the platform to provide a unified, accessible
+        experience for both students and faculty, while ensuring the new design
+        would be sustainable for future development and growth. Oh, and make it
+        look nice too!
+      </p>
+
+      <div class="process-section">
+        <h2 class="project-subtitle flex">Design Process</h2>
+
+        <!-- 1. Where do I start? -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="where-do-i-start"
+          >
+            <div>
+              <h3>1. Where do I start?</h3>
+              <br />
+              <p>
+                As the sole designer joining UT Sage, I started by testing the
+                platform and quickly found inconsistent icons, font sizes, and
+                styles across pages, along with major accessibility issues like
+                poor contrast, small text, and lack of keyboard navigation. That
+                is when I decided to rebuild a new design system from scratch.
+              </p>
+            </div>
+            <div
+              class="flex flex-row flex-wrap gap-4 min-w-0 w-full items-center"
+            >
+              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+                <Image
+                  src={sageOriginalDesign1}
+                  alt="Original UT Sage design - issue 1"
+                  width={800}
+                  height={600}
+                  class="rounded-xl w-full h-auto object-contain max-w-full"
+                />
+              </div>
+              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+                <Image
+                  src={sageOriginalDesign2}
+                  alt="Original UT Sage design - issue 2"
+                  width={800}
+                  height={600}
+                  class="rounded-xl w-full h-auto object-contain max-w-full"
+                />
+              </div>
+              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+                <Image
+                  src={sageOriginalIssueList}
+                  alt="Original UT Sage design - issue list"
+                  width={800}
+                  class="rounded-xl w-full h-auto object-contain max-w-full"
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 4. Discovery and research -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-even flex flex-col justify-center w-full"
-          id="discovery-and-research"
-        >
-          <div>
-            <h3>4. Discovery and research</h3>
-            <br />
-            <p>
-              <strong>What to include:</strong> How you learned about users and context—interviews,
-              surveys, support ticket analysis, or competitive/analogous product review.
-              Key insights (e.g. “Students want answers in their own words” or “Instructors
-              worry about academic integrity”). Add artifacts: affinity maps, personas,
-              journey maps, or insight summaries.
-            </p>
-            <p class="pt-4">
-              <em>Replace with your research methods, 2–3 main insights, and embed or link to artifacts.</em>
-            </p>
+        <!-- 2. Get feedback from the users and stakeholders -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="get-feedback-from-the-users-and-stakeholders"
+          >
+            <div>
+              <h3>2. Get feedback from the users and stakeholders</h3>
+              <br />
+              <p>
+                Before diving into solutions, I learned the existing design
+                language and gathered context. I reached out to the previous
+                designer to learn her design rationale, and requested lo-fi
+                sketch-ups from my manager to understand the product's
+                evolution. Besides learning on my own, I regularly gathered
+                feedback from my manager, who summarized insights from users and
+                researchers.
+              </p>
+              <Image
+                src={sageLofi}
+                alt="UT Sage lo-fi design"
+                width={2000}
+                class="rounded-xl object-cover"
+              />
+              <Image
+                src={sageOriginalToggle}
+                alt="UT Sage original toggle design"
+                width={2000}
+                class="rounded-xl object-cover"
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 5. Ideation and concepts -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-odd flex flex-col justify-center w-full"
-          id="ideation-and-concepts"
-        >
-          <div>
-            <h3>5. Ideation and concepts</h3>
+        <!-- 3. Rebuild the design system -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="rebuild-the-design-system"
+          >
+            <h3>3. Rebuild the design system</h3>
             <br />
             <p>
-              <strong>What to include:</strong> How you explored solutions—sketches, concept
-              variants (e.g. chat-first vs. search-first), or framing (e.g. “tutor in the
-              margin” vs. “standalone assistant”). Tradeoffs you considered and why you
-              chose the direction you did. Optional: early wireframes or lo-fi prototypes.
+              After gathering insights, I created a new design system consisting of
+              25+ standardized components, ensuring
+              web accessibility (WCAG 2.2 Level AA) on the component level, and
+              consistency with Figma tokens from the start, making sure the new
+              design system is scalable and future-proof.
             </p>
-            <p class="pt-4">
-              <em>Replace with your exploration narrative and 1–2 images (sketches, concepts, wireframes).</em>
-            </p>
+            <Image
+              src={sageFoundations}
+              alt="UT Sage foundations"
+              width={2000}
+              class="rounded-xl object-cover"
+            />
+            <Image
+              src={sageButtons}
+              alt="UT Sage buttons"
+              width={2000}
+              class="rounded-xl object-cover"
+            />
+            <Image
+              src={sageExampleComponents}
+              alt="UT Sage example components"
+              width={2000}
+              class="rounded-xl object-cover"
+            />
           </div>
         </div>
-      </div>
 
-      <!-- 6. Design solution -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-even flex flex-col justify-center w-full"
-          id="design-solution"
-        >
-          <div>
-            <h3>6. Design solution</h3>
+        <!-- 4. Create new pages -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="create-new-pages"
+          >
+            <h3>4. Create new pages</h3>
             <br />
             <p>
-              <strong>What to include:</strong> The core experience you shipped. Key flows (e.g.
-              starting a conversation, viewing history, handling errors or empty states).
-              Information architecture and main screens. Design system choices: components,
-              typography, color, states (loading, error, success), and how you applied UT
-              brand and accessibility (contrast, focus, screen readers). Use hi-fi screens,
-              flow diagrams, or short video/GIF of key interactions.
+              Using the new design system, I quickly iterated on each page and
+              updated components as needed. My background as a design engineer
+              helped a lot here. I worked closely with the lead front-end
+              engineer, understanding technical constraints upfront and
+              designing solutions that were both user-friendly and technically
+              sustainable.
             </p>
-            <p class="pt-4">
-              <em>Replace with your solution narrative plus screens, flows, and design system highlights.</em>
-            </p>
+            <ul class="flex flex-col gap-8 items-center">
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Toggle redesign</strong>
+                <Image
+                  src={sageToggleIteration}
+                  alt="UT Sage toggle iteration"
+                  width={2000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Edit page</strong>
+                <Image
+                  src={sageEditPage}
+                  alt="UT Sage edit page"
+                  width={3000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Home screen</strong>
+                <Image
+                  src={sageHomepageTransition}
+                  alt="UT Sage homepage transition"
+                  width={3000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Help center</strong>
+                <Image
+                  src={sageHelpCenterPage}
+                  alt="UT Sage help center page"
+                  width={3000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Example Sharing flow with redlines</strong>
+                <Image
+                  src={sageSharingFlow}
+                  alt="UT Sage sharing flow"
+                  width={2000}
+                  class="rounded-xl object-cover"
+                />
+                <p>
+                  Updated sharing flow with more accessible font sizes and
+                  colors.
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <!-- 7. Validation and iteration -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-odd flex flex-col justify-center w-full"
-          id="validation-and-iteration"
-        >
-          <div>
-            <h3>7. Validation and iteration</h3>
+        <!-- 5. Validation and results -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="validation-and-results"
+          >
+            <h3>5. Validation and results</h3>
             <br />
             <p>
-              <strong>What to include:</strong> How you tested and refined—usability tests,
-              internal demos, beta feedback, or A/B ideas. What you changed based on
-              feedback (e.g. “We simplified onboarding after 3/5 users missed the context
-              selector”). Before/after or iteration highlights strengthen the story.
+              After four months, I delivered a more accessible, unified UT Sage
+              prototype. The engineering team used my design system to quickly
+              rebuild pages with improved consistency and accessibility.
             </p>
-            <p class="pt-4">
-              <em>Replace with testing approach, main findings, and 1–2 concrete iterations.</em>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8. Outcomes and impact -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-even flex flex-col justify-center w-full"
-          id="outcomes-and-impact"
-        >
-          <div>
-            <h3>8. Outcomes and impact</h3>
             <br />
             <p>
-              <strong>What to include:</strong> What happened after launch—adoption numbers,
-              satisfaction or NPS, qualitative feedback, or stakeholder quotes. If metrics
-              are confidential, use relative language (“usage grew significantly in the
-              first semester”) or focus on reach (e.g. “Rolled out to all undergrads”).
-              Tie back to the goals from section 2.
+              <em
+                ><strong>Disclaimer:</strong> We're currently testing with more users
+                to gather feedback for the next iteration and further improvements.</em
+              >
+              <br />
+              <br />
             </p>
-            <p class="pt-4">
-              <em>Replace with real outcomes, quotes, or a short impact summary.</em>
-            </p>
+            <ul class="flex flex-col gap-8 items-center">
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Home screen</strong>
+                <Image
+                  src={sageHomepageProduction}
+                  alt="UT Sage homepage production"
+                  width={2000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Edit screen</strong>
+                <Image
+                  src={sageEditPageProduction}
+                  alt="UT Sage edit page production"
+                  width={2000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+              <li class="flex flex-col gap-4 items-center">
+                <strong>Chat screen</strong>
+                <Image
+                  src={sageChatPageProduction}
+                  alt="UT Sage chat page production"
+                  width={2000}
+                  class="rounded-xl object-cover"
+                />
+              </li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <!-- 9. Reflection and next steps -->
-      <div class="flex gap-4">
-        <div
-          class="process-item-odd flex flex-col justify-center w-full"
-          id="reflection-and-next-steps"
-        >
-          <div>
-            <h3>9. Reflection and next steps</h3>
+        <!-- 6. Outcomes -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="outcomes"
+          >
+            <h3>6. Outcomes</h3>
             <br />
             <p>
-              <strong>What to include:</strong> What you learned (process, collaboration, AI UX).
-              What you’d do differently with more time or data. Future opportunities—e.g.
-              personalization, integration with LMS, or expanding to new user groups. Keeps
-              the case study forward-looking and shows ownership.
+              This redesign transformed UT Sage from a half-finished beta into a
+              coherent, accessible educational platform:
             </p>
-            <p class="pt-4">
-              <em>Replace with 2–3 learnings and 1–2 next steps or future ideas.</em>
-            </p>
+            <div
+              class="outcomes-card-list grid grid-cols-1 md:grid-cols-2 gap-4 my-4"
+            >
+              <Card title="Accessibility" cardType="secondary">
+                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                  Aiming for WCAG 2.2 Level AA compliance across all components,
+                  addressing color contrast, font sizing, and keyboard
+                  navigation
+                </p>
+              </Card>
+              <Card title="Consistency" cardType="secondary">
+                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                  Established a 25+ component design system with Figma tokens,
+                  ensuring consistent design across the platform
+                </p>
+              </Card>
+              <Card title="Developer efficiency" cardType="secondary">
+                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                  Engineering team can now build pages significantly faster
+                  using the systematized design system
+                </p>
+              </Card>
+              <Card title="Design sustainability" cardType="secondary">
+                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                  If new features are added, the new pages can be designed
+                  quickly using the robust design system
+                </p>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>
 
-      <br />
-      <div class="flex flex-row gap-8 justify-between w-full">
-        <Link href="/" underline
-          ><Icon name="arrow-left-long" />Go back to home</Link
-        >
-        <Link href="/ux-projects/venus" underline
-          >Next case study: Venus<Icon name="arrow-right-long" /></Link
-        >
+        <!-- 7. Reflection and next steps -->
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="reflection-and-next-steps"
+          >
+            <h3>7. Reflection and next steps</h3>
+            <br />
+            <p>
+              This project showed that a solid design system is essential for
+              scalable, high-quality results. My design engineering skills
+              helped bridge design and development for a more practical,
+              polished solution.
+              <br />
+              <br />
+              However, I would have asked for more detailed feedback from the users
+              and stakeholders, which could have helped me rethink some of the design
+              decisions and user flows.
+            </p>
+            <br />
+            <p>
+              <strong>Next steps:</strong>
+            </p>
+            <br />
+            <ul class="list-disc pl-6 space-y-2">
+              <li>
+                Dark mode (yay!) implementation to improve accessibility and
+                user choice
+              </li>
+              <li>
+                Broader user testing to gather feedback from diverse faculty and
+                student populations
+              </li>
+              <li>
+                Iterative improvements based on testing insights to continuously
+                refine the experience
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <br />
+        <div class="flex flex-row gap-8 justify-between w-full">
+          <Link href="/" underline
+            ><Icon name="arrow-left-long" />Go back home</Link
+          >
+          <Link href="/ux-projects/venus" underline
+            >Next case study: Venus<Icon name="arrow-right-long" /></Link
+          >
+        </div>
       </div>
     </div>
   </div>
 </Layout>
-

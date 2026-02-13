@@ -17,7 +17,7 @@ import trustyNewsPage from "../../images/Trusty-News-page.png";
 import trustyPersonalization from "../../images/Trusty-personalization.png";
 ---
 
-<Layout title="Orion's UX Projects - Trusty">
+<Layout title="Trusty - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
@@ -31,19 +31,70 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
       <Tag>Adobe Creative Jam</Tag>
     </div>
 
-    <p class="project-description">
-      A mobile app designed to help users easily verify the credibility of news.
-      With a user-friendly interface, it allows users to filter out
-      misinformation from social media at the app level. Trusty provides
-      convenient visual cues for assessing news credibility and lets users
-      choose their trusted news sources for a cleaner, smoother experience.
-      <br />
-      <br />
-      This project was created during the 2021 Adobe Creative Jam, where we were delighted
-      to receive an honorable mention, ranking in the top 20 out of 315 competitors.
-    </p>
+    <h2 class="project-subtitle">Project Overview</h2>
+    <div class="project-overview w-full">
+      <p class="project-description">
+        A mobile app designed to help users easily verify the credibility of news.
+        With a user-friendly interface, it allows users to filter out
+        misinformation from social media at the app level. Trusty provides
+        convenient visual cues for assessing news credibility and lets users
+        choose their trusted news sources for a cleaner, smoother experience.
+        This project was created during the 2021 Adobe Creative Jam, where we were delighted
+        to receive an honorable mention, ranking in the top 20 out of 315 competitors.
+      </p>
+      <Divider dividerType="tertiary" />
+      <div
+        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+      >
+        <div class="project-toc flex-1 min-w-0">
+          <strong>Table of Contents</strong>
+          <ul class="project-toc-list">
+            <li>
+              <Link href="#research" className="scroll-link" underline
+                >1. Research</Link
+              >
+            </li>
+            <li>
+              <Link href="#design" className="scroll-link" underline
+                >2. Design</Link
+              >
+            </li>
+            <li>
+              <Link href="#user-flow" className="scroll-link" underline
+                >3. User flow</Link
+              >
+            </li>
+            <li>
+              <Link href="#feedback" className="scroll-link" underline
+                >4. Feedback</Link
+              >
+            </li>
+          </ul>
+        </div>
 
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4">
+        <div class="project-meta flex-1 min-w-0">
+          <div class="project-description flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <strong>My Role:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>UI designer</Tag>
+                <Tag>Brand designer</Tag>
+                <Tag>UX designer</Tag>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <strong>Tools Used:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>Adobe XD</Tag>
+                <Tag>Figma</Tag>
+                <Tag>Adobe Illustrator</Tag>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4">
       <Image
         format="jpeg"
         src={trustyLoading}
@@ -63,10 +114,11 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
         width={250}
       />
     </div>
+    </div>
     <div class="process-section lg:px-2">
       <h2 class="project-subtitle">Design Process</h2>
       <div>
-        <div class="process-item">
+        <div class="process-item" id="research">
           <h3>1. Research</h3>
           <p>
             To guide our design process, we conducted an in-depth analysis of
@@ -81,7 +133,7 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
         </div>
       </div>
       <div class="flex lg:flex-row w-full gap-4 flex-col">
-        <div class="process-item">
+        <div class="process-item" id="design">
           <h3>2. Design</h3>
           <br />
           <h4 class="font-bold text-lg">2.1 Branding</h4>
@@ -124,7 +176,7 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
             src={trustyBranding}
             alt="Branding of Trusty app"
             width={250}
-            class="rounded-2xl m-1 object-cover"
+            class="rounded-[1.75rem] m-1 object-cover"
           />
           <Image
             format="jpeg"
@@ -132,7 +184,7 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
             src={trustyDS}
             alt="Design system of Trusty app"
             width={250}
-            class="rounded-2xl m-1 object-cover"
+            class="rounded-[1.75rem] m-1 object-cover"
           />
         </div>
       </div>
@@ -146,7 +198,7 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
             src={trustyPersonalization}
             alt="On the category preference setting page"
             width={250}
-            class="rounded-2xl m-1 object-cover"
+            class="rounded-[1.75rem] m-1 object-cover"
           />
           <Image
             format="jpeg"
@@ -154,10 +206,10 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
             src={trustyNewsPage}
             alt="Example news page with verification"
             width={250}
-            class="rounded-2xl m-1 object-cover"
+            class="rounded-[1.75rem] m-1 object-cover"
           />
         </div>
-        <div class="process-item flex flex-col justify-between">
+        <div class="process-item flex flex-col justify-between" id="user-flow">
           <div>
             <h3>3. User Flow</h3>
             <br />
@@ -226,9 +278,9 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
         style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
         src={trustyFlow}
         alt="Flow of Trusty app"
-        class="rounded-2xl m-1 object-cover"
+        class="rounded-[1.75rem] m-1 object-cover"
       />
-      <div class="process-item">
+      <div class="process-item" id="feedback">
         <h3>4. Feedback</h3>
         <p>
           After submitting our design, we received significant attention during

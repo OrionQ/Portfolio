@@ -5,15 +5,31 @@ import hikingPic from "../images/Hiking-pic.jpeg";
 ---
 
 <div
-  class="about-me flex flex-row flex-wrap-reverse lg:flex-nowrap gap-8 w-full min-w-0 py-8"
+  class="about-me flex flex-row flex-wrap-reverse lg:flex-nowrap gap-4 w-full min-w-0 py-8"
   id="about-me"
 >
-  <div
-    class="about-me__content flex flex-1 min-w-0 flex-col gap-4"
-  >
-    <div class="flex flex-row gap-4 flex-wrap">
-      <Card cardType="secondary" className="flex-1 min-w-[min(100%,20rem)]">
-        <div class="intro flex flex-col gap-4 text-xl">
+  <div class="about-me__content flex flex-1 min-w-0 flex-col gap-4">
+    <div class="flex flex-row gap-4 flex-wrap-reverse">
+      <div class="flex flex-1 min-w-[min(100%,20rem)] flex-col gap-4">
+        <Card className="flex flex-1">
+          <div class="flex flex-col gap-4">
+            <p class="flex flex-wrap items-center text-lg">
+              I cook a lot of cuisine from my province.<br />
+            </p>
+          </div>
+        </Card>
+        <Card className="flex flex-1">
+          <div class="flex flex-col gap-4">
+            <p class="flex flex-wrap items-center text-lg">
+              I am always out exploring something new with my friends.<br />
+            </p>
+          </div>
+        </Card>
+      </div><Card
+        cardType="secondary"
+        className="flex-1 min-w-[min(100%,20rem)]"
+      >
+        <div class="intro flex flex-col gap-4 text-lg">
           <span
             >My name is <span class="underline underline-offset-2"
               >Xiaolei Qin (秦啸雷)</span
@@ -24,26 +40,10 @@ import hikingPic from "../images/Hiking-pic.jpeg";
           >
         </div>
       </Card>
-      <div class="flex flex-1 min-w-[min(100%,20rem)] flex-col gap-4">
-        <Card className="flex flex-1">
-          <div class="flex flex-col gap-4">
-            <p class="flex flex-wrap items-center text-xl">
-              I cook a lot of cuisine from my province.<br />
-            </p>
-          </div>
-        </Card>
-        <Card className="flex flex-1">
-          <div class="flex flex-col gap-4">
-            <p class="flex flex-wrap items-center text-xl">
-              I am always out exploring something new with my friends.<br />
-            </p>
-          </div>
-        </Card>
-      </div>
     </div>
     <Card className="w-full">
       <div class="flex flex-col gap-4 w-full">
-        <p class="flex flex-wrap items-center text-xl">
+        <p class="flex flex-wrap items-center text-lg">
           Traveling is how I learn about the world. I am always planning to
           travel somewhere new, and there are so many views and stories are
           waiting for me to discover.
@@ -52,14 +52,14 @@ import hikingPic from "../images/Hiking-pic.jpeg";
     </Card>
     <Card className="w-full">
       <div class="flex flex-col gap-4">
-        <p class="flex flex-wrap items-center text-xl">
+        <p class="flex flex-wrap items-center text-lg">
           And I am from Kunming, Yunnan, China.
         </p>
       </div>
     </Card>
   </div>
   <div
-    class="about-me__image flex w-full max-w-full min-w-0 shrink-0 lg:w-80 xl:w-96 self-stretch overflow-hidden rounded-2xl"
+    class="about-me__image flex w-full max-w-full min-w-0 shrink-0 lg:w-80 xl:w-96 self-stretch overflow-hidden rounded-[1.75rem]"
   >
     <Image
       format="jpeg"

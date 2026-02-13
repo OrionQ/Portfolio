@@ -14,7 +14,7 @@ import redditCA from "../../images/Reddit-competitive-analysis.png";
 import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 ---
 
-<Layout title="Orion's UX Projects - Reddit Usability Testing">
+<Layout title="Reddit Usability Testing - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
@@ -35,62 +35,97 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     </div>
 
     <h2 class="project-subtitle">Project Overview</h2>
-    <p class="project-description">
-      This case study walks through our end-to-end research process, from first
-      principles to final recommendations. Here is the table of contents.
-      <br />
-      <br />
-      <ul>
-        <li>
-          <Link href="#heuristic-evaluation" className="scroll-link" underline
-            >1. Heuristic evaluation</Link
-          >
-          <Link href="#competitive-analysis" className="scroll-link" underline
-            >2. Competitive analysis</Link
-          >
-          <Link href="#usability-testing" className="scroll-link" underline
-            >3. Usability testing</Link
-          >
-          <Link href="#final-report" className="scroll-link" underline
-            >4. Final report</Link
-          >
-          <Link
-            href="#what-i-learned-from-this-experience"
-            className="scroll-link"
-            underline>5. What I learned from this experience</Link
-          >
-          <Link href="#supplemental-materials" className="scroll-link" underline
-            >6. Supplemental materials</Link
-          >
-        </li>
-      </ul>
-
-      <strong>My Role:</strong><div class="flex flex-row flex-wrap gap-2">
-        <Tag>UX researcher</Tag>
-        <Tag>Interviewer</Tag>
-        <Tag>Note taker</Tag>
-        <Tag>Observer</Tag>
-      </div>
-      <strong>Tools Used:</strong><div class="flex flex-row flex-wrap gap-2">
-        <Tag>Figma</Tag>
-        <Tag>Miro</Tag>
-        <Tag>Canva</Tag>
-        <Tag>Google docs</Tag>
-        <Tag>Google forms</Tag>
-        <Tag>Zoom</Tag>
-      </div>
-      <br />
-      <p>
-        Prefer a presentation style? Click <Link
+    <div class="project-overview w-full">
+      <p class="project-description">
+        This case study walks through our end-to-end research process, from first
+        principles to final recommendations. Prefer a presentation style? Click
+        <Link
           className="inline-flex"
-          aria-label="Final report(opens a new window)"
+          aria-label="Final report (opens a new window)"
           href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
           newTab
           underline
-          >Final report
-        </Link>
+          >Final report</Link
+        >.
       </p>
-    </p>
+      <Divider dividerType="tertiary" />
+      <div
+        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+      >
+        <div class="project-toc flex-1 min-w-0">
+          <strong>Table of Contents</strong>
+          <ul class="project-toc-list">
+            <li>
+              <Link href="#heuristic-evaluation" className="scroll-link" underline
+                >1. Heuristic evaluation</Link
+              >
+            </li>
+            <li>
+              <Link href="#competitive-analysis" className="scroll-link" underline
+                >2. Competitive analysis</Link
+              >
+            </li>
+            <li>
+              <Link href="#usability-testing" className="scroll-link" underline
+                >3. Usability testing</Link
+              >
+            </li>
+            <li>
+              <Link href="#final-report" className="scroll-link" underline
+                >4. Final report</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#what-i-learned-from-this-experience"
+                className="scroll-link"
+                underline>5. What I learned from this experience</Link
+              >
+            </li>
+            <li>
+              <Link href="#supplemental-materials" className="scroll-link" underline
+                >6. Supplemental materials</Link
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="project-meta flex-1 min-w-0">
+          <div class="project-description flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <strong>My Role:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>UX researcher</Tag>
+                <Tag>Interviewer</Tag>
+                <Tag>Note taker</Tag>
+                <Tag>Observer</Tag>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <strong>Tools Used:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>Figma</Tag>
+                <Tag>Miro</Tag>
+                <Tag>Canva</Tag>
+                <Tag>Google docs</Tag>
+                <Tag>Google forms</Tag>
+                <Tag>Zoom</Tag>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+        <Image
+          format="jpeg"
+          src={redditThumbnail}
+          alt="first page of the Reddit app in a phone mock up"
+          width={1500}
+          class="rounded-[1.75rem] object-cover"
+        />
+      </div>
+    </div>
     <h2 class="project-subtitle">The Problem We Found</h2>
     <p class="project-description">
       We’re all familiar with Reddit: endless threads, niche communities, and
@@ -107,17 +142,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       usability study: heuristic evaluation, competitive analysis, and live user
       interviews. Our goal was simple: understand what’s actually broken, who it
       affects, and where the biggest opportunities for improvement lie.
-
-      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-        <Image
-          format="jpeg"
-          src={redditThumbnail}
-          alt="first page of the Reddit app in a phone mock up"
-          width={1500}
-          class="rounded-2xl object-cover"
-        />
-      </div>
-      <div class="process-section">
+    </p>
+    <div class="process-section">
         <h2 class="project-subtitle flex">UX Research Process</h2>
 
         <div
@@ -170,7 +196,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
               src={redditHE}
               alt="five criteria of heuristic evaluation we picked: Consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, & recover from errors; help and documentation"
               width={500}
-              class="rounded-2xl object-cover w-full h-full"
+              class="rounded-[1.75rem] object-cover w-full h-full"
             />
           </div>
         </div>
@@ -215,7 +241,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
             alt="Competitive analysis thumbnail of Reddit"
             width={2000}
             quality={100}
-            class="rounded-2xl object-cover w-full h-full"
+            class="rounded-[1.75rem] object-cover w-full h-full"
           />
         </div>
 
@@ -454,6 +480,5 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           >
         </div>
       </div>
-    </p>
   </div>
 </Layout>

@@ -5,17 +5,16 @@ import ClickableCard from "../components/clickable-card/ClickableCard.astro";
 import Tag from "../components/tag/Tag.astro";
 import nexusPic from "../images/Nexus_thumbnail.jpeg";
 import redditPic from "../images/Reddit_thumbnail.jpeg";
-import SagePic from "../images/Sage_thumbnail.jpeg";
+import SagePic from "../images/Sage_thumbnail.png";
 import venusPic from "../images/Venus_thumbnail.jpeg";
 ---
 
-<div class="flex flex-col gap-4">
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
+<div class="design-projects">
+  <div class="flex flex-col gap-4 w-full">
     <ClickableCard
       title="UT Sage "
-      description="Virtual AI tutor for students and professors. (Case study coming soon!)"
-      newTab
-      href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+      description="Introducing a cohesive design system for the campus-wide AI tutor platform."
+      href="/ux-projects/ut-sage"
     >
       <Image
         format="jpeg"
@@ -32,11 +31,9 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
         <Tag>Design system</Tag>
       </div>
     </ClickableCard>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
     <ClickableCard
       title="Venus"
-      description="No more swiping, let us do the matching."
+      description="A dating app that allows AI to help you match your dates,from start to finish."
       href="/ux-projects/venus"
     >
       <Image
@@ -54,11 +51,9 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
         <Tag>Interaction design</Tag>
       </div>
     </ClickableCard>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap xl:flex-nowrap justify-center">
     <ClickableCard
       title="Reddit Usability Test"
-      description="A usability test with the mobile app."
+      description="A comprehensive usability test with the Reddit mobile app."
       href="/ux-projects/reddit"
     >
       <Image
@@ -77,7 +72,7 @@ import venusPic from "../images/Venus_thumbnail.jpeg";
     </ClickableCard>
     <ClickableCard
       title="Nexus"
-      description="Design inspired by culture, not trends."
+      description="An interactive platform for designers to explore identity, culture, and design beyond the algorithm-driven trends."
       newTab
       href="https://nexusbythecosmos.framer.website/"
     >

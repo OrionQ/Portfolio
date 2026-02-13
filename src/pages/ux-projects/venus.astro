@@ -5,6 +5,7 @@ import Card from "../../components/card/Card.astro";
 import Link from "../../components/link/Link.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
 import Tag from "../../components/tag/Tag.astro";
+import Divider from "../../components/divider/Divider.astro";
 import Layout from "../../layouts/Layout.astro";
 import "./ux-projects.css";
 
@@ -34,9 +35,10 @@ import venusStoryboard from "../../images/Venus-storyboard.png";
 import venusTrendsFix from "../../images/Venus-trends-fix.png";
 import venusUnmatchFeedback from "../../images/Venus-unmatch-feedback.png";
 import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
+import Chip from "../../components/chip/Chip.astro";
 ---
 
-<Layout title="Orion's UX Projects - Venus">
+<Layout title="Venus - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
@@ -56,83 +58,125 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     </div>
 
     <h2 class="project-subtitle">Project Overview</h2>
-    <p class="project-description">
-      We took a museum visit as a starting point: one painting sparked the
-      concept, and we turned it into a mobile dating app that tackles a real
-      problem. From start to finish, I led the design system in Figma,
-      contributed feature ideas, built interactions and flows, and addressed
-      usability issues after testing.
-    </p>
+    <div class="project-overview w-full">
+      <p class="project-description">
+        We took a museum visit as a starting point: one painting sparked the
+        concept, and we turned it into a mobile dating app that tackles a real
+        problem. From start to finish, I led the design system in Figma,
+        contributed feature ideas, built interactions and flows, and addressed
+        usability issues after testing.
+      </p>
+      <Divider dividerType="tertiary" />
+      <div
+        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+      >
+        <div class="project-toc flex-1 min-w-0">
+          <strong>Table of Contents</strong>
+          <ul class="project-toc-list">
+            <li>
+              <Link
+                href="#storyboards-and-story-mapping"
+                className="scroll-link"
+                underline>1. Storyboards and story mapping</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#low-fi-and-mid-fi-prototype"
+                className="scroll-link"
+                underline>2. Low-fi & Mid-fi prototype</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#making-a-design-system"
+                className="scroll-link"
+                underline>3. Making a design system</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#first-iteration-of-hi-fi-prototype"
+                className="scroll-link"
+                underline>4. First iteration of hi-fi prototype</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#usability-testing-and-feedback"
+                className="scroll-link"
+                underline>5. Usability testing and feedback</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#iteration-and-final-prototype"
+                className="scroll-link"
+                underline>6. Iteration and final prototype</Link
+              >
+            </li>
+            <li>
+              <Link
+                href="#future-plans-and-my-learnings"
+                className="scroll-link"
+                underline>7. Future plans and my learnings</Link
+              >
+            </li>
+          </ul>
+        </div>
 
-    <ul>
-      <li>
-        <Link
-          href="#storyboards-and-story-mapping"
-          className="scroll-link"
-          underline>1. Storyboards and story mapping</Link
-        >
-        <Link
-          href="#low-fi-and-mid-fi-prototype"
-          className="scroll-link"
-          underline>2. Low-fi & Mid-fi prototype</Link
-        >
-        <Link href="#making-a-design-system" className="scroll-link" underline
-          >3. Making a design system</Link
-        >
-        <Link
-          href="#first-iteration-of-hi-fi-prototype"
-          className="scroll-link"
-          underline>4. First iteration of hi-fi prototype</Link
-        >
-        <Link
-          href="#usability-testing-and-feedback"
-          className="scroll-link"
-          underline>5. Usability testing and feedback</Link
-        >
-        <Link
-          href="#iteration-and-final-prototype"
-          className="scroll-link"
-          underline>6. Iteration and final prototype</Link
-        >
-        <Link
-          href="#future-plans-and-my-learnings"
-          className="scroll-link"
-          underline>7. Future plans and my learnings</Link
-        >
-      </li>
-    </ul>
+        <div class="project-meta flex-1 min-w-0">
+          <div class="project-description flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <strong>My Role:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Tag>Design system designer</Tag>
+                <Tag>Interaction designer</Tag>
+                <Tag>Usability researcher</Tag>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <strong>Tools Used:</strong>
+              <div class="flex flex-row flex-wrap gap-2">
+                <Chip title="Figma" level="professional">
+                  <Icon
+                    slot="icon"
+                    name="figma-brands-solid-full"
+                    size={18}
+                    aria-hidden
+                  />
+                </Chip>
+                <Chip title="Framer" level="proficient">
+                  <Icon
+                    slot="icon"
+                    name="framer"
+                    size={18}
+                    aria-hidden
+                  />
+                </Chip>
+                <Chip title="Figjam" level="professional">
+                  <Icon
+                    slot="icon"
+                    name="figma-brands-solid-full"
+                    size={18}
+                    aria-hidden
+                  />
+                </Chip>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <p class="project-description">
-      <strong>My Role:</strong>
-      <div class="flex flex-row flex-wrap gap-2">
-        <Tag>Design system designer</Tag>
-        <Tag>Interaction designer</Tag>
-        <Tag>Usability researcher</Tag>
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+        <Image
+          format="jpeg"
+          src={venusThumbnail}
+          alt="Venus app in a phone mockup"
+          width={1500}
+          class="rounded-[1.75rem] object-cover"
+        />
       </div>
-      <strong>Tools Used:</strong>
-      <div class="flex flex-row flex-wrap gap-2">
-        <Tag>Figma</Tag>
-        <Tag>Framer</Tag>
-        <Tag>Figjam</Tag>
-      </div>
-      <br />
-      <!-- <p>Prefer a presentation style? Click <Link
-        className="inline-flex"
-        aria-label="Final report(opens a new window)"
-        href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
-        newTab
-        underline
-        >Final report</Link
-      ></p> -->
-    </p>
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image
-        format="jpeg"
-        src={venusThumbnail}
-        alt="Venus app in a phone mockup"
-        width={1500}
-        class="rounded-2xl object-cover"
-      />
     </div>
     <h2 class="project-subtitle">Dating through the app is a problem...</h2>
     <p class="project-description">
@@ -151,7 +195,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         src={venusArt}
         alt="Still Life with Silver and Gold Vessels, Fruit, and Flowers at Blanton Museum"
         width={300}
-        class="rounded-2xl object-cover flex basis-1/2 w-full h-full"
+        class="rounded-[1.75rem] object-cover flex basis-1/2 w-full h-full"
       />
       <p class="project-description">
         We chose Pierre Nicolas Huilliot&apos;s <em
@@ -193,7 +237,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
               src={venusStoryboard}
               alt="Venus storyboard"
               width={450}
-              class="rounded-2xl object-cover"
+              class="rounded-[1.75rem] object-cover"
             />
           </div>
           <div class="justify-between flex flex-col gap-4">
@@ -202,7 +246,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
               src={venusStoryMap}
               alt="Venus story map"
               width={2000}
-              class="rounded-2xl object-cover"
+              class="rounded-[1.75rem] object-cover"
             />
           </div>
         </div>
@@ -232,7 +276,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Low-fi prototype of the match screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>
                 No swiping. Users open a recommended profile and choose to talk.
@@ -249,7 +293,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Low-fi prototype of the progress screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>
                 This shows how they&apos;re doing with current matches and
@@ -292,7 +336,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Venus design system color palette"
                 width={1200}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <br />
               Since our app is called Venus, a classic greek mythological figure,
@@ -306,7 +350,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Venus design system font"
                 width={1200}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
             </p>
             <br />
@@ -329,7 +373,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
               alt="Venus design system components"
               width={1200}
               quality={100}
-              class="rounded-2xl object-cover"
+              class="rounded-[1.75rem] object-cover"
             />
             <br />
             <div>
@@ -363,7 +407,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Hi-fi prototype of the onboarding screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>
                 Profile setup and app mechanics. (We found issues here later in
@@ -378,7 +422,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Hi-fi prototype of the match screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>
                 Match/Unmatch flow with reasons, options to pick why they would
@@ -393,7 +437,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Hi-fi prototype of the Chat screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>
                 Chat screen, plus an icebreaker game so users can learn about a
@@ -408,7 +452,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
                 alt="Hi-fi prototype of the Home/Progress screen"
                 width={800}
                 quality={100}
-                class="rounded-2xl object-cover"
+                class="rounded-[1.75rem] object-cover"
               />
               <p>Current matches and how they&apos;re doing in the app.</p>
             </li>
@@ -469,7 +513,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
             alt="Usability testing feedback and affinity diagram"
             width={1500}
             quality={100}
-            class="rounded-2xl object-cover"
+            class="rounded-[1.75rem] object-cover"
           />
           <br />
           <p class="font-bold">Key findings (what we acted on):</p>
@@ -477,23 +521,52 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           <div class="flex flex-col gap-6">
             <Card cardType="secondary" className="flex flex-col gap-2">
               <h4 class="font-bold text-lg">Most liked ✅: Icebreaker</h4>
-              <p>Participants liked the icebreaker. It eased first-contact tension:</p>
+              <p>
+                Participants liked the icebreaker. It eased first-contact
+                tension:
+              </p>
               <ul class="flex flex-col gap-4 items-center">
-                <li><em>&quot;This is a fun way to interact from the beginning.&quot;</em></li>
-                <li><em>&quot;Makes me feel more comfortable and will help spark conversation.&quot;</em></li>
+                <li>
+                  <em
+                    >&quot;This is a fun way to interact from the
+                    beginning.&quot;</em
+                  >
+                </li>
+                <li>
+                  <em
+                    >&quot;Makes me feel more comfortable and will help spark
+                    conversation.&quot;</em
+                  >
+                </li>
               </ul>
             </Card>
             <Card cardType="secondary" className="flex flex-col gap-2">
               <h4 class="font-bold text-lg">Least liked 🙅‍♂️: Milestones</h4>
-              <p>Milestones caused the most trouble. We knew we had to rethink this:</p>
+              <p>
+                Milestones caused the most trouble. We knew we had to rethink
+                this:
+              </p>
               <ul class="flex flex-col gap-4 items-center">
-                <li><em>&quot;Don&apos;t really understand the point.&quot;</em></li>
-                <li><em>&quot;Don&apos;t see the point if the app is meant to make meaningful connections.&quot;</em></li>
+                <li>
+                  <em>&quot;Don&apos;t really understand the point.&quot;</em>
+                </li>
+                <li>
+                  <em
+                    >&quot;Don&apos;t see the point if the app is meant to make
+                    meaningful connections.&quot;</em
+                  >
+                </li>
               </ul>
             </Card>
             <Card cardType="secondary" className="flex flex-col gap-2">
-              <h4 class="font-bold text-lg">Main confusion 😵‍💫: Onboarding and unmatching</h4>
-              <p>Just like what we mentioned above, a major problem we found is that many users found the onboarding tutorials overwhelming and had trouble unmatching:</p>
+              <h4 class="font-bold text-lg">
+                Main confusion 😵‍💫: Onboarding and unmatching
+              </h4>
+              <p>
+                Just like what we mentioned above, a major problem we found is
+                that many users found the onboarding tutorials overwhelming and
+                had trouble unmatching:
+              </p>
               <ul class="flex flex-col gap-4 items-center">
                 <li>
                   <em
@@ -560,7 +633,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           alt="Fix on the onboarding screen"
           width={1500}
           quality={100}
-          class="rounded-2xl object-cover"
+          class="rounded-[1.75rem] object-cover"
         />
         <br />
         <div class="flex flex-col gap-6 pb-4">
@@ -586,7 +659,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           alt="Fix on the homepage screen"
           width={1500}
           quality={100}
-          class="rounded-2xl object-cover"
+          class="rounded-[1.75rem] object-cover"
         />
         <br />
         <div class="flex flex-col gap-6 pb-4">
@@ -609,7 +682,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           alt="Fix on the trends screen"
           width={1500}
           quality={100}
-          class="rounded-2xl object-cover"
+          class="rounded-[1.75rem] object-cover"
         />
         <br />
         <div class="flex flex-col gap-6 pb-4">
@@ -666,7 +739,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           alt="Fix on the icebreaker screen"
           width={1500}
           quality={100}
-          class="rounded-2xl object-cover"
+          class="rounded-[1.75rem] object-cover"
         />
         <br />
         <p>Transition between icebreaker screens:</p>
@@ -699,7 +772,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     </div>
     <iframe
       aria-label="Venus final prototype"
-      class="rounded-2xl w-full"
+      class="rounded-[1.75rem] w-full"
       style="border: 3px solid rgba(var(--floating-color), 1); box-shadow: 0 1px 4px rgba(0,0,0,0.15);"
       width="800"
       height="450"

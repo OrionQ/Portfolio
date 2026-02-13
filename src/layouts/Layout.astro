@@ -6,15 +6,16 @@ import "../themes/themes.css"; // adjust path as needed
 
 const {
   title,
-  description = "Orion's Portfolio - Software Engineer, UX Designer, Photographer",
+  description = "Orion's Portfolio - Software Engineer, UX Designer",
   image = "/profile-pic.jpeg",
 } = Astro.props;
 
 const siteUrl =
   Astro.site?.toString().replace(/\/$/, "") ?? "https://orionq.github.io";
+const baseUrl = `${siteUrl}${import.meta.env.BASE_URL || "/"}`.replace(/\/$/, "");
 const imageUrl = image.startsWith("http")
   ? image
-  : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+  : `${baseUrl}${image.startsWith("/") ? "" : "/"}${image}?v=2`;
 ---
 
 <!doctype html>
@@ -26,6 +27,7 @@ const imageUrl = image.startsWith("http")
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={Astro.url.href} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

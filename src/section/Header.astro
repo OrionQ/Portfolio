@@ -48,7 +48,7 @@ const isHomePage = Astro.url.pathname === "/";
 
     <!-- Desktop Navigation -->
     <div class="flex gap-4 flex-row items-center">
-      <div class="gap-8 items-center hidden sm:flex sm:flex-row">
+      <div class="gap-8 items-center hidden md:flex md:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
           className="scroll-link">Projects</Link
@@ -57,7 +57,7 @@ const isHomePage = Astro.url.pathname === "/";
         <Link href="/about">About Me</Link>
         <Link href="/Xiaolei Qin's Resume.pdf" newTab>Résumé</Link>
       </div><!-- Mobile Menu Button -->
-      <details class="sm:hidden mobile-menu">
+      <details class="md:hidden mobile-menu">
         <summary class="mobile-menu-button">
           <Icon name="bars" size={24} class="menu-icon" />
           <Icon name="xmark" size={24} class="close-icon" />

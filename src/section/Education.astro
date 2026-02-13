@@ -9,7 +9,7 @@ import Tag from "../components/tag/Tag.astro";
   id="education"
 >
   <div
-    class="flex flex-col items-center lg:items-end lg:basis-1/5 justify-start gap-2"
+    class="flex flex-col items-center lg:items-end lg:basis-1/5 justify-start gap-2 w-full"
   >
     <h2 class="text-2xl">Education</h2>
     <p
@@ -25,25 +25,30 @@ import Tag from "../components/tag/Tag.astro";
     </p>
   </div>
   <div
-    class="education flex flex-col gap-4 justify-center items-center w-full flex-1 min-w-0"
+    class="education flex flex-col gap-4 justify-center items-center w-full flex-1 min-w-[20rem]"
   >
     <Card cardType="secondary" className="flex gap-4 w-full justify-between">
-      <div class="flex-col">
-        <h3 class="text-xl">University of Texas at Austin</h3>
-        <Link href="https://www.ischool.utexas.edu/" newTab underline
-          >M.S. Information Studies</Link
-        >
-        <span>Human-Computer Interaction & UX Design</span>
-      </div>
-      <div class="flex items-center">
-        <Tag className="text-xs">Current</Tag>
+      <div class="flex flex-row gap-8">
+        <div class="flex-col">
+          <h3 class="text-xl">University of Texas at Austin</h3>
+          <Link href="https://www.ischool.utexas.edu/" newTab underline
+            >M.S. Information Studies</Link
+          >
+          <span>Human-Computer Interaction & UX Design</span>
+        </div>
+        <div class="flex items-center">
+          <Tag className="text-xs">Current</Tag>
+        </div>
       </div>
       <p class="flex flex-col justify-center text-end">
         <span>Aug 2024 - May 2026 (expected)</span>
       </p>
     </Card>
-    <Card cardType="secondary" className="flex gap-4 w-full justify-between">
-      <div class="flex-col">
+    <Card
+      cardType="secondary"
+      className="flex flex-wrap gap-4 w-full justify-between"
+    >
+      <div class="flex-col min-w-0 flex-1 basis-40">
         <h3 class="text-xl">North Carolina State University</h3>
         <Link href="https://www.csc.ncsu.edu/" newTab underline
           >B.S. Computer Science</Link

@@ -10,7 +10,7 @@ const { className, title, cardType = 'primary', style } = Astro.props;
 </div>
 <style>
   .card {
-    border-radius: 1.75rem;
+    border-radius: var(--border-radius);
     box-shadow: 0 1px 4px rgba(var(--shadow-color));
     padding: 1.5rem;
   }

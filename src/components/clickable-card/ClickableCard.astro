@@ -49,7 +49,7 @@ const {
 <style>
   .clickable-card {
     background-color: transparent;
-    border-radius: 1.75rem;
+    border-radius: calc(var(--border-radius) + 1.25rem - 2px);
     border: 2px solid transparent;
     display: flex;
     flex-direction: column;
@@ -82,7 +82,7 @@ const {
 
   .clickable-card-image-wrapper {
     aspect-ratio: 16 / 10;
-    border-radius: 1.75rem;
+    border-radius: var(--border-radius);
     flex-shrink: 0;
     inline-size: 100%;
     overflow: hidden;

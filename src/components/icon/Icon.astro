@@ -1,0 +1,39 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components";
+import { FAIcon, FA_ICON_NAMES } from "./FAIcon";
+
+interface Props {
+  name: string;
+  size?: number | string;
+  class?: string;
+  color?: string;
+  slot?: string;
+  id?: string;
+  "aria-hidden"?: boolean | "true" | "false";
+}
+
+const { name, size, class: className, color, id, "aria-hidden": ariaHidden, ...rest } = Astro.props;
+const useFA = FA_ICON_NAMES.has(name);
+---
+
+{useFA ? (
+  <FAIcon
+    client:load
+    name={name}
+    size={size ?? "1em"}
+    className={className}
+    color={color}
+    aria-hidden={ariaHidden}
+    id={id}
+  />
+) : (
+  <AstroIcon
+    name={name as never}
+    size={size}
+    class={className}
+    style={color ? { color } : undefined}
+    aria-hidden={ariaHidden}
+    id={id}
+    {...rest}
+  />
+)}

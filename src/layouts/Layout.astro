@@ -42,6 +42,26 @@ const imageUrl = image.startsWith("http")
       rel="stylesheet"
     />
     <title>{title}</title>
+    <script is:inline>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem("colorTheme");
+          if (!savedTheme) {
+            var themes = ["blue", "pink", "green", "brown", "mono"];
+            savedTheme = themes[Math.floor(Math.random() * themes.length)];
+            localStorage.setItem("colorTheme", savedTheme);
+          }
+          var savedMode = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+          document.documentElement.setAttribute("data-theme", savedTheme);
+
+          var isDark = savedMode === "dark" ||
+            (savedMode !== "light" && prefersDark);
+          document.documentElement.classList.toggle("dark", isDark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div class="flex flex-col items-center pb-16">
@@ -104,37 +124,8 @@ const imageUrl = image.startsWith("http")
 </html>
 
 <style is:global>
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-
   html {
     scroll-behavior: smooth;
-  }
-
-  :root {
-    /* Light Mode */
-    --background: 255, 255, 255; /* #ffffff */
-    --foreground: 0, 49, 73; /* #003149 */
-    --primary-color: 0, 125, 179; /* #007db3 */
-    --secondary-color: 0, 90, 132; /* #005a84 */
-    --floating-color: 237, 248, 252; /* #edf8fc */
-    --ambience-color: 181, 223, 241; /* #b5dff1 */
-    --tint-color: 0, 110, 158; /* #006e9e */
-    --shadow-color: 0, 0, 0, 0.15;
-  }
-
-  :root.dark {
-    /* Dark Mode */
-    --background: 39, 39, 39; /* #272727 */
-    --foreground: 229, 245, 251; /* #e5f5fb - light, readable text */
-    --primary-color: 102, 204, 238; /* #66ccee - brighter primary */
-    --secondary-color:
-      153, 218, 243; /* #99daf3 - lighter secondary for better contrast */
-    --floating-color: 55, 80, 95; /* #37505f */
-    --ambience-color: 0, 100, 150; /* #006496 - brighter ambient */
-    --tint-color: 102, 204, 238; /* #66ccee */
-    --shadow-color: 0, 0, 0, 0.5;
   }
 
   body {
@@ -142,11 +133,5 @@ const imageUrl = image.startsWith("http")
     background: rgba(var(--background), 1);
     font-family: "Gabarito", Arial, Helvetica, sans-serif;
     font-size: 1rem;
-  }
-
-  @layer utilities {
-    .text-balance {
-      text-wrap: balance;
-    }
   }
 </style>

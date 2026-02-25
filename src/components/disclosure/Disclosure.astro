@@ -8,7 +8,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
 <details class="disclosure group" open={open}>
   <summary class="summary">
     <div
-      class="summary-inner flex flex-grow justify-between items-center gap-4 min-w-0"
+      class="summary-inner flex grow justify-between items-center gap-4 min-w-0"
     >
       <div class="flex gap-4 items-center">
         <div class="flex flex-col">
@@ -19,7 +19,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
             )
           }
         </div>
-        {tag && <Tag className="text-xs flex-shrink-0">{tag}</Tag>}
+        {tag && <Tag className="text-xs shrink-0">{tag}</Tag>}
       </div>
       {date && <p class="flex-wrap text-end font-light">{date}</p>}
     </div>

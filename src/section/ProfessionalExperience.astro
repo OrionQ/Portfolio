@@ -7,10 +7,12 @@ import Link from "../components/link/Link.astro";
   class="flex flex-row flex-wrap lg:flex-nowrap gap-12 w-full pt-12 pb-8"
   id="experience"
 >
-<div
+  <div
     class="flex flex-col items-center lg:items-end lg:basis-1/5 justify-start gap-2 w-full lg:w-auto"
   >
-    <h2 class="text-2xl text-center lg:text-end w-full lg:w-auto">Professional Experience</h2>
+    <h2 class="text-2xl text-center lg:text-end w-full lg:w-auto">
+      Professional Experience
+    </h2>
     <p
       style={{
         fontWeight: "500",
@@ -23,9 +25,7 @@ import Link from "../components/link/Link.astro";
       Both creative and technical.
     </p>
   </div>
-  <div
-    class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch"
-  >
+  <div class="flex flex-col gap-4 justify-between w-full flex-1 items-stretch">
     <div
       class="experience flex flex-col gap-4 justify-center items-center w-full"
     >
@@ -71,8 +71,7 @@ import Link from "../components/link/Link.astro";
               href="https://design.visa.com/"
               newTab
               underline
-              inline
-              >Visa Design System React library</Link
+              inline>Visa Design System React library</Link
             >
             , enhancing collaboration between designers and engineers to deliver seamless
             user experiences.
@@ -94,6 +93,11 @@ import Link from "../components/link/Link.astro";
           <li class="pl-4">
             Facilitated cross-functional communication and problem-solving,
             leading to a 30% decrease in bug resolution time in Visa VaultKey+.
+          </li>
+          <li class="pl-4">
+            Wrote unit and integration tests for design system components using
+            Jest and React Testing Library, ensuring reliability and consistency
+            across React and Angular implementations.
           </li>
           <li class="pl-4">
             Provided critical support for North American and Asia-Pacific
@@ -126,5 +130,4 @@ import Link from "../components/link/Link.astro";
       </Disclosure>
     </div>
   </div>
-  
 </div>

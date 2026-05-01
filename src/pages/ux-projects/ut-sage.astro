@@ -26,134 +26,301 @@ import sageOriginalIssueList from "../../images/Sage_Original_issue_list.png";
 import sageOriginalToggle from "../../images/Sage_Toggle_issue.png";
 import sageToggleIteration from "../../images/Sage_Toggle_redesign.png";
 import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
+import facultyEvalByField from "../../images/faculty-eval-by-field.png";
+import facultyEvalChatStep from "../../images/faculty-eval-chat-step.png";
+import facultyEvalConfigureStep from "../../images/faculty-eval-configure-step.png";
+import facultyEvalCustomize from "../../images/faculty-eval-customize.png";
+import facultyEvalFileManagement from "../../images/faculty-eval-file-management.png";
+import facultyEvalRecommendations from "../../images/faculty-eval-recommendations.png";
+import facultyEvalThumbnail from "../../images/faculty-eval-thumbnail.png";
+import facultyEvalTutorialModal from "../../images/faculty-eval-tutorial-modal.png";
+import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png";
 ---
 
-<Layout title="UT Sage - UX Project | Xiaolei Qin's Portfolio">
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const tabOrder = ["redesignCase", "capstoneCase"];
+
+      const tabButtonId = {
+        redesignCase: "tab-redesign-case",
+        capstoneCase: "tab-capstone-case",
+      };
+
+      const container = document.querySelector(".case-tabs-container");
+      const indicator = document.getElementById("case-tab-indicator");
+
+      const updateIndicator = (instant = false) => {
+        const selected = document.querySelector(
+          '.case-tab-button[aria-selected="true"]',
+        );
+        if (
+          !indicator ||
+          !container ||
+          !selected ||
+          !(selected instanceof HTMLElement)
+        )
+          return;
+        if (instant) {
+          indicator.classList.add("case-tab-indicator--snap");
+        }
+        indicator.style.left = `${selected.offsetLeft}px`;
+        indicator.style.width = `${selected.offsetWidth}px`;
+        if (instant) {
+          void indicator.offsetWidth;
+          indicator.classList.remove("case-tab-indicator--snap");
+        }
+      };
+
+      const focusTabButton = (caseKey) => {
+        document.getElementById(tabButtonId[caseKey])?.focus();
+      };
+
+      const showCase = (caseKey) => {
+        for (const key of tabOrder) {
+          const panel = document.getElementById(key);
+          if (!panel) continue;
+          if (key === caseKey) {
+            panel.removeAttribute("hidden");
+          } else {
+            panel.setAttribute("hidden", "");
+          }
+        }
+
+        document.querySelectorAll(".case-tab-button").forEach((button) => {
+          const sel = button.getAttribute("data-case") === caseKey;
+          button.setAttribute("aria-selected", sel ? "true" : "false");
+          if (button instanceof HTMLElement) button.tabIndex = sel ? 0 : -1;
+        });
+
+        focusTabButton(caseKey);
+        requestAnimationFrame(() => updateIndicator());
+      };
+
+      container?.addEventListener("keydown", (e) => {
+        if (!(e instanceof KeyboardEvent)) return;
+        if (!(e.target instanceof HTMLElement)) return;
+        if (!e.target.classList.contains("case-tab-button")) return;
+
+        const ix = tabOrder.indexOf(e.target.dataset.case ?? "");
+        if (ix === -1) return;
+
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+          e.preventDefault();
+          showCase(tabOrder[(ix + 1) % tabOrder.length]);
+          return;
+        }
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          showCase(tabOrder[(ix - 1 + tabOrder.length) % tabOrder.length]);
+          return;
+        }
+        if (e.key === "Home") {
+          e.preventDefault();
+          showCase("redesignCase");
+          return;
+        }
+        if (e.key === "End") {
+          e.preventDefault();
+          showCase("capstoneCase");
+        }
+      });
+
+      updateIndicator(true);
+      requestAnimationFrame(() => updateIndicator(true));
+      window.addEventListener("resize", () => updateIndicator());
+
+      document
+        .getElementById("tab-redesign-case")
+        ?.addEventListener("click", () => {
+          showCase("redesignCase");
+        });
+      document
+        .getElementById("tab-capstone-case")
+        ?.addEventListener("click", () => {
+          showCase("capstoneCase");
+        });
+    });
+  }
+</script>
+
+<Layout title="UT Sage: Redesign + Tutor Evaluation | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <Link href="/" underline
       ><Icon name="arrow-left-long" />Go back to the home page</Link
     >
 
-    <h1 class="project-title">UT Sage</h1>
+    <h1 class="project-title">UT Sage: Redesign + Tutor Evaluation</h1>
     <p class="project-introduction">
-      Improve the user experience and user interface of the AI tutor platform
-      for students and professors using a design system.
+      End-to-end product design for UT Austin's AI tutor platform, from design
+      system redesign (shipped in production!) to an AI-powered faculty
+      evaluation workflow.
     </p>
 
     <div class="flex flex-row flex-wrap gap-2 pb-12">
       <Tag>Professional experience</Tag>
+      <Tag>Capstone project</Tag>
       <Tag>AI chatbot</Tag>
       <Tag>Design system</Tag>
-      <Tag>UX design</Tag>
-      <Tag>Prototyping</Tag>
+      <Tag>AI evaluation</Tag>
+      <Tag>UX research</Tag>
+      <Tag>End-to-end product design</Tag>
     </div>
 
-    <h2 class="project-subtitle">Project Overview</h2>
-    <div class="project-overview w-full">
-      UT Sage is the University of Texas at Austin's new campus-wide AI tutor
-      platform. After the beta launch, I took over the design process to fully
-      redesign the interface, focusing on building a unified and user-friendly
-      experience through the development of a comprehensive design system. The
-      result is a more consistent, accessible, and visually appealing platform
-      for both students and faculty.
-      <Link
-        className="inline-flex"
-        aria-label="UT Sage website (opens a new window)"
-        href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
-        newTab
-        underline>Learn more about UT Sage</Link
-      >
-      <Divider dividerType="tertiary" />
+    <div
+      class="case-tabs-container flex flex-row flex-nowrap mt-2"
+      role="tablist"
+      aria-label="Choose case study"
+    >
       <div
-        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+        class="case-tab-indicator"
+        aria-hidden="true"
+        id="case-tab-indicator"
       >
-        <div class="project-toc flex-1 min-w-0">
-          <strong>Table of Contents</strong>
-          <ul class="project-toc-list">
-            <li>
-              <Link href="#where-do-i-start" className="scroll-link" underline
-                >1. Where do I start?</Link
-              >
-            </li>
-            <li>
-              <Link
-                href="#get-feedback-from-the-users-and-stakeholders"
-                className="scroll-link"
-                underline>2. Get feedback from the users and stakeholders</Link
-              >
-            </li>
-            <li>
-              <Link
-                href="#build-the-new-design-system"
-                className="scroll-link"
-                underline>3. Build the new design system</Link
-              >
-            </li>
-            <li>
-              <Link href="#recreate-the-pages" className="scroll-link" underline
-                >4. Recreate the pages</Link
-              >
-            </li>
-            <li>
-              <Link
-                href="#validation-and-results"
-                className="scroll-link"
-                underline>5. Validation and results</Link
-              >
-            </li>
-            <li>
-              <Link href="#outcomes" className="scroll-link" underline
-                >6. Outcomes</Link
-              >
-            </li>
-            <li>
-              <Link
-                href="#reflection-and-next-steps"
-                className="scroll-link"
-                underline>7. Reflection and next steps</Link
-              >
-            </li>
-          </ul>
-        </div>
+      </div>
+      <button
+        type="button"
+        aria-controls="redesignCase"
+        aria-selected="true"
+        class="case-tab-button min-w-0"
+        data-case="redesignCase"
+        id="tab-redesign-case"
+        role="tab"
+        tabindex="0"
+      >
+        <span class="case-tab-label">Case Study 1: Product Redesign</span>
+      </button>
+      <button
+        type="button"
+        aria-controls="capstoneCase"
+        aria-selected="false"
+        class="case-tab-button min-w-0"
+        data-case="capstoneCase"
+        id="tab-capstone-case"
+        role="tab"
+        tabindex="-1"
+      >
+        <span class="case-tab-label"
+          >Case Study 2: Faculty Evaluation Workflow</span
+        >
+      </button>
+    </div>
 
-        <div class="project-meta flex-1 min-w-0">
-          <div class="project-description flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              <strong>My Role:</strong>
-              <div class="flex flex-row flex-wrap gap-2">
-                <Tag>Product designer</Tag>
-                <Tag>Design system designer</Tag>
-                <Tag>UI/UX designer</Tag>
-                <Tag>Interaction designer</Tag>
+    <div
+      id="redesignCase"
+      class="case-category"
+      role="tabpanel"
+      aria-labelledby="tab-redesign-case"
+    >
+      <h2 class="project-subtitle">Project Overview: Product Redesign</h2>
+      <div class="project-overview w-full">
+        UT Sage is the University of Texas at Austin's campus-wide AI tutor
+        platform. After the beta launch, I took over the design process to fully
+        redesign the interface, focusing on building a unified and user-friendly
+        experience through a comprehensive design system.
+        <Link
+          className="inline-flex"
+          aria-label="UT Sage website (opens a new window)"
+          href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+          newTab
+          underline>Learn more about UT Sage</Link
+        >
+        <Divider dividerType="tertiary" />
+        <div
+          class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+        >
+          <div class="project-toc flex-1 min-w-0">
+            <strong>Table of Contents</strong>
+            <ul class="project-toc-list">
+              <li>
+                <Link href="#where-do-i-start" className="scroll-link" underline
+                  >1. Where do I start?</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#get-feedback-from-the-users-and-stakeholders"
+                  className="scroll-link"
+                  underline
+                  >2. Get feedback from the users and stakeholders</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#build-the-new-design-system"
+                  className="scroll-link"
+                  underline>3. Build the new design system</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#recreate-the-pages"
+                  className="scroll-link"
+                  underline>4. Recreate the pages</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#validation-and-results"
+                  className="scroll-link"
+                  underline>5. Validation and results</Link
+                >
+              </li>
+              <li>
+                <Link href="#outcomes" className="scroll-link" underline
+                  >6. Outcomes</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#reflection-and-next-steps"
+                  className="scroll-link"
+                  underline>7. Reflection and next steps</Link
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="project-meta flex-1 min-w-0">
+            <div class="project-description flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <strong>My Role:</strong>
+                <div class="flex flex-row flex-wrap gap-2">
+                  <Tag>Product designer</Tag>
+                  <Tag>Design system designer</Tag>
+                  <Tag>UI/UX designer</Tag>
+                  <Tag>Interaction designer</Tag>
+                </div>
               </div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <strong>Tools Used:</strong>
-              <div class="flex flex-row flex-wrap gap-2">
-                <Chip title="Figma" level="professional">
-                  <Icon
-                    slot="icon"
-                    name="figma-brands-solid-full"
-                    size={18}
-                    aria-hidden
-                  />
-                </Chip>
-                <Chip title="GitHub" level="professional">
-                  <Icon slot="icon" name="github" size={18} aria-hidden />
-                </Chip>
+              <div class="flex flex-col gap-2">
+                <strong>Tools Used:</strong>
+                <div class="flex flex-row flex-wrap gap-2">
+                  <Chip title="Figma" level="professional">
+                    <Icon
+                      slot="icon"
+                      name="figma-brands-solid-full"
+                      size={18}
+                      aria-hidden
+                    />
+                  </Chip>
+                  <Chip title="GitHub" level="professional">
+                    <Icon slot="icon" name="github" size={18} aria-hidden />
+                  </Chip>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-        <Image
-          src={sageConfigurePage}
-          alt="UT Sage product sample page"
-          width={2000}
-          class="rounded-xl object-cover"
-        />
+        <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+          <Image
+            src={sageConfigurePage}
+            alt="UT Sage product sample page"
+            width={2000}
+            quality={100}
+            class="rounded-xl object-cover"
+          />
+        </div>
       </div>
 
       <h2 class="project-subtitle">The Problem</h2>
@@ -206,8 +373,9 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageOriginalDesign1}
                   alt="Original UT Sage design - issue 1"
-                  width={800}
-                  height={600}
+                  width={2000}
+                  height={1500}
+                  quality={100}
                   class="rounded-xl w-full h-auto object-contain max-w-full"
                 />
               </div>
@@ -215,8 +383,9 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageOriginalDesign2}
                   alt="Original UT Sage design - issue 2"
-                  width={800}
-                  height={600}
+                  width={2000}
+                  height={1500}
+                  quality={100}
                   class="rounded-xl w-full h-auto object-contain max-w-full"
                 />
               </div>
@@ -224,7 +393,8 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageOriginalIssueList}
                   alt="Original UT Sage design - issue list"
-                  width={800}
+                  width={2000}
+                  quality={100}
                   class="rounded-xl w-full h-auto object-contain max-w-full"
                 />
               </div>
@@ -254,12 +424,14 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 src={sageLofi}
                 alt="UT Sage lo-fi design"
                 width={2000}
+                quality={100}
                 class="rounded-xl object-cover"
               />
               <Image
                 src={sageOriginalToggle}
                 alt="UT Sage original toggle design"
                 width={2000}
+                quality={100}
                 class="rounded-xl object-cover"
               />
             </div>
@@ -285,18 +457,21 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
               src={sageFoundations}
               alt="UT Sage foundations"
               width={2000}
+              quality={100}
               class="rounded-xl object-cover"
             />
             <Image
               src={sageButtons}
               alt="UT Sage buttons"
               width={2000}
+              quality={100}
               class="rounded-xl object-cover"
             />
             <Image
               src={sageExampleComponents}
               alt="UT Sage example components"
               width={2000}
+              quality={100}
               class="rounded-xl object-cover"
             />
           </div>
@@ -325,6 +500,7 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                   src={sageToggleIteration}
                   alt="UT Sage toggle iteration"
                   width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -333,7 +509,8 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageEditPage}
                   alt="UT Sage edit page"
-                  width={3000}
+                  width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -342,7 +519,8 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageHomepageTransition}
                   alt="UT Sage homepage transition"
-                  width={3000}
+                  width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -351,7 +529,8 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                 <Image
                   src={sageHelpCenterPage}
                   alt="UT Sage help center page"
-                  width={3000}
+                  width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -361,6 +540,7 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                   src={sageSharingFlow}
                   alt="UT Sage sharing flow"
                   width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
                 <p>
@@ -393,6 +573,7 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                   src={sageHomepageProduction}
                   alt="UT Sage homepage production"
                   width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -402,6 +583,7 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                   src={sageEditPageProduction}
                   alt="UT Sage edit page production"
                   width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -411,6 +593,7 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
                   src={sageChatPageProduction}
                   alt="UT Sage chat page production"
                   width={2000}
+                  quality={100}
                   class="rounded-xl object-cover"
                 />
               </li>
@@ -502,17 +685,572 @@ import sageSharingFlow from "../../images/Sage_Updated_sharing_flow.png";
             </ul>
           </div>
         </div>
+      </div>
+    </div>
 
-        <br />
-        <div class="flex flex-row gap-8 justify-between w-full">
-          <Link href="/" underline
-            ><Icon name="arrow-left-long" />Go back home</Link
+    <div
+      id="capstoneCase"
+      class="case-category"
+      role="tabpanel"
+      aria-labelledby="tab-capstone-case"
+      hidden
+    >
+      <h2 class="project-subtitle">
+        Project Overview: Faculty Evaluation Workflow
+      </h2>
+      <div class="project-overview w-full">
+        <p class="project-description">
+          UT Sage lowers the barrier for faculty to configure AI tutors, but the
+          product still lacked a reliable way for instructors to test quality,
+          misconceptions, and pedagogy before exposing students to a tutor.
+          Plus, the new faculty still lacks an onboarding process to learn and
+          use the evaluation tool.
+        </p>
+        <Divider dividerType="tertiary" />
+        <div
+          class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
+        >
+          <div class="project-toc flex-1 min-w-0">
+            <strong>Table of Contents</strong>
+            <ul class="project-toc-list">
+              <li>
+                <Link href="#capstone-goal" className="scroll-link" underline
+                  >1. Goal</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#capstone-research"
+                  className="scroll-link"
+                  underline>2. Research and evaluation framework</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#capstone-prototyping"
+                  className="scroll-link"
+                  underline>3. Prototyping (tutorial + dashboard)</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#capstone-interviews"
+                  className="scroll-link"
+                  underline>4. Faculty research — usability findings</Link
+                >
+              </li>
+              <li>
+                <Link
+                  href="#capstone-iteration"
+                  className="scroll-link"
+                  underline>5. Iteration — reduce information overload</Link
+                >
+              </li>
+              <li>
+                <Link href="#capstone-future" className="scroll-link" underline
+                  >6. Future directions</Link
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="project-meta flex-1 min-w-0">
+            <div class="project-description flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <strong>My Role:</strong>
+                <div class="flex flex-row flex-wrap gap-2">
+                  <Tag>UX designer</Tag>
+                  <Tag>UX Researcher</Tag>
+                  <Tag>Interaction designer</Tag>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <strong>Tools Used:</strong>
+                <div class="flex flex-row flex-wrap gap-2">
+                  <Chip title="Figma" level="professional">
+                    <Icon
+                      slot="icon"
+                      name="figma-brands-solid-full"
+                      size={18}
+                      aria-hidden
+                    />
+                  </Chip>
+                  <Chip title="Claude" level="professional">
+                    <Icon
+                      slot="icon"
+                      name="claude-brands-solid-full"
+                      size={18}
+                      aria-hidden
+                    />
+                  </Chip>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <figure class="capstone-hero-thumb">
+          <Image
+            format="png"
+            src={facultyEvalRecommendations}
+            alt="Tutor evaluation dashboard — key findings, overview, and Suggestions & Recommendations"
+            width={2000}
+            quality={100}
+            class="rounded-xl w-full h-auto object-contain"
+          />
+        </figure>
+      </div>
+
+      <div class="process-section">
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full"
+            id="capstone-goal"
           >
-          <Link href="/ux-projects/venus" underline
-            >Next case study: Venus<Icon name="arrow-right-long" /></Link
+            <h3>1. Goal</h3>
+            <br />
+            <p>
+              <strong>Problem:</strong> faculty could scaffold and publish tutors,
+              but lacked a repeatable way to simulate learners, stress-test tutoring
+              behavior, and reconcile configuration with pedagogical outcomes.
+            </p>
+            <br />
+            <Card title="How might we?" cardType="secondary">
+              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                Help faculty confidently assess and refine tutor configurations
+                before deployments, surfacing observable evidence, explainable
+                ratings, and updates they can approve?
+              </p>
+            </Card>
+            <br />
+            <Card title="Design goal" cardType="secondary">
+              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                Pair approachable onboarding that builds mental models of each
+                configuration fields with an evaluation dashboard that routes
+                faculty from high-level warnings to granular checks,
+                suggestions, examples, and simulated dialogue.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="capstone-research"
           >
+            <h3>2. Research and evaluation framework</h3>
+            <br />
+            <p>
+              I paired secondary research with history user interview data from
+              existing UT Sage papers to uncover configuration gaps, then
+              translated benchmarks from AI evaluation literature into an
+              instructor-readable scorecard anchored in classroom teaching
+              moves.
+            </p>
+            <br />
+            <Card
+              title="8 evaluation dimensions (response quality)"
+              cardType="secondary"
+            >
+              <ul
+                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
+              >
+                <li>
+                  D1 Instruction-following — Honors faculty special
+                  instructions.
+                </li>
+                <li>
+                  D2 Truthfulness — Keeps explanations accurate; avoids
+                  hallucinated content.
+                </li>
+                <li>
+                  D3 Style / tone — Language is warm yet academically rigorous.
+                </li>
+                <li>
+                  D4 Visual reasoning — Interprets and reasons about diagrams or
+                  graphs.
+                </li>
+                <li>
+                  D5 Visual perception — Reads visual inputs shared by learners.
+                </li>
+                <li>D6 Calibration — Pacing fits the learner profile.</li>
+                <li>D7 Conciseness — Keeps replies scoped appropriately.</li>
+                <li>
+                  D8 Emotional responsiveness — Addresses frustration
+                  constructively.
+                </li>
+              </ul>
+            </Card>
+            <br />
+            <Card
+              title="7 tutoring skills (instructional behaviors)"
+              cardType="secondary"
+            >
+              <ul
+                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
+              >
+                <li>T1 Identifies misconceptions explicitly.</li>
+                <li>
+                  T2 Guides with questions instead of giving answers outright.
+                </li>
+                <li>T3 Uses examples and analogies to demystify ideas.</li>
+                <li>T4 Offers alternate solution paths.</li>
+                <li>T5 Scaffolds step-by-step when problems are dense.</li>
+                <li>
+                  T6 Recalls syllabus or uploaded resources when relevant.
+                </li>
+                <li>
+                  T7 Judges correct/incorrect steps in learner work accurately.
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full gap-4"
+            id="capstone-prototyping"
+          >
+            <h3>3. Prototyping</h3>
+            <p>
+              I iterated in Figma on two intertwined surfaces: contextual
+              tutorial overlays explaining how Create, Configure, and Train map
+              tutor memory, plus a consolidated evaluation concept that surfaced
+              key findings before detail tabs.
+            </p>
+            <div
+              class="capstone-proto-grid grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              <figure class="capstone-figure">
+                <figcaption
+                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+                >
+                  Welcome modal — sets expectations and scope guardrails.
+                </figcaption>
+                <Image
+                  format="png"
+                  src={facultyEvalTutorialModal}
+                  alt="Welcome to Create Your UT Sage Tutor modal"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
+                />
+              </figure>
+              <figure class="capstone-figure">
+                <figcaption
+                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+                >
+                  Orientation step — contextualizes Create, Configure, and
+                  Train.
+                </figcaption>
+                <Image
+                  format="png"
+                  src={facultyEvalTutorialStep}
+                  alt="Tutorial explaining Create Configure and Train sections"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
+                />
+              </figure>
+              <figure class="capstone-figure">
+                <figcaption
+                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+                >
+                  Chat scaffolding — alternative to manually type in every
+                  field.
+                </figcaption>
+                <Image
+                  format="png"
+                  src={facultyEvalChatStep}
+                  alt="Tutorial tooltip on tutor creation chat syncing fields"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
+                />
+              </figure>
+              <figure class="capstone-figure">
+                <figcaption
+                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+                >
+                  Configure cue — anchors different fields feeding calibration
+                  logic.
+                </figcaption>
+                <Image
+                  format="png"
+                  src={facultyEvalConfigureStep}
+                  alt="Tutorial tooltip on learner characteristics in Configure tab"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
+                />
+              </figure>
+            </div>
+            <figure class="capstone-hero-thumb mt-2">
+              <figcaption
+                class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+              >
+                Early evaluation dashboard — How AI surfaces cross-field risks
+                to the faculty.
+              </figcaption>
+              <Image
+                format="png"
+                src={facultyEvalThumbnail}
+                alt="Full tutor evaluation concept showing key findings and overview"
+                width={2000}
+                quality={100}
+                class="rounded-xl w-full h-auto object-contain"
+              />
+            </figure>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="capstone-interviews"
+          >
+            <h3>4. Faculty research — usability findings</h3>
+            <br />
+            <Card title="Method" cardType="secondary">
+              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
+                Moderated remote think-aloud (30–45 min) with UT Austin faculty
+                / instructional partners evaluating two Figma prototypes: guided
+                tutorial overlay + tutor evaluation UI.
+              </p>
+            </Card>
+            <br />
+            <Card title="Key findings" cardType="secondary">
+              <ul
+                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
+              >
+                <li>
+                  <strong>Tutorial &amp; language:</strong> The use of language is
+                  confusing and doesn't contribute to the learning process, and multiple
+                  participants mentioned that they would like to see more concrete
+                  examples.
+                </li>
+                <li>
+                  <strong>Cognitive load:</strong> empty states swung straight into
+                  exhaustive detail on the evaluation page, and faculty feels overwhelmed
+                  by the amount of information.
+                </li>
+                <li>
+                  <strong>Fitness of the model:</strong> Faculty would like to see
+                  if there is a way to customize the evaluation prompts to fit their
+                  needs.
+                </li>
+                <li>
+                  <strong>Surfacing severity:</strong> While the color coding is helpful,
+                  some faculty would like to make sure accessibility is considered,
+                  and additional color coding to grab their attention for critical
+                  issues.
+                  <li>
+                    <strong>Evidence &amp; authenticity:</strong> Participants think
+                    that auto-fix and heavy nudging need visible scope/consent boundaries
+                    that protect instructor-authored ideas.
+                  </li>
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div
+            class="process-item-odd flex flex-col justify-center w-full gap-6"
+            id="capstone-iteration"
+          >
+            <h3>5. Iteration — reduce information overload</h3>
+            <p>
+              Research converged on the need to stage complexity: summarize
+              risk, funnel faculty into prioritized remediations, only then
+              expose field-by-field adjudication or bespoke simulation prompts.
+            </p>
+            <p>
+              Each tab below isolates workloads to prevent the “everything at
+              once” fatigue cited in moderated sessions while keeping
+              cross-links for deep dives intact.
+            </p>
+
+            <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+              <div
+                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
+              >
+                <strong>Suggestions &amp; Recommendations</strong>
+                <Image
+                  format="png"
+                  src={facultyEvalRecommendations}
+                  alt="Tutor Evaluation tab showing key findings overview and suggestion cards"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain"
+                />
+              </div>
+              <div
+                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
+              >
+                <strong>Evaluation by field</strong>
+                <Image
+                  format="png"
+                  src={facultyEvalByField}
+                  alt="Evaluation by field table"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain"
+                />
+              </div>
+              <div
+                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
+              >
+                <strong>File management</strong>
+                <Image
+                  format="png"
+                  src={facultyEvalFileManagement}
+                  alt="File management tab listing syllabus and documents with statuses"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain"
+                />
+              </div>
+              <div
+                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
+              >
+                <strong
+                  >Customize evaluation - An added feature from feedback</strong
+                >
+                <Image
+                  format="png"
+                  src={facultyEvalCustomize}
+                  alt="Customize evaluation tab for additional benchmark questions"
+                  width={2000}
+                  quality={100}
+                  class="rounded-xl w-full h-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          <div
+            class="process-item-even flex flex-col justify-center w-full"
+            id="capstone-future"
+          >
+            <h3>6. Future directions</h3>
+
+            <ul class="list-disc pl-6 space-y-2 project-description">
+              <li>
+                Ship tutorial copy that aligns highlight, narration, and live UI
+                state causality plus concrete examples to further clarify the
+                configuration fields.
+              </li>
+              <li>
+                Build explainable modality + labeling for simulations (simulated
+                learner transcripts vs telemetry) and rethink Auto-fix so
+                faculty stay authors of misconception content unless they
+                opt-in.
+              </li>
+              <li>
+                Follow-up moderated tests with Humanities + STEM instructors
+                after engineering implementation; extend benchmark suites per
+                discipline as adoption grows.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
+
+    <br />
+    <div class="flex flex-row gap-8 justify-between w-full">
+      <Link href="/" underline><Icon name="arrow-left-long" />Go back home</Link
+      >
+      <Link href="/ux-projects/venus" underline
+        >Next case study: Venus<Icon name="arrow-right-long" /></Link
+      >
+    </div>
   </div>
 </Layout>
+
+<style>
+  .case-category {
+    width: 100%;
+  }
+
+  /* `hidden` on inactive tabpanel uses the HTML attribute only (avoid display toggles vs [hidden]). */
+
+  .case-tabs-container {
+    align-items: stretch;
+    border: 3px solid rgba(var(--floating-color), 1);
+    border-radius: var(--border-radius);
+    display: flex;
+    gap: 8px;
+    inline-size: 100%;
+    justify-content: center;
+    margin-block-end: 1.5rem;
+    padding: 0.25rem;
+    position: relative;
+  }
+
+  .case-tab-button {
+    align-items: center;
+    color: rgba(var(--foreground), 1);
+    cursor: pointer;
+    flex: 1;
+    padding-block: 1rem;
+    padding-inline: 0.75rem;
+    position: relative;
+    text-align: center;
+    transition: color 0.25s;
+    z-index: 1;
+  }
+
+  .case-tab-label {
+    display: block;
+    font-size: 1.125rem;
+  }
+
+  .case-tab-button[aria-selected="true"] {
+    color: rgba(var(--primary-color), 1);
+    font-weight: 600;
+  }
+
+  .case-tab-button:hover,
+  .case-tab-button:focus-visible {
+    color: rgba(var(--primary-color), 1);
+  }
+
+  .case-tab-button:focus-visible {
+    border-radius: 1.4rem;
+    outline: dashed 2px rgba(var(--secondary-color), 1);
+    outline-offset: 2px;
+  }
+
+  /* Mirrors first tab geometry before JS (padding 0.25rem, gap 8px, two flex:1 pills). */
+  .case-tab-indicator {
+    background-color: rgba(var(--background), 1);
+    border: 2px solid rgba(var(--primary-color), 1);
+    border-radius: 1.4rem;
+    inset-block-end: 0.25rem;
+    inset-block-start: 0.25rem;
+    left: 0.25rem;
+    pointer-events: none;
+    position: absolute;
+    transition:
+      left 0.3s ease-out,
+      width 0.3s ease-out;
+    width: calc((100% - 0.5rem - 8px) / 2);
+    z-index: 0;
+  }
+
+  .case-tab-indicator.case-tab-indicator--snap {
+    transition: none;
+  }
+
+  .capstone-hero-thumb,
+  .capstone-figure,
+  .capstone-iteration-figure {
+    margin-inline: auto;
+    max-width: min(1100px, 100%);
+  }
+</style>

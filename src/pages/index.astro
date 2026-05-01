@@ -7,13 +7,14 @@ import Tag from "../components/tag/Tag.astro";
 import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Projects from "../section/Projects.astro";
+import TaglineScratch from "../components/tagline/TaglineScratch";
 ---
 
 <script>
   const arrow = document.getElementById("scroll-arrow");
-  const targetSection = document.querySelector("#projects"); // Adjust based on your section ID
+  const targetSection = document.querySelector("#projects");
 
-  const observer = new IntersectionObserver(
+  const arrowObserver = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
         arrow?.classList.add("opacity-0");
@@ -25,7 +26,7 @@ import Projects from "../section/Projects.astro";
   );
 
   if (targetSection) {
-    observer.observe(targetSection);
+    arrowObserver.observe(targetSection);
   }
 </script>
 
@@ -38,18 +39,8 @@ import Projects from "../section/Projects.astro";
       class="flex flex-col justify-between items-center md:items-start gap-8 scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
     >
       <h1 class="text-4xl py-4 md:py-0 text-center md:text-start">Hey, I'm Orion!</h1>
-      <div class="flex flex-col items-center md:items-start gap-2">
-        <p
-          style={{
-            fontWeight: "500",
-            fontSize: "2.5rem",
-            color: "rgba(var(--primary-color), 1)",
-            lineHeight: "normal",
-          }}
-          class="flex flex-wrap items-center text-center md:text-start"
-        >
-          I am usually stuck between Figma and VS Code.
-        </p>
+      <div class="flex w-full max-w-full flex-col items-center md:items-start gap-2">
+        <TaglineScratch client:load />
         <p class="flex items-center text-center md:text-start justify-center md:justify-start">
           But solving design challenges as a developer is my specialty. 
         </p>

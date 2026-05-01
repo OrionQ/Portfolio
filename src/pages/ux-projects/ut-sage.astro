@@ -40,19 +40,14 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 <script>
   if (typeof window !== "undefined") {
     window.addEventListener("DOMContentLoaded", () => {
-      const tabOrder = ["redesignCase", "capstoneCase"];
+      const container = document.querySelector(".tabs-container");
+      const indicator = document.getElementById("tab-indicator");
 
-      const tabButtonId = {
-        redesignCase: "tab-redesign-case",
-        capstoneCase: "tab-capstone-case",
-      };
-
-      const container = document.querySelector(".case-tabs-container");
-      const indicator = document.getElementById("case-tab-indicator");
+      const TAB_LAYOUT_MIN_PX = 4;
 
       const updateIndicator = (instant = false) => {
-        const selected = document.querySelector(
-          '.case-tab-button[aria-selected="true"]',
+        const selected = container?.querySelector(
+          '.tab-button[aria-selected="true"]',
         );
         if (
           !indicator ||
@@ -61,85 +56,69 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           !(selected instanceof HTMLElement)
         )
           return;
-        if (instant) {
-          indicator.classList.add("case-tab-indicator--snap");
+        const measuredW = selected.offsetWidth;
+        /* offsetWidth may be 0 on DOMContentLoaded; inline width would override CSS fallback. */
+        if (measuredW < TAB_LAYOUT_MIN_PX) {
+          return;
         }
-        indicator.style.left = `${selected.offsetLeft}px`;
-        indicator.style.width = `${selected.offsetWidth}px`;
+        const leftPx = `${selected.offsetLeft}px`;
+        const widthPx = `${measuredW}px`;
+
+        if (instant) {
+          indicator.style.transition = "none";
+        }
+        indicator.style.left = leftPx;
+        indicator.style.width = widthPx;
         if (instant) {
           void indicator.offsetWidth;
-          indicator.classList.remove("case-tab-indicator--snap");
+          indicator.style.removeProperty("transition");
         }
       };
 
-      const focusTabButton = (caseKey) => {
-        document.getElementById(tabButtonId[caseKey])?.focus();
-      };
+      const syncIndicatorLayout = () => updateIndicator(true);
+      syncIndicatorLayout();
+      requestAnimationFrame(syncIndicatorLayout);
+      requestAnimationFrame(() => requestAnimationFrame(syncIndicatorLayout));
 
-      const showCase = (caseKey) => {
-        for (const key of tabOrder) {
-          const panel = document.getElementById(key);
-          if (!panel) continue;
-          if (key === caseKey) {
+      window.addEventListener("resize", () => updateIndicator(false));
+
+      document.fonts?.ready?.then(() => {
+        updateIndicator(true);
+      });
+
+      container?.addEventListener("click", (e) => {
+        const target = e.target;
+        const btn =
+          target instanceof Element
+            ? target.closest("button[data-category]")
+            : null;
+        if (!(btn instanceof HTMLButtonElement)) return;
+        const caseKey = btn.dataset.category;
+        if (
+          caseKey !== "redesignCase" &&
+          caseKey !== "capstoneCase"
+        )
+          return;
+
+        document.querySelectorAll('[role="tabpanel"]').forEach((panel) => {
+          const id = panel.getAttribute("id");
+          if (!id || !["redesignCase", "capstoneCase"].includes(id)) return;
+          if (id === caseKey) {
             panel.removeAttribute("hidden");
           } else {
             panel.setAttribute("hidden", "");
           }
-        }
-
-        document.querySelectorAll(".case-tab-button").forEach((button) => {
-          const sel = button.getAttribute("data-case") === caseKey;
-          button.setAttribute("aria-selected", sel ? "true" : "false");
-          if (button instanceof HTMLElement) button.tabIndex = sel ? 0 : -1;
         });
 
-        focusTabButton(caseKey);
-        requestAnimationFrame(() => updateIndicator());
-      };
+        container?.querySelectorAll('[role="tab"]').forEach((button) => {
+          button.setAttribute(
+            "aria-selected",
+            button.getAttribute("data-category") === caseKey ? "true" : "false",
+          );
+        });
 
-      container?.addEventListener("keydown", (e) => {
-        if (!(e instanceof KeyboardEvent)) return;
-        if (!(e.target instanceof HTMLElement)) return;
-        if (!e.target.classList.contains("case-tab-button")) return;
-
-        const ix = tabOrder.indexOf(e.target.dataset.case ?? "");
-        if (ix === -1) return;
-
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-          e.preventDefault();
-          showCase(tabOrder[(ix + 1) % tabOrder.length]);
-          return;
-        }
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-          e.preventDefault();
-          showCase(tabOrder[(ix - 1 + tabOrder.length) % tabOrder.length]);
-          return;
-        }
-        if (e.key === "Home") {
-          e.preventDefault();
-          showCase("redesignCase");
-          return;
-        }
-        if (e.key === "End") {
-          e.preventDefault();
-          showCase("capstoneCase");
-        }
+        requestAnimationFrame(() => updateIndicator(false));
       });
-
-      updateIndicator(true);
-      requestAnimationFrame(() => updateIndicator(true));
-      window.addEventListener("resize", () => updateIndicator());
-
-      document
-        .getElementById("tab-redesign-case")
-        ?.addEventListener("click", () => {
-          showCase("redesignCase");
-        });
-      document
-        .getElementById("tab-capstone-case")
-        ?.addEventListener("click", () => {
-          showCase("capstoneCase");
-        });
     });
   }
 </script>
@@ -168,42 +147,31 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
     </div>
 
     <div
-      class="case-tabs-container flex flex-row flex-nowrap mt-2"
+      class="tabs-container flex flex-row flex-wrap mt-2 mb-4 min-w-0"
       role="tablist"
       aria-label="Choose case study"
     >
-      <div
-        class="case-tab-indicator"
-        aria-hidden="true"
-        id="case-tab-indicator"
-      >
-      </div>
+      <div class="tab-indicator" aria-hidden="true" id="tab-indicator"></div>
       <button
         type="button"
         aria-controls="redesignCase"
         aria-selected="true"
-        class="case-tab-button min-w-0"
-        data-case="redesignCase"
+        class="tab-button min-w-0"
+        data-category="redesignCase"
         id="tab-redesign-case"
         role="tab"
-        tabindex="0"
+        ><h3>Case Study 1: Product Redesign</h3></button
       >
-        <span class="case-tab-label">Case Study 1: Product Redesign</span>
-      </button>
       <button
         type="button"
         aria-controls="capstoneCase"
         aria-selected="false"
-        class="case-tab-button min-w-0"
-        data-case="capstoneCase"
+        class="tab-button min-w-0"
+        data-category="capstoneCase"
         id="tab-capstone-case"
         role="tab"
-        tabindex="-1"
+        ><h3>Case Study 2: Faculty Evaluation Workflow</h3></button
       >
-        <span class="case-tab-label"
-          >Case Study 2: Faculty Evaluation Workflow</span
-        >
-      </button>
     </div>
 
     <div
@@ -1179,20 +1147,7 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 
   /* `hidden` on inactive tabpanel uses the HTML attribute only (avoid display toggles vs [hidden]). */
 
-  .case-tabs-container {
-    align-items: stretch;
-    border: 3px solid rgba(var(--floating-color), 1);
-    border-radius: var(--border-radius);
-    display: flex;
-    gap: 8px;
-    inline-size: 100%;
-    justify-content: center;
-    margin-block-end: 1.5rem;
-    padding: 0.25rem;
-    position: relative;
-  }
-
-  .case-tab-button {
+  .tab-button {
     align-items: center;
     color: rgba(var(--foreground), 1);
     cursor: pointer;
@@ -1205,46 +1160,65 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
     z-index: 1;
   }
 
-  .case-tab-label {
-    display: block;
-    font-size: 1.125rem;
+  .tab-button h3 {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
   }
 
-  .case-tab-button[aria-selected="true"] {
+  .tab-button[aria-selected="true"] {
     color: rgba(var(--primary-color), 1);
-    font-weight: 600;
+    font-weight: 500;
   }
 
-  .case-tab-button:hover,
-  .case-tab-button:focus-visible {
-    color: rgba(var(--primary-color), 1);
+  .tab-button:active {
+    opacity: 0.75;
   }
 
-  .case-tab-button:focus-visible {
+  .tab-button:focus-visible {
     border-radius: 1.4rem;
+
     outline: dashed 2px rgba(var(--secondary-color), 1);
     outline-offset: 2px;
   }
 
-  /* Mirrors first tab geometry before JS (padding 0.25rem, gap 8px, two flex:1 pills). */
-  .case-tab-indicator {
+  .tab-button:hover,
+  .tab-button:focus-visible {
+    color: rgba(var(--primary-color), 1);
+    transition: color 0.2s ease-in-out;
+  }
+
+  /*
+   Matches first-selected tab geometry before JS: padding 0.25rem, gap 8px, two flex:1 pills.
+   Keeps indicator visible immediately without a zero-width flash (no width transition in CSS).
+  */
+  .tab-indicator {
     background-color: rgba(var(--background), 1);
     border: 2px solid rgba(var(--primary-color), 1);
     border-radius: 1.4rem;
+
     inset-block-end: 0.25rem;
     inset-block-start: 0.25rem;
     left: 0.25rem;
     pointer-events: none;
     position: absolute;
-    transition:
-      left 0.3s ease-out,
-      width 0.3s ease-out;
+    transition: left 0.3s ease-out;
     width: calc((100% - 0.5rem - 8px) / 2);
     z-index: 0;
   }
 
-  .case-tab-indicator.case-tab-indicator--snap {
-    transition: none;
+  .tabs-container {
+    align-items: stretch;
+    border: 3px solid rgba(var(--floating-color), 1);
+    border-radius: var(--border-radius);
+
+    display: flex;
+    gap: 8px;
+    inline-size: 100%;
+    justify-content: center;
+    padding: 0.25rem;
+    position: relative;
   }
 
   .capstone-hero-thumb,

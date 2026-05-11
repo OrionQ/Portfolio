@@ -1,0 +1,7 @@
+# Ensures this repo is its own workspace root before ~/.pnpm-workspace.yaml is found.
+packages:
+  - "."
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true

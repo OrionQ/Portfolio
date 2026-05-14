@@ -9,88 +9,14 @@ const STRIKE_MS = STRIKE_S * 1000;
 const PAIR_COUNT = 2;
 const REMOVE_SCRATCHED_AFTER_MS = 5000;
 
-/** SVG padding so scribble strokes past the text box aren’t clipped */
-const SCRIBBLE_PAD = 8;
-
-/** Tiny deterministic wobble so segments aren’t perfectly straight */
-function wobble(i: number, variant: number): number {
-  return Math.sin(i * 2.1 + variant * 1.7) * 0.35 + Math.cos(i * 3.3) * 0.18;
-}
-
-function densifySegment(
-  from: [number, number],
-  to: [number, number],
-  steps: number,
-  variant: number,
-): [number, number][] {
-  const out: [number, number][] = [];
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const nx = from[0] + (to[0] - from[0]) * t;
-    const ny = from[1] + (to[1] - from[1]) * t;
-    const perpX = -(to[1] - from[1]);
-    const perpY = to[0] - from[0];
-    const len = Math.hypot(perpX, perpY) || 1;
-    const ox = (perpX / len) * wobble(i + variant * 10, variant);
-    const oy = (perpY / len) * wobble(i + variant * 10, variant);
-    out.push([nx + ox, ny + oy]);
-  }
-  return out;
-}
-
 /**
- * Full-word zigzag scratch: each stroke spans nearly the full width (left edge ↔ right edge),
- * like drawing one continuous scribble across the word — not many tight local oscillations.
+ * Path from `public/scratch1.svg` — viewBox padded for stroke.
+ * Idle uses `pathLength: 0` + `opacity: 0` so `strokeLinecap: round` does not leave a dot
+ * (tiny non-zero pathLength would).
  */
-function handScribblePath(w: number, h: number, variant: number): string {
-  if (w <= 0 || h <= 0) return "";
-
-  const xL = -SCRIBBLE_PAD * 0.15;
-  const xR = w + SCRIBBLE_PAD * 0.2;
-  const inset = Math.min(w * 0.04, 6);
-
-  const mid = h * 0.48;
-  const yHi = h * 0.22;
-  const yLo = h * 0.82;
-  const yHi2 = h * 0.34;
-  const yLo2 = h * 0.68;
-
-  const sh = variant === 0 ? 0 : h * 0.04;
-
-  // Alternating corners: each segment crosses almost the whole word (reference-style scratch)
-  const corners: [number, number][] = [
-    [xL + inset, mid - sh * 0.5],
-    [xR - inset, yHi + sh],
-    [xL + inset * 1.8, yLo - sh * 0.3],
-    [xR - inset * 1.2, yHi2],
-    [xL + inset * 2.2, yLo2 + sh],
-    [xR - inset * 1.5, mid + sh * 0.4],
-    [xL + inset * 2.8, yLo * 0.92],
-  ];
-
-  const stepsPerLeg = 14;
-  const pts: [number, number][] = [];
-
-  for (let c = 0; c < corners.length - 1; c++) {
-    const segment = densifySegment(corners[c], corners[c + 1], stepsPerLeg, variant + c);
-    const startIdx = pts.length === 0 ? 0 : 1;
-    for (let i = startIdx; i < segment.length; i++) {
-      let px = segment[i][0];
-      let py = segment[i][1];
-      px = Math.min(w + SCRIBBLE_PAD * 0.6, Math.max(-SCRIBBLE_PAD * 0.6, px));
-      py = Math.min(h + SCRIBBLE_PAD * 0.45, Math.max(-SCRIBBLE_PAD * 0.35, py));
-      pts.push([px + SCRIBBLE_PAD, py + SCRIBBLE_PAD]);
-    }
-  }
-
-  if (pts.length < 2) return "";
-
-  let d = `M ${pts[0][0].toFixed(2)} ${pts[0][1].toFixed(2)}`;
-  for (let i = 1; i < pts.length; i++) {
-    d += ` L ${pts[i][0].toFixed(2)} ${pts[i][1].toFixed(2)}`;
-  }
-  return d;
-}
+const SCRATCH_VB = { x: -3, y: -3, w: 155, h: 35 };
+const SCRATCH_PATH_D =
+  "M2.00012 30.7175C2.4895 30.3479 2.97887 29.9783 10.2024 24.625C17.426 19.2718 31.3689 8.94616 37.8411 4.53976C44.3133 0.133352 42.8922 1.9591 39.0798 6.21576C21.9994 25.2861 19.4722 28.708 19.1272 30.0688C19.0314 30.4467 20.43 29.9205 27.3697 25.474C34.3094 21.0276 47.0888 12.6081 54.0661 8.10185C61.0434 3.59556 61.8314 3.25762 61.9036 3.79406C63.3948 14.8648 44.2722 24.8435 45.2329 25.1508C49.5652 26.5366 60.9873 17.3381 73.4802 10.0201C77.5209 7.65311 77.1429 8.45818 75.2788 10.8065C73.4147 13.1549 70.1397 17.134 68.9971 19.2883C67.8896 21.3764 85.6163 13.648 96.7245 8.275C97.5836 7.85948 98.3299 7.85873 98.3656 8.34013C98.9207 15.8119 87.6765 22.2408 88.2138 22.8853C90.4631 25.5832 103.393 16.9448 116.936 10.8492C121.149 8.95345 120.373 10.4858 119.301 11.9007C118.229 13.3155 116.99 14.8213 117.371 15.4229C124.98 14.2507 133.723 11.5533 138.692 10.051C141.183 9.08004 143.611 7.68549 146.114 6.24868";
 
 type Phase = "idle" | "strike" | "done";
 
@@ -99,7 +25,8 @@ type ScratchPairProps = {
   inView: boolean;
   original: string;
   replacement: string;
-  reduceMotion: boolean | null;
+  /** `true` only when the OS requests reduced motion; `false` when not (never `null` for stable timing). */
+  reduceMotion: boolean;
   stripOriginal: boolean;
 };
 
@@ -152,19 +79,16 @@ function ScratchPair({
     };
   }, [inView, pairIndex, reduceMotion]);
 
-  const pathD =
-    dims.w > 0 && dims.h > 0
-      ? handScribblePath(dims.w, dims.h, pairIndex)
-      : "";
+  const showScratch = dims.w > 0 && dims.h > 0;
 
   const strikeTransition = reduceMotion
     ? { duration: 0 }
     : { duration: STRIKE_S, ease: "easeOut" as const };
 
   return (
-    <span className="inline-flex scratch-pair align-baseline gap-x-1">
+    <span className="scratch-pair inline-flex items-baseline gap-x-1">
       <motion.span
-        className="relative inline-block max-w-full align-baseline overflow-x-clip overflow-y-visible whitespace-nowrap"
+        className="relative inline-block max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
         style={{ verticalAlign: "baseline" }}
         aria-hidden={stripOriginal}
         animate={{
@@ -173,42 +97,49 @@ function ScratchPair({
         }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
-        <span className="relative inline-block overflow-visible">
-          <span ref={textRef} className="inline">
-            {original}
-          </span>
-
-          {dims.w > 0 && pathD ? (
-            <svg
-              className="pointer-events-none absolute left-0 top-0 overflow-visible"
-              width={dims.w + SCRIBBLE_PAD * 2}
-              height={dims.h + SCRIBBLE_PAD * 2}
-              style={{ left: -SCRIBBLE_PAD, top: -SCRIBBLE_PAD }}
-              aria-hidden
-            >
-              <motion.path
-                d={pathD}
-                fill="none"
-                stroke="rgba(var(--primary-color), 0.8)"
-                strokeWidth={3}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0.001, opacity: 1 }}
-                animate={{
-                  pathLength: phase === "idle" ? 0.001 : 1,
-                  opacity: stripOriginal ? 0 : 1,
-                }}
-                transition={{
-                  pathLength: strikeTransition,
-                  opacity: { duration: 0.35 },
-                }}
-              />
-            </svg>
-          ) : null}
+        <span ref={textRef} className="inline">
+          {original}
         </span>
+
+        {showScratch ? (
+          <svg
+            className="pointer-events-none absolute left-0 top-0 overflow-hidden"
+            width={dims.w}
+            height={dims.h}
+            viewBox={`${SCRATCH_VB.x} ${SCRATCH_VB.y} ${SCRATCH_VB.w} ${SCRATCH_VB.h}`}
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden
+          >
+            <motion.path
+              d={SCRATCH_PATH_D}
+              fill="none"
+              stroke="rgba(var(--primary-color), 1)"
+              strokeWidth={4}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{
+                pathLength: phase === "idle" ? 0 : 1,
+                opacity:
+                  phase === "idle"
+                    ? 0
+                    : stripOriginal
+                      ? 0
+                      : 1,
+              }}
+              transition={{
+                pathLength: strikeTransition,
+                opacity: {
+                  duration:
+                    phase === "idle" ? 0 : stripOriginal ? 0.35 : 0.05,
+                },
+              }}
+            />
+          </svg>
+        ) : null}
       </motion.span>
       <motion.span
-        className="inline-block max-w-full align-baseline overflow-x-clip overflow-y-visible whitespace-nowrap"
+        className="inline-block max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
         style={{ verticalAlign: "baseline" }}
         initial={false}
         animate={{
@@ -230,7 +161,8 @@ function ScratchPair({
 export default function TaglineScratch() {
   const rootRef = useRef<HTMLParagraphElement>(null);
   const inView = useInView(rootRef, { once: true, amount: 0.5 });
-  const reduceMotion = useReducedMotion();
+  const reduceMotionPref = useReducedMotion();
+  const reduceMotion = reduceMotionPref === true;
   const [stripOriginals, setStripOriginals] = useState(false);
 
   useEffect(() => {

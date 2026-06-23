@@ -207,7 +207,7 @@ export default function TaglineScratch() {
           pairIndex={0}
           inView={inView}
           original="mocking up"
-          replacement="coding"
+          replacement="building"
           reduceMotion={reduceMotion}
           stripOriginal={stripOriginals}
         />

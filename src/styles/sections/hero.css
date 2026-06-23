@@ -21,7 +21,7 @@
 .hero-chevron {
   position: absolute;
   left: 50%;
-  bottom: clamp(1.25rem, 2.5vh, 1.75rem);
+  bottom: clamp(-1rem, 2vh, 0rem);
   z-index: 2;
   translate: -50% 50%;
   pointer-events: none;

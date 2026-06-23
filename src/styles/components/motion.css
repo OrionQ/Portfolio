@@ -23,16 +23,9 @@ html.motion-paused .animate-float-slow {
   }
 }
 
-@media (min-width: 640px) and (max-width: 1023px) {
+@media (min-width: 430px) and (max-width: 1023px) {
   .hero-actions {
-    bottom: clamp(0.75rem, 2.5vh, 1.5rem);
-    padding-top: 0.5rem;
-  }
-}
-
-@media (max-width: 639px) {
-  .hero-actions {
-    bottom: clamp(0.625rem, 2.25vh, 1.25rem);
+    bottom: clamp(2rem, 6vh, 4.5rem);
     padding-top: 0.5rem;
   }
 }

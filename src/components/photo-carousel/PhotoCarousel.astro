@@ -29,7 +29,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
 
 <script>
   const LOOP_SETS = 3;
-  const AUTO_SPEED = 0.25;
+  const AUTO_SPEED = 30;
   const RESUME_DELAY = 1200;
   const SCROLL_SETTLE_DELAY = 160;
 
@@ -61,6 +61,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       let activeTimer = 0;
       let scrollTimer = 0;
       let autoPosition = 0;
+      let previousFrameTime = 0;
 
       const gap = () => {
         const styles = getComputedStyle(track);
@@ -105,7 +106,12 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
         }
       };
 
-      const tick = () => {
+      const tick = (time: number) => {
+        const elapsed = previousFrameTime
+          ? Math.min(time - previousFrameTime, 50)
+          : 0;
+        previousFrameTime = time;
+
         if (
           !dragging &&
           !userActive &&
@@ -113,7 +119,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
           !isMotionPaused() &&
           setWidth > 0
         ) {
-          autoPosition += AUTO_SPEED;
+          autoPosition += AUTO_SPEED * (elapsed / 1000);
           const upper = setWidth * (LOOP_SETS - 1);
           if (autoPosition >= upper) autoPosition -= setWidth;
           else if (autoPosition < setWidth * 0.5) autoPosition += setWidth;
@@ -166,6 +172,16 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       viewport.addEventListener(
         "scroll",
         () => {
+          // Automatic movement also fires scroll events. Treat only movement
+          // that differs from the animation position as user interaction.
+          if (
+            !dragging &&
+            !userActive &&
+            Math.abs(viewport.scrollLeft - autoPosition) <= 2
+          ) {
+            return;
+          }
+
           markActive();
           window.clearTimeout(scrollTimer);
           scrollTimer = window.setTimeout(normalizeScroll, SCROLL_SETTLE_DELAY);

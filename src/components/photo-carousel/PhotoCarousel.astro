@@ -30,7 +30,8 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
 <script>
   const LOOP_SETS = 3;
   const AUTO_SPEED = 0.25;
-  const RESUME_DELAY = 100;
+  const RESUME_DELAY = 1200;
+  const SCROLL_SETTLE_DELAY = 160;
 
   const initPhotoCarousels = () => {
     document.querySelectorAll("[data-photo-carousel]").forEach((root) => {
@@ -58,6 +59,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       let pointerId = -1;
       let frameId = 0;
       let activeTimer = 0;
+      let scrollTimer = 0;
       let autoPosition = 0;
 
       const gap = () => {
@@ -123,6 +125,9 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       };
 
       const onPointerDown = (e: PointerEvent) => {
+        // Touch devices already provide smooth, momentum-based scrolling.
+        // Custom pointer dragging is only needed for mouse and pen input.
+        if (e.pointerType === "touch") return;
         if (e.button !== 0) return;
         dragging = true;
         moved = false;
@@ -161,7 +166,9 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       viewport.addEventListener(
         "scroll",
         () => {
-          if (dragging || userActive) normalizeScroll();
+          markActive();
+          window.clearTimeout(scrollTimer);
+          scrollTimer = window.setTimeout(normalizeScroll, SCROLL_SETTLE_DELAY);
         },
         { passive: true },
       );
@@ -184,6 +191,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
       const stop = () => {
         window.cancelAnimationFrame(frameId);
         window.clearTimeout(activeTimer);
+        window.clearTimeout(scrollTimer);
         ro.disconnect();
       };
 

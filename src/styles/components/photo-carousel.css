@@ -18,7 +18,7 @@
   -webkit-overflow-scrolling: touch;
   padding-inline: var(--page-gutter);
   padding-block: 0.35rem 0.5rem;
-  touch-action: pan-x;
+  touch-action: auto;
 }
 
 .photo-carousel__viewport::-webkit-scrollbar {

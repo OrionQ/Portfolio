@@ -22,7 +22,7 @@
     const heroBlock = document.querySelector<HTMLElement>(".hero-block");
     if (!heroBlock) return null;
 
-    const runway = Math.max(heroBlock.offsetHeight - window.innerHeight, 0);
+    const runway = Math.max(heroBlock.offsetHeight - (window.visualViewport?.height ?? window.innerHeight), 0);
     if (runway <= STAGED_HERO_MIN_RUNWAY) return null;
 
     const scrolled = Math.min(Math.max(-heroBlock.getBoundingClientRect().top, 0), runway);

@@ -96,10 +96,10 @@
 
   .hero-block {
     --hero-scroll-steps: 8;
-    /* text lift + rotate/hold × 3 illustrations + overshoot past CAPTURE */
-    --hero-segment-height: 125dvh;
+    /* svh stays stable when the mobile URL bar shows/hides (dvh caused runway jitter) */
+    --hero-segment-height: 125svh;
     --hero-scroll-runway: calc(var(--hero-scroll-steps) * var(--hero-segment-height));
-    min-height: calc(100dvh + var(--hero-scroll-runway));
+    min-height: calc(100svh + var(--hero-scroll-runway));
     padding-bottom: 0;
   }
 
@@ -108,9 +108,9 @@
     top: var(--hero-pin-top);
     z-index: 1;
     box-sizing: border-box;
-    min-height: calc(100dvh - var(--hero-pin-top));
-    height: calc(100dvh - var(--hero-pin-top));
-    max-height: calc(100dvh - var(--hero-pin-top));
+    min-height: calc(100svh - var(--hero-pin-top));
+    height: calc(100svh - var(--hero-pin-top));
+    max-height: calc(100svh - var(--hero-pin-top));
     align-items: stretch;
     padding-block: 0;
     padding-bottom: clamp(3rem, 8vh, 4.5rem);

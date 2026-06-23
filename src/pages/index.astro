@@ -18,13 +18,47 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   const headerOuter = document.querySelector<HTMLElement>(".header-outer");
   const PIN_MAX = 431;
   const MOBILE_SCROLL_STEPS = 8;
+  const MOBILE_SEGMENT_VH = 125;
 
   let hoverChipIndex = -1;
   let lastScrollFocus = -2;
   let pinRaf = 0;
   let userInitiatedHeroScroll = false;
+  let pinnedRunwayPx = 0;
+  let cachedPinTop = 0;
 
   const canHoverChips = () => window.innerWidth >= PIN_MAX;
+
+  const getViewportHeight = () =>
+    window.visualViewport?.height ?? window.innerHeight;
+
+  const invalidatePinnedRunway = () => {
+    pinnedRunwayPx = 0;
+  };
+
+  const measurePinnedRunway = () => {
+    if (!heroBlock) return 0;
+    const measured = Math.max(heroBlock.offsetHeight - getViewportHeight(), 0);
+    const fromSegments =
+      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_VH * (getViewportHeight() / 100);
+    return measured > 0 ? measured : fromSegments;
+  };
+
+  const getHeroScrollRunway = () => {
+    if (!heroBlock) return 0;
+    if (!isPinnedHero()) {
+      pinnedRunwayPx = 0;
+      return Math.max(heroBlock.offsetHeight - getViewportHeight(), 0);
+    }
+    if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
+    return pinnedRunwayPx;
+  };
+
+  const syncPinTop = () => {
+    cachedPinTop = headerOuter
+      ? Math.ceil(headerOuter.getBoundingClientRect().height)
+      : 88;
+  };
 
   const arrowObserver = new IntersectionObserver(
     ([entry]) => {
@@ -41,16 +75,15 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     arrowObserver.observe(targetSection);
   }
 
-  const prefersReducedMotion = () =>
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+  const osReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const motionPaused = () =>
     document.documentElement.classList.contains("motion-paused");
 
-  const isPinnedHero = () => window.innerWidth < PIN_MAX;
+  const heroMotionFrozen = () => osReducedMotion() || motionPaused();
 
-  const getHeroScrollRunway = () => {
-    if (!heroBlock) return 0;
-    return Math.max(heroBlock.offsetHeight - window.innerHeight, 0);
-  };
+  const isPinnedHero = () => window.innerWidth < PIN_MAX;
 
   const getCurrentScrolled = () => {
     if (!heroBlock) return 0;
@@ -74,7 +107,8 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   };
 
   const markHeroScrollIntent = () => {
-    if (!isPinnedHero() || userInitiatedHeroScroll || prefersReducedMotion()) return;
+    if (!isPinnedHero() || userInitiatedHeroScroll || heroMotionFrozen()) return;
+    if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
     userInitiatedHeroScroll = true;
     updateHeroScrollPin();
   };
@@ -94,14 +128,12 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       return;
     }
 
-    const pinTop = headerOuter
-      ? Math.ceil(headerOuter.getBoundingClientRect().height)
-      : 88;
+    const pinTop = cachedPinTop;
     heroBlock.style.setProperty("--hero-pin-top", `${pinTop}px`);
 
     const { runway, segment, staged } = getRunwayInfo();
 
-    if (prefersReducedMotion()) {
+    if (osReducedMotion()) {
       heroBlock.style.setProperty("--hero-progress", "1");
       heroBlock.style.setProperty("--hero-scroll-step", String(MOBILE_SCROLL_STEPS - 1));
       heroBlock.style.setProperty("--hero-scroll-phase", String(MOBILE_SCROLL_STEPS));
@@ -147,6 +179,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
     if (atHeroTop) {
       userInitiatedHeroScroll = false;
+      invalidatePinnedRunway();
       heroBlock.style.setProperty("--hero-progress", "0");
       heroBlock.style.setProperty("--hero-scroll-step", "0");
       heroBlock.style.setProperty("--hero-scroll-phase", "0");
@@ -190,10 +223,17 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (!canHoverChips()) releaseChipHover();
   };
 
+  syncPinTop();
   updateHeroScrollPin();
   window.addEventListener("scroll", scheduleHeroScrollPin, { passive: true });
   window.addEventListener("wheel", markHeroScrollIntent, { passive: true });
   window.addEventListener("touchmove", markHeroScrollIntent, { passive: true });
+  window.visualViewport?.addEventListener("resize", () => {
+    if (!isPinnedHero()) return;
+    syncPinTop();
+    if (!userInitiatedHeroScroll) invalidatePinnedRunway();
+    scheduleHeroScrollPin();
+  });
   window.addEventListener(
     "keydown",
     (e) => {
@@ -204,7 +244,13 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     { passive: true },
   );
   window.addEventListener("resize", () => {
-    if (!isPinnedHero()) userInitiatedHeroScroll = false;
+    syncPinTop();
+    if (!isPinnedHero()) {
+      userInitiatedHeroScroll = false;
+      invalidatePinnedRunway();
+    } else if (!userInitiatedHeroScroll) {
+      invalidatePinnedRunway();
+    }
     updateHeroScrollPin();
     syncChipHoverMode();
   });
@@ -228,7 +274,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
 <Layout title="Xiaolei Qin's Portfolio">
   <div class="hero-block" slot="hero">
-    <section class="hero" id="hero" aria-label="Introduction">
+    <section class="hero" id="hero" aria-label="Introduction" tabindex="-1">
       <HeroStarfield client:load />
       <div class="hero__inner">
         <div class="hero__text-stage">

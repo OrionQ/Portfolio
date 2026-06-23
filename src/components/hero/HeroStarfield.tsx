@@ -272,6 +272,10 @@ export default function HeroStarfield() {
     if (!ctx) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isMotionPaused = () =>
+      document.documentElement.classList.contains("motion-paused");
+
+    const shouldRepaint = () => reduced || isMotionPaused();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     let width = 0;
@@ -290,7 +294,7 @@ export default function HeroStarfield() {
         const svg = tintSvg(raw, r, g, b);
         const img = new Image();
         img.onload = () => {
-          if (reduced) render(performance.now());
+          if (shouldRepaint()) render(performance.now());
         };
         img.src = `data:image/svg+xml,${encodeURIComponent(svg)}`;
         return img;
@@ -463,12 +467,16 @@ export default function HeroStarfield() {
       if (!active) {
         if (scrollScrubActive) {
           scrollScrubActive = false;
-          scrollHandoffYaw = null;
           scrubSrcIdx = -1;
           scrubSrcFade = 0;
           scrubDstIdx = -1;
           scrubDstFade = 0;
-          if (focusIdx < 0) resumeAutocycleFromYaw();
+          const phase =
+            Number.parseFloat(style.getPropertyValue("--hero-scroll-phase")) || 0;
+          if (focusIdx < 0 && phase < 0.05) {
+            scrollHandoffYaw = null;
+            resumeAutocycleFromYaw();
+          }
         }
         return;
       }
@@ -658,7 +666,7 @@ export default function HeroStarfield() {
 
       readColors();
       if (widthChanged) initStars();
-      if (reduced) render(performance.now());
+      if (shouldRepaint()) render(performance.now());
     };
 
     const scaleMin = 1 / (CAM + 1);
@@ -685,7 +693,7 @@ export default function HeroStarfield() {
     };
 
     const advance = (dt: number) => {
-      if (reduced || document.documentElement.classList.contains("motion-paused")) return;
+      if (reduced || isMotionPaused()) return;
 
       syncScrollScrub();
       if (scrollScrubActive) return;
@@ -928,7 +936,7 @@ export default function HeroStarfield() {
         ctx.restore();
       }
 
-      if (!reduced && !document.documentElement.classList.contains("motion-paused")) {
+      if (!reduced && !isMotionPaused()) {
         frameId = requestAnimationFrame(render);
       }
     };
@@ -973,6 +981,8 @@ export default function HeroStarfield() {
       const paused = Boolean((e as CustomEvent<{ paused?: boolean }>).detail?.paused);
       if (paused) {
         cancelAnimationFrame(frameId);
+        frameId = 0;
+        render(performance.now());
         return;
       }
       if (!reduced) {
@@ -987,7 +997,7 @@ export default function HeroStarfield() {
 
     const mo = new MutationObserver(() => {
       readColors();
-      if (reduced) render(performance.now());
+      if (shouldRepaint()) render(performance.now());
     });
     mo.observe(document.documentElement, {
       attributes: true,

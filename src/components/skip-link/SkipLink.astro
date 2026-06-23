@@ -1,0 +1,65 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a
+  href={href}
+  class="link skip-link flex items-center hover:underline hover:underline-offset-4 hover:opacity-60"
+  >Skip to content</a
+>
+
+<script>
+  const syncSkipLinkPosition = () => {
+    const header = document.querySelector<HTMLElement>(".header");
+    const skipLink = document.querySelector<HTMLElement>(".skip-link");
+    if (!header || !skipLink) return;
+
+    const { top, left, width, height } = header.getBoundingClientRect();
+    skipLink.style.top = `${top + height / 2}px`;
+    skipLink.style.left = `${left + width / 2}px`;
+  };
+
+  const getHeaderOffset = () => {
+    const headerOuter = document.querySelector<HTMLElement>(".header-outer");
+    return headerOuter ? Math.ceil(headerOuter.getBoundingClientRect().height) + 8 : 88;
+  };
+
+  const initSkipLink = () => {
+    syncSkipLinkPosition();
+    window.addEventListener("resize", syncSkipLinkPosition);
+    window.addEventListener("scroll", syncSkipLinkPosition, { passive: true });
+
+    document.querySelectorAll(".skip-link").forEach((link) => {
+      link.addEventListener("focus", syncSkipLinkPosition);
+
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+        if (!href?.startsWith("#")) return;
+
+        const target = document.getElementById(href.slice(1));
+        if (!target) return;
+
+        event.preventDefault();
+
+        const top =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          getHeaderOffset();
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+        target.focus({ preventScroll: true });
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSkipLink);
+  } else {
+    initSkipLink();
+  }
+
+  document.fonts?.ready.then(syncSkipLinkPosition);
+</script>

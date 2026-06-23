@@ -2,6 +2,7 @@
 import BackToTop from "../components/back-to-top/BackToTop.astro";
 import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
+import SkipLink from "../components/skip-link/SkipLink.astro";
 import "../styles/global.css";
 
 const {
@@ -9,6 +10,9 @@ const {
   description = "Orion's Portfolio - Software Engineer, UX Designer",
   image = "/profile-pic.jpeg",
 } = Astro.props;
+
+const hasHero = Astro.slots.has("hero");
+const skipHref = hasHero ? "#hero" : "#main-content";
 
 const siteUrl =
   Astro.site?.toString().replace(/\/$/, "") ?? "https://orionq.github.io";
@@ -47,7 +51,7 @@ const imageUrl = image.startsWith("http")
         try {
           var savedTheme = localStorage.getItem("colorTheme");
           if (!savedTheme) {
-            var themes = ["blue", "pink", "green", "brown", "mono"];
+            var themes = ["blue", "pink", "green", "brown", "mono", "retro"];
             savedTheme = themes[Math.floor(Math.random() * themes.length)];
             localStorage.setItem("colorTheme", savedTheme);
           }
@@ -67,11 +71,12 @@ const imageUrl = image.startsWith("http")
     </script>
   </head>
   <body>
+    <SkipLink href={skipHref} />
     <div class="flex flex-col items-center pb-16">
       <Header />
       <slot name="hero" />
       <div class="site-body justify-between min-h-screen pt-6 gap-16 w-full">
-        <main class="page-shell flex flex-col gap-8 items-center">
+        <main id="main-content" tabindex="-1" class="page-shell flex flex-col gap-8 items-center">
           <slot />
         </main>
         <Footer />

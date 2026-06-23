@@ -31,10 +31,10 @@ const isHomePage = Astro.url.pathname === "/";
   });
 </script>
 
-<nav
-  class="header lg:px-6 px-4 py-2 sticky top-0 flex flex-col max-w-6xl w-full"
->
-  <div class="flex justify-between flex-row items-center gap-8">
+<div class="header-outer">
+  <nav class="header">
+    <div class="header__inner flex flex-col">
+      <div class="flex justify-between flex-row items-center gap-8">
     <div>
       <a href="/" class="flex gap-4 items-center home-link">
         <Icon
@@ -74,92 +74,7 @@ const isHomePage = Astro.url.pathname === "/";
       </details>
       <ThemeSelector />
     </div>
-  </div>
-
-  <style>
-    .header {
-      background-color: rgba(var(--background), 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(var(--floating-color), 1);
-      border-radius: 9999px;
-      box-shadow: 0 2px 12px rgba(var(--shadow-color));
-      inset-block-start: 16px;
-      z-index: 1000;
-
-      &:has(.mobile-menu[open]) {
-        background-color: rgba(var(--background), 1);
-        backdrop-filter: none;
-        border-radius: var(--border-radius) var(--border-radius) 0 0;
-      }
-    }
-
-    .home-link:focus-visible {
-      outline: 2px dashed rgba(var(--secondary-color), 1);
-    }
-
-    .mobile-menu {
-      position: relative;
-    }
-
-    .mobile-menu-button {
-      border: 0;
-      border-radius: 50%;
-      cursor: pointer;
-      list-style: none;
-      padding: 0.5rem;
-      transition: background-color 0.25s;
-    }
-
-    .mobile-menu-button svg {
-      color: rgba(var(--primary-color), 1);
-    }
-
-    .mobile-menu-button::-webkit-details-marker {
-      display: none;
-    }
-
-    .mobile-menu-button:focus-visible {
-      outline: 2px dashed rgba(var(--secondary-color), 1);
-    }
-
-    .mobile-menu-button:hover {
-      background-color: rgba(var(--ambience-color), 1);
-    }
-
-    .mobile-menu[open] .menu-icon {
-      display: none;
-    }
-
-    .mobile-menu:not([open]) .close-icon {
-      display: none;
-    }
-
-    .mobile-menu-content {
-      background-color: rgba(var(--background), 0.85);
-      backdrop-filter: blur(10px);
-      border-color: rgba(var(--floating-color), 1);
-      border-radius: 0 0 var(--border-radius) var(--border-radius);
-      border-width: 0 1px 1px 1px;
-      box-shadow: 0 4px 6px rgba(var(--shadow-color));
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      inset-block-start: 4.25rem;
-      inset-inline-end: 0.5rem;
-      inset-inline-start: 0.5rem;
-      justify-content: center;
-      padding-block: 1rem 1rem;
-      padding-inline: 1.25rem;
-      position: fixed;
-      inline-size: calc(100% - 1rem);
-      z-index: 999;
-    }
-
-    @media (max-width: 72rem) {
-      .header {
-        inline-size: calc(100% - 1rem);
-      }
-    }
-  </style>
-</nav>
+      </div>
+    </div>
+  </nav>
+</div>

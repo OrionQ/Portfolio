@@ -1,0 +1,102 @@
+.header-outer {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  width: 100%;
+  padding-block-start: 1rem;
+  padding-inline: var(--header-edge-gap);
+}
+
+.header {
+  background-color: rgba(var(--background), 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--floating-color), 1);
+  border-radius: 9999px;
+  box-shadow: 0 2px 12px rgba(var(--shadow-color));
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--page-max-width) - var(--header-extend));
+  margin-inline: auto;
+}
+
+.header:has(.mobile-menu[open]) {
+  background-color: rgba(var(--background), 1);
+  backdrop-filter: none;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.header__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-block: 0.5rem;
+  padding-inline: calc(var(--page-gutter) / 2);
+}
+
+.home-link:focus-visible {
+  outline: 2px dashed rgba(var(--secondary-color), 1);
+}
+
+.mobile-menu {
+  position: relative;
+}
+
+.mobile-menu-button {
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.5rem;
+  transition: background-color 0.25s;
+}
+
+.mobile-menu-button svg {
+  color: rgba(var(--primary-color), 1);
+}
+
+.mobile-menu-button::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-menu-button:focus-visible {
+  outline: 2px dashed rgba(var(--secondary-color), 1);
+}
+
+.mobile-menu-button:hover {
+  background-color: rgba(var(--ambience-color), 1);
+}
+
+.mobile-menu[open] .menu-icon {
+  display: none;
+}
+
+.mobile-menu:not([open]) .close-icon {
+  display: none;
+}
+
+.mobile-menu-content {
+  background-color: rgba(var(--background), 0.85);
+  backdrop-filter: blur(10px);
+  border-color: rgba(var(--floating-color), 1);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  border-width: 0 1px 1px 1px;
+  box-shadow: 0 4px 6px rgba(var(--shadow-color));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  inset-block-start: 4.25rem;
+  left: 50%;
+  translate: -50% 0;
+  justify-content: center;
+  padding-block: 1rem;
+  padding-inline: 1.25rem;
+  position: fixed;
+  inline-size: min(
+    calc(100% - 2 * var(--header-edge-gap)),
+    calc(var(--page-max-width) + 2 * var(--header-extend))
+  );
+  z-index: 999;
+}

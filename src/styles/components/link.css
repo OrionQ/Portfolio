@@ -1,0 +1,7 @@
+.link {
+  color: rgba(var(--primary-color), 1);
+}
+
+.link:focus-visible {
+  outline: 2px dashed rgba(var(--secondary-color), 1);
+}

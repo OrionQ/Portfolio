@@ -1,0 +1,39 @@
+.about-me__image {
+  width: 100%;
+}
+
+.about-me__image .profileImgMask {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  aspect-ratio: auto;
+  height: auto;
+}
+
+.about-me__image .profileImg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+  .about-me__image {
+    width: 250px;
+  }
+
+  .about-me__image .profileImgMask {
+    width: 250px;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .about-me__cards-row {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .about-me__card {
+    min-height: 0;
+    overflow: auto;
+  }
+}

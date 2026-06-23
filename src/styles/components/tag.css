@@ -1,0 +1,19 @@
+.tag {
+  align-items: center;
+  background-color: rgba(var(--ambience-color), 0.7);
+  backdrop-filter: blur(10px);
+  border-color: rgba(var(--ambience-color), 1);
+  border-radius: 9999px;
+  box-shadow: 0 1px 4px rgba(var(--shadow-color));
+  color: rgba(var(--secondary-color), 1);
+  display: flex;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+}
+
+/* Role chips are scroll-driven on the pinned hero — not hover targets */
+@media (max-width: 430px) {
+  .roles .tag {
+    cursor: default;
+  }
+}

@@ -13,12 +13,3 @@ const { href, newTab = false, underline = false, className } = Astro.props;
   <slot />
   {newTab && <Icon name="up-right-from-square" size="1em" />}
 </a>
-<style>
-  .link {
-    color: rgba(var(--primary-color), 1);
-  }
-
-  .link:focus-visible {
-    outline: 2px dashed rgba(var(--secondary-color), 1);
-  }
-</style>

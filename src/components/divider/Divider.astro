@@ -1,25 +1,5 @@
 ---
-const { dividerType = "primary" } = Astro.props;
+const { dividerType = "primary", class: className = "" } = Astro.props;
 ---
 
-<hr class={`divider ${dividerType}`} />
-<style>
-  .divider {
-    border-radius: 2rem;
-    border-width: 1.5px;
-    inline-size: 100%;
-  }
-
-  .primary {
-    border-color: rgba(var(--secondary-color), 1);
-  }
-
-  .secondary {
-    border-color: rgba(var(--forground), 1);
-  }
-
-  .tertiary {
-    border-color: rgba(var(--floating-color), 1);
-    border-width: 1.5px;
-  }
-</style>
+<hr class:list={["divider", "content-divider", dividerType, className]} />

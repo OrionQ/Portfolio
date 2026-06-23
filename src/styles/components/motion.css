@@ -1,0 +1,90 @@
+html.motion-paused .animate-float-slow {
+  animation-play-state: paused !important;
+}
+
+.hero-actions {
+  position: absolute;
+  inset-inline: 0;
+  bottom: clamp(0.5rem, 2vh, 1.25rem);
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+@media (max-width: 1023px) {
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-actions {
+    bottom: clamp(0.75rem, 2.5vh, 1.5rem);
+    padding-top: 0.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-actions {
+    bottom: clamp(0.625rem, 2.25vh, 1.25rem);
+    padding-top: 0.5rem;
+  }
+}
+
+.motion-pause-wrap {
+  z-index: 1;
+}
+
+.motion-pause-button {
+  background: none;
+  border: 0;
+  border-radius: 9999px;
+  color: rgba(var(--primary-color), 1);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  padding: 0.5rem 0.75rem;
+  transition: background-color 0s;
+}
+
+.motion-pause-button:hover,
+.motion-pause-button:focus-visible {
+  background-color: rgba(var(--ambience-color), 1);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.motion-pause-button:focus-visible {
+  outline: 2px dashed rgba(var(--secondary-color), 1);
+  outline-offset: 0;
+}
+
+.motion-pause-button:active {
+  opacity: 0.75;
+}
+
+.motion-pause-button svg {
+  flex-shrink: 0;
+}
+
+.motion-toggle-icon {
+  fill: currentColor;
+}
+
+#motionPauseToggle .motion-play-icon {
+  display: none;
+}
+
+#motionPauseToggle[aria-pressed="true"] .motion-pause-icon {
+  display: none;
+}
+
+#motionPauseToggle[aria-pressed="true"] .motion-play-icon {
+  display: block;
+}

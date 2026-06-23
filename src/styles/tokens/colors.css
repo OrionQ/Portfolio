@@ -1,0 +1,158 @@
+/* ============================================
+   BLUE THEME (Default)
+   ============================================ */
+
+:root,
+:root[data-theme="blue"] {
+  --border-radius: 1.75rem;
+  --background: 255, 255, 255;
+  --foreground: 0, 49, 73;
+  --primary-color: 0, 125, 179;
+  --secondary-color: 0, 90, 132;
+  --floating-color: 237, 248, 252;
+  --ambience-color: 181, 223, 241;
+  --tint-color: 0, 110, 158;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root.dark[data-theme="blue"],
+:root[data-theme="blue"].dark {
+  --background: 22, 22, 22;
+  --foreground: 229, 245, 251;
+  --primary-color: 102, 204, 238;
+  --secondary-color: 153, 218, 243;
+  --floating-color: 55, 80, 95;
+  --ambience-color: 0, 100, 150;
+  --tint-color: 102, 204, 238;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   GREEN THEME
+   ============================================ */
+
+:root[data-theme="green"] {
+  --background: 255, 255, 255;
+  --foreground: 24, 48, 30;
+  --primary-color: 76, 118, 59;
+  --secondary-color: 56, 99, 45;
+  --floating-color: 229, 243, 232;
+  --ambience-color: 176, 208, 181;
+  --tint-color: 76, 118, 59;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="green"].dark {
+  --background: 22, 22, 22;
+  --foreground: 229, 243, 232;
+  --primary-color: 136, 179, 128;
+  --secondary-color: 176, 208, 181;
+  --floating-color: 42, 56, 47;
+  --ambience-color: 56, 99, 45;
+  --tint-color: 136, 179, 128;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   MONOCHROME THEME
+   ============================================ */
+
+:root[data-theme="mono"] {
+  --background: 255, 255, 255;
+  --foreground: 23, 23, 23;
+  --primary-color: 64, 64, 64;
+  --secondary-color: 82, 82, 82;
+  --floating-color: 230, 230, 230;
+  --ambience-color: 210, 210, 210;
+  --tint-color: 64, 64, 64;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="mono"].dark {
+  --background: 22, 22, 22;
+  --foreground: 245, 245, 245;
+  --primary-color: 212, 212, 212;
+  --secondary-color: 200, 200, 200;
+  --floating-color: 60, 60, 60;
+  --ambience-color: 82, 82, 82;
+  --tint-color: 212, 212, 212;
+  --shadow-color: 0, 0, 0, 0.4;
+}
+
+/* ============================================
+   BROWN THEME
+   ============================================ */
+
+:root[data-theme="brown"] {
+  --background: 255, 255, 255;
+  --foreground: 95, 39, 0;
+  --primary-color: 166, 76, 0;
+  --secondary-color: 145, 65, 0;
+  --floating-color: 253, 245, 237;
+  --ambience-color: 245, 204, 165;
+  --tint-color: 166, 76, 0;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="brown"].dark {
+  --background: 22, 22, 22;
+  --foreground: 255, 241, 230;
+  --primary-color: 230, 140, 77;
+  --secondary-color: 245, 204, 165;
+  --floating-color: 66, 46, 36;
+  --ambience-color: 95, 39, 0;
+  --tint-color: 230, 140, 77;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   PINK THEME
+   ============================================ */
+
+:root[data-theme="pink"] {
+  --background: 255, 255, 255;
+  --foreground: 136, 19, 55;
+  --primary-color: 190, 24, 93;
+  --secondary-color: 157, 23, 77;
+  --floating-color: 252, 246, 249;
+  --ambience-color: 251, 207, 232;
+  --tint-color: 190, 24, 93;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="pink"].dark {
+  --background: 22, 22, 22;
+  --foreground: 242, 203, 220;
+  --primary-color: 245, 104, 165;
+  --secondary-color: 229, 159, 189;
+  --floating-color: 58, 44, 52;
+  --ambience-color: 74, 46, 60;
+  --tint-color: 245, 104, 165;
+  --shadow-color: 0, 0, 0, 0.5;
+}
+
+/* ============================================
+   RETRO THEME
+   ============================================ */
+
+:root[data-theme="retro"] {
+  --background: 253, 244, 227;
+  --foreground: 19, 70, 134;
+  --primary-color: 19, 70, 134;
+  --secondary-color: 179, 21, 0;
+  --floating-color: 254, 178, 26;
+  --ambience-color: 255, 219, 148;
+  --tint-color: 19, 70, 134;
+  --shadow-color: 0, 0, 0, 0.15;
+}
+
+:root[data-theme="retro"].dark {
+  --background: 19, 70, 134;
+  --foreground: 253, 244, 227;
+  --primary-color: 253, 244, 227;
+  --secondary-color: 254, 178, 26;
+  --floating-color: 92, 11, 0;
+  --ambience-color: 137, 26, 12;
+  --tint-color: 19, 70, 134;
+  --shadow-color: 0, 0, 0, 0.5;
+}

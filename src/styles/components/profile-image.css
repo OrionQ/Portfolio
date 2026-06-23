@@ -1,0 +1,30 @@
+.profileImg {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.profileImgMask {
+  align-items: center;
+  border: 4px solid rgba(var(--secondary-color), 1);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  max-width: min(100%, 400px);
+  aspect-ratio: 1 / 1;
+}
+
+@media (min-width: 768px) {
+  .profileImg {
+    height: auto;
+  }
+
+  .profileImgMask {
+    width: 250px;
+    aspect-ratio: auto;
+    flex-shrink: 0;
+  }
+}

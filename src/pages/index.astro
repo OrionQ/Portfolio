@@ -1,18 +1,28 @@
 ---
 import { Icon } from "astro-icon/components";
 import Divider from "../components/divider/Divider.astro";
-import ProfileImage from "../components/profile-image/ProfileImage.astro";
+import HeroStarfield from "../components/hero/HeroStarfield";
 import Tag from "../components/tag/Tag.astro";
 
 import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Projects from "../section/Projects.astro";
+import MotionPause from "../components/motion-pause/MotionPause.astro";
 import TaglineScratch from "../components/tagline/TaglineScratch";
 ---
 
 <script>
   const arrow = document.getElementById("scroll-arrow");
   const targetSection = document.querySelector("#projects");
+  const heroBlock = document.querySelector<HTMLElement>(".hero-block");
+  const headerOuter = document.querySelector<HTMLElement>(".header-outer");
+  const PIN_MAX = 431;
+  const MOBILE_SCROLL_STEPS = 4;
+
+  let hoverChipIndex = -1;
+  let lastScrollFocus = -2;
+
+  const canHoverChips = () => window.innerWidth >= PIN_MAX;
 
   const arrowObserver = new IntersectionObserver(
     ([entry]) => {
@@ -28,41 +38,180 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   if (targetSection) {
     arrowObserver.observe(targetSection);
   }
+
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    document.documentElement.classList.contains("motion-paused");
+
+  const isPinnedHero = () => window.innerWidth < PIN_MAX;
+
+  const getHeroScrollRunway = () => {
+    if (!heroBlock) return 0;
+    return Math.max(heroBlock.offsetHeight - window.innerHeight, 0);
+  };
+
+  const getCurrentScrolled = () => {
+    if (!heroBlock) return 0;
+    const runway = getHeroScrollRunway();
+    if (runway <= 0) return 0;
+    return Math.min(Math.max(-heroBlock.getBoundingClientRect().top, 0), runway);
+  };
+
+  const getRunwayInfo = () => {
+    const runway = getHeroScrollRunway();
+    const staged = isPinnedHero();
+    const steps = staged ? MOBILE_SCROLL_STEPS : 1;
+    const segment = runway > 0 ? runway / steps : 0;
+    return { runway, segment, steps, staged };
+  };
+
+  const getScrollStep = () => {
+    const { segment, steps, staged } = getRunwayInfo();
+    if (!staged || segment <= 0) return 0;
+    return Math.min(Math.floor(getCurrentScrolled() / segment), steps - 1);
+  };
+
+  const focusForScrollStep = (step: number) => (step >= 1 ? step - 1 : -1);
+
+  const dispatchHeroFocus = (detail: number) => {
+    if (detail === lastScrollFocus) return;
+    lastScrollFocus = detail;
+    window.dispatchEvent(new CustomEvent("hero-focus", { detail }));
+  };
+
+  const applyScrollDrivenFocus = () => {
+    if (hoverChipIndex >= 0) return;
+    if (window.innerWidth >= PIN_MAX) {
+      dispatchHeroFocus(-1);
+      return;
+    }
+    const { staged, runway } = getRunwayInfo();
+    if (!staged || !heroBlock) {
+      dispatchHeroFocus(-1);
+      return;
+    }
+
+    const rawScrolled = Math.max(-heroBlock.getBoundingClientRect().top, 0);
+    if (runway > 0 && rawScrolled >= runway - 1) {
+      dispatchHeroFocus(-1);
+      return;
+    }
+
+    dispatchHeroFocus(focusForScrollStep(getScrollStep()));
+  };
+
+  const updateHeroScrollPin = () => {
+    if (!heroBlock) return;
+
+    if (window.innerWidth >= PIN_MAX) {
+      heroBlock.style.removeProperty("--hero-progress");
+      heroBlock.style.removeProperty("--hero-pin-top");
+      heroBlock.style.removeProperty("--hero-scroll-step");
+      lastScrollFocus = -2;
+      return;
+    }
+
+    const pinTop = headerOuter
+      ? Math.ceil(headerOuter.getBoundingClientRect().height)
+      : 88;
+    heroBlock.style.setProperty("--hero-pin-top", `${pinTop}px`);
+
+    const { runway, segment, staged } = getRunwayInfo();
+
+    if (prefersReducedMotion()) {
+      heroBlock.style.setProperty("--hero-progress", "1");
+      heroBlock.style.setProperty("--hero-scroll-step", String(MOBILE_SCROLL_STEPS - 1));
+      applyScrollDrivenFocus();
+      return;
+    }
+
+    if (runway <= 0) {
+      heroBlock.style.setProperty("--hero-progress", "0");
+      heroBlock.style.setProperty("--hero-scroll-step", "0");
+      return;
+    }
+
+    const scrolled = getCurrentScrolled();
+    const step = staged && segment > 0 ? Math.min(Math.floor(scrolled / segment), MOBILE_SCROLL_STEPS - 1) : 0;
+    const textProgress = staged
+      ? Math.min(1, scrolled / segment)
+      : scrolled / runway;
+
+    heroBlock.style.setProperty("--hero-progress", String(textProgress));
+    heroBlock.style.setProperty("--hero-scroll-step", String(step));
+    applyScrollDrivenFocus();
+  };
+
+  const releaseChipHover = () => {
+    if (hoverChipIndex < 0) return;
+    hoverChipIndex = -1;
+    lastScrollFocus = -2;
+    applyScrollDrivenFocus();
+  };
+
+  const syncChipHoverMode = () => {
+    if (!canHoverChips()) releaseChipHover();
+  };
+
+  updateHeroScrollPin();
+  window.addEventListener("scroll", updateHeroScrollPin, { passive: true });
+  window.addEventListener("resize", () => {
+    updateHeroScrollPin();
+    syncChipHoverMode();
+  });
+  window.addEventListener("motion-pause-change", updateHeroScrollPin);
+
+  // Chip hover: enabled above 431px; pinned hero scroll owns focus below that.
+  const chips = document.querySelectorAll<HTMLElement>(".roles .tag");
+  chips.forEach((chip, i) => {
+    chip.addEventListener("mouseenter", () => {
+      if (!canHoverChips()) return;
+      hoverChipIndex = i;
+      lastScrollFocus = i;
+      window.dispatchEvent(new CustomEvent("hero-focus", { detail: i }));
+    });
+    chip.addEventListener("mouseleave", () => {
+      if (!canHoverChips()) return;
+      releaseChipHover();
+    });
+  });
 </script>
 
 <Layout title="Xiaolei Qin's Portfolio">
-  <!-- About Section -->
-  <section
-    class="flex flex-row flex-wrap md:flex-nowrap w-full items-center md:items-stretch justify-center lg:justify-between gap-12 md:pt-24 pt-8"
-  >
-    <div
-      class="flex flex-col justify-between items-center md:items-start gap-8 scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
-    >
-      <h1 class="text-4xl py-4 md:py-0 text-center md:text-start">Hey, I'm Orion!</h1>
-      <div class="flex w-full max-w-full flex-col items-center md:items-start gap-2">
-        <TaglineScratch client:load />
-        <p class="flex items-center text-center md:text-start justify-center md:justify-start">
-          But solving design challenges as a developer is my specialty.
-        </p>
+  <div class="hero-block" slot="hero">
+    <section class="hero" id="hero" aria-label="Introduction">
+      <HeroStarfield client:load />
+      <div class="hero__inner">
+        <div class="hero__text-stage">
+          <div
+            class="hero__text flex flex-col gap-8 w-full scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
+          >
+            <div class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start w-full">
+              <h1 class="text-4xl py-4 lg:py-8 w-full">Hey, I'm Orion!</h1>
+              <TaglineScratch client:load />
+              <p>That's why I keep designing and coding.</p>
+            </div>
+            <div class="roles flex flex-row flex-wrap gap-2 justify-center lg:justify-start">
+              <Tag>Software Engineer</Tag>
+              <Tag>UX Designer</Tag>
+              <Tag>Photographer</Tag>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="roles flex flex-row gap-2 justify-center lg:justify-start">
-        <Tag>Software Engineer</Tag>
-        <Tag>UX Designer</Tag>
-        <Tag>Photographer</Tag>
+      <div class="hero-actions">
+        <MotionPause />
       </div>
-    </div>
-    <div class="flex justify-center md:justify-start w-full md:w-auto md:shrink-0 md:mx-0">
-      <ProfileImage alt="Orion's profile picture" width={250} />
-    </div>
-  </section>
-  <Icon
-    name="chevron-down"
-    id="scroll-arrow"
-    size={32}
-    class="shrink-0 inline animate-float-slow transition-opacity duration-500"
-    aria-hidden
-    color="rgba(var(--floating-color), 1)"
-  />
+      <Icon
+        name="chevron-down"
+        id="scroll-arrow"
+        size={32}
+        class="hero-chevron shrink-0 animate-float-slow transition-opacity duration-500"
+        aria-hidden
+        color="rgba(var(--floating-color), 1)"
+      />
+    </section>
+  </div>
   <Divider dividerType="tertiary" />
   <!-- Projects Section -->
   <Projects />

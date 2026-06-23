@@ -1,0 +1,24 @@
+.divider {
+  border-radius: 2rem;
+  border-width: 1.5px;
+  inline-size: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.content-divider {
+  width: 100%;
+}
+
+.divider.primary {
+  border-color: rgba(var(--secondary-color), 1);
+}
+
+.divider.secondary {
+  border-color: rgba(var(--foreground), 1);
+}
+
+.divider.tertiary {
+  border-color: rgba(var(--floating-color), 1);
+  border-width: 1.5px;
+}

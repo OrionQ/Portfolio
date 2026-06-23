@@ -1,0 +1,28 @@
+/* Shared content width + horizontal gutters (max-w-7xl, px-4 sm:px-10) */
+/* --header-edge-gap: min margin from viewport to header pill */
+/* --header-extend: header pill extends this far past the content column each side */
+:root {
+  --page-max-width: 80rem;
+  --page-gutter: 2rem;
+  --header-edge-gap: 0.5rem;
+  --header-extend: 0.25rem;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-gutter: 3rem;
+    --header-edge-gap: 1rem;
+    --header-extend: 1.5rem;
+  }
+}
+
+.page-shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}

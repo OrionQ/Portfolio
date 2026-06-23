@@ -1,0 +1,85 @@
+---
+---
+
+<div class="motion-pause-wrap">
+  <div class="sr-only" id="motionAnnouncement" role="status" aria-live="polite"></div>
+  <button
+    type="button"
+    id="motionPauseToggle"
+    class="motion-pause-button flex items-center gap-2"
+    aria-pressed="false"
+    aria-controls="hero"
+    aria-labelledby="motionPauseLabel"
+  >
+    <svg
+      class="motion-pause-icon motion-toggle-icon"
+      width="20"
+      height="20"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M7 5h3v14H7V5zm7 0h3v14h-3V5z"></path>
+    </svg>
+    <svg
+      class="motion-play-icon motion-toggle-icon"
+      width="20"
+      height="20"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M8 5v14l11-7L8 5z"></path>
+    </svg>
+    <span id="motionPauseLabel">Pause animations</span>
+  </button>
+</div>
+
+<script is:inline>
+  const applyMotionPaused = (paused) => {
+    document.documentElement.classList.toggle("motion-paused", paused);
+    localStorage.setItem("motionPaused", paused ? "true" : "false");
+
+    const btn = document.getElementById("motionPauseToggle");
+    const label = document.getElementById("motionPauseLabel");
+    if (btn) {
+      btn.setAttribute("aria-pressed", paused ? "true" : "false");
+    }
+    if (label) {
+      label.textContent = paused ? "Play animations" : "Pause animations";
+    }
+
+    const announcement = document.getElementById("motionAnnouncement");
+    if (announcement) {
+      announcement.textContent = paused ? "Animations paused" : "Animations playing";
+      window.setTimeout(() => {
+        announcement.textContent = "";
+      }, 1000);
+    }
+
+    window.dispatchEvent(
+      new CustomEvent("motion-pause-change", { detail: { paused } }),
+    );
+  };
+
+  const initMotionPause = () => {
+    const paused = localStorage.getItem("motionPaused") === "true";
+    applyMotionPaused(paused);
+
+    const btn = document.getElementById("motionPauseToggle");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const next = !document.documentElement.classList.contains("motion-paused");
+      applyMotionPaused(next);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMotionPause);
+  } else {
+    initMotionPause();
+  }
+</script>

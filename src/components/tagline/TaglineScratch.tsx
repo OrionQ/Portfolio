@@ -1,13 +1,15 @@
 /** @jsxImportSource react */
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "motion/react";
+import { motion, MotionConfig, useInView, useReducedMotion } from "motion/react";
 
 const STRIKE_S = 1.2;
 const STRIKE_MS = STRIKE_S * 1000;
 
-/** Pairs in this tagline — last reveal completes at `PAIR_COUNT * STRIKE_MS` */
-const PAIR_COUNT = 2;
-const REMOVE_SCRATCHED_AFTER_MS = 5000;
+/** Pairs in this tagline — last reveal completes at `INITIAL_DELAY_MS + PAIR_COUNT * STRIKE_MS` */
+const PAIR_COUNT = 3;
+const INITIAL_DELAY_MS = 1000;
+const REMOVE_SCRATCHED_AFTER_MS = 1000;
+const STRIP_S = 0.4;
 
 /**
  * Path from `public/scratch1.svg` — viewBox padded for stroke.
@@ -65,7 +67,7 @@ function ScratchPair({
       return;
     }
 
-    const start = pairIndex * STRIKE_MS;
+    const start = INITIAL_DELAY_MS + pairIndex * STRIKE_MS;
 
     const toStrike = window.setTimeout(() => setPhase("strike"), start);
     const toDone = window.setTimeout(
@@ -79,6 +81,7 @@ function ScratchPair({
     };
   }, [inView, pairIndex, reduceMotion]);
 
+  const revealed = phase === "done" || reduceMotion;
   const showScratch = dims.w > 0 && dims.h > 0;
 
   const strikeTransition = reduceMotion
@@ -86,16 +89,23 @@ function ScratchPair({
     : { duration: STRIKE_S, ease: "easeOut" as const };
 
   return (
-    <span className="scratch-pair inline-flex items-baseline gap-x-1">
+    <span
+      className={`scratch-pair inline-flex items-baseline${stripOriginal ? "" : " gap-[0.12em]"}`}
+      style={{ marginInline: stripOriginal ? 0 : "0.05em 0" }}
+    >
       <motion.span
-        className="relative inline-block max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
+        className="relative inline-block min-w-0 max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
         style={{ verticalAlign: "baseline" }}
         aria-hidden={stripOriginal}
+        initial={false}
         animate={{
           opacity: stripOriginal ? 0 : 1,
-          maxWidth: stripOriginal ? 0 : 480,
+          maxWidth: stripOriginal ? 0 : dims.w > 0 ? dims.w : 480,
         }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
+        transition={{
+          duration: stripOriginal && !reduceMotion ? STRIP_S : 0.4,
+          ease: "easeInOut",
+        }}
       >
         <span ref={textRef} className="inline">
           {original}
@@ -131,20 +141,21 @@ function ScratchPair({
                 pathLength: strikeTransition,
                 opacity: {
                   duration:
-                    phase === "idle" ? 0 : stripOriginal ? 0.35 : 0.05,
+                    phase === "idle" ? 0 : stripOriginal ? STRIP_S : 0.05,
                 },
               }}
             />
           </svg>
         ) : null}
       </motion.span>
+
       <motion.span
-        className="inline-block max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
+        className="inline-block min-w-0 max-w-full whitespace-nowrap align-baseline overflow-x-clip overflow-y-visible"
         style={{ verticalAlign: "baseline" }}
         initial={false}
         animate={{
-          opacity: phase === "done" ? 1 : 0,
-          maxWidth: phase === "done" ? 280 : 0,
+          opacity: revealed ? 1 : 0,
+          maxWidth: revealed ? "max-content" : 0,
         }}
         transition={{
           duration: reduceMotion ? 0 : 0.45,
@@ -162,12 +173,25 @@ export default function TaglineScratch() {
   const rootRef = useRef<HTMLParagraphElement>(null);
   const inView = useInView(rootRef, { once: true, amount: 0.5 });
   const reduceMotionPref = useReducedMotion();
-  const reduceMotion = reduceMotionPref === true;
+  const [motionPaused, setMotionPaused] = useState(
+    () =>
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("motion-paused"),
+  );
+  const reduceMotion = reduceMotionPref === true || motionPaused;
   const [stripOriginals, setStripOriginals] = useState(false);
 
   useEffect(() => {
+    const onMotionPause = (e: Event) => {
+      setMotionPaused(Boolean((e as CustomEvent<{ paused?: boolean }>).detail?.paused));
+    };
+    window.addEventListener("motion-pause-change", onMotionPause);
+    return () => window.removeEventListener("motion-pause-change", onMotionPause);
+  }, []);
+
+  useEffect(() => {
     if (!inView) return;
-    const delayAfterLastReveal = reduceMotion ? 0 : PAIR_COUNT * STRIKE_MS;
+    const delayAfterLastReveal = reduceMotion ? 0 : INITIAL_DELAY_MS + PAIR_COUNT * STRIKE_MS;
     const id = window.setTimeout(
       () => setStripOriginals(true),
       delayAfterLastReveal + REMOVE_SCRATCHED_AFTER_MS,
@@ -176,37 +200,37 @@ export default function TaglineScratch() {
   }, [inView, reduceMotion]);
 
   return (
-    <p
-      ref={rootRef}
-      id="tagline"
-      style={{
-        fontWeight: "500",
-        fontSize: "2.5rem",
-        color: "rgba(var(--primary-color), 1)",
-        lineHeight: 1.2,
-      }}
-      className="m-0 w-full text-center md:text-start"
-    >
-      I am{" "}
-      <ScratchPair
-        pairIndex={0}
-        inView={inView}
-        original="usually"
-        replacement="now"
-        reduceMotion={reduceMotion}
-        stripOriginal={stripOriginals}
-      />
-      {" "}
-      stuck between Figma and{" "}
-      <ScratchPair
-        pairIndex={1}
-        inView={inView}
-        original="VS Code"
-        replacement="Claude Code"
-        reduceMotion={reduceMotion}
-        stripOriginal={stripOriginals}
-      />
-      .
-    </p>
+    <MotionConfig reducedMotion={reduceMotion ? "always" : "user"}>
+      <p ref={rootRef} id="tagline" className="tagline w-full min-w-0">
+        {"I love "}
+        <ScratchPair
+          pairIndex={0}
+          inView={inView}
+          original="mocking up"
+          replacement="coding"
+          reduceMotion={reduceMotion}
+          stripOriginal={stripOriginals}
+        />
+        {" interfaces and "}
+        <ScratchPair
+          pairIndex={1}
+          inView={inView}
+          original="refactoring"
+          replacement="designing"
+          reduceMotion={reduceMotion}
+          stripOriginal={stripOriginals}
+        />
+        {" the "}
+        <ScratchPair
+          pairIndex={2}
+          inView={inView}
+          original="backend"
+          replacement="experience"
+          reduceMotion={reduceMotion}
+          stripOriginal={stripOriginals}
+        />
+        .
+      </p>
+    </MotionConfig>
   );
 }

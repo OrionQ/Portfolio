@@ -1,0 +1,19 @@
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  color: rgba(var(--foreground), 1);
+  background: rgba(var(--background), 1);
+  font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+html.dark .tagline {
+  text-shadow: 0 0 16px rgba(var(--primary-color), 0.45);
+}

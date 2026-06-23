@@ -631,14 +631,17 @@ export default function HeroStarfield() {
     const resize = () => {
       const cssW = Math.max(canvas.clientWidth, 1);
       const cssH = Math.max(canvas.clientHeight, 1);
-      const sizeChanged =
-        Math.abs(cssW - lastCssW) > 2 || Math.abs(cssH - lastCssH) > 2;
+      // Only regenerate the star field on a real width change. Height-only
+      // changes happen constantly on mobile as the browser's address bar
+      // collapses/expands during scroll (we size off 100dvh) — regenerating
+      // stars on every one of those produced a visible flicker.
+      const widthChanged = Math.abs(cssW - lastCssW) > 2;
       lastCssW = cssW;
       lastCssH = cssH;
       width = canvas.width = cssW * dpr;
       height = canvas.height = cssH * dpr;
       readColors();
-      if (sizeChanged) initStars();
+      if (widthChanged) initStars();
       if (reduced) render(performance.now());
     };
 

@@ -558,10 +558,22 @@ export default function HeroStarfield() {
     };
 
     const readColors = () => {
-      primary = [...readRgb("--primary-color", primary)];
-      secondary = [...readRgb("--secondary-color", secondary)];
-      dark = document.documentElement.classList.contains("dark");
-      buildIcons();
+      const nextPrimary = readRgb("--primary-color", primary);
+      const nextSecondary = readRgb("--secondary-color", secondary);
+      const nextDark = document.documentElement.classList.contains("dark");
+      const colorsChanged =
+        nextDark !== dark ||
+        nextPrimary[0] !== primary[0] ||
+        nextPrimary[1] !== primary[1] ||
+        nextPrimary[2] !== primary[2];
+      primary = [...nextPrimary];
+      secondary = [...nextSecondary];
+      dark = nextDark;
+      // Rebuilding icons allocates new <img> elements that start unloaded,
+      // so only do it when the theme/color actually changed — not on every
+      // resize tick, where it could make a revealed icon blink out for a
+      // frame while the new image decodes.
+      if (colorsChanged || icons.length === 0) buildIcons();
     };
 
     const addAmbient = (x: number, y: number, z: number) => {
@@ -638,8 +650,18 @@ export default function HeroStarfield() {
       const widthChanged = Math.abs(cssW - lastCssW) > 2;
       lastCssW = cssW;
       lastCssH = cssH;
-      width = canvas.width = cssW * dpr;
-      height = canvas.height = cssH * dpr;
+
+      const backingW = Math.round(cssW * dpr);
+      const backingH = Math.round(cssH * dpr);
+      // Assigning canvas.width/height clears the bitmap even when set to
+      // an unchanged value. ResizeObserver fires on sub-pixel dvh jitter
+      // during mobile scroll, so without this guard we were still clearing
+      // + redrawing on every tick — the residual flicker.
+      if (backingW !== width || backingH !== height) {
+        width = canvas.width = backingW;
+        height = canvas.height = backingH;
+      }
+
       readColors();
       if (widthChanged) initStars();
       if (reduced) render(performance.now());

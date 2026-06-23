@@ -147,12 +147,12 @@
 }
 
 :root[data-theme="retro"].dark {
-  --background: 19, 70, 134;
+  --background: 10, 38, 72;
   --foreground: 253, 244, 227;
   --primary-color: 253, 244, 227;
   --secondary-color: 254, 178, 26;
   --floating-color: 92, 11, 0;
   --ambience-color: 137, 26, 12;
-  --tint-color: 19, 70, 134;
+  --tint-color: 10, 38, 72;
   --shadow-color: 0, 0, 0, 0.5;
 }

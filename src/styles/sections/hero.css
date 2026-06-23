@@ -90,9 +90,14 @@
 
 /* Small phones only: pin hero, lift text, step through each illustration */
 @media (max-width: 431px) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .hero-block {
-    --hero-scroll-steps: 4;
-    --hero-segment-height: clamp(13rem, 38dvh, 22rem);
+    --hero-scroll-steps: 8;
+    /* text lift + rotate/hold × 3 illustrations + overshoot past CAPTURE */
+    --hero-segment-height: 125dvh;
     --hero-scroll-runway: calc(var(--hero-scroll-steps) * var(--hero-segment-height));
     min-height: calc(100dvh + var(--hero-scroll-runway));
     padding-bottom: 0;
@@ -131,8 +136,7 @@
     pointer-events: auto;
     --hero-text-top: clamp(2.75rem, 12vh, 4.5rem);
     top: calc(50% + (var(--hero-text-top) - 50%) * var(--hero-progress));
-    transform: translateY(calc(-50% * (1 - var(--hero-progress))));
-    will-change: top, transform;
+    transform: translate3d(0, calc(-50% * (1 - var(--hero-progress))), 0);
   }
 
   .hero__text {
@@ -140,7 +144,7 @@
   }
 
   .hero-chevron {
-    bottom: clamp(0.75rem, 2vh, 1.25rem);
-    opacity: calc(1 - min(1, var(--hero-scroll-step) / 3) * 0.85);
+    bottom: clamp(1.25rem, 3.5vh, 1.25rem);
+    translate: -50% 0;
   }
 }

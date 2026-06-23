@@ -15,9 +15,33 @@
 </button>
 
 <script>
+  const HERO_RUNWAY_THRESHOLD = 1;
+  const STAGED_HERO_MIN_RUNWAY = 50;
+
+  const getStagedHeroRunwayProgress = () => {
+    const heroBlock = document.querySelector<HTMLElement>(".hero-block");
+    if (!heroBlock) return null;
+
+    const runway = Math.max(heroBlock.offsetHeight - window.innerHeight, 0);
+    if (runway <= STAGED_HERO_MIN_RUNWAY) return null;
+
+    const scrolled = Math.min(Math.max(-heroBlock.getBoundingClientRect().top, 0), runway);
+    return scrolled / runway;
+  };
+
   function updateBackToTopVisibility() {
     const btn = document.querySelector(".back-to-top");
     if (!btn || !(btn instanceof HTMLElement)) return;
+
+    const heroProgress = getStagedHeroRunwayProgress();
+    if (heroProgress !== null) {
+      if (heroProgress >= HERO_RUNWAY_THRESHOLD) {
+        btn.classList.add("back-to-top-visible");
+      } else {
+        btn.classList.remove("back-to-top-visible");
+      }
+      return;
+    }
 
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     if (scrollHeight <= 0) {
@@ -38,6 +62,7 @@
     if (!btn || !(btn instanceof HTMLElement)) return;
 
     window.addEventListener("scroll", updateBackToTopVisibility, { passive: true });
+    window.addEventListener("resize", updateBackToTopVisibility, { passive: true });
     updateBackToTopVisibility();
 
     btn.addEventListener("click", () => {

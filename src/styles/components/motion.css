@@ -37,6 +37,12 @@ html.motion-paused .animate-float-slow {
   }
 }
 
+@media (max-width: 431px) {
+  .hero-actions {
+    bottom: clamp(2.5rem, 7vh, 5rem);
+  }
+}
+
 .motion-pause-wrap {
   z-index: 1;
 }

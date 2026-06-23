@@ -41,6 +41,8 @@ const MIN_SPIN_FAST = 0.55;
 const MAX_YAW_SPEED = 0.055;
 // seconds the field pauses on each constellation
 const HOLD = 6;
+// how far along the inbound arc to BUILD at rest (0 = previous stop, 1 = BUILD)
+const PREBUILD_LAND_FRAC = 0.92;
 
 // constellation placement on the sphere
 const R_CONST = 0.6;
@@ -306,12 +308,23 @@ export default function HeroStarfield() {
       .map((s) => ({ idx: s.idx, target: s.target }))
       .sort((a, b) => a.target - b.target);
 
+    // BUILD (idx 0) — laptop / "coding" — first stop on load and in the auto-cycle
+    const START_CONST_IDX = 0;
+    const startShape = shapes[START_CONST_IDX];
+    const startOrderIdx = Math.max(0, order.findIndex((o) => o.idx === START_CONST_IDX));
+    const buildTarget = startShape.target;
+    const prevOrderIdx = (startOrderIdx - 1 + order.length) % order.length;
+    const prevTarget = shapes[order[prevOrderIdx].idx].target;
+    const arcToBuild =
+      ((((buildTarget - prevTarget) % (2 * Math.PI)) + 3 * Math.PI) % (2 * Math.PI)) - Math.PI;
+    const preBuildYaw = buildTarget - arcToBuild * (1 - PREBUILD_LAND_FRAC);
+
     // rotation state machine (ease-in-out spin → hold → spin)
-    let yaw = 0;
-    let holding = false;
-    let holdIdx = -1;
-    let holdTimer = 0;
-    let pointer = 0;
+    let yaw = reduced ? buildTarget : preBuildYaw;
+    let holding = reduced;
+    let holdIdx = reduced ? START_CONST_IDX : -1;
+    let holdTimer = reduced ? HOLD / 2 : 0;
+    let pointer = startOrderIdx;
     let focusIdx = -1;
     let rotating = false;
     let rotFrom = 0;
@@ -320,6 +333,163 @@ export default function HeroStarfield() {
     let rotDuration = 1;
     let spinGoal = 0;
     let hoverSpin = false;
+
+    // pinned-hero scroll scrub (Apple-style: scroll position drives yaw + reveals)
+    let scrollScrubActive = false;
+    let scrollPhase = 0;
+    let scrubSrcIdx = -1;
+    let scrubSrcFade = 0;
+    let scrubDstIdx = -1;
+    let scrubDstFade = 0;
+    let scrollHandoffYaw: number | null = null;
+
+    const constellationTargets = shapes.map((s) => s.target);
+    // Fraction of each hold segment used for fade in/out (mirrors desktop ~0.4s / ~0.45s on HOLD)
+    const SCRUB_FADE_IN = 0.1;
+    const SCRUB_FADE_OUT = 0.1;
+
+    const scrubHoldFade = (localT: number) => {
+      let fin = 1;
+      if (localT < SCRUB_FADE_IN) {
+        fin = easeInOutCubic(localT / SCRUB_FADE_IN);
+      }
+      let fout = 1;
+      if (localT > 1 - SCRUB_FADE_OUT) {
+        fout = easeInOutCubic((1 - localT) / SCRUB_FADE_OUT);
+      }
+      return Math.min(fin, fout);
+    };
+
+    const revealScrubConstellations = (phase: number) => {
+      scrubSrcIdx = -1;
+      scrubSrcFade = 0;
+      scrubDstIdx = -1;
+      scrubDstFade = 0;
+
+      const holds: { idx: number; start: number }[] = [
+        { idx: 0, start: 2 },
+        { idx: 1, start: 4 },
+        { idx: 2, start: 6 },
+      ];
+
+      for (const { idx, start } of holds) {
+        if (phase >= start && phase < start + 1) {
+          const fade = scrubHoldFade(phase - start);
+          if (fade > 0.001) {
+            scrubDstIdx = idx;
+            scrubDstFade = fade;
+          }
+          return;
+        }
+      }
+    };
+    // Must match MOBILE_SCROLL_STEPS in index.astro (text + 3× rotate/hold + overshoot)
+    const SCROLL_SEGMENTS: { from: number; to: number }[] = [
+      { from: -1, to: -1 }, // 0 text lift — resolved to preBuildYaw below
+      { from: -1, to: 0 }, // 1 rotate → BUILD
+      { from: 0, to: 0 }, // 2 hold BUILD
+      { from: 0, to: 1 }, // 3 rotate → DESIGN
+      { from: 1, to: 1 }, // 4 hold DESIGN
+      { from: 1, to: 2 }, // 5 rotate → CAPTURE
+      { from: 2, to: 2 }, // 6 hold CAPTURE
+      { from: 2, to: -1 }, // 7 drift past CAPTURE, stop before BUILD
+    ];
+    const SCROLL_PHASE_MAX = SCROLL_SEGMENTS.length;
+
+    const yawForConstIdx = (idx: number) =>
+      idx < 0 ? preBuildYaw : constellationTargets[idx];
+
+    const applyScrollScrub = (phase: number) => {
+      rotating = false;
+      holding = false;
+
+      scrubSrcIdx = -1;
+      scrubSrcFade = 0;
+      scrubDstIdx = -1;
+      scrubDstFade = 0;
+
+      // Text lift — auto was running until the user scrolled; freeze yaw in place.
+      if (phase < 1) {
+        if (scrollHandoffYaw === null) scrollHandoffYaw = yaw;
+        revealScrubConstellations(phase);
+        return;
+      }
+
+      if (scrollHandoffYaw === null) scrollHandoffYaw = yaw;
+
+      const seg = Math.min(Math.floor(phase), SCROLL_SEGMENTS.length - 1);
+      let t = phase - seg;
+      const { from, to } = SCROLL_SEGMENTS[seg];
+      let fromYaw = yawForConstIdx(from);
+      const toYaw = yawForConstIdx(to);
+      if (seg === 1) fromYaw = scrollHandoffYaw;
+      const delta = shortestDelta(fromYaw, toYaw);
+      if (Math.abs(delta) < 1e-6) {
+        yaw = fromYaw;
+      } else {
+        t = easeInOutCubic(t);
+        yaw = fromYaw + delta * t;
+      }
+
+      revealScrubConstellations(phase);
+    };
+
+    const resumeAutocycleFromYaw = () => {
+      holding = false;
+      rotating = false;
+      const norm = ((yaw % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+      let pi = 0;
+      for (let i = 0; i < order.length; i++) {
+        if (order[i].target > norm + 1e-3) {
+          pi = i;
+          break;
+        }
+      }
+      pointer = pi;
+      startSpin(order[pointer].target, SPEED);
+    };
+
+    const syncScrollScrub = () => {
+      const block = canvas.closest(".hero-block") as HTMLElement | null;
+      if (!block) {
+        if (scrollScrubActive) {
+          scrollScrubActive = false;
+          scrollHandoffYaw = null;
+          scrubSrcIdx = -1;
+          scrubSrcFade = 0;
+          scrubDstIdx = -1;
+          scrubDstFade = 0;
+          if (focusIdx < 0) resumeAutocycleFromYaw();
+        }
+        return;
+      }
+
+      const style = getComputedStyle(block);
+      const active = style.getPropertyValue("--hero-scroll-active").trim() === "1";
+      if (!active) {
+        if (scrollScrubActive) {
+          scrollScrubActive = false;
+          scrollHandoffYaw = null;
+          scrubSrcIdx = -1;
+          scrubSrcFade = 0;
+          scrubDstIdx = -1;
+          scrubDstFade = 0;
+          if (focusIdx < 0) resumeAutocycleFromYaw();
+        }
+        return;
+      }
+
+      focusIdx = -1;
+      scrollScrubActive = true;
+      scrollPhase = Math.max(
+        0,
+        Math.min(
+          SCROLL_PHASE_MAX,
+          Number.parseFloat(style.getPropertyValue("--hero-scroll-phase")) || 0,
+        ),
+      );
+      applyScrollScrub(scrollPhase);
+    };
 
     const shortestDelta = (from: number, to: number) =>
       ((((to - from) % (2 * Math.PI)) + 3 * Math.PI) % (2 * Math.PI)) - Math.PI;
@@ -379,14 +549,6 @@ export default function HeroStarfield() {
       }
       return false;
     };
-
-    if (reduced) {
-      // settle on the first constellation, fully revealed
-      yaw = order[0].target;
-      holding = true;
-      holdIdx = order[0].idx;
-      holdTimer = HOLD / 2;
-    }
 
     const readRgb = (name: string, fallback: [number, number, number]) => {
       const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -463,13 +625,20 @@ export default function HeroStarfield() {
       }
     };
 
+    let lastCssW = 0;
+    let lastCssH = 0;
+
     const resize = () => {
       const cssW = Math.max(canvas.clientWidth, 1);
       const cssH = Math.max(canvas.clientHeight, 1);
+      const sizeChanged =
+        Math.abs(cssW - lastCssW) > 2 || Math.abs(cssH - lastCssH) > 2;
+      lastCssW = cssW;
+      lastCssH = cssH;
       width = canvas.width = cssW * dpr;
       height = canvas.height = cssH * dpr;
       readColors();
-      initStars();
+      if (sizeChanged) initStars();
       if (reduced) render(performance.now());
     };
 
@@ -498,6 +667,9 @@ export default function HeroStarfield() {
 
     const advance = (dt: number) => {
       if (reduced || document.documentElement.classList.contains("motion-paused")) return;
+
+      syncScrollScrub();
+      if (scrollScrubActive) return;
 
       if (focusIdx >= 0) {
         const tgt = shapes[focusIdx].target;
@@ -536,7 +708,9 @@ export default function HeroStarfield() {
         return;
       }
 
-      startSpin(order[pointer].target, SPEED);
+      if (startSpin(order[pointer].target, SPEED)) {
+        beginHold(order[pointer].idx);
+      }
     };
 
     const render = (now: number) => {
@@ -633,31 +807,44 @@ export default function HeroStarfield() {
 
       // reveal fade for the currently-held constellation
       let fade = 0;
-      if (holding) {
+      if (scrollScrubActive) {
+        fade = scrubDstFade;
+      } else if (holding) {
         const fin = Math.min(1, holdTimer / 0.4);
         const fout = holdTimer > HOLD - 0.45 ? Math.max(0, (HOLD - holdTimer) / 0.45) : 1;
         fade = Math.min(fin, fout);
       }
 
+      const fadeFor = (idx: number) => {
+        if (scrollScrubActive) {
+          if (idx === scrubDstIdx) return scrubDstFade;
+          if (idx === scrubSrcIdx) return scrubSrcFade;
+          return 0;
+        }
+        if (holding && idx === holdIdx) return fade;
+        return 0;
+      };
+
       // constellation stars (always present, brighter) + lines/label on reveal
       for (const c of shapes) {
         const cyShape = constCy + stagger[c.idx % stagger.length] * height;
         const { projPts, bMx, bMy, iconSize } = layoutConstellation(c, cyShape);
-        const isHeld = holding && c.idx === holdIdx;
+        const shapeFade = fadeFor(c.idx);
+        const isHeld = shapeFade > 0.001;
 
         // revealed illustration: fade the SVG icon in behind the dots
         const icon = icons[c.idx];
-        if (isHeld && fade > 0.001 && icon && icon.complete && icon.naturalWidth > 0) {
+        if (isHeld && icon && icon.complete && icon.naturalWidth > 0) {
           ctx.save();
-          ctx.globalAlpha = fade * 0.62;
+          ctx.globalAlpha = shapeFade * 0.62;
           ctx.drawImage(icon, bMx - iconSize / 2, bMy - iconSize / 2, iconSize, iconSize);
           ctx.restore();
         }
 
         // connecting lines (only when this shape is revealed)
-        if (isHeld && fade > 0.001) {
+        if (isHeld) {
           ctx.save();
-          ctx.strokeStyle = `rgba(${pr},${pg},${pb},${0.85 * fade})`;
+          ctx.strokeStyle = `rgba(${pr},${pg},${pb},${0.85 * shapeFade})`;
           ctx.lineWidth = 1.4 * dpr;
           ctx.lineCap = "round";
           ctx.beginPath();
@@ -676,12 +863,12 @@ export default function HeroStarfield() {
           let norm = (p.scale - scaleMin) / scaleRange;
           norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
           const base = 0.45 + norm * 0.4;
-          const alpha = Math.min(1, isHeld ? base + fade * 0.5 : base);
+          const alpha = Math.min(1, isHeld ? base + shapeFade * 0.5 : base);
           const isLead = i === c.lead;
           const rad =
-            Math.max(0.6, p.scale * (isLead ? 4.4 : 3.2) * dpr) * (isHeld ? 1 + fade * 0.15 : 1);
-          if (dark && isHeld && fade > 0.15) {
-            drawHalo(ctx, p.sx, p.sy, rad, pr, pg, pb, alpha * fade);
+            Math.max(0.6, p.scale * (isLead ? 4.4 : 3.2) * dpr) * (isHeld ? 1 + shapeFade * 0.15 : 1);
+          if (dark && isHeld && shapeFade > 0.15) {
+            drawHalo(ctx, p.sx, p.sy, rad, pr, pg, pb, alpha * shapeFade);
           }
           drawStarShape(
             ctx,
@@ -696,8 +883,10 @@ export default function HeroStarfield() {
       }
 
       // labels last so they always paint above icons and stars
-      if (holding && fade > 0.02) {
-        const c = shapes[holdIdx];
+      const labelIdx = scrollScrubActive ? scrubDstIdx : holding ? holdIdx : -1;
+      const labelFade = scrollScrubActive ? scrubDstFade : fade;
+      if (labelIdx >= 0 && labelFade > 0.02) {
+        const c = shapes[labelIdx];
         const cyShape = constCy + stagger[c.idx % stagger.length] * height;
         const { bMx, bMy, iconSize } = layoutConstellation(c, cyShape);
         const iconTop = bMy - iconSize / 2;
@@ -715,7 +904,7 @@ export default function HeroStarfield() {
         ctx.font = `600 ${fontSize}px Gabarito, system-ui, sans-serif`;
         ctx.textAlign = "center";
         ctx.textBaseline = "bottom";
-        ctx.fillStyle = `rgba(${pr},${pg},${pb},${0.9 * fade})`;
+        ctx.fillStyle = `rgba(${pr},${pg},${pb},${0.9 * labelFade})`;
         ctx.fillText(c.label, bMx, labelY);
         ctx.restore();
       }
@@ -730,25 +919,33 @@ export default function HeroStarfield() {
     render(last);
 
     const onFocus = (e: Event) => {
-      const detail = (e as CustomEvent).detail;
+      const raw = (e as CustomEvent).detail;
+      const scroll =
+        typeof raw === "object" && raw !== null && "scroll" in raw
+          ? Boolean((raw as { scroll?: boolean }).scroll)
+          : false;
+      const detail =
+        typeof raw === "number"
+          ? raw
+          : typeof raw === "object" && raw !== null && "idx" in raw
+            ? (raw as { idx: number }).idx
+            : -1;
+
       if (typeof detail === "number" && detail >= 0 && detail < shapes.length) {
+        scrollScrubActive = false;
         focusIdx = detail;
+        if (scroll) {
+          yaw = shapes[detail].target;
+          rotating = false;
+          beginHold(detail);
+          return;
+        }
         holding = false;
         startSpin(shapes[detail].target, FAST, MIN_SPIN_FAST, true);
       } else {
+        if (scrollScrubActive) return;
         focusIdx = -1;
-        holding = false;
-        rotating = false;
-        const norm = ((yaw % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-        let pi = 0;
-        for (let i = 0; i < order.length; i++) {
-          if (order[i].target > norm + 1e-3) {
-            pi = i;
-            break;
-          }
-        }
-        pointer = pi;
-        startSpin(order[pointer].target, SPEED);
+        resumeAutocycleFromYaw();
       }
     };
     window.addEventListener("hero-focus", onFocus as EventListener);

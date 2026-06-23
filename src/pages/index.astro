@@ -17,10 +17,12 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   const heroBlock = document.querySelector<HTMLElement>(".hero-block");
   const headerOuter = document.querySelector<HTMLElement>(".header-outer");
   const PIN_MAX = 431;
-  const MOBILE_SCROLL_STEPS = 4;
+  const MOBILE_SCROLL_STEPS = 8;
 
   let hoverChipIndex = -1;
   let lastScrollFocus = -2;
+  let pinRaf = 0;
+  let userInitiatedHeroScroll = false;
 
   const canHoverChips = () => window.innerWidth >= PIN_MAX;
 
@@ -65,39 +67,16 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     return { runway, segment, steps, staged };
   };
 
-  const getScrollStep = () => {
-    const { segment, steps, staged } = getRunwayInfo();
-    if (!staged || segment <= 0) return 0;
-    return Math.min(Math.floor(getCurrentScrolled() / segment), steps - 1);
-  };
-
-  const focusForScrollStep = (step: number) => (step >= 1 ? step - 1 : -1);
-
   const dispatchHeroFocus = (detail: number) => {
     if (detail === lastScrollFocus) return;
     lastScrollFocus = detail;
     window.dispatchEvent(new CustomEvent("hero-focus", { detail }));
   };
 
-  const applyScrollDrivenFocus = () => {
-    if (hoverChipIndex >= 0) return;
-    if (window.innerWidth >= PIN_MAX) {
-      dispatchHeroFocus(-1);
-      return;
-    }
-    const { staged, runway } = getRunwayInfo();
-    if (!staged || !heroBlock) {
-      dispatchHeroFocus(-1);
-      return;
-    }
-
-    const rawScrolled = Math.max(-heroBlock.getBoundingClientRect().top, 0);
-    if (runway > 0 && rawScrolled >= runway - 1) {
-      dispatchHeroFocus(-1);
-      return;
-    }
-
-    dispatchHeroFocus(focusForScrollStep(getScrollStep()));
+  const markHeroScrollIntent = () => {
+    if (!isPinnedHero() || userInitiatedHeroScroll || prefersReducedMotion()) return;
+    userInitiatedHeroScroll = true;
+    updateHeroScrollPin();
   };
 
   const updateHeroScrollPin = () => {
@@ -107,7 +86,11 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       heroBlock.style.removeProperty("--hero-progress");
       heroBlock.style.removeProperty("--hero-pin-top");
       heroBlock.style.removeProperty("--hero-scroll-step");
+      heroBlock.style.removeProperty("--hero-scroll-phase");
+      heroBlock.style.removeProperty("--hero-scroll-active");
+      heroBlock.style.removeProperty("--hero-runway-progress");
       lastScrollFocus = -2;
+      userInitiatedHeroScroll = false;
       return;
     }
 
@@ -121,32 +104,86 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (prefersReducedMotion()) {
       heroBlock.style.setProperty("--hero-progress", "1");
       heroBlock.style.setProperty("--hero-scroll-step", String(MOBILE_SCROLL_STEPS - 1));
-      applyScrollDrivenFocus();
+      heroBlock.style.setProperty("--hero-scroll-phase", String(MOBILE_SCROLL_STEPS));
+      heroBlock.style.setProperty("--hero-scroll-active", "1");
       return;
     }
 
     if (runway <= 0) {
       heroBlock.style.setProperty("--hero-progress", "0");
       heroBlock.style.setProperty("--hero-scroll-step", "0");
+      heroBlock.style.setProperty("--hero-scroll-phase", "0");
+      heroBlock.style.setProperty("--hero-scroll-active", "0");
       return;
     }
 
     const scrolled = getCurrentScrolled();
-    const step = staged && segment > 0 ? Math.min(Math.floor(scrolled / segment), MOBILE_SCROLL_STEPS - 1) : 0;
-    const textProgress = staged
-      ? Math.min(1, scrolled / segment)
-      : scrolled / runway;
+    const atHeroTop = scrolled <= 2;
+
+    if (!atHeroTop && scrolled > 2) userInitiatedHeroScroll = true;
+
+    const phase = staged && segment > 0 ? scrolled / segment : 0;
+    const step = staged ? Math.min(Math.floor(phase), MOBILE_SCROLL_STEPS - 1) : 0;
+    const textProgress = staged ? Math.min(1, phase) : scrolled / runway;
+    const runwayProgress = runway > 0 ? scrolled / runway : 0;
+
+    heroBlock.style.setProperty("--hero-runway-progress", String(runwayProgress));
+
+    if (hoverChipIndex >= 0) {
+      heroBlock.style.setProperty("--hero-scroll-active", "0");
+      return;
+    }
+
+    const rawScrolled = Math.max(-heroBlock.getBoundingClientRect().top, 0);
+    const exited = runway > 0 && rawScrolled >= runway - 1;
+    if (exited) {
+      heroBlock.style.setProperty("--hero-progress", String(textProgress));
+      heroBlock.style.setProperty("--hero-scroll-step", String(step));
+      heroBlock.style.setProperty("--hero-scroll-active", "0");
+      heroBlock.style.setProperty("--hero-scroll-phase", String(MOBILE_SCROLL_STEPS));
+      dispatchHeroFocus(-1);
+      return;
+    }
+
+    if (atHeroTop) {
+      userInitiatedHeroScroll = false;
+      heroBlock.style.setProperty("--hero-progress", "0");
+      heroBlock.style.setProperty("--hero-scroll-step", "0");
+      heroBlock.style.setProperty("--hero-scroll-phase", "0");
+      heroBlock.style.setProperty("--hero-scroll-active", "0");
+      return;
+    }
 
     heroBlock.style.setProperty("--hero-progress", String(textProgress));
     heroBlock.style.setProperty("--hero-scroll-step", String(step));
-    applyScrollDrivenFocus();
+
+    if (!userInitiatedHeroScroll) {
+      heroBlock.style.setProperty("--hero-scroll-phase", "0");
+      heroBlock.style.setProperty("--hero-scroll-active", "0");
+      return;
+    }
+
+    heroBlock.style.setProperty("--hero-scroll-phase", String(Math.min(phase, MOBILE_SCROLL_STEPS)));
+    heroBlock.style.setProperty("--hero-scroll-active", "1");
+  };
+
+  const scheduleHeroScrollPin = () => {
+    if (pinRaf) return;
+    pinRaf = requestAnimationFrame(() => {
+      pinRaf = 0;
+      updateHeroScrollPin();
+    });
   };
 
   const releaseChipHover = () => {
     if (hoverChipIndex < 0) return;
     hoverChipIndex = -1;
     lastScrollFocus = -2;
-    applyScrollDrivenFocus();
+    if (isPinnedHero()) {
+      updateHeroScrollPin();
+      return;
+    }
+    dispatchHeroFocus(-1);
   };
 
   const syncChipHoverMode = () => {
@@ -154,14 +191,26 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   };
 
   updateHeroScrollPin();
-  window.addEventListener("scroll", updateHeroScrollPin, { passive: true });
+  window.addEventListener("scroll", scheduleHeroScrollPin, { passive: true });
+  window.addEventListener("wheel", markHeroScrollIntent, { passive: true });
+  window.addEventListener("touchmove", markHeroScrollIntent, { passive: true });
+  window.addEventListener(
+    "keydown",
+    (e) => {
+      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "End", "Home"].includes(e.key)) {
+        markHeroScrollIntent();
+      }
+    },
+    { passive: true },
+  );
   window.addEventListener("resize", () => {
+    if (!isPinnedHero()) userInitiatedHeroScroll = false;
     updateHeroScrollPin();
     syncChipHoverMode();
   });
   window.addEventListener("motion-pause-change", updateHeroScrollPin);
 
-  // Chip hover: enabled above 431px; pinned hero scroll owns focus below that.
+  // Chip hover: enabled above 431px; pinned scroll scrubs sphere rotation below that.
   const chips = document.querySelectorAll<HTMLElement>(".roles .tag");
   chips.forEach((chip, i) => {
     chip.addEventListener("mouseenter", () => {

@@ -4,36 +4,52 @@ import ProfileImage from "../components/profile-image/ProfileImage.astro";
 ---
 
 <div class="about-me w-full min-w-0 py-8" id="about-me">
-  <div class="about-me__top flex flex-col lg:flex-row gap-4 lg:items-stretch">
+  <div
+    class="about-me__top flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch"
+  >
     <Card cardType="secondary" className="about-me__intro-mobile lg:hidden">
       <p class="intro text-lg">
-        My name is <span class="underline underline-offset-2">Xiaolei Qin (秦啸雷)</span>, but you may
-        call me Orion. I'm a HCI/UX master student at UT Austin. I used to be a software engineer
-        passionate about design, and now I'm learning about it! I care deeply about user experience
-        and aim to bridge the gap between engineers and designers.
+        My name is <span class="underline underline-offset-2"
+          >Xiaolei Qin (秦啸雷)</span
+        >, but you may call me Orion. I was an HCI/UX master's student at UT
+        Austin. I used to be a software engineer passionate about design, and
+        now I'm learning about it! I care deeply about user experience and aim
+        to bridge the gap between engineers and designers. Now that AI is here,
+        it is inevitably going to change the way we design and develop, but in
+        the meantime, I am learning to use it responsibly to build more
+        responsible and ethical products.
       </p>
     </Card>
 
-    <div class="about-me__image w-full lg:w-auto lg:order-2 shrink-0 flex justify-center lg:justify-start">
+    <Card
+      cardType="secondary"
+      className="about-me__card about-me__intro-desktop hidden lg:flex min-h-0 min-w-0"
+    >
+      <p class="intro text-lg">
+        My name is <span class="underline underline-offset-2"
+          >Xiaolei Qin (秦啸雷)</span
+        >, but you may call me Orion. I was an HCI/UX master's student at UT
+        Austin. I used to be a software engineer passionate about design, and
+        now I'm learning about it! I care deeply about user experience and aim
+        to bridge the gap between engineers and designers. Now that AI is here,
+        it is inevitably going to change the way we design and develop, but in
+        the meantime, I am learning to use it responsibly to build more
+        responsible and ethical products.
+      </p>
+    </Card>
+
+    <div class="about-me__image w-full shrink-0 flex justify-center">
       <ProfileImage alt="Portrait of Xiaolei Qin" width={250} />
     </div>
 
-    <div class="about-me__cards-row flex flex-1 min-w-0 flex-col lg:flex-row gap-4 lg:order-1">
-      <div class="flex flex-1 min-w-[min(100%,20rem)] flex-col gap-4 min-h-0">
-        <Card className="about-me__card flex flex-1 min-h-0">
-          <p class="text-lg">I cook a lot of cuisine from my province.</p>
-        </Card>
-        <Card className="about-me__card flex flex-1 min-h-0">
-          <p class="text-lg">I am always out exploring something new with my friends.</p>
-        </Card>
-      </div>
-      <Card cardType="secondary" className="about-me__card about-me__intro-desktop hidden lg:flex flex-1 min-w-[min(100%,20rem)] min-h-0">
-        <p class="intro text-lg">
-        My name is <span class="underline underline-offset-2">Xiaolei Qin (秦啸雷)</span>, but you may
-        call me Orion. I'm a HCI/UX master student at UT Austin. I used to be a software engineer
-        passionate about design, and now I'm learning about it! I care deeply about user experience
-        and aim to bridge the gap between engineers and designers.
-      </p>
+    <div class="about-me__side-cards flex flex-col gap-4 min-h-0 min-w-0">
+      <Card className="about-me__card flex flex-1 min-h-0">
+        <p class="text-lg">I cook a lot of dishes from my home province.</p>
+      </Card>
+      <Card className="about-me__card flex flex-1 min-h-0">
+        <p class="text-lg">
+          I am always out exploring something new with my friends.
+        </p>
       </Card>
     </div>
   </div>
@@ -41,8 +57,9 @@ import ProfileImage from "../components/profile-image/ProfileImage.astro";
   <div class="about-me__bottom flex flex-col gap-4 mt-4">
     <Card className="w-full">
       <p class="text-lg">
-        Traveling is how I learn about the world. I am always planning to travel somewhere new, and
-        there are so many views and stories are waiting for me to discover.
+        Traveling is how I learn about the world. I am always planning to travel
+        somewhere new, and there are so many views and stories waiting for me
+        to discover.
       </p>
     </Card>
     <Card className="w-full">

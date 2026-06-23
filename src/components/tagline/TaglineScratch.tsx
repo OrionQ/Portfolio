@@ -216,7 +216,7 @@ export default function TaglineScratch() {
           pairIndex={1}
           inView={inView}
           original="refactoring"
-          replacement="designing"
+          replacement="improving"
           reduceMotion={reduceMotion}
           stripOriginal={stripOriginals}
         />
@@ -224,8 +224,8 @@ export default function TaglineScratch() {
         <ScratchPair
           pairIndex={2}
           inView={inView}
-          original="backend"
-          replacement="experience"
+          original="codebase"
+          replacement="user experience"
           reduceMotion={reduceMotion}
           stripOriginal={stripOriginals}
         />

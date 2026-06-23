@@ -18,19 +18,41 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   const headerOuter = document.querySelector<HTMLElement>(".header-outer");
   const PIN_MAX = 431;
   const MOBILE_SCROLL_STEPS = 8;
-  const MOBILE_SEGMENT_DVH = 125;
+  const MOBILE_SEGMENT_VH = 82;
 
   let hoverChipIndex = -1;
   let lastScrollFocus = -2;
   let pinRaf = 0;
   let userInitiatedHeroScroll = false;
   let pinnedRunwayPx = 0;
+  let stableViewportHeight = 0;
+  let stableViewportWidth = window.innerWidth;
   let cachedPinTop = 0;
 
   const canHoverChips = () => window.innerWidth >= PIN_MAX;
 
-  const getViewportHeight = () =>
-    window.visualViewport?.height ?? window.innerHeight;
+  const measureLargeViewportHeight = () => {
+    const probe = document.createElement("div");
+    probe.style.cssText =
+      "position:fixed;inset:0 auto auto 0;width:1px;height:100lvh;visibility:hidden;pointer-events:none;";
+    document.body.append(probe);
+    const measured = probe.offsetHeight;
+    probe.remove();
+    return measured || Math.max(window.innerHeight, window.visualViewport?.height ?? 0);
+  };
+
+  const syncStableViewport = () => {
+    if (!heroBlock) return;
+    stableViewportHeight = measureLargeViewportHeight();
+    stableViewportWidth = window.innerWidth;
+    pinnedRunwayPx =
+      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_VH * (stableViewportHeight / 100);
+    heroBlock.style.setProperty(
+      "--hero-layout-height",
+      `${stableViewportHeight}px`,
+    );
+    heroBlock.style.setProperty("--hero-scroll-runway", `${pinnedRunwayPx}px`);
+  };
 
   const invalidatePinnedRunway = () => {
     pinnedRunwayPx = 0;
@@ -38,17 +60,18 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
   const measurePinnedRunway = () => {
     if (!heroBlock) return 0;
-    const measured = Math.max(heroBlock.offsetHeight - getViewportHeight(), 0);
-    const fromSegments =
-      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_DVH * (getViewportHeight() / 100);
-    return measured > 0 ? measured : fromSegments;
+    if (stableViewportHeight <= 0) syncStableViewport();
+    return (
+      pinnedRunwayPx ||
+      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_VH * (stableViewportHeight / 100)
+    );
   };
 
   const getHeroScrollRunway = () => {
     if (!heroBlock) return 0;
     if (!isPinnedHero()) {
       pinnedRunwayPx = 0;
-      return Math.max(heroBlock.offsetHeight - getViewportHeight(), 0);
+      return Math.max(heroBlock.offsetHeight - window.innerHeight, 0);
     }
     if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
     return pinnedRunwayPx;
@@ -223,6 +246,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (!canHoverChips()) releaseChipHover();
   };
 
+  syncStableViewport();
   syncPinTop();
   updateHeroScrollPin();
   window.addEventListener("scroll", scheduleHeroScrollPin, { passive: true });
@@ -231,7 +255,6 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   window.visualViewport?.addEventListener("resize", () => {
     if (!isPinnedHero()) return;
     syncPinTop();
-    if (!userInitiatedHeroScroll) invalidatePinnedRunway();
     scheduleHeroScrollPin();
   });
   window.addEventListener(
@@ -245,14 +268,21 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   );
   window.addEventListener("resize", () => {
     syncPinTop();
+    const widthChanged = Math.abs(window.innerWidth - stableViewportWidth) > 20;
+    if (widthChanged) syncStableViewport();
     if (!isPinnedHero()) {
       userInitiatedHeroScroll = false;
-      invalidatePinnedRunway();
-    } else if (!userInitiatedHeroScroll) {
       invalidatePinnedRunway();
     }
     updateHeroScrollPin();
     syncChipHoverMode();
+  });
+  window.addEventListener("orientationchange", () => {
+    window.setTimeout(() => {
+      syncStableViewport();
+      syncPinTop();
+      updateHeroScrollPin();
+    }, 150);
   });
   window.addEventListener("motion-pause-change", updateHeroScrollPin);
 

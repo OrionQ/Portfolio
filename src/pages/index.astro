@@ -18,7 +18,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   const headerOuter = document.querySelector<HTMLElement>(".header-outer");
   const PIN_MAX = 431;
   const MOBILE_SCROLL_STEPS = 8;
-  const MOBILE_SEGMENT_VH = 125;
+  const MOBILE_SEGMENT_DVH = 125;
 
   let hoverChipIndex = -1;
   let lastScrollFocus = -2;
@@ -40,7 +40,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (!heroBlock) return 0;
     const measured = Math.max(heroBlock.offsetHeight - getViewportHeight(), 0);
     const fromSegments =
-      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_VH * (getViewportHeight() / 100);
+      MOBILE_SCROLL_STEPS * MOBILE_SEGMENT_DVH * (getViewportHeight() / 100);
     return measured > 0 ? measured : fromSegments;
   };
 

@@ -1,9 +1,11 @@
 ---
 import Card from "../components/card/Card.astro";
+import MotionPause from "../components/motion-pause/MotionPause.astro";
+import PhotoCarousel from "../components/photo-carousel/PhotoCarousel.astro";
 import ProfileImage from "../components/profile-image/ProfileImage.astro";
 ---
 
-<div class="about-me w-full min-w-0 py-8" id="about-me">
+<div class="about-me w-full min-w-0" id="about-me">
   <div
     class="about-me__top flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:items-stretch"
   >
@@ -44,7 +46,10 @@ import ProfileImage from "../components/profile-image/ProfileImage.astro";
 
     <div class="about-me__side-cards flex flex-col gap-4 min-h-0 min-w-0">
       <Card className="about-me__card flex flex-1 min-h-0">
-        <p class="text-lg">I cook a lot of dishes from my home province.</p>
+        <p class="text-lg">
+          I cook a lot of dishes from my home province, Yunnan, where there are
+          many varieties of cuisine because of the diverse ethnic groups.
+        </p>
       </Card>
       <Card className="about-me__card flex flex-1 min-h-0">
         <p class="text-lg">
@@ -54,16 +59,34 @@ import ProfileImage from "../components/profile-image/ProfileImage.astro";
     </div>
   </div>
 
-  <div class="about-me__bottom flex flex-col gap-4 mt-4">
-    <Card className="w-full">
-      <p class="text-lg">
-        Traveling is how I learn about the world. I am always planning to travel
-        somewhere new, and there are so many views and stories waiting for me
-        to discover.
+  <section
+    class="about-me__travel scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
+    aria-label="Travel and home"
+  >
+    <div class="about-me__travel-copy">
+      <Card className="w-full">
+        <p class="text-lg">
+          Traveling is how I learn about the world. I am always planning to travel
+          somewhere new, and there are so many views and stories waiting for me to
+          discover.
+        </p>
+      </Card>
+      <Card cardType="secondary" className="w-full">
+        <p class="text-lg">
+          I'm from Kunming, the
+          spring city in Yunnan — high plateau light, tea and flowers, and food
+          shaped by many cultures.
+        </p>
+      </Card>
+    </div>
+    <PhotoCarousel />
+    <div class="about-me__carousel-controls">
+      <p class="about-me__drag-hint">
+        <span aria-hidden="true">←</span>
+        Drag to scroll
+        <span aria-hidden="true">→</span>
       </p>
-    </Card>
-    <Card className="w-full">
-      <p class="text-lg">And I am from Kunming, Yunnan, China.</p>
-    </Card>
-  </div>
+      <MotionPause controls="about-photo-carousel" />
+    </div>
+  </section>
 </div>

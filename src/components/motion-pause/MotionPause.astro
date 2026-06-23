@@ -1,4 +1,5 @@
 ---
+const { controls = "hero tagline" } = Astro.props;
 ---
 
 <div class="motion-pause-wrap">
@@ -8,7 +9,7 @@
     id="motionPauseToggle"
     class="motion-pause-button flex items-center gap-2"
     aria-pressed="false"
-    aria-controls="hero tagline"
+    aria-controls={controls}
     aria-labelledby="motionPauseLabel"
   >
     <svg

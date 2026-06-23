@@ -1,0 +1,211 @@
+---
+import { ABOUT_PHOTOS } from "../../data/about-photos";
+
+const LOOP_SETS = 3;
+const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
+---
+
+<div class="photo-carousel" data-photo-carousel data-set-size={ABOUT_PHOTOS.length}>
+  <div class="photo-carousel__viewport" id="about-photo-carousel">
+    <ul class="photo-carousel__track">
+      {
+        loopPhotos.map((photo) => (
+          <li class="photo-carousel__slide">
+            <img
+              src={photo.src}
+              width={photo.width}
+              height={photo.height}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  const LOOP_SETS = 3;
+  const AUTO_SPEED = 0.25;
+  const RESUME_DELAY = 100;
+
+  const initPhotoCarousels = () => {
+    document.querySelectorAll("[data-photo-carousel]").forEach((root) => {
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.carouselReady === "true") return;
+      root.dataset.carouselReady = "true";
+
+      const viewport = root.querySelector(".photo-carousel__viewport");
+      const track = root.querySelector(".photo-carousel__track");
+      if (!(viewport instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
+
+      const setSize = Number.parseInt(root.dataset.setSize || "0", 10);
+      if (!setSize) return;
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isMotionPaused = () =>
+        document.documentElement.classList.contains("motion-paused");
+
+      let setWidth = 0;
+      let dragging = false;
+      let moved = false;
+      let userActive = false;
+      let startX = 0;
+      let scrollStart = 0;
+      let pointerId = -1;
+      let frameId = 0;
+      let activeTimer = 0;
+      let autoPosition = 0;
+
+      const gap = () => {
+        const styles = getComputedStyle(track);
+        const raw = styles.columnGap || styles.gap || "0";
+        const value = Number.parseFloat(raw);
+        return Number.isNaN(value) ? 0 : value;
+      };
+
+      const measureSetWidth = () => {
+        const slideGap = gap();
+        let width = 0;
+        for (let i = 0; i < setSize; i++) {
+          const slide = track.children[i];
+          if (!(slide instanceof HTMLElement)) continue;
+          width += slide.offsetWidth;
+          if (i < setSize - 1) width += slideGap;
+        }
+        setWidth = width;
+      };
+
+      const normalizeScroll = () => {
+        if (!setWidth) return;
+        const upper = setWidth * (LOOP_SETS - 1);
+        if (viewport.scrollLeft >= upper) viewport.scrollLeft -= setWidth;
+        else if (viewport.scrollLeft < setWidth * 0.5) viewport.scrollLeft += setWidth;
+        autoPosition = viewport.scrollLeft;
+      };
+
+      const markActive = () => {
+        userActive = true;
+        window.clearTimeout(activeTimer);
+        activeTimer = window.setTimeout(() => {
+          userActive = false;
+        }, RESUME_DELAY);
+      };
+
+      const layout = () => {
+        measureSetWidth();
+        if (setWidth > 0) {
+          viewport.scrollLeft = setWidth;
+          autoPosition = setWidth;
+        }
+      };
+
+      const tick = () => {
+        if (
+          !dragging &&
+          !userActive &&
+          !reduced &&
+          !isMotionPaused() &&
+          setWidth > 0
+        ) {
+          autoPosition += AUTO_SPEED;
+          const upper = setWidth * (LOOP_SETS - 1);
+          if (autoPosition >= upper) autoPosition -= setWidth;
+          else if (autoPosition < setWidth * 0.5) autoPosition += setWidth;
+          viewport.scrollLeft = autoPosition;
+        } else {
+          autoPosition = viewport.scrollLeft;
+        }
+        frameId = window.requestAnimationFrame(tick);
+      };
+
+      const onPointerDown = (e: PointerEvent) => {
+        if (e.button !== 0) return;
+        dragging = true;
+        moved = false;
+        userActive = true;
+        pointerId = e.pointerId;
+        startX = e.clientX;
+        scrollStart = viewport.scrollLeft;
+        viewport.setPointerCapture(e.pointerId);
+        viewport.classList.add("is-dragging");
+        root.classList.add("is-dragging");
+      };
+
+      const onPointerMove = (e: PointerEvent) => {
+        if (!dragging || e.pointerId !== pointerId) return;
+        const delta = e.clientX - startX;
+        if (Math.abs(delta) > 3) moved = true;
+        viewport.scrollLeft = scrollStart - delta;
+      };
+
+      const endDrag = (e: PointerEvent) => {
+        if (!dragging || e.pointerId !== pointerId) return;
+        dragging = false;
+        viewport.classList.remove("is-dragging");
+        root.classList.remove("is-dragging");
+        if (viewport.hasPointerCapture(e.pointerId)) {
+          viewport.releasePointerCapture(e.pointerId);
+        }
+        normalizeScroll();
+        markActive();
+      };
+
+      viewport.addEventListener("pointerdown", onPointerDown);
+      viewport.addEventListener("pointermove", onPointerMove);
+      viewport.addEventListener("pointerup", endDrag);
+      viewport.addEventListener("pointercancel", endDrag);
+      viewport.addEventListener(
+        "scroll",
+        () => {
+          if (dragging || userActive) normalizeScroll();
+        },
+        { passive: true },
+      );
+      viewport.addEventListener("wheel", markActive, { passive: true });
+      viewport.addEventListener(
+        "click",
+        (e) => {
+          if (moved) e.preventDefault();
+        },
+        true,
+      );
+      const rootEl = root as HTMLElement & { __carouselCleanup?: () => void };
+      rootEl.__carouselCleanup?.();
+
+      const ro = new ResizeObserver(() => {
+        layout();
+      });
+      ro.observe(track);
+
+      const stop = () => {
+        window.cancelAnimationFrame(frameId);
+        window.clearTimeout(activeTimer);
+        ro.disconnect();
+      };
+
+      rootEl.__carouselCleanup = stop;
+
+      layout();
+      if (!reduced) frameId = window.requestAnimationFrame(tick);
+    });
+  };
+
+  const teardownPhotoCarousels = () => {
+    document.querySelectorAll("[data-photo-carousel]").forEach((root) => {
+      if (!(root instanceof HTMLElement)) return;
+      const rootEl = root as HTMLElement & { __carouselCleanup?: () => void };
+      rootEl.__carouselCleanup?.();
+      delete root.dataset.carouselReady;
+      delete rootEl.__carouselCleanup;
+    });
+  };
+
+  document.addEventListener("astro:before-swap", teardownPhotoCarousels);
+
+  initPhotoCarousels();
+  document.addEventListener("astro:page-load", initPhotoCarousels);
+</script>

@@ -1,0 +1,37 @@
+/** About-page travel photos (public/photos/about). */
+export const ABOUT_PHOTOS = [
+  { src: "/photos/about/OXQ06363.jpg", width: 4608, height: 3072 },
+  { src: "/photos/about/OXQ04883.jpg", width: 4000, height: 6000 },
+  { src: "/photos/about/IMG_8491.JPG", width: 6000, height: 4000 },
+  { src: "/photos/about/OXQ02533.jpg", width: 3976, height: 5964 },
+  {
+    src: "/photos/about/CEB4908B-3E00-4D63-BF39-B43144703FC1.jpg",
+    width: 5562,
+    height: 3708,
+  },
+  { src: "/photos/about/OXQ03288.jpg", width: 3072, height: 4608 },
+  {
+    src: "/photos/about/3E940D3D-E194-4BCC-93F2-EB5350AE9888.jpg",
+    width: 6000,
+    height: 4000,
+  },
+  { src: "/photos/about/OXQ04288.JPG", width: 3889, height: 5833 },
+  { src: "/photos/about/OXQ04425.JPG", width: 6000, height: 4000 },
+  { src: "/photos/about/OXQ04450.JPG", width: 3511, height: 5268 },
+  { src: "/photos/about/ORG_OXQ08529.jpg", width: 5624, height: 3749 },
+  {
+    src: "/photos/about/935ADFD7-0CEA-4000-B987-E814C8154CEA.jpg",
+    width: 4000,
+    height: 6000,
+  },
+  { src: "/photos/about/OXQ09786.jpg", width: 6000, height: 4000 },
+  { src: "/photos/about/OXQF8199.jpg", width: 4160, height: 6240 },
+  { src: "/photos/about/OXQ04391.JPG", width: 5835, height: 3890 },
+  { src: "/photos/about/OXQF7982.jpg", width: 4160, height: 6240 },
+  { src: "/photos/about/IMG_4234.jpg", width: 4255, height: 2836 },
+  { src: "/photos/about/OXQF8047.jpg", width: 3876, height: 5815 },
+  { src: "/photos/about/OXQ03798.jpeg", width: 4608, height: 3072 },
+  { src: "/photos/about/OXQF9105.jpg", width: 4141, height: 6212 },
+  { src: "/photos/about/OXQF5311.JPG", width: 6240, height: 4160 },
+  { src: "/photos/about/OXQ02358.jpg", width: 4672, height: 7008 },
+] as const;

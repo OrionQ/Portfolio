@@ -23,18 +23,31 @@ const { href } = Astro.props;
     skipLink.style.left = `${left + width / 2}px`;
   };
 
+  const resetSkipLinkPosition = () => {
+    const skipLink = document.querySelector<HTMLElement>(".skip-link");
+    if (!skipLink) return;
+    skipLink.style.top = "0";
+    skipLink.style.left = "0";
+  };
+
   const getHeaderOffset = () => {
     const headerOuter = document.querySelector<HTMLElement>(".header-outer");
     return headerOuter ? Math.ceil(headerOuter.getBoundingClientRect().height) + 8 : 88;
   };
 
   const initSkipLink = () => {
-    syncSkipLinkPosition();
-    window.addEventListener("resize", syncSkipLinkPosition);
-    window.addEventListener("scroll", syncSkipLinkPosition, { passive: true });
+    window.addEventListener("resize", () => {
+      const skipLink = document.querySelector<HTMLElement>(".skip-link");
+      if (skipLink === document.activeElement) syncSkipLinkPosition();
+    });
+    window.addEventListener("scroll", () => {
+      const skipLink = document.querySelector<HTMLElement>(".skip-link");
+      if (skipLink === document.activeElement) syncSkipLinkPosition();
+    }, { passive: true });
 
     document.querySelectorAll(".skip-link").forEach((link) => {
       link.addEventListener("focus", syncSkipLinkPosition);
+      link.addEventListener("blur", resetSkipLinkPosition);
 
       link.addEventListener("click", (event) => {
         const href = link.getAttribute("href");
@@ -51,6 +64,7 @@ const { href } = Astro.props;
           getHeaderOffset();
         window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
         target.focus({ preventScroll: true });
+        (link as HTMLElement).blur();
       });
     });
   };
@@ -60,6 +74,4 @@ const { href } = Astro.props;
   } else {
     initSkipLink();
   }
-
-  document.fonts?.ready.then(syncSkipLinkPosition);
 </script>

@@ -2,7 +2,7 @@
 /* --header-edge-gap: min margin from viewport to header pill */
 /* --header-extend: header pill extends this far past the content column each side */
 :root {
-  --page-max-width: 80rem;
+  --page-max-width: 100rem;
   --page-gutter: 2rem;
   --header-edge-gap: 0.5rem;
   --header-extend: 0.25rem;

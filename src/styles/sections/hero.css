@@ -96,10 +96,14 @@
 
   .hero-block {
     --hero-scroll-steps: 8;
-    /* text lift + rotate/hold × 3 illustrations + overshoot past CAPTURE */
-    --hero-segment-height: 125dvh;
+    /*
+     * Keep the document runway stable while mobile browser chrome expands and
+     * collapses. The visible sticky hero can still follow dvh below.
+     */
+    --hero-layout-height: 100lvh;
+    --hero-segment-height: 82lvh;
     --hero-scroll-runway: calc(var(--hero-scroll-steps) * var(--hero-segment-height));
-    min-height: calc(100dvh + var(--hero-scroll-runway));
+    min-height: calc(var(--hero-layout-height) + var(--hero-scroll-runway));
     padding-bottom: 0;
   }
 
@@ -144,7 +148,7 @@
   }
 
   .hero-chevron {
-    bottom: clamp(1.25rem, 3.5vh, 1.25rem);
+    bottom: clamp(1.25rem, 3.5dvh, 1.75rem);
     translate: -50% 0;
   }
 }

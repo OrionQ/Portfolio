@@ -8,6 +8,11 @@ import Link from "../components/link/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Projects from "../section/Projects.astro";
 import TaglineScratch from "../components/tagline/TaglineScratch";
+
+// Edit these to change how the homepage may appear in Google results.
+const pageTitle = "Orion's Portfolio";
+const pageDescription =
+  "Hi, Welcome to my space! I'm Xiaolei Qin, and you may know me as Orion. I'm a software engineer and UX designer who builds thoughtful interfaces and improves digital user experiences.";
 ---
 
 <script>
@@ -43,7 +48,10 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     document.body.append(probe);
     const measured = probe.offsetHeight;
     probe.remove();
-    return measured || Math.max(window.innerHeight, window.visualViewport?.height ?? 0);
+    return (
+      measured ||
+      Math.max(window.innerHeight, window.visualViewport?.height ?? 0)
+    );
   };
 
   const syncStableViewport = () => {
@@ -117,7 +125,10 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (!heroBlock) return 0;
     const runway = getHeroScrollRunway();
     if (runway <= 0) return 0;
-    return Math.min(Math.max(-heroBlock.getBoundingClientRect().top, 0), runway);
+    return Math.min(
+      Math.max(-heroBlock.getBoundingClientRect().top, 0),
+      runway,
+    );
   };
 
   const getRunwayInfo = () => {
@@ -176,7 +187,8 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (isPinnedHero() && easterEggIndex === 3) {
       releaseEasterEgg(true);
     }
-    if (!isPinnedHero() || userInitiatedHeroScroll || heroMotionFrozen()) return;
+    if (!isPinnedHero() || userInitiatedHeroScroll || heroMotionFrozen())
+      return;
     if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
     userInitiatedHeroScroll = true;
     updateHeroScrollPin();
@@ -204,8 +216,14 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
     if (osReducedMotion()) {
       heroBlock.style.setProperty("--hero-progress", "1");
-      heroBlock.style.setProperty("--hero-scroll-step", String(MOBILE_SCROLL_STEPS - 1));
-      heroBlock.style.setProperty("--hero-scroll-phase", String(MOBILE_SCROLL_STEPS));
+      heroBlock.style.setProperty(
+        "--hero-scroll-step",
+        String(MOBILE_SCROLL_STEPS - 1),
+      );
+      heroBlock.style.setProperty(
+        "--hero-scroll-phase",
+        String(MOBILE_SCROLL_STEPS),
+      );
       heroBlock.style.setProperty("--hero-scroll-active", "1");
       return;
     }
@@ -224,11 +242,16 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     if (!atHeroTop && scrolled > 2) userInitiatedHeroScroll = true;
 
     const phase = staged && segment > 0 ? scrolled / segment : 0;
-    const step = staged ? Math.min(Math.floor(phase), MOBILE_SCROLL_STEPS - 1) : 0;
+    const step = staged
+      ? Math.min(Math.floor(phase), MOBILE_SCROLL_STEPS - 1)
+      : 0;
     const textProgress = staged ? Math.min(1, phase) : scrolled / runway;
     const runwayProgress = runway > 0 ? scrolled / runway : 0;
 
-    heroBlock.style.setProperty("--hero-runway-progress", String(runwayProgress));
+    heroBlock.style.setProperty(
+      "--hero-runway-progress",
+      String(runwayProgress),
+    );
 
     if (hoverChipIndex >= 0 || easterEggIndex >= 0) {
       heroBlock.style.setProperty("--hero-scroll-active", "0");
@@ -241,7 +264,10 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       heroBlock.style.setProperty("--hero-progress", String(textProgress));
       heroBlock.style.setProperty("--hero-scroll-step", String(step));
       heroBlock.style.setProperty("--hero-scroll-active", "0");
-      heroBlock.style.setProperty("--hero-scroll-phase", String(MOBILE_SCROLL_STEPS));
+      heroBlock.style.setProperty(
+        "--hero-scroll-phase",
+        String(MOBILE_SCROLL_STEPS),
+      );
       dispatchHeroFocus(-1);
       return;
     }
@@ -265,7 +291,10 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       return;
     }
 
-    heroBlock.style.setProperty("--hero-scroll-phase", String(Math.min(phase, MOBILE_SCROLL_STEPS)));
+    heroBlock.style.setProperty(
+      "--hero-scroll-phase",
+      String(Math.min(phase, MOBILE_SCROLL_STEPS)),
+    );
     heroBlock.style.setProperty("--hero-scroll-active", "1");
   };
 
@@ -315,14 +344,32 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   window.addEventListener(
     "keydown",
     (e) => {
-      if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "End", "Home"].includes(e.key)) {
+      if (
+        [
+          "ArrowDown",
+          "ArrowUp",
+          "PageDown",
+          "PageUp",
+          " ",
+          "End",
+          "Home",
+        ].includes(e.key)
+      ) {
         markHeroScrollIntent();
       }
 
       const target = e.target as HTMLElement | null;
       const isTypingField =
-        target?.matches("input, textarea, select, [contenteditable='true']") ?? false;
-      if (isTypingField || e.metaKey || e.ctrlKey || e.altKey || e.key.length !== 1) return;
+        target?.matches("input, textarea, select, [contenteditable='true']") ??
+        false;
+      if (
+        isTypingField ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.altKey ||
+        e.key.length !== 1
+      )
+        return;
 
       easterEggBuffer = `${easterEggBuffer}${e.key.toLowerCase()}`.slice(-8);
       const secretIndex = easterEggBuffer.endsWith("cancer")
@@ -397,7 +444,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   orionTrigger?.addEventListener("click", () => showEasterEgg(3));
 </script>
 
-<Layout title="Xiaolei Qin's Portfolio">
+<Layout title={pageTitle} description={pageDescription}>
   <div class="hero-block" slot="hero">
     <section class="hero" id="hero" aria-label="Introduction" tabindex="-1">
       <HeroStarfield client:load />
@@ -406,20 +453,24 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
           <div
             class="hero__text flex flex-col gap-8 w-full scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
           >
-            <div class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start w-full">
+            <div
+              class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start w-full"
+            >
               <h1 class="text-4xl xl:text-5xl py-4 lg:py-8 w-full">
                 Hey, I'm <button
                   type="button"
                   id="hero-secret-trigger"
                   class="hero-secret-trigger"
                   tabindex="-1"
-                  aria-label="Reveal a hidden constellation"
-                >Orion!</button>
+                  aria-label="Reveal a hidden constellation">Orion!</button
+                >
               </h1>
               <TaglineScratch client:load />
               <p class="xl:text-lg">That's why I keep designing and coding.</p>
             </div>
-            <div class="roles flex flex-row flex-wrap gap-2 justify-center lg:justify-start">
+            <div
+              class="roles flex flex-row flex-wrap gap-2 justify-center lg:justify-start"
+            >
               <Tag>Software Engineer</Tag>
               <Tag>UX Designer</Tag>
               <Tag>Photographer</Tag>
@@ -441,7 +492,11 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   <!-- Projects Section -->
   <Projects />
   <section class="flex justify-center py-12">
-    <Link underline href="/experience" className="text-xl font-medium inline-flex items-center gap-2">
+    <Link
+      underline
+      href="/experience"
+      className="text-xl font-medium inline-flex items-center gap-2"
+    >
       Check out my experience
       <Icon name="arrow-right-long" size={20} aria-hidden />
     </Link>

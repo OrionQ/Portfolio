@@ -42,7 +42,33 @@ const {
 </div>
 
 <script is:inline>
+  const getPausedAnimationStore = () => {
+    if (!window.__portfolioPausedAnimations) {
+      window.__portfolioPausedAnimations = [];
+    }
+    return window.__portfolioPausedAnimations;
+  };
+
+  const freezeDocumentAnimations = () => {
+    const store = getPausedAnimationStore();
+    store.length = 0;
+    document.getAnimations().forEach((animation) => {
+      if (animation.playState === "running" || animation.playState === "pending") {
+        animation.pause();
+        store.push(animation);
+      }
+    });
+  };
+
+  const resumeDocumentAnimations = () => {
+    const store = getPausedAnimationStore();
+    store.splice(0).forEach((animation) => {
+      if (animation.playState === "paused") animation.play();
+    });
+  };
+
   const applyMotionPaused = (paused) => {
+    if (paused) freezeDocumentAnimations();
     document.documentElement.classList.toggle("motion-paused", paused);
     localStorage.setItem("motionPaused", paused ? "true" : "false");
 
@@ -66,6 +92,21 @@ const {
     window.dispatchEvent(
       new CustomEvent("motion-pause-change", { detail: { paused } }),
     );
+
+    if (!paused) {
+      // Let pause-aware components restore their clocks before playback resumes.
+      requestAnimationFrame(resumeDocumentAnimations);
+    } else {
+      // Catch animations created by a component render responding to the pause event.
+      requestAnimationFrame(() => {
+        document.getAnimations().forEach((animation) => {
+          if (animation.playState === "running" || animation.playState === "pending") {
+            animation.pause();
+            getPausedAnimationStore().push(animation);
+          }
+        });
+      });
+    }
   };
 
   const initMotionPause = () => {

@@ -87,6 +87,7 @@ export default function AmbientStarfield() {
     let ambient: Star3D[] = [];
     let frameId = 0;
     let last = performance.now();
+    let visualNow = last;
     let yaw = 0;
     let primary: [number, number, number] = [0, 125, 179];
     let secondary: [number, number, number] = [0, 90, 132];
@@ -194,7 +195,14 @@ export default function AmbientStarfield() {
       lastCssW = cssW;
 
       const backingW = Math.round(cssW * dpr);
-      const backingH = Math.round(cssH * dpr);
+      // Safari's collapsing address bar emits height-only ResizeObserver
+      // updates while scrolling. Reusing the backing height prevents the
+      // fixed ambient canvas from being cleared for a frame on every update.
+      const keepMobileHeight =
+        cssW < 1024 && !widthChanged && height > 0;
+      const backingH = keepMobileHeight
+        ? height
+        : Math.round(cssH * dpr);
       if (backingW !== width || backingH !== height) {
         width = canvas.width = backingW;
         height = canvas.height = backingH;
@@ -214,6 +222,7 @@ export default function AmbientStarfield() {
 
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
+      if (!isMotionPaused()) visualNow += dt * 1000;
 
       if (!reduced && !isMotionPaused()) {
         yaw += DRIFT_SPEED * dt;
@@ -235,7 +244,7 @@ export default function AmbientStarfield() {
         let norm = (p.scale - scaleMin) / scaleRange;
         norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
         const twinkle =
-          reduced || isMotionPaused() ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
+          reduced ? 0 : Math.sin(s.tw + visualNow * 0.001 * s.sp) * 0.16;
         let alpha = 0.1 + norm * 0.55 + twinkle;
         alpha = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
         if (alpha < 0.07) continue;
@@ -271,7 +280,6 @@ export default function AmbientStarfield() {
       if (paused) {
         cancelAnimationFrame(frameId);
         frameId = 0;
-        render(performance.now());
         return;
       }
       if (!reduced && dark) {

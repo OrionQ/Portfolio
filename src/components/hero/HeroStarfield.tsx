@@ -50,6 +50,7 @@ const MIN_SPIN_FAST = 0.55;
 const MAX_YAW_SPEED = 0.055;
 // seconds the field pauses on each constellation
 const HOLD = 6;
+const REVEAL_S = 1.1;
 // how far along the inbound arc to BUILD at rest (0 = previous stop, 1 = BUILD)
 const PREBUILD_LAND_FRAC = 0.92;
 
@@ -247,6 +248,27 @@ const drawHalo = (
   ctx.fill();
 };
 
+const drawConstellationGlow = (
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  radius: number,
+  r: number,
+  g: number,
+  b: number,
+  intensity: number,
+) => {
+  const glowRadius = radius * (3.8 + intensity * 1.8);
+  const glow = ctx.createRadialGradient(x, y, radius * 0.3, x, y, glowRadius);
+  glow.addColorStop(0, `rgba(${r},${g},${b},${0.34 * intensity})`);
+  glow.addColorStop(0.28, `rgba(${r},${g},${b},${0.14 * intensity})`);
+  glow.addColorStop(1, `rgba(${r},${g},${b},0)`);
+  ctx.beginPath();
+  ctx.arc(x, y, glowRadius, 0, Math.PI * 2);
+  ctx.fillStyle = glow;
+  ctx.fill();
+};
+
 function buildShapes(): ConstShape[] {
   return RAW.map((c, idx) => {
     // place shapes in the same cyclic order the chips read (BUILD→DESIGN→CAPTURE)
@@ -317,6 +339,7 @@ export default function HeroStarfield() {
     let ambient: Star3D[] = [];
     let frameId = 0;
     let last = performance.now();
+    let visualNow = last;
     let primary: [number, number, number] = [0, 125, 179];
     let secondary: [number, number, number] = [0, 90, 132];
     let dark = document.documentElement.classList.contains("dark");
@@ -376,9 +399,9 @@ export default function HeroStarfield() {
     let scrollHandoffYaw: number | null = null;
 
     const constellationTargets = shapes.map((s) => s.target);
-    // Fraction of each hold segment used for fade in/out (mirrors desktop ~0.4s / ~0.45s on HOLD)
-    const SCRUB_FADE_IN = 0.1;
-    const SCRUB_FADE_OUT = 0.1;
+    // Fraction of each hold segment used for the staged glow → illustration reveal.
+    const SCRUB_FADE_IN = 0.16;
+    const SCRUB_FADE_OUT = 0.16;
 
     const scrubHoldFade = (localT: number) => {
       let fin = 1;
@@ -674,7 +697,6 @@ export default function HeroStarfield() {
     };
 
     let lastCssW = 0;
-    let lastCssH = 0;
 
     const resize = () => {
       const cssW = Math.max(canvas.clientWidth, 1);
@@ -685,10 +707,17 @@ export default function HeroStarfield() {
       // stars on every one of those produced a visible flicker.
       const widthChanged = Math.abs(cssW - lastCssW) > 2;
       lastCssW = cssW;
-      lastCssH = cssH;
 
       const backingW = Math.round(cssW * dpr);
-      const backingH = Math.round(cssH * dpr);
+      // Mobile Safari continuously changes clientHeight while its browser
+      // chrome collapses. Keep the existing backing bitmap through those
+      // height-only changes; CSS can scale it slightly without clearing it.
+      // A width change still rebuilds both dimensions for orientation changes.
+      const keepMobileHeight =
+        cssW < BP_LG && !widthChanged && height > 0;
+      const backingH = keepMobileHeight
+        ? height
+        : Math.round(cssH * dpr);
       // Assigning canvas.width/height clears the bitmap even when set to
       // an unchanged value. ResizeObserver fires on sub-pixel dvh jitter
       // during mobile scroll, so without this guard we were still clearing
@@ -777,6 +806,7 @@ export default function HeroStarfield() {
     const render = (now: number) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
+      if (!isMotionPaused()) visualNow += dt * 1000;
       advance(dt);
 
       ctx.clearRect(0, 0, width, height);
@@ -867,7 +897,7 @@ export default function HeroStarfield() {
         let norm = (p.scale - scaleMin) / scaleRange;
         norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
         const twinkle =
-          reduced || isMotionPaused() ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
+          reduced ? 0 : Math.sin(s.tw + visualNow * 0.001 * s.sp) * 0.16;
         let alpha = 0.1 + norm * 0.55 + twinkle;
         alpha = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
         if (alpha < 0.07) continue;
@@ -889,8 +919,11 @@ export default function HeroStarfield() {
       if (scrollScrubActive) {
         fade = scrubDstFade;
       } else if (holding) {
-        const fin = Math.min(1, holdTimer / 0.4);
-        const fout = holdTimer > HOLD - 0.45 ? Math.max(0, (HOLD - holdTimer) / 0.45) : 1;
+        const fin = Math.min(1, holdTimer / REVEAL_S);
+        const fout =
+          holdTimer > HOLD - REVEAL_S
+            ? Math.max(0, (HOLD - holdTimer) / REVEAL_S)
+            : 1;
         fade = Math.min(fin, fout);
       }
 
@@ -904,6 +937,22 @@ export default function HeroStarfield() {
         return 0;
       };
 
+      const stagedReveal = (rawFade: number) => {
+        const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+        // Connected stars/lines complete first. The SVG starts only after that
+        // stage, so exit naturally reverses: SVG out, then constellation glow.
+        const glowFade = easeInOutCubic(clamp01(rawFade / 0.65));
+        const iconFade = easeInOutCubic(clamp01((rawFade - 0.65) / 0.35));
+        return { glowFade, iconFade };
+      };
+
+      const landingGlowFor = (idx: number, glowFade: number) => {
+        if (scrollScrubActive) return glowFade;
+        if (!holding || idx !== holdIdx) return 0;
+        const arrivalBloom = Math.max(0, 1 - holdTimer / 1.1);
+        return glowFade * (0.55 + arrivalBloom * 0.45);
+      };
+
       // constellation stars (always present, brighter) + lines/label on reveal
       for (const c of shapes) {
         const cyShape = constCy + stagger[c.idx % stagger.length] * height;
@@ -911,20 +960,22 @@ export default function HeroStarfield() {
         const shapeFade = fadeFor(c.idx);
         const isHeld = shapeFade > 0.001;
         const chartOnly = isChartConstellation(c.label);
+        const { glowFade, iconFade } = stagedReveal(shapeFade);
+        const landingGlow = landingGlowFor(c.idx, glowFade);
 
         // revealed illustration (BUILD / DESIGN / CAPTURE only)
         const icon = !chartOnly && c.idx < ICON_SVGS.length ? icons[c.idx] : undefined;
-        if (isHeld && icon && icon.complete && icon.naturalWidth > 0) {
+        if (iconFade > 0.001 && icon && icon.complete && icon.naturalWidth > 0) {
           ctx.save();
-          ctx.globalAlpha = shapeFade * 0.62;
+          ctx.globalAlpha = iconFade * 0.62;
           ctx.drawImage(icon, bMx - iconSize / 2, bMy - iconSize / 2, iconSize, iconSize);
           ctx.restore();
         }
 
         // connecting lines (only when this shape is revealed)
-        if (isHeld) {
+        if (glowFade > 0.001) {
           ctx.save();
-          ctx.strokeStyle = `rgba(${pr},${pg},${pb},${0.85 * shapeFade})`;
+          ctx.strokeStyle = `rgba(${pr},${pg},${pb},${0.85 * glowFade})`;
           ctx.lineWidth = (chartOnly ? 1.15 : 1.4) * dpr;
           ctx.lineCap = "round";
           ctx.beginPath();
@@ -952,11 +1003,24 @@ export default function HeroStarfield() {
           const beltMul = isBelt && isHeld ? 1.12 : 1;
           const rad =
             Math.max(0.6, p.scale * (isLead ? 4.4 : 3.2) * dpr * magMul * chartMul * beltMul) *
-            (isHeld ? 1 + shapeFade * 0.15 : 1);
-          const beltAlpha = isBelt && isHeld ? 0.2 * shapeFade : 0;
-          const alpha = Math.min(1, (isHeld ? base + shapeFade * 0.5 : base) + beltAlpha);
-          if (dark && isHeld && shapeFade > 0.15 && (isLead || isBelt)) {
-            drawHalo(ctx, p.sx, p.sy, rad, pr, pg, pb, alpha * shapeFade);
+            (isHeld ? 1 + glowFade * 0.15 : 1);
+          const beltAlpha = isBelt && isHeld ? 0.2 * glowFade : 0;
+          const alpha = Math.min(1, (isHeld ? base + glowFade * 0.5 : base) + beltAlpha);
+          const isConnected = c.edges.some(([a, b]) => a === i || b === i);
+          if (dark && isHeld && isConnected && landingGlow > 0.08) {
+            drawConstellationGlow(
+              ctx,
+              p.sx,
+              p.sy,
+              rad,
+              pr,
+              pg,
+              pb,
+              landingGlow,
+            );
+          }
+          if (dark && isHeld && glowFade > 0.15 && (isLead || isBelt)) {
+            drawHalo(ctx, p.sx, p.sy, rad, pr, pg, pb, alpha * glowFade);
           }
           drawStarShape(
             ctx,
@@ -972,35 +1036,39 @@ export default function HeroStarfield() {
 
       // labels last so they always paint above icons and stars
       const labelIdx = scrollScrubActive ? scrubDstIdx : holding ? holdIdx : -1;
-      const labelFade = scrollScrubActive ? scrubDstFade : fade;
-      if (labelIdx >= 0 && labelFade > 0.02) {
+      const rawLabelFade = scrollScrubActive ? scrubDstFade : fade;
+      if (labelIdx >= 0 && rawLabelFade > 0.02) {
         const c = shapes[labelIdx];
-        const cyShape = constCy + stagger[c.idx % stagger.length] * height;
-        const { bMx, bMy, iconSize, bMinY } = layoutConstellation(c, cyShape);
         const chartOnly = isChartConstellation(c.label);
-        const fontSize = 12 * dpr;
-        let labelY: number;
-        if (chartOnly) {
-          labelY = bMinY - 10 * dpr;
-        } else {
-          const iconTop = bMy - iconSize / 2;
-          const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
-          const visibleTop = iconTop + iconSize * tune.inset;
-          labelY = visibleTop - tune.gap * dpr;
-        }
+        const { glowFade, iconFade } = stagedReveal(rawLabelFade);
+        const labelFade = chartOnly ? glowFade : iconFade;
+        if (labelFade > 0.02) {
+          const cyShape = constCy + stagger[c.idx % stagger.length] * height;
+          const { bMx, bMy, iconSize, bMinY } = layoutConstellation(c, cyShape);
+          const fontSize = 12 * dpr;
+          let labelY: number;
+          if (chartOnly) {
+            labelY = bMinY - 10 * dpr;
+          } else {
+            const iconTop = bMy - iconSize / 2;
+            const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
+            const visibleTop = iconTop + iconSize * tune.inset;
+            labelY = visibleTop - tune.gap * dpr;
+          }
 
-        ctx.save();
-        try {
-          (ctx as CanvasRenderingContext2D & { letterSpacing?: string }).letterSpacing = `${3 * dpr}px`;
-        } catch {
-          /* letterSpacing unsupported */
+          ctx.save();
+          try {
+            (ctx as CanvasRenderingContext2D & { letterSpacing?: string }).letterSpacing = `${3 * dpr}px`;
+          } catch {
+            /* letterSpacing unsupported */
+          }
+          ctx.font = `600 ${fontSize}px Gabarito, system-ui, sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "bottom";
+          ctx.fillStyle = `rgba(${pr},${pg},${pb},${0.9 * labelFade})`;
+          ctx.fillText(c.label, bMx, labelY);
+          ctx.restore();
         }
-        ctx.font = `600 ${fontSize}px Gabarito, system-ui, sans-serif`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "bottom";
-        ctx.fillStyle = `rgba(${pr},${pg},${pb},${0.9 * labelFade})`;
-        ctx.fillText(c.label, bMx, labelY);
-        ctx.restore();
       }
 
       if (!reduced && !isMotionPaused()) {
@@ -1049,7 +1117,6 @@ export default function HeroStarfield() {
       if (paused) {
         cancelAnimationFrame(frameId);
         frameId = 0;
-        render(performance.now());
         return;
       }
       if (!reduced) {

@@ -29,6 +29,10 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   let cachedPinTop = 0;
   let easterEggBuffer = "";
   let easterEggTimer = 0;
+  let easterEggIndex = -1;
+  let easterEggRemaining = 6500;
+  let easterEggStartedAt = 0;
+  let easterEggAutoRelease = true;
 
   const canHoverChips = () => window.innerWidth >= PIN_MAX;
 
@@ -130,7 +134,43 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     window.dispatchEvent(new CustomEvent("hero-focus", { detail }));
   };
 
+  const releaseEasterEgg = () => {
+    window.clearTimeout(easterEggTimer);
+    easterEggTimer = 0;
+    easterEggIndex = -1;
+    easterEggRemaining = 6500;
+    easterEggAutoRelease = true;
+    if (hoverChipIndex < 0) {
+      lastScrollFocus = -2;
+      if (isPinnedHero()) {
+        updateHeroScrollPin();
+      } else {
+        dispatchHeroFocus(-1);
+      }
+    }
+  };
+
+  const scheduleEasterEggRelease = () => {
+    if (motionPaused() || easterEggIndex < 0 || !easterEggAutoRelease) return;
+    easterEggStartedAt = Date.now();
+    easterEggTimer = window.setTimeout(releaseEasterEgg, easterEggRemaining);
+  };
+
+  const showEasterEgg = (index: number, autoRelease = true) => {
+    window.clearTimeout(easterEggTimer);
+    easterEggIndex = index;
+    easterEggRemaining = 6500;
+    easterEggAutoRelease = autoRelease;
+    lastScrollFocus = index;
+    heroBlock?.style.setProperty("--hero-scroll-active", "0");
+    window.dispatchEvent(new CustomEvent("hero-focus", { detail: index }));
+    if (autoRelease) scheduleEasterEggRelease();
+  };
+
   const markHeroScrollIntent = () => {
+    if (isPinnedHero() && easterEggIndex === 3) {
+      releaseEasterEgg();
+    }
     if (!isPinnedHero() || userInitiatedHeroScroll || heroMotionFrozen()) return;
     if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
     userInitiatedHeroScroll = true;
@@ -185,7 +225,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
     heroBlock.style.setProperty("--hero-runway-progress", String(runwayProgress));
 
-    if (hoverChipIndex >= 0) {
+    if (hoverChipIndex >= 0 || easterEggIndex >= 0) {
       heroBlock.style.setProperty("--hero-scroll-active", "0");
       return;
     }
@@ -250,7 +290,16 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   syncStableViewport();
   syncPinTop();
   updateHeroScrollPin();
-  window.addEventListener("scroll", scheduleHeroScrollPin, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (isPinnedHero() && easterEggIndex === 3) {
+        releaseEasterEgg();
+      }
+      scheduleHeroScrollPin();
+    },
+    { passive: true },
+  );
   window.addEventListener("wheel", markHeroScrollIntent, { passive: true });
   window.addEventListener("touchmove", markHeroScrollIntent, { passive: true });
   window.visualViewport?.addEventListener("resize", () => {
@@ -278,12 +327,8 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
           : -1;
       if (secretIndex < 0) return;
 
-      window.clearTimeout(easterEggTimer);
-      window.dispatchEvent(new CustomEvent("hero-focus", { detail: secretIndex }));
       easterEggBuffer = "";
-      easterEggTimer = window.setTimeout(() => {
-        if (hoverChipIndex < 0) dispatchHeroFocus(-1);
-      }, 6500);
+      showEasterEgg(secretIndex);
     },
     { passive: true },
   );
@@ -305,7 +350,24 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       updateHeroScrollPin();
     }, 150);
   });
-  window.addEventListener("motion-pause-change", updateHeroScrollPin);
+  window.addEventListener("motion-pause-change", (e) => {
+    const paused = Boolean(
+      (e as CustomEvent<{ paused?: boolean }>).detail?.paused,
+    );
+    if (easterEggIndex >= 0) {
+      if (paused && easterEggTimer) {
+        window.clearTimeout(easterEggTimer);
+        easterEggTimer = 0;
+        easterEggRemaining = Math.max(
+          0,
+          easterEggRemaining - (Date.now() - easterEggStartedAt),
+        );
+      } else if (!paused) {
+        scheduleEasterEggRelease();
+      }
+    }
+    updateHeroScrollPin();
+  });
 
   // Chip hover: enabled above 431px; pinned scroll scrubs sphere rotation below that.
   const chips = document.querySelectorAll<HTMLElement>(".roles .tag");
@@ -322,6 +384,12 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       releaseChipHover();
     });
   });
+
+  const orionTrigger = document.getElementById("hero-secret-trigger");
+
+  orionTrigger?.addEventListener("mouseenter", () => showEasterEgg(3, false));
+  orionTrigger?.addEventListener("mouseleave", releaseEasterEgg);
+  orionTrigger?.addEventListener("click", () => showEasterEgg(3));
 </script>
 
 <Layout title="Xiaolei Qin's Portfolio">
@@ -334,9 +402,17 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
             class="hero__text flex flex-col gap-8 w-full scroll-content opacity-0 translate-y-10 transition-[opacity,transform] duration-500"
           >
             <div class="flex flex-col gap-2 items-center text-center lg:items-start lg:text-start w-full">
-              <h1 class="text-4xl py-4 lg:py-8 w-full">Hey, I'm Orion!</h1>
+              <h1 class="text-4xl xl:text-5xl py-4 lg:py-8 w-full">
+                Hey, I'm <button
+                  type="button"
+                  id="hero-secret-trigger"
+                  class="hero-secret-trigger"
+                  tabindex="-1"
+                  aria-label="Reveal a hidden constellation"
+                >Orion!</button>
+              </h1>
               <TaglineScratch client:load />
-              <p>That's why I keep designing and coding.</p>
+              <p class="xl:text-lg">That's why I keep designing and coding.</p>
             </div>
             <div class="roles flex flex-row flex-wrap gap-2 justify-center lg:justify-start">
               <Tag>Software Engineer</Tag>

@@ -35,9 +35,7 @@ type Phase = "idle" | "strike" | "done";
 
 type ScratchPairProps = {
   pairIndex: number;
-  inView: boolean;
-  animationStartMs: number | null;
-  motionPaused: boolean;
+  elapsedMs: number;
   /** OS-level reduced motion only — not the user pause toggle. */
   skipAnimation: boolean;
   original: string;
@@ -47,9 +45,7 @@ type ScratchPairProps = {
 
 function ScratchPair({
   pairIndex,
-  inView,
-  animationStartMs,
-  motionPaused,
+  elapsedMs,
   skipAnimation,
   original,
   replacement,
@@ -57,9 +53,6 @@ function ScratchPair({
 }: ScratchPairProps) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [phase, setPhase] = useState<Phase>("idle");
-  const [revealAnimated, setRevealAnimated] = useState(false);
-  const [stripAnimated, setStripAnimated] = useState(false);
 
   useLayoutEffect(() => {
     const el = textRef.current;
@@ -76,70 +69,23 @@ function ScratchPair({
     return () => ro.disconnect();
   }, [original]);
 
-  useEffect(() => {
-    if (!inView) return;
-
-    if (skipAnimation) {
-      setPhase("done");
-      return;
-    }
-
-    if (motionPaused || animationStartMs === null) return;
-
-    const strikeAt = pairStrikeAt(pairIndex);
-    const doneAt = pairDoneAt(pairIndex);
-    const elapsed = Date.now() - animationStartMs;
-
-    if (elapsed >= doneAt) {
-      setPhase("done");
-      return;
-    }
-
-    const timers: number[] = [];
-
-    if (elapsed >= strikeAt) {
-      setPhase((current) => (current === "idle" ? "strike" : current));
-      timers.push(window.setTimeout(() => setPhase("done"), doneAt - elapsed));
-    } else {
-      timers.push(
-        window.setTimeout(() => setPhase("strike"), strikeAt - elapsed),
-      );
-      timers.push(window.setTimeout(() => setPhase("done"), doneAt - elapsed));
-    }
-
-    return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [inView, pairIndex, skipAnimation, motionPaused, animationStartMs]);
+  const phase: Phase = skipAnimation
+    ? "done"
+    : elapsedMs >= pairDoneAt(pairIndex)
+      ? "done"
+      : elapsedMs >= pairStrikeAt(pairIndex)
+        ? "strike"
+        : "idle";
 
   const revealed = phase === "done" || skipAnimation;
 
-  useEffect(() => {
-    if (!revealed || revealAnimated || skipAnimation) return;
-    const id = window.setTimeout(() => setRevealAnimated(true), 500);
-    return () => window.clearTimeout(id);
-  }, [revealed, revealAnimated, skipAnimation]);
-
-  useEffect(() => {
-    if (!stripOriginal || stripAnimated || skipAnimation) return;
-    const id = window.setTimeout(
-      () => setStripAnimated(true),
-      STRIP_S * 1000,
-    );
-    return () => window.clearTimeout(id);
-  }, [stripOriginal, stripAnimated, skipAnimation]);
-
   const showScratch = dims.w > 0 && dims.h > 0;
-  const freezeMotion = motionPaused || skipAnimation;
 
   const strikeTransition = skipAnimation
     ? { duration: 0 }
     : { duration: STRIKE_S, ease: "easeOut" as const };
 
-  const stripDuration =
-    stripOriginal && !stripAnimated && !skipAnimation && !motionPaused
-      ? STRIP_S
-      : stripOriginal
-        ? 0
-        : 0.4;
+  const stripDuration = skipAnimation ? 0 : STRIP_S;
 
   return (
     <span
@@ -191,11 +137,10 @@ function ScratchPair({
                       : 1,
               }}
               transition={{
-                pathLength: freezeMotion ? { duration: 0 } : strikeTransition,
+                pathLength: strikeTransition,
                 opacity: {
-                  duration: freezeMotion
-                    ? 0
-                    : phase === "idle"
+                  duration:
+                    phase === "idle"
                       ? 0
                       : stripOriginal
                         ? STRIP_S
@@ -217,14 +162,11 @@ function ScratchPair({
           maxWidth: revealed ? "max-content" : 0,
         }}
         transition={{
-          duration:
-            skipAnimation || motionPaused || revealAnimated ? 0 : 0.45,
+          duration: skipAnimation ? 0 : 0.45,
           ease: "easeOut",
           opacity: {
-            duration:
-              skipAnimation || motionPaused || revealAnimated ? 0 : 0.35,
-            delay:
-              skipAnimation || motionPaused || revealAnimated ? 0 : 0.08,
+            duration: skipAnimation ? 0 : 0.35,
+            delay: skipAnimation ? 0 : 0.08,
           },
         }}
       >
@@ -243,72 +185,42 @@ export default function TaglineScratch() {
       typeof document !== "undefined" &&
       document.documentElement.classList.contains("motion-paused"),
   );
-  const animationStartRef = useRef<number | null>(null);
-  const frozenElapsedRef = useRef<number | null>(null);
-  const wasPausedRef = useRef(motionPaused);
-  const [animationStartMs, setAnimationStartMs] = useState<number | null>(
-    null,
-  );
-  const [stripOriginals, setStripOriginals] = useState(false);
+  const elapsedRef = useRef(0);
+  const [elapsedMs, setElapsedMs] = useState(0);
 
   useEffect(() => {
     const onMotionPause = (e: Event) => {
-      setMotionPaused(
-        Boolean((e as CustomEvent<{ paused?: boolean }>).detail?.paused),
+      const paused = Boolean(
+        (e as CustomEvent<{ paused?: boolean }>).detail?.paused,
       );
+
+      setMotionPaused(paused);
     };
     window.addEventListener("motion-pause-change", onMotionPause);
     return () => window.removeEventListener("motion-pause-change", onMotionPause);
   }, []);
 
   useEffect(() => {
-    if (animationStartRef.current === null) {
-      wasPausedRef.current = motionPaused;
-      return;
-    }
-
-    const wasPaused = wasPausedRef.current;
-
-    if (!wasPaused && motionPaused) {
-      frozenElapsedRef.current = Date.now() - animationStartRef.current;
-    } else if (wasPaused && !motionPaused && frozenElapsedRef.current !== null) {
-      animationStartRef.current = Date.now() - frozenElapsedRef.current;
-      setAnimationStartMs(animationStartRef.current);
-      frozenElapsedRef.current = null;
-    }
-
-    wasPausedRef.current = motionPaused;
-  }, [motionPaused]);
-
-  useEffect(() => {
     if (!inView || skipAnimation || motionPaused) return;
-    if (animationStartRef.current !== null) return;
+    if (elapsedRef.current >= STRIP_AT_MS + STRIP_S * 1000) return;
 
-    animationStartRef.current = Date.now();
-    setAnimationStartMs(animationStartRef.current);
+    let frameId = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      elapsedRef.current += Math.min(now - last, 50);
+      last = now;
+      setElapsedMs(elapsedRef.current);
+      if (elapsedRef.current < STRIP_AT_MS + STRIP_S * 1000) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
   }, [inView, skipAnimation, motionPaused]);
 
-  useEffect(() => {
-    if (!inView || stripOriginals) return;
-
-    if (skipAnimation) {
-      setStripOriginals(true);
-      return;
-    }
-
-    if (motionPaused || animationStartMs === null) return;
-
-    const elapsed = Date.now() - animationStartMs;
-    const remaining = STRIP_AT_MS - elapsed;
-
-    if (remaining <= 0) {
-      setStripOriginals(true);
-      return;
-    }
-
-    const id = window.setTimeout(() => setStripOriginals(true), remaining);
-    return () => window.clearTimeout(id);
-  }, [inView, skipAnimation, motionPaused, animationStartMs, stripOriginals]);
+  const stripOriginals = skipAnimation || elapsedMs >= STRIP_AT_MS;
 
   if (skipAnimation) {
     return (
@@ -326,9 +238,7 @@ export default function TaglineScratch() {
           {"I love "}
           <ScratchPair
             pairIndex={0}
-            inView={inView}
-            animationStartMs={animationStartMs}
-            motionPaused={motionPaused}
+            elapsedMs={elapsedMs}
             skipAnimation={skipAnimation}
             original="mocking up"
             replacement="building"
@@ -337,9 +247,7 @@ export default function TaglineScratch() {
           {" interfaces and "}
           <ScratchPair
             pairIndex={1}
-            inView={inView}
-            animationStartMs={animationStartMs}
-            motionPaused={motionPaused}
+            elapsedMs={elapsedMs}
             skipAnimation={skipAnimation}
             original="refactoring"
             replacement="improving"
@@ -348,9 +256,7 @@ export default function TaglineScratch() {
           {" the "}
           <ScratchPair
             pairIndex={2}
-            inView={inView}
-            animationStartMs={animationStartMs}
-            motionPaused={motionPaused}
+            elapsedMs={elapsedMs}
             skipAnimation={skipAnimation}
             original="codebase"
             replacement="user experience"

@@ -1,4 +1,6 @@
-html.motion-paused .animate-float-slow {
+html.motion-paused *,
+html.motion-paused *::before,
+html.motion-paused *::after {
   animation-play-state: paused !important;
 }
 

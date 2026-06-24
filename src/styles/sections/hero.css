@@ -2,6 +2,20 @@
   position: relative;
   width: 100%;
   z-index: 1;
+  /*
+   * Keep the page-wide ambient canvas hidden through the active hero, then
+   * gradually reveal it near the handoff instead of ending on a hard mask edge.
+   */
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--background), 0) 0,
+      rgba(var(--background), 0.82) clamp(2rem, 4vh, 3rem),
+      rgba(var(--background), 1) clamp(4rem, 8vh, 6rem),
+      rgba(var(--background), 1) calc(100% - clamp(6rem, 12vh, 9rem)),
+      rgba(var(--background), 0.82) calc(100% - clamp(3.5rem, 7vh, 5rem)),
+      rgba(var(--background), 0) 100%
+    );
   padding-bottom: clamp(2.75rem, 5vh, 3.5rem);
   overflow: visible;
   --hero-pin-top: 5.5rem;
@@ -62,6 +76,17 @@
   min-width: 0;
   max-width: 100%;
   overflow-x: clip;
+}
+
+.hero-secret-trigger {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: text;
+  touch-action: manipulation;
 }
 
 @media (min-width: 1024px) {

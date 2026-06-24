@@ -8,6 +8,12 @@
   text-wrap: balance;
 }
 
+@media (min-width: 1280px) {
+  #tagline {
+    font-size: 3rem;
+  }
+}
+
 .scratch-pair {
   max-width: 100%;
   vertical-align: baseline;

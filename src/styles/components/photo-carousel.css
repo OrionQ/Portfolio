@@ -10,19 +10,11 @@
 }
 
 .photo-carousel__viewport {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   cursor: grab;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
   padding-inline: var(--page-gutter);
   padding-block: 0.35rem 0.5rem;
-  touch-action: auto;
-}
-
-.photo-carousel__viewport::-webkit-scrollbar {
-  display: none;
+  touch-action: pan-y pinch-zoom;
 }
 
 .photo-carousel__viewport.is-dragging,
@@ -34,13 +26,17 @@
 .photo-carousel__track {
   display: flex;
   align-items: center;
-  gap: 1.1rem;
-  width: max-content;
+  margin: 0;
+  padding: 0;
+  backface-visibility: hidden;
 }
 
 .photo-carousel__slide {
   flex: 0 0 auto;
   list-style: none;
+  min-width: 0;
+  /* margin (not gap) so loop seam keeps spacing between last and first slide */
+  margin-right: 1.1rem;
 }
 
 .photo-carousel__slide img {
@@ -54,14 +50,13 @@
 }
 
 @media (min-width: 768px) {
-  .photo-carousel__track {
-    gap: 1.25rem;
+  .photo-carousel__slide {
+    margin-right: 1.25rem;
   }
 
   .photo-carousel__slide img {
     height: clamp(14rem, 28vw, 22rem);
   }
-
 }
 
 @media (min-width: 1024px) {
@@ -74,12 +69,4 @@
   .photo-carousel__viewport {
     cursor: default;
   }
-
-  .photo-carousel__slide img {
-    transition: none;
-  }
-}
-
-.photo-carousel.is-dragging .photo-carousel__slide img {
-  transition: none;
 }

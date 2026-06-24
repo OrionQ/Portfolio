@@ -11,6 +11,9 @@ import icon from "astro-icon";
 export default defineConfig({
   site: 'https://orionq.github.io',
   base: '',
+  server: {
+    host: true,
+  },
   integrations: [
     react({ experimentalReactChildren: true }),
     icon(),

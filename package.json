@@ -4,6 +4,7 @@
   "version": "5.1.2",
   "scripts": {
     "dev": "astro dev",
+    "dev:host": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
@@ -18,6 +19,8 @@
     "@types/react-dom": "^18.3.7",
     "astro": "^6.3.1",
     "astro-icon": "^1.1.5",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-auto-scroll": "^8.6.0",
     "motion": "^12.38.0",
     "pnpm": "^9.15.9",
     "react": "^18.3.1",

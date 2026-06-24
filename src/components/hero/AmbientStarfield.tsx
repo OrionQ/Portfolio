@@ -195,14 +195,7 @@ export default function AmbientStarfield() {
       lastCssW = cssW;
 
       const backingW = Math.round(cssW * dpr);
-      // Safari's collapsing address bar emits height-only ResizeObserver
-      // updates while scrolling. Reusing the backing height prevents the
-      // fixed ambient canvas from being cleared for a frame on every update.
-      const keepMobileHeight =
-        cssW < 1024 && !widthChanged && height > 0;
-      const backingH = keepMobileHeight
-        ? height
-        : Math.round(cssH * dpr);
+      const backingH = Math.round(cssH * dpr);
       if (backingW !== width || backingH !== height) {
         width = canvas.width = backingW;
         height = canvas.height = backingH;

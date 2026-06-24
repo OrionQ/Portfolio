@@ -728,15 +728,7 @@ export default function HeroStarfield() {
       lastCssW = cssW;
 
       const backingW = Math.round(cssW * dpr);
-      // Mobile Safari continuously changes clientHeight while its browser
-      // chrome collapses. Keep the existing backing bitmap through those
-      // height-only changes; CSS can scale it slightly without clearing it.
-      // A width change still rebuilds both dimensions for orientation changes.
-      const keepMobileHeight =
-        cssW < BP_LG && !widthChanged && height > 0;
-      const backingH = keepMobileHeight
-        ? height
-        : Math.round(cssH * dpr);
+      const backingH = Math.round(cssH * dpr);
       // Assigning canvas.width/height clears the bitmap even when set to
       // an unchanged value. ResizeObserver fires on sub-pixel dvh jitter
       // during mobile scroll, so without this guard we were still clearing

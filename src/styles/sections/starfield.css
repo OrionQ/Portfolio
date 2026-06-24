@@ -16,3 +16,13 @@ html:not(.dark) .ambient-starfield {
   position: relative;
   z-index: 1;
 }
+
+@media (max-width: 1023px) {
+  .ambient-starfield {
+    /*
+     * Keep Safari's collapsing browser chrome from changing the canvas box.
+     * A stable CSS height avoids both bitmap clearing and vertical stretching.
+     */
+    height: 100lvh;
+  }
+}

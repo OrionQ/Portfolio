@@ -147,6 +147,16 @@
     overflow: hidden;
   }
 
+  .hero-starfield {
+    /*
+     * Safari's dynamic toolbar changes dvh while scrolling. Size the canvas
+     * against the stable large viewport so its bitmap is never CSS-stretched.
+     * The sticky hero clips the small offscreen remainder when chrome is open.
+     */
+    bottom: auto;
+    height: calc(100lvh - var(--hero-pin-top) + 1.5rem);
+  }
+
   .hero__inner {
     box-sizing: border-box;
     height: 100%;

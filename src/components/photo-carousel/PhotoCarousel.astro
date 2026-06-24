@@ -29,7 +29,9 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
 
 <script>
   const LOOP_SETS = 3;
-  const AUTO_SPEED = 30;
+  /** Matches AmbientStarfield DRIFT_SPEED — one carousel loop per full starfield rotation. */
+  const AMBIENT_DRIFT_RAD_S = 0.012;
+  const LOOP_DURATION_S = (2 * Math.PI) / AMBIENT_DRIFT_RAD_S;
   const RESUME_DELAY = 1200;
   const SCROLL_SETTLE_DELAY = 160;
 
@@ -119,7 +121,7 @@ const loopPhotos = Array.from({ length: LOOP_SETS }, () => ABOUT_PHOTOS).flat();
           !isMotionPaused() &&
           setWidth > 0
         ) {
-          autoPosition += AUTO_SPEED * (elapsed / 1000);
+          autoPosition += (setWidth / LOOP_DURATION_S) * (elapsed / 1000);
           const upper = setWidth * (LOOP_SETS - 1);
           if (autoPosition >= upper) autoPosition -= setWidth;
           else if (autoPosition < setWidth * 0.5) autoPosition += setWidth;

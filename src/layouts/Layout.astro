@@ -1,5 +1,6 @@
 ---
 import BackToTop from "../components/back-to-top/BackToTop.astro";
+import AmbientStarfield from "../components/hero/AmbientStarfield";
 import Footer from "../section/Footer.astro";
 import Header from "../section/Header.astro";
 import SkipLink from "../components/skip-link/SkipLink.astro";
@@ -71,6 +72,7 @@ const imageUrl = image.startsWith("http")
     </script>
   </head>
   <body>
+    <AmbientStarfield client:visible />
     <SkipLink href={skipHref} />
     <div class="flex flex-col items-center pb-16">
       <Header />

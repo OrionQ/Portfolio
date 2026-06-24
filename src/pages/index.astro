@@ -28,6 +28,8 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   let stableViewportHeight = 0;
   let stableViewportWidth = window.innerWidth;
   let cachedPinTop = 0;
+  let easterEggBuffer = "";
+  let easterEggTimer = 0;
 
   const canHoverChips = () => window.innerWidth >= PIN_MAX;
 
@@ -263,6 +265,26 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
       if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "End", "Home"].includes(e.key)) {
         markHeroScrollIntent();
       }
+
+      const target = e.target as HTMLElement | null;
+      const isTypingField =
+        target?.matches("input, textarea, select, [contenteditable='true']") ?? false;
+      if (isTypingField || e.metaKey || e.ctrlKey || e.altKey || e.key.length !== 1) return;
+
+      easterEggBuffer = `${easterEggBuffer}${e.key.toLowerCase()}`.slice(-8);
+      const secretIndex = easterEggBuffer.endsWith("cancer")
+        ? 4
+        : easterEggBuffer.endsWith("orion")
+          ? 3
+          : -1;
+      if (secretIndex < 0) return;
+
+      window.clearTimeout(easterEggTimer);
+      window.dispatchEvent(new CustomEvent("hero-focus", { detail: secretIndex }));
+      easterEggBuffer = "";
+      easterEggTimer = window.setTimeout(() => {
+        if (hoverChipIndex < 0) dispatchHeroFocus(-1);
+      }, 6500);
     },
     { passive: true },
   );
@@ -291,6 +313,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   chips.forEach((chip, i) => {
     chip.addEventListener("mouseenter", () => {
       if (!canHoverChips()) return;
+      window.clearTimeout(easterEggTimer);
       hoverChipIndex = i;
       lastScrollFocus = i;
       window.dispatchEvent(new CustomEvent("hero-focus", { detail: i }));

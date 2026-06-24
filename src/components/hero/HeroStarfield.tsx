@@ -3,6 +3,14 @@ import { useEffect, useRef } from "react";
 import laptopSvg from "../../icons/laptop.svg?raw";
 import penSvg from "../../icons/pen.svg?raw";
 import cameraSvg from "../../icons/camera.svg?raw";
+import {
+  CANCER_STARS,
+  isChartConstellation,
+  magnitudeScale,
+  ORION_BELT,
+  ORION_STARS,
+  type RawConstellation,
+} from "./constellation-stars";
 
 type Star3D = {
   x: number;
@@ -22,6 +30,7 @@ type ConstShape = {
   target: number; // yaw at which it faces the camera
   pts: { x: number; y: number; z: number }[];
   edges: [number, number][];
+  mags: number[];
   topIndex: number; // point used to anchor the label
   lead: number; // brighter "lead" star
 };
@@ -44,14 +53,25 @@ const HOLD = 6;
 // how far along the inbound arc to BUILD at rest (0 = previous stop, 1 = BUILD)
 const PREBUILD_LAND_FRAC = 0.92;
 
+/** Orion / Cancer render smaller than role constellations on reveal. */
+const CHART_LAYOUT_SCALE = 0.86;
+const CHART_STAR_SCALE = 0.88;
+const ORION_LAYOUT_SCALE = 1.1;
+const ORION_STAR_SCALE = 1.1;
+
+const chartLayoutScale = (label: string) =>
+  label === "ORION" ? ORION_LAYOUT_SCALE : CHART_LAYOUT_SCALE;
+const chartStarScale = (label: string) =>
+  label === "ORION" ? ORION_STAR_SCALE : CHART_STAR_SCALE;
+
 // constellation placement on the sphere
 const R_CONST = 0.6;
 const SCALE = 0.0024;
 // per-constellation vertical offset (fraction of canvas height, − = higher).
 // staggers the reveal heights so they don't all sit on one line. On narrow
 // screens we flatten the stagger and float the cluster above the centred text.
-const STAGGER_WIDE = [-0.19, 0.12, -0.04];
-const STAGGER_NARROW = [0, 0, 0];
+const STAGGER_WIDE = [-0.19, 0.12, -0.04, 0.08, -0.12];
+const STAGGER_NARROW = [0, 0, 0, 0, 0];
 
 /** Viewport breakpoints (px) */
 const BP_TABLET = 432;
@@ -85,8 +105,9 @@ const ICON_OFFSET = [
   { x: -0.38, y: 0.62 }, // CAPTURE
 ];
 
-// local line-art silhouettes (centred) — matched to src/icons laptop / pen / camera
-const RAW: { label: string; lead: number; pts: [number, number][]; edges: [number, number][] }[] = [
+// Local line-art silhouettes (centred), matched to the five SVG illustrations.
+// BUILD–CAPTURE are role-linked; Cancer and Orion use catalog star positions.
+const RAW: RawConstellation[] = [
   {
     label: "BUILD",
     lead: 0,
@@ -109,6 +130,7 @@ const RAW: { label: string; lead: number; pts: [number, number][]; edges: [numbe
       [4, 6],
       [5, 6],
     ],
+    mags: [2, 2, 2, 2, 2, 2, 2],
   },
   {
     label: "DESIGN",
@@ -128,6 +150,7 @@ const RAW: { label: string; lead: number; pts: [number, number][]; edges: [numbe
       [4, 5],
       [0, 3],
     ],
+    mags: [2, 2, 2, 2, 2, 2],
   },
   {
     label: "CAPTURE",
@@ -157,10 +180,12 @@ const RAW: { label: string; lead: number; pts: [number, number][]; edges: [numbe
       [5, 3],
       [5, 4],
     ],
+    mags: [2, 2, 2, 2, 2, 2, 2, 2],
   },
+  ORION_STARS,
+  CANCER_STARS,
 ];
 
-// user-provided icons — BUILD → laptop, DESIGN → pen, CAPTURE → camera
 const ICON_SVGS = [laptopSvg, penSvg, cameraSvg];
 
 const tintSvg = (raw: string, r: number, g: number, b: number) => {
@@ -258,7 +283,16 @@ function buildShapes(): ConstShape[] {
     c.pts.forEach(([, ly], i) => {
       if (ly < c.pts[topIndex][1]) topIndex = i;
     });
-    return { idx, label: c.label, target, pts, edges: c.edges, topIndex, lead: c.lead };
+    return {
+      idx,
+      label: c.label,
+      target,
+      pts,
+      edges: c.edges,
+      mags: c.mags,
+      topIndex,
+      lead: c.lead,
+    };
   });
 }
 
@@ -788,24 +822,41 @@ export default function HeroStarfield() {
         const bMy = (bMinY + bMaxY) / 2;
         const bSpan = Math.max(bMaxX - bMinX, bMaxY - bMinY, 1);
         const iconSize = Math.max(bSpan * iconMult, iconMin);
+        const chartOnly = isChartConstellation(c.label);
 
         if (!wide) {
-          const spread = (iconSize * constSpread) / bSpan;
+          const spreadBase = chartOnly ? constSpread * chartLayoutScale(c.label) : constSpread;
+          const spread = (iconSize * spreadBase) / bSpan;
           projPts = projPts.map((p) => ({
             ...p,
             sx: bMx + (p.sx - bMx) * spread,
             sy: bMy + (p.sy - bMy) * spread,
           }));
+        } else if (chartOnly) {
+          projPts = projPts.map((p) => ({
+            ...p,
+            sx: bMx + (p.sx - bMx) * chartLayoutScale(c.label),
+            sy: bMy + (p.sy - bMy) * chartLayoutScale(c.label),
+          }));
         }
 
-        const off = wide ? (ICON_OFFSET[c.idx] ?? ICON_OFFSET[0]) : ICON_OFFSET[0];
+        const off = chartOnly
+          ? { x: 0, y: 0 }
+          : wide
+            ? (ICON_OFFSET[c.idx] ?? ICON_OFFSET[0])
+            : ICON_OFFSET[0];
         const dx = off.x * iconSize;
         const dy = off.y * iconSize;
         if (dx !== 0 || dy !== 0) {
           projPts = projPts.map((p) => ({ ...p, sx: p.sx + dx, sy: p.sy + dy }));
         }
 
-        return { projPts, bMx: bMx + dx, bMy: bMy + dy, iconSize, bMinY };
+        let bMinYFinal = Infinity;
+        for (const p of projPts) {
+          if (p.sy < bMinYFinal) bMinYFinal = p.sy;
+        }
+
+        return { projPts, bMx: bMx + dx, bMy: bMy + dy, iconSize, bMinY: bMinYFinal };
       };
 
       // ambient field — dual-tone stars (primary + secondary)
@@ -858,9 +909,10 @@ export default function HeroStarfield() {
         const { projPts, bMx, bMy, iconSize } = layoutConstellation(c, cyShape);
         const shapeFade = fadeFor(c.idx);
         const isHeld = shapeFade > 0.001;
+        const chartOnly = isChartConstellation(c.label);
 
-        // revealed illustration: fade the SVG icon in behind the dots
-        const icon = icons[c.idx];
+        // revealed illustration (BUILD / DESIGN / CAPTURE only)
+        const icon = !chartOnly && c.idx < ICON_SVGS.length ? icons[c.idx] : undefined;
         if (isHeld && icon && icon.complete && icon.naturalWidth > 0) {
           ctx.save();
           ctx.globalAlpha = shapeFade * 0.62;
@@ -872,7 +924,7 @@ export default function HeroStarfield() {
         if (isHeld) {
           ctx.save();
           ctx.strokeStyle = `rgba(${pr},${pg},${pb},${0.85 * shapeFade})`;
-          ctx.lineWidth = 1.4 * dpr;
+          ctx.lineWidth = (chartOnly ? 1.15 : 1.4) * dpr;
           ctx.lineCap = "round";
           ctx.beginPath();
           for (const [a, b] of c.edges) {
@@ -890,11 +942,19 @@ export default function HeroStarfield() {
           let norm = (p.scale - scaleMin) / scaleRange;
           norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
           const base = 0.45 + norm * 0.4;
-          const alpha = Math.min(1, isHeld ? base + shapeFade * 0.5 : base);
           const isLead = i === c.lead;
+          const isBelt =
+            c.label === "ORION" && (ORION_BELT as readonly number[]).includes(i);
+          const mag = c.mags[i] ?? 3;
+          const magMul = magnitudeScale(mag, isLead);
+          const chartMul = chartOnly ? chartStarScale(c.label) : 1;
+          const beltMul = isBelt && isHeld ? 1.12 : 1;
           const rad =
-            Math.max(0.6, p.scale * (isLead ? 4.4 : 3.2) * dpr) * (isHeld ? 1 + shapeFade * 0.15 : 1);
-          if (dark && isHeld && shapeFade > 0.15) {
+            Math.max(0.6, p.scale * (isLead ? 4.4 : 3.2) * dpr * magMul * chartMul * beltMul) *
+            (isHeld ? 1 + shapeFade * 0.15 : 1);
+          const beltAlpha = isBelt && isHeld ? 0.2 * shapeFade : 0;
+          const alpha = Math.min(1, (isHeld ? base + shapeFade * 0.5 : base) + beltAlpha);
+          if (dark && isHeld && shapeFade > 0.15 && (isLead || isBelt)) {
             drawHalo(ctx, p.sx, p.sy, rad, pr, pg, pb, alpha * shapeFade);
           }
           drawStarShape(
@@ -915,12 +975,18 @@ export default function HeroStarfield() {
       if (labelIdx >= 0 && labelFade > 0.02) {
         const c = shapes[labelIdx];
         const cyShape = constCy + stagger[c.idx % stagger.length] * height;
-        const { bMx, bMy, iconSize } = layoutConstellation(c, cyShape);
-        const iconTop = bMy - iconSize / 2;
+        const { bMx, bMy, iconSize, bMinY } = layoutConstellation(c, cyShape);
+        const chartOnly = isChartConstellation(c.label);
         const fontSize = 12 * dpr;
-        const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
-        const visibleTop = iconTop + iconSize * tune.inset;
-        const labelY = visibleTop - tune.gap * dpr;
+        let labelY: number;
+        if (chartOnly) {
+          labelY = bMinY - 10 * dpr;
+        } else {
+          const iconTop = bMy - iconSize / 2;
+          const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
+          const visibleTop = iconTop + iconSize * tune.inset;
+          labelY = visibleTop - tune.gap * dpr;
+        }
 
         ctx.save();
         try {

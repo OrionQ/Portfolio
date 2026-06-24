@@ -1,6 +1,7 @@
 .hero-block {
   position: relative;
   width: 100%;
+  z-index: 1;
   padding-bottom: clamp(2.75rem, 5vh, 3.5rem);
   overflow: visible;
   --hero-pin-top: 5.5rem;

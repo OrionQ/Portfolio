@@ -397,6 +397,8 @@ export default function HeroStarfield() {
     let scrubDstIdx = -1;
     let scrubDstFade = 0;
     let scrollHandoffYaw: number | null = null;
+    let scrollHandoffPhase: number | null = null;
+    let scrollHandoffProgress = 0;
 
     const constellationTargets = shapes.map((s) => s.target);
     // Fraction of each hold segment used for the staged glow → illustration reveal.
@@ -464,7 +466,7 @@ export default function HeroStarfield() {
       scrubDstFade = 0;
 
       // Text lift — auto was running until the user scrolled; freeze yaw in place.
-      if (phase < 1) {
+      if (phase < 1 && scrollHandoffPhase === null) {
         if (scrollHandoffYaw === null) scrollHandoffYaw = yaw;
         revealScrubConstellations(phase);
         return;
@@ -479,11 +481,24 @@ export default function HeroStarfield() {
       const toYaw = yawForConstIdx(to);
       if (seg === 1) fromYaw = scrollHandoffYaw;
       const delta = shortestDelta(fromYaw, toYaw);
-      if (Math.abs(delta) < 1e-6) {
-        yaw = fromYaw;
-      } else {
+      let targetYaw = fromYaw;
+      if (Math.abs(delta) >= 1e-6) {
         t = easeInOutCubic(t);
-        yaw = fromYaw + delta * t;
+        targetYaw = fromYaw + delta * t;
+      }
+
+      if (scrollHandoffYaw !== null && scrollHandoffPhase !== null) {
+        yaw =
+          scrollHandoffYaw +
+          shortestDelta(scrollHandoffYaw, targetYaw) *
+            easeInOutCubic(scrollHandoffProgress);
+        if (scrollHandoffProgress >= 1) {
+          scrollHandoffYaw = null;
+          scrollHandoffPhase = null;
+          scrollHandoffProgress = 0;
+        }
+      } else {
+        yaw = targetYaw;
       }
 
       revealScrubConstellations(phase);
@@ -510,6 +525,8 @@ export default function HeroStarfield() {
         if (scrollScrubActive) {
           scrollScrubActive = false;
           scrollHandoffYaw = null;
+          scrollHandoffPhase = null;
+          scrollHandoffProgress = 0;
           scrubSrcIdx = -1;
           scrubSrcFade = 0;
           scrubDstIdx = -1;
@@ -532,6 +549,8 @@ export default function HeroStarfield() {
             Number.parseFloat(style.getPropertyValue("--hero-scroll-phase")) || 0;
           if (focusIdx < 0 && phase < 0.05) {
             scrollHandoffYaw = null;
+            scrollHandoffPhase = null;
+            scrollHandoffProgress = 0;
             resumeAutocycleFromYaw();
           }
         }
@@ -757,6 +776,13 @@ export default function HeroStarfield() {
 
     const advance = (dt: number) => {
       if (reduced || isMotionPaused()) return;
+
+      if (scrollHandoffPhase !== null) {
+        scrollHandoffProgress = Math.min(
+          1,
+          scrollHandoffProgress + dt / 0.75,
+        );
+      }
 
       syncScrollScrub();
       if (scrollScrubActive) return;
@@ -1086,6 +1112,10 @@ export default function HeroStarfield() {
         typeof raw === "object" && raw !== null && "scroll" in raw
           ? Boolean((raw as { scroll?: boolean }).scroll)
           : false;
+      const handoffToScroll =
+        typeof raw === "object" && raw !== null && "handoffToScroll" in raw
+          ? Boolean((raw as { handoffToScroll?: boolean }).handoffToScroll)
+          : false;
       const detail =
         typeof raw === "number"
           ? raw
@@ -1107,6 +1137,24 @@ export default function HeroStarfield() {
       } else {
         if (scrollScrubActive) return;
         focusIdx = -1;
+        if (handoffToScroll) {
+          const block = canvas.closest(".hero-block") as HTMLElement | null;
+          const style = block ? getComputedStyle(block) : null;
+          scrollHandoffYaw = yaw;
+          scrollHandoffPhase = Math.max(
+            0,
+            Math.min(
+              SCROLL_PHASE_MAX,
+              Number.parseFloat(
+                style?.getPropertyValue("--hero-scroll-phase") || "0",
+              ) || 0,
+            ),
+          );
+          scrollHandoffProgress = 0;
+          holding = false;
+          rotating = false;
+          return;
+        }
         resumeAutocycleFromYaw();
       }
     };

@@ -134,7 +134,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     window.dispatchEvent(new CustomEvent("hero-focus", { detail }));
   };
 
-  const releaseEasterEgg = () => {
+  const releaseEasterEgg = (returnToScroll = false) => {
     window.clearTimeout(easterEggTimer);
     easterEggTimer = 0;
     easterEggIndex = -1;
@@ -142,7 +142,12 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     easterEggAutoRelease = true;
     if (hoverChipIndex < 0) {
       lastScrollFocus = -2;
-      if (isPinnedHero()) {
+      if (isPinnedHero() && (returnToScroll || getCurrentScrolled() > 2)) {
+        window.dispatchEvent(
+          new CustomEvent("hero-focus", {
+            detail: { idx: -1, handoffToScroll: true },
+          }),
+        );
         updateHeroScrollPin();
       } else {
         dispatchHeroFocus(-1);
@@ -169,7 +174,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
 
   const markHeroScrollIntent = () => {
     if (isPinnedHero() && easterEggIndex === 3) {
-      releaseEasterEgg();
+      releaseEasterEgg(true);
     }
     if (!isPinnedHero() || userInitiatedHeroScroll || heroMotionFrozen()) return;
     if (pinnedRunwayPx <= 0) pinnedRunwayPx = measurePinnedRunway();
@@ -294,7 +299,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
     "scroll",
     () => {
       if (isPinnedHero() && easterEggIndex === 3) {
-        releaseEasterEgg();
+        releaseEasterEgg(true);
       }
       scheduleHeroScrollPin();
     },
@@ -388,7 +393,7 @@ import TaglineScratch from "../components/tagline/TaglineScratch";
   const orionTrigger = document.getElementById("hero-secret-trigger");
 
   orionTrigger?.addEventListener("mouseenter", () => showEasterEgg(3, false));
-  orionTrigger?.addEventListener("mouseleave", releaseEasterEgg);
+  orionTrigger?.addEventListener("mouseleave", () => releaseEasterEgg());
   orionTrigger?.addEventListener("click", () => showEasterEgg(3));
 </script>
 

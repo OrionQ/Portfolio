@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "../components/link/Link.astro";
+import MotionPause from "../components/motion-pause/MotionPause.astro";
 import ThemeSelector from "../components/theme-selector/ThemeSelector.astro";
 
 const isHomePage = Astro.url.pathname === "/";
@@ -72,7 +73,13 @@ const isHomePage = Astro.url.pathname === "/";
           <Link href="/Xiaolei Qin's Resume.pdf" newTab>Résumé</Link>
         </div>
       </details>
-      <ThemeSelector />
+      <div class="header__utilities flex flex-row items-center gap-1 shrink-0">
+        <ThemeSelector />
+        <MotionPause
+          iconOnly
+          controls="hero hero-starfield ambient-starfield tagline about-photo-carousel"
+        />
+      </div>
     </div>
       </div>
     </div>

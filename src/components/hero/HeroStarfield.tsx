@@ -866,7 +866,8 @@ export default function HeroStarfield() {
         const [cr, cg, cb] = s.tone === 0 ? [pr, pg, pb] : [sr, sg, sb];
         let norm = (p.scale - scaleMin) / scaleRange;
         norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
-        const twinkle = reduced ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
+        const twinkle =
+          reduced || isMotionPaused() ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
         let alpha = 0.1 + norm * 0.55 + twinkle;
         alpha = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
         if (alpha < 0.07) continue;
@@ -1079,5 +1080,7 @@ export default function HeroStarfield() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="hero-starfield" aria-hidden="true" />;
+  return (
+    <canvas ref={canvasRef} id="hero-starfield" className="hero-starfield" aria-hidden="true" />
+  );
 }

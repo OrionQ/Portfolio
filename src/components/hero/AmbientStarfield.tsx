@@ -234,7 +234,8 @@ export default function AmbientStarfield() {
         const [cr, cg, cb] = s.tone === 0 ? [pr, pg, pb] : [sr, sg, sb];
         let norm = (p.scale - scaleMin) / scaleRange;
         norm = norm < 0 ? 0 : norm > 1 ? 1 : norm;
-        const twinkle = reduced ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
+        const twinkle =
+          reduced || isMotionPaused() ? 0 : Math.sin(s.tw + now * 0.001 * s.sp) * 0.16;
         let alpha = 0.1 + norm * 0.55 + twinkle;
         alpha = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
         if (alpha < 0.07) continue;
@@ -253,6 +254,8 @@ export default function AmbientStarfield() {
 
       if (!reduced && !isMotionPaused()) {
         frameId = requestAnimationFrame(render);
+      } else {
+        frameId = 0;
       }
     };
 
@@ -263,10 +266,16 @@ export default function AmbientStarfield() {
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
-    const onMotionPause = () => {
-      if (shouldRepaint()) {
+    const onMotionPause = (e: Event) => {
+      const paused = Boolean((e as CustomEvent<{ paused?: boolean }>).detail?.paused);
+      if (paused) {
+        cancelAnimationFrame(frameId);
+        frameId = 0;
         render(performance.now());
-      } else if (!frameId) {
+        return;
+      }
+      if (!reduced && dark) {
+        last = performance.now();
         frameId = requestAnimationFrame(render);
       }
     };
@@ -301,5 +310,12 @@ export default function AmbientStarfield() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="ambient-starfield" aria-hidden="true" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      id="ambient-starfield"
+      className="ambient-starfield"
+      aria-hidden="true"
+    />
+  );
 }

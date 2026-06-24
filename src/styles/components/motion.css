@@ -2,40 +2,6 @@ html.motion-paused .animate-float-slow {
   animation-play-state: paused !important;
 }
 
-.hero-actions {
-  position: absolute;
-  inset-inline: 0;
-  bottom: clamp(0.5rem, 2vh, 1.25rem);
-  z-index: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: var(--page-max-width);
-  margin-inline: auto;
-  padding-inline: var(--page-gutter);
-}
-
-@media (max-width: 1023px) {
-  .hero-actions {
-    justify-content: center;
-  }
-}
-
-@media (min-width: 430px) and (max-width: 1023px) {
-  .hero-actions {
-    bottom: clamp(2rem, 6vh, 4.5rem);
-    padding-top: 0.5rem;
-  }
-}
-
-@media (max-width: 431px) {
-  .hero-actions {
-    bottom: clamp(2.5rem, 7vh, 5rem);
-  }
-}
-
 .motion-pause-wrap {
   z-index: 1;
 }
@@ -70,6 +36,27 @@ html.motion-paused .animate-float-slow {
 
 .motion-pause-button svg {
   flex-shrink: 0;
+}
+
+.motion-pause-button--icon-only {
+  padding: 0.5rem;
+}
+
+.motion-pause-button--icon-only span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.header__utilities .motion-pause-wrap {
+  display: flex;
+  align-items: center;
 }
 
 .motion-toggle-icon {

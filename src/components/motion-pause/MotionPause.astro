@@ -1,5 +1,10 @@
 ---
-const { controls = "hero tagline" } = Astro.props;
+import { Icon } from "astro-icon/components";
+
+const {
+  controls = "hero hero-starfield ambient-starfield tagline about-photo-carousel",
+  iconOnly = false,
+} = Astro.props;
 ---
 
 <div class="motion-pause-wrap">
@@ -7,35 +12,33 @@ const { controls = "hero tagline" } = Astro.props;
   <button
     type="button"
     id="motionPauseToggle"
-    class="motion-pause-button flex items-center gap-2"
+    class:list={[
+      "motion-pause-button flex items-center gap-2",
+      iconOnly && "motion-pause-button--icon-only",
+    ]}
     aria-pressed="false"
     aria-controls={controls}
+    aria-describedby="motionPauseDesc"
     aria-labelledby="motionPauseLabel"
   >
-    <svg
+    <Icon
+      name="pause"
+      size={24}
       class="motion-pause-icon motion-toggle-icon"
-      width="20"
-      height="20"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
       aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M7 5h3v14H7V5zm7 0h3v14h-3V5z"></path>
-    </svg>
-    <svg
+    />
+    <Icon
+      name="play"
+      size={24}
       class="motion-play-icon motion-toggle-icon"
-      width="20"
-      height="20"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
       aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M8 5v14l11-7L8 5z"></path>
-    </svg>
+    />
     <span id="motionPauseLabel">Pause animations</span>
   </button>
+  <span id="motionPauseDesc" class="sr-only">
+    Pauses or resumes the hero starfield, page background stars, tagline reveal, and
+    photo carousel.
+  </span>
 </div>
 
 <script is:inline>

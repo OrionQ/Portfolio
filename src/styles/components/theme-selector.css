@@ -35,12 +35,24 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.moon {
-  fill: transparent;
+#darkModeToggle svg {
+  flex-shrink: 0;
 }
 
-.sun {
-  fill: rgba(var(--primary-color), 1);
+.theme-toggle-icon {
+  fill: currentColor;
+}
+
+#darkModeToggle .theme-moon-icon {
+  display: none;
+}
+
+#darkModeToggle[aria-pressed="true"] .theme-sun-icon {
+  display: none;
+}
+
+#darkModeToggle[aria-pressed="true"] .theme-moon-icon {
+  display: block;
 }
 
 .sr-only {
@@ -140,14 +152,6 @@
 
 .theme-picker-mobile.show {
   display: flex;
-}
-
-.dark .moon {
-  fill: rgba(var(--primary-color), 1);
-}
-
-.dark .sun {
-  fill: transparent;
 }
 
 @media (min-width: 1000px) {

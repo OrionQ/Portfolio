@@ -39,6 +39,13 @@
   margin-right: 1.1rem;
 }
 
+.photo-carousel__slide figure {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  width: max-content;
+}
+
 .photo-carousel__slide img {
   display: block;
   height: clamp(13rem, 34vw, 21rem);
@@ -47,6 +54,12 @@
   border-radius: calc(var(--border-radius) / 2);
   pointer-events: none;
   user-select: none;
+}
+
+.photo-carousel__slide figcaption {
+  color: rgba(var(--foreground), 0.5);
+  font-size: 0.8rem;
+  max-width: 22rem;
 }
 
 @media (min-width: 768px) {

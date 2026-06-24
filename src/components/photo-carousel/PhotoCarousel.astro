@@ -8,15 +8,18 @@ import { ABOUT_PHOTOS } from "../../data/about-photos";
       {
         ABOUT_PHOTOS.map((photo) => (
           <li class="photo-carousel__slide">
-            <img
-              src={photo.src}
-              width={photo.width}
-              height={photo.height}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              draggable="false"
-            />
+            <figure>
+              <img
+                src={photo.src}
+                width={photo.width}
+                height={photo.height}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+              <figcaption>{photo.location}</figcaption>
+            </figure>
           </li>
         ))
       }

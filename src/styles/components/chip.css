@@ -19,6 +19,12 @@
   border-color: rgba(var(--tint-color), 1);
 }
 
+.chip--without-level {
+  gap: 0;
+  min-width: 0;
+  padding: 0.65rem 1rem;
+}
+
 .chip__header {
   display: flex;
   align-items: center;

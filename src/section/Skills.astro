@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon/components";
 import Chip from "../components/chip/Chip.astro";
 
+// Keep level data available while its visual treatment is temporarily disabled.
+const SHOW_SKILL_LEVELS = false;
 const levelOrder = { professional: 0, proficient: 1, novice: 2 } as const;
 
 const skillCategories = [
@@ -82,6 +84,7 @@ const highlightedSkills = [
   { title: "User Interface Design", level: "professional" as const, icon: "layer-group" },
   { title: "Cursor AI", level: "proficient" as const, icon: "cursor-ai" },
 ].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]);
+
 ---
 
 <div
@@ -103,70 +106,81 @@ const highlightedSkills = [
     >
       Learn, build, apply.
     </p>
-    <div
-      class="skills-legend flex flex-wrap items-center gap-4 text-sm justify-center lg:justify-end text-center lg:text-end"
-      role="list"
-      aria-label="Skill level legend"
-    >
-      <span class="skills-legend__item flex items-center gap-2">
-        <span class="skills-legend__bars" aria-hidden>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-        </span>
-        Professional
-      </span>
-      <span class="skills-legend__item flex items-center gap-2">
-        <span class="skills-legend__bars" aria-hidden>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-          <span class="skills-legend__bar"></span>
-        </span>
-        Proficient
-      </span>
-      <span class="skills-legend__item flex items-center gap-2">
-        <span class="skills-legend__bars" aria-hidden>
-          <span class="skills-legend__bar skills-legend__bar--filled"></span>
-          <span class="skills-legend__bar"></span>
-          <span class="skills-legend__bar"></span>
-        </span>
-        Novice
-      </span>
-    </div>
+    {
+      SHOW_SKILL_LEVELS && (
+        <div
+          class="skills-legend flex flex-wrap items-center gap-4 text-sm justify-center lg:justify-end text-center lg:text-end"
+          role="list"
+          aria-label="Skill level legend"
+        >
+          <span class="skills-legend__item flex items-center gap-2">
+            <span class="skills-legend__bars" aria-hidden>
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+            </span>
+            Professional
+          </span>
+          <span class="skills-legend__item flex items-center gap-2">
+            <span class="skills-legend__bars" aria-hidden>
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+              <span class="skills-legend__bar" />
+            </span>
+            Proficient
+          </span>
+          <span class="skills-legend__item flex items-center gap-2">
+            <span class="skills-legend__bars" aria-hidden>
+              <span class="skills-legend__bar skills-legend__bar--filled" />
+              <span class="skills-legend__bar" />
+              <span class="skills-legend__bar" />
+            </span>
+            Novice
+          </span>
+        </div>
+      )
+    }
   </div>
   <div
     class="flex flex-col gap-4 justify-between w-full min-w-0 flex-1 items-stretch"
   >
     <div class="skills-section flex flex-col gap-4 justify-center items-center w-full">
-      <!-- Collapsed: highlighted skills (hidden when expanded) -->
-      <div
-        class="skills-highlights flex flex-wrap gap-3 lg:justify-start justify-center w-full min-w-0"
-      >
-        {
-          highlightedSkills.map((skill) => (
-            <Chip title={skill.title} level={skill.level}>
-              <Icon
-                slot="icon"
-                name={skill.icon ?? "swatch"}
-                size={18}
-                aria-hidden
-              />
-            </Chip>
-          ))
-        }
-      </div>
-      <!-- Expand to show all categories -->
-      <details class="skills-expand w-full">
-        <summary class="skills-expand__trigger flex justify-center lg:justify-start">
-          <span class="skills-expand__expand-text">Expand all</span>
-          <span class="skills-expand__collapse-text">Collapse</span>
-          <Icon name="chevron-down" size={16} class="skills-expand__icon" aria-hidden />
-        </summary>
-        <!-- Expanded: full categorized skills -->
-        <div class="flex flex-col gap-6 py-4">
+      <div class="skills-panels w-full" data-skills-panels>
+        <div
+          id="skills-highlights"
+          class="skills-panel skills-highlights flex flex-wrap gap-3 lg:justify-start justify-center w-full min-w-0"
+          data-skills-panel="highlights"
+        >
           {
-            skillCategories.map((category) => (
-              <div class="flex flex-col gap-3">
+            highlightedSkills.map((skill) => (
+              <Chip
+                title={skill.title}
+                level={skill.level}
+                showLevel={SHOW_SKILL_LEVELS}
+              >
+                <Icon
+                  slot="icon"
+                  name={skill.icon ?? "swatch"}
+                  size={18}
+                  aria-hidden
+                />
+              </Chip>
+            ))
+          }
+        </div>
+
+        <div
+          id="skills-full"
+          class="skills-panel skills-full flex flex-col gap-6 pb-2"
+          data-skills-panel="full"
+          hidden
+        >
+          {
+            skillCategories.map((category, index) => (
+              <section
+                class="skills-category flex flex-col gap-3"
+                style={{ "--category-index": index }}
+              >
                 <h3
                   class="text-xl flex justify-center lg:justify-start"
                   style={{ color: "rgba(var(--foreground), 1)" }}
@@ -175,7 +189,11 @@ const highlightedSkills = [
                 </h3>
                 <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                   {category.skills.map((skill) => (
-                    <Chip title={skill.title} level={skill.level}>
+                    <Chip
+                      title={skill.title}
+                      level={skill.level}
+                      showLevel={SHOW_SKILL_LEVELS}
+                    >
                       <Icon
                         slot="icon"
                         name={skill.icon ?? "swatch"}
@@ -185,11 +203,143 @@ const highlightedSkills = [
                     </Chip>
                   ))}
                 </div>
-              </div>
+              </section>
             ))
           }
         </div>
-      </details>
+      </div>
+
+      <button
+        class="skills-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="skills-highlights skills-full"
+        data-skills-toggle
+        data-expand-label="View all skills"
+        data-collapse-label="Show highlights"
+      >
+        <span data-skills-toggle-label>
+          View all skills
+        </span>
+        <Icon name="chevron-down" size={16} class="skills-toggle__icon" aria-hidden />
+      </button>
     </div>
   </div>
 </div>
+
+<script>
+  const initSkillsToggle = () => {
+    document.querySelectorAll("[data-skills-toggle]").forEach((toggle) => {
+      if (!(toggle instanceof HTMLButtonElement)) return;
+      if (toggle.dataset.ready === "true") return;
+
+      const section = toggle.closest(".skills-section");
+      const panels = section?.querySelector("[data-skills-panels]");
+      const highlights = section?.querySelector('[data-skills-panel="highlights"]');
+      const full = section?.querySelector('[data-skills-panel="full"]');
+      const label = toggle.querySelector("[data-skills-toggle-label]");
+      if (
+        !(panels instanceof HTMLElement) ||
+        !(highlights instanceof HTMLElement) ||
+        !(full instanceof HTMLElement) ||
+        !(label instanceof HTMLElement)
+      ) return;
+
+      toggle.dataset.ready = "true";
+      panels.classList.add("is-ready");
+      panels.style.height = `${highlights.scrollHeight}px`;
+
+      const syncActivePanelHeight = () => {
+        if (toggle.dataset.animating === "true") return;
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        const active = expanded ? full : highlights;
+        panels.style.height = `${active.scrollHeight}px`;
+      };
+
+      const resizeObserver = new ResizeObserver(syncActivePanelHeight);
+      resizeObserver.observe(highlights);
+      resizeObserver.observe(full);
+
+      toggle.addEventListener("click", async () => {
+        if (toggle.dataset.animating === "true") return;
+        toggle.dataset.animating = "true";
+
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        const current = expanded ? full : highlights;
+        const next = expanded ? highlights : full;
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        const startHeight = panels.getBoundingClientRect().height;
+        next.style.visibility = "hidden";
+        next.hidden = false;
+        const endHeight = next.scrollHeight;
+
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        label.textContent = expanded
+          ? toggle.dataset.expandLabel ?? "View all skills"
+          : toggle.dataset.collapseLabel ?? "Show highlights";
+
+        if (prefersReducedMotion) {
+          current.hidden = true;
+          next.style.visibility = "";
+          panels.style.height = "";
+          syncActivePanelHeight();
+          delete toggle.dataset.animating;
+          return;
+        }
+
+        panels.style.height = `${startHeight}px`;
+        panels.classList.add("is-transitioning");
+        current.classList.add("is-leaving");
+        next.classList.add("is-entering");
+        next.style.opacity = "0";
+        next.style.visibility = "";
+
+        const outgoingAnimation = current.animate([{ opacity: 1 }, { opacity: 0 }], {
+          duration: expanded ? 140 : 100,
+          easing: "ease-out",
+          fill: "forwards",
+        });
+        await outgoingAnimation.finished;
+        current.hidden = true;
+        current.classList.remove("is-leaving");
+        outgoingAnimation.cancel();
+
+        const heightAnimation = panels.animate(
+          [{ height: `${startHeight}px` }, { height: `${endHeight}px` }],
+          {
+            duration: expanded ? 360 : 460,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "forwards",
+          },
+        );
+
+        const incomingAnimation = next.animate([{ opacity: 0 }, { opacity: 1 }], {
+          duration: expanded ? 180 : 260,
+          delay: expanded ? 80 : 140,
+          easing: "ease-out",
+          fill: "forwards",
+        });
+
+        await Promise.allSettled([
+          heightAnimation.finished,
+          incomingAnimation.finished,
+        ]);
+
+        next.classList.remove("is-entering");
+        next.style.opacity = "";
+        next.style.visibility = "";
+        heightAnimation.cancel();
+        incomingAnimation.cancel();
+        panels.classList.remove("is-transitioning");
+        panels.style.height = `${endHeight}px`;
+        delete toggle.dataset.animating;
+      });
+    });
+  };
+
+  initSkillsToggle();
+  document.addEventListener("astro:page-load", initSkillsToggle);
+</script>

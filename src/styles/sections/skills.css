@@ -1,53 +1,84 @@
-.skills-section:has(.skills-expand[open]) .skills-highlights {
-  display: none;
+.skills-panels {
+  display: grid;
+  position: relative;
 }
 
-.skills-expand__trigger {
-  cursor: pointer;
-  font-size: 0.9rem;
-  color: rgba(var(--primary-color), 1);
-  font-weight: 500;
-  padding: 0.25rem 0;
-  list-style: none;
-  display: flex;
+.skills-panels.is-ready,
+.skills-panels.is-transitioning {
+  overflow: clip;
+}
+
+.skills-panel {
+  grid-area: 1 / 1;
+}
+
+.skills-panels.is-ready .skills-panel {
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.skills-panels.is-transitioning .skills-panel {
+  will-change: opacity;
+}
+
+.skills-panels.is-transitioning .skills-panel.is-entering {
+  opacity: 0;
+}
+
+.skills-toggle {
   align-items: center;
-  transition: opacity 0.2s;
+  align-self: center;
+  background: none;
+  border: 0;
+  border-radius: 9999px;
+  color: rgba(var(--primary-color), 1);
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  transition: background-color 0s;
 }
 
-.skills-expand__trigger:hover {
-  opacity: 0.75;
-  text-decoration: none;
+.skills-toggle:hover,
+.skills-toggle:focus-visible {
+  background-color: rgba(var(--ambience-color), 1);
+  transition: background-color 0.2s ease-in-out;
 }
 
-.skills-expand__trigger:focus-visible {
+.skills-toggle:focus-visible {
   outline: 2px dashed rgba(var(--secondary-color), 1);
-  outline-offset: 2px;
+  outline-offset: 0;
 }
 
-.skills-expand__trigger::-webkit-details-marker {
-  display: none;
+.skills-toggle:active {
+  opacity: 0.8;
 }
 
-.skills-expand__icon {
+.skills-toggle__icon {
   flex-shrink: 0;
-  margin-inline-start: 0.35rem;
-  transition: transform 0.2s;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.skills-expand[open] .skills-expand__icon {
+.skills-toggle[aria-expanded="true"] .skills-toggle__icon {
   transform: rotate(180deg);
 }
 
-.skills-expand__collapse-text {
-  display: none;
+@media (min-width: 1024px) {
+  .skills-toggle {
+    align-self: flex-start;
+  }
 }
 
-.skills-expand[open] .skills-expand__collapse-text {
-  display: inline;
-}
-
-.skills-expand[open] .skills-expand__expand-text {
-  display: none;
+@media (prefers-reduced-motion: reduce) {
+  .skills-toggle,
+  .skills-toggle__icon {
+    transition: none;
+  }
 }
 
 .skills-legend {

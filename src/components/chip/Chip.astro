@@ -4,10 +4,16 @@ import { Icon } from "astro-icon/components";
 interface Props {
   title: string;
   level?: "novice" | "proficient" | "professional";
+  showLevel?: boolean;
   className?: string;
 }
 
-const { title, level = "proficient", className = "" } = Astro.props;
+const {
+  title,
+  level = "proficient",
+  showLevel = true,
+  className = "",
+} = Astro.props;
 
 const filledBars = {
   novice: 1,
@@ -16,7 +22,10 @@ const filledBars = {
 }[level];
 ---
 
-<div class:list={["chip", className]} data-level={level}>
+<div
+  class:list={["chip", !showLevel && "chip--without-level", className]}
+  data-level={level}
+>
   <div class="chip__header">
     <div class="chip__icon" aria-hidden>
       <slot name="icon">
@@ -25,9 +34,13 @@ const filledBars = {
     </div>
     <span class="chip__title">{title}</span>
   </div>
-  <div class="chip__bars" role="img" aria-label={`${level} proficiency`}>
-    <span class:list={["chip__bar", filledBars >= 1 && "chip__bar--filled"]} />
-    <span class:list={["chip__bar", filledBars >= 2 && "chip__bar--filled"]} />
-    <span class:list={["chip__bar", filledBars >= 3 && "chip__bar--filled"]} />
-  </div>
+  {
+    showLevel && (
+      <div class="chip__bars" role="img" aria-label={`${level} proficiency`}>
+        <span class:list={["chip__bar", filledBars >= 1 && "chip__bar--filled"]} />
+        <span class:list={["chip__bar", filledBars >= 2 && "chip__bar--filled"]} />
+        <span class:list={["chip__bar", filledBars >= 3 && "chip__bar--filled"]} />
+      </div>
+    )
+  }
 </div>

@@ -97,7 +97,7 @@
   }
 
   .hero__text {
-    max-width: min(45rem, 58vw);
+    max-width: min(70rem, 80vw);
   }
 }
 

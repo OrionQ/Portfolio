@@ -9,7 +9,7 @@ import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://orionq.github.io',
+  site: 'https://xiaoleiqin.com',
   base: '',
   server: {
     host: true,

@@ -1,5 +1,4 @@
 .chip {
-  backdrop-filter: blur(10px);
   background: rgba(var(--floating-color), 0.6);
   border: 2px solid rgba(var(--floating-color));
   border-radius: 9999px;

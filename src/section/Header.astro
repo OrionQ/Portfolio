@@ -35,8 +35,8 @@ const isHomePage = Astro.url.pathname === "/";
 <div class="header-outer">
   <nav class="header">
     <div class="header__inner flex flex-col">
-      <div class="flex justify-between flex-row items-center gap-8">
-    <div>
+      <div class="header__bar flex justify-between flex-row items-center gap-8">
+    <div class="header__brand">
       <a href="/" class="flex gap-4 items-center home-link">
         <Icon
           name="orion-logo"
@@ -48,7 +48,7 @@ const isHomePage = Astro.url.pathname === "/";
     </div>
 
     <!-- Desktop Navigation -->
-    <div class="flex gap-4 flex-row items-center">
+    <div class="header__actions flex gap-4 flex-row items-center">
       <div class="gap-8 items-center hidden md:flex md:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}

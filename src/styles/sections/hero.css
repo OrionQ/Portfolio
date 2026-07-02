@@ -12,11 +12,12 @@
       rgba(var(--background), 0) 0,
       rgba(var(--background), 0.82) clamp(2rem, 4vh, 3rem),
       rgba(var(--background), 1) clamp(4rem, 8vh, 6rem),
-      rgba(var(--background), 1) calc(100% - clamp(6rem, 12vh, 9rem)),
-      rgba(var(--background), 0.82) calc(100% - clamp(3.5rem, 7vh, 5rem)),
+      rgba(var(--background), 1) calc(100% - clamp(8rem, 14vh, 11rem)),
+      rgba(var(--background), 0.72) calc(100% - clamp(4.75rem, 8vh, 6.5rem)),
+      rgba(var(--background), 0.28) calc(100% - clamp(2rem, 4vh, 3rem)),
       rgba(var(--background), 0) 100%
     );
-  padding-bottom: clamp(2.75rem, 5vh, 3.5rem);
+  padding-bottom: clamp(3.5rem, 7vh, 5rem);
   overflow: visible;
   --hero-pin-top: 5.5rem;
   --hero-progress: 0;
@@ -28,7 +29,7 @@
   min-height: clamp(32rem, 78vh, 48rem);
   display: flex;
   align-items: center;
-  padding-block: clamp(3rem, 9vh, 6rem) clamp(2.5rem, 6vh, 4rem);
+  padding-block: clamp(3rem, 9vh, 6rem) clamp(3.5rem, 8vh, 5.5rem);
   padding-inline: 0;
   overflow: visible;
 }
@@ -90,6 +91,19 @@
 }
 
 @media (min-width: 1024px) {
+  .hero-block {
+    padding-bottom: clamp(3.5rem, 7vh, 5rem);
+  }
+
+  .hero {
+    min-height: clamp(35rem, 83vh, 52rem);
+    padding-block: clamp(3.25rem, 8.5vh, 6rem) clamp(3.75rem, 7vh, 5.25rem);
+  }
+
+  .hero-chevron {
+    bottom: clamp(-1.25rem, -1.5vh, -0.5rem);
+  }
+
   .hero__inner {
     flex-direction: row;
     align-items: center;
@@ -129,6 +143,17 @@
     --hero-layout-height: 100lvh;
     --hero-segment-height: 82lvh;
     --hero-scroll-runway: calc(var(--hero-scroll-steps) * var(--hero-segment-height));
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(var(--background), 0) 0,
+        rgba(var(--background), 0.82) clamp(2rem, 4vh, 3rem),
+        rgba(var(--background), 1) clamp(4rem, 8vh, 6rem),
+        rgba(var(--background), 1) calc(100% - clamp(11rem, 24vh, 15rem)),
+        rgba(var(--background), 0.9) calc(100% - clamp(8rem, 18vh, 11rem)),
+        rgba(var(--background), 0.48) calc(100% - clamp(4rem, 10vh, 6rem)),
+        rgba(var(--background), 0) 100%
+      );
     min-height: calc(var(--hero-layout-height) + var(--hero-scroll-runway));
     padding-bottom: 0;
   }

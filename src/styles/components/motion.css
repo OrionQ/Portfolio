@@ -21,10 +21,16 @@ html.motion-paused *::after {
   transition: background-color 0s;
 }
 
-.motion-pause-button:hover,
 .motion-pause-button:focus-visible {
   background-color: rgba(var(--ambience-color), 1);
   transition: background-color 0.2s ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .motion-pause-button:hover {
+    background-color: rgba(var(--ambience-color), 1);
+    transition: background-color 0.2s ease-in-out;
+  }
 }
 
 .motion-pause-button:focus-visible {

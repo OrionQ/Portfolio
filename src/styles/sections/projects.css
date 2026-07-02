@@ -59,10 +59,16 @@
   outline-offset: 2px;
 }
 
-.tab-button:hover,
 .tab-button:focus-visible {
   color: rgba(var(--primary-color), 1);
   transition: color 0.2s ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tab-button:hover {
+    color: rgba(var(--primary-color), 1);
+    transition: color 0.2s ease-in-out;
+  }
 }
 
 .tab-indicator {

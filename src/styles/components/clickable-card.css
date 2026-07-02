@@ -24,7 +24,6 @@
   outline: 3px dashed rgba(var(--secondary-color), 1);
 }
 
-.clickable-card:hover,
 .clickable-card:focus-visible {
   background-color: rgba(var(--floating-color), 1);
   border-color: rgba(var(--primary-color), 1);
@@ -99,9 +98,20 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.clickable-card:hover .clickable-card-cta,
 .clickable-card:focus-visible .clickable-card-cta {
   opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .clickable-card:hover {
+    background-color: rgba(var(--floating-color), 1);
+    border-color: rgba(var(--primary-color), 1);
+    box-shadow: 0 1px 4px rgba(var(--shadow-color));
+  }
+
+  .clickable-card:hover .clickable-card-cta {
+    opacity: 1;
+  }
 }
 
 @media (prefers-contrast: more) {

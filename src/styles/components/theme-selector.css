@@ -27,9 +27,7 @@
   outline-offset: 0;
 }
 
-#darkModeToggle:hover,
 #darkModeToggle:focus-visible,
-.icon-toggle:hover,
 .icon-toggle:focus-visible {
   background-color: rgba(var(--ambience-color), 1);
   transition: background-color 0.2s ease-in-out;
@@ -86,11 +84,6 @@
   outline-offset: 0;
 }
 
-.theme-button:hover {
-  border-color: rgba(var(--primary-color), 0.5);
-  transition: border-color 0.2s ease-in-out;
-}
-
 .theme-controls {
   align-items: center;
   display: flex;
@@ -120,10 +113,27 @@
   outline-offset: 0;
 }
 
-.theme-dropdown-button:hover,
 .theme-dropdown-button:focus-visible {
   background-color: rgba(var(--ambience-color), 1);
   transition: background-color 0.2s ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #darkModeToggle:hover,
+  .icon-toggle:hover {
+    background-color: rgba(var(--ambience-color), 1);
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .theme-button:hover {
+    border-color: rgba(var(--primary-color), 0.5);
+    transition: border-color 0.2s ease-in-out;
+  }
+
+  .theme-dropdown-button:hover {
+    background-color: rgba(var(--ambience-color), 1);
+    transition: background-color 0.2s ease-in-out;
+  }
 }
 
 .theme-picker-desktop {

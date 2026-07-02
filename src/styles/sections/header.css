@@ -86,16 +86,18 @@ body:has(.skip-link:focus-visible) .header::before {
   outline: 2px dashed rgba(var(--secondary-color), 1);
 }
 
-.mobile-menu-button:hover {
-  background-color: rgba(var(--ambience-color), 1);
-}
-
 .mobile-menu[open] .menu-icon {
   display: none;
 }
 
 .mobile-menu:not([open]) .close-icon {
   display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mobile-menu-button:hover {
+    background-color: rgba(var(--ambience-color), 1);
+  }
 }
 
 .mobile-menu-content {

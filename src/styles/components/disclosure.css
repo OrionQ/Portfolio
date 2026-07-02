@@ -60,10 +60,16 @@
   outline-offset: 2px;
 }
 
-.disclosure .summary:hover,
 .disclosure .summary:focus-visible {
   outline-color: rgba(var(--primary-color), 1);
   transition: outline-color 0.2s ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .disclosure .summary:hover {
+    outline-color: rgba(var(--primary-color), 1);
+    transition: outline-color 0.2s ease-in-out;
+  }
 }
 
 .disclosure .summary::-webkit-details-marker {

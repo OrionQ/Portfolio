@@ -20,7 +20,9 @@
   outline: 2px dashed rgba(var(--secondary-color), 1);
 }
 
-.page-link:hover {
-  background-color: rgba(var(--secondary-color), 1);
-  gap: 1rem;
+@media (hover: hover) and (pointer: fine) {
+  .page-link:hover {
+    background-color: rgba(var(--secondary-color), 1);
+    gap: 1rem;
+  }
 }

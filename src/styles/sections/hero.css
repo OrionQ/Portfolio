@@ -128,6 +128,12 @@
   }
 }
 
+@media (max-width: 639px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+}
+
 /* Small phones only: pin hero, lift text, step through each illustration */
 @media (max-width: 431px) {
   html {

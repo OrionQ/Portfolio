@@ -1,0 +1,6 @@
+@media (min-width: 1024px) {
+  .experience-section__label {
+    flex: 0 0 18.5rem;
+    inline-size: 18.5rem;
+  }
+}

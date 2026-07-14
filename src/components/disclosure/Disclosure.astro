@@ -10,7 +10,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
     <div
       class="summary-inner flex grow justify-between items-center gap-4 min-w-0"
     >
-      <div class="flex gap-4 items-center">
+      <div class="summary-heading flex gap-4 items-center min-w-0">
         <div class="flex flex-col">
           <h3 class="font-normal text-2xl">{title}</h3>
           {
@@ -21,7 +21,7 @@ const { className, company, date, open = false, tag, title } = Astro.props;
         </div>
         {tag && <Tag className="text-sm shrink-0">{tag}</Tag>}
       </div>
-      {date && <p class="flex-wrap text-end font-light">{date}</p>}
+      {date && <p class="summary-date flex-wrap text-end font-light">{date}</p>}
     </div>
     <Icon name="chevron-down" size={20} class="chevron-down-icon" aria-hidden />
     <Icon name="chevron-up" size={20} class="chevron-up-icon" aria-hidden />

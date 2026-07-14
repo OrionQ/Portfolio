@@ -75,3 +75,30 @@
 .disclosure .summary::-webkit-details-marker {
   display: none;
 }
+
+@media (max-width: 639px) {
+  .project-experience .summary-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .experience .summary-inner,
+  .experience .summary-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .experience .summary-inner {
+    gap: 0.75rem;
+  }
+
+  .experience .summary-heading {
+    gap: 0.5rem;
+    inline-size: 100%;
+  }
+
+  .experience .summary-date {
+    text-align: start;
+  }
+}

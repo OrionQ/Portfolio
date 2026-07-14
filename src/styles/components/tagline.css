@@ -1,14 +1,31 @@
-#tagline {
+.tagline {
   font-weight: 500;
   font-size: 2.5rem;
   line-height: 1.2;
   color: rgba(var(--primary-color), 1);
   max-width: 100%;
+}
+
+#tagline {
   overflow-x: clip;
   text-wrap: balance;
+}
+
+.tagline--compact {
+  font-size: 2rem;
 }
 
 .scratch-pair {
   max-width: 100%;
   vertical-align: baseline;
+}
+
+@media (max-width: 639px) {
+  .tagline {
+    font-size: 2rem;
+  }
+
+  .tagline--compact {
+    font-size: 1.5rem;
+  }
 }

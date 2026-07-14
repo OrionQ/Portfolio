@@ -5,6 +5,7 @@
 @import "./base/document.css";
 @import "./sections/hero.css";
 @import "./sections/header.css";
+@import "./sections/experience.css";
 @import "./sections/projects.css";
 @import "./sections/skills.css";
 @import "./sections/who-i-am.css";

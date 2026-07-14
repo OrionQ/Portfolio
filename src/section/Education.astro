@@ -15,9 +15,9 @@ import Tag from "../components/tag/Tag.astro";
     <p
       style={{
         fontWeight: "500",
-        fontSize: "2rem",
+        fontSize: "1.5rem",
         color: "rgba(var(--primary-color), 1)",
-        lineHeight: "normal",
+        lineHeight: "1.2",
       }}
       class="flex flex-wrap items-center text-center lg:text-end"
     >
@@ -25,19 +25,19 @@ import Tag from "../components/tag/Tag.astro";
     </p>
   </div>
   <div
-    class="education flex flex-col gap-4 justify-center items-center w-full flex-1 min-w-[20rem]"
+    class="education flex flex-col gap-4 justify-center items-center w-full flex-1 min-w-0"
   >
     <Card cardType="secondary" className="flex gap-4 w-full justify-between">
       <div class="flex flex-row gap-8">
         <div class="flex-col">
-          <h3 class="text-xl">University of Texas at Austin</h3>
+          <h3 class="text-2xl">University of Texas at Austin</h3>
           <Link href="https://www.ischool.utexas.edu/" newTab underline
             >M.S. Information Studies</Link
           >
           <span>Human-Computer Interaction & UX Design</span>
         </div>
         <div class="flex items-center">
-          <Tag className="text-xs">Just Graduated!</Tag>
+          <Tag className="text-sm">Just Graduated!</Tag>
         </div>
       </div>
       <p class="flex flex-col justify-center text-end">
@@ -49,7 +49,7 @@ import Tag from "../components/tag/Tag.astro";
       className="flex flex-wrap gap-4 w-full justify-between"
     >
       <div class="flex-col min-w-0 flex-1 basis-40">
-        <h3 class="text-xl">North Carolina State University</h3>
+        <h3 class="text-2xl">North Carolina State University</h3>
         <Link href="https://www.csc.ncsu.edu/" newTab underline
           >B.S. Computer Science</Link
         >

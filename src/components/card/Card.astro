@@ -3,7 +3,7 @@ const { className, title, cardType = 'primary', style } = Astro.props;
 ---
 
 <div class:list={["card", `${className}`, `card-${cardType}`]} style={style}>
-  {title && <h3 class="font-light text-[2.25rem] pb-2 pr-2">{title}</h3>}
+  {title && <h3 class="font-light text-2xl pb-2 pr-2">{title}</h3>}
   <div class:list={[`${className || ""}`]}>
     <slot />
   </div>

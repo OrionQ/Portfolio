@@ -3,8 +3,7 @@
 export default function TaglineScratch() {
   return (
     <p id="tagline" className="tagline w-full min-w-0">
-      I design and engineer accessible products, from design systems to
-      production code.
+      I design and transform design systems into accessible products.
     </p>
   );
 }

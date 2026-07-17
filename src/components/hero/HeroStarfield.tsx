@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import laptopSvg from "../../icons/laptop.svg?raw";
 import penSvg from "../../icons/pen.svg?raw";
-import cameraSvg from "../../icons/camera.svg?raw";
+import accessibilitySvg from "../../icons/accessibility.svg?raw";
 import {
   CANCER_STARS,
   isChartConstellation,
@@ -97,17 +97,22 @@ const pickLayout = (cssW: number) => {
 const LABEL_TUNE = [
   { inset: 0.13, gap: 5 }, // BUILD — laptop
   { inset: 0.06, gap: 12 }, // DESIGN — pen cap sits high in the SVG
-  { inset: 0.13, gap: 5 }, // CAPTURE — camera
+  { inset: 0.13, gap: 5 }, // ACCESSIBLE — universal access symbol
 ];
 // icon + constellation nudge when revealed (fraction of iconSize)
 const ICON_OFFSET = [
   { x: 0, y: 0.10 }, // BUILD
   { x: 0, y: 0 }, // DESIGN
-  { x: -0.38, y: 0.62 }, // CAPTURE
+  { x: 0, y: 0.1 }, // ACCESSIBLE
 ];
 
-// Local line-art silhouettes (centred), matched to the five SVG illustrations.
-// BUILD–CAPTURE are role-linked; Cancer and Orion use catalog star positions.
+// The accessibility artwork fills more of its SVG canvas than the laptop and pen.
+// Scale it down slightly so all three revealed illustrations share the same visual weight.
+const ILLUSTRATION_SCALE = [1, 1, 0.72];
+
+
+// Local line-art silhouettes (centred), matched to the three SVG illustrations.
+// BUILD–ACCESS are role-linked; Cancer and Orion use catalog star positions.
 const RAW: RawConstellation[] = [
   {
     label: "BUILD",
@@ -154,47 +159,62 @@ const RAW: RawConstellation[] = [
     mags: [2, 2, 2, 2, 2, 2],
   },
   {
-    label: "CAPTURE",
-    lead: 5,
+    label: "ACCESSIBLE",
+    lead: 8,
     pts: [
-      [-70, -8],
-      [70, -8],
-      [0, -42],
-      [-70, 52],
-      [70, 52],
-      [0, 18],
-      [-28, 18],
-      [28, 18],
+      [0, -78],
+      [55, -55],
+      [78, 0],
+      [55, 55],
+      [0, 78],
+      [-55, 55],
+      [-78, 0],
+      [-55, -55],
+      [0, -38],
+      [0, -5],
+      [-38, -10],
+      [38, -10],
+      [0, 24],
+      [-28, 56],
+      [28, 56],
     ],
     edges: [
       [0, 1],
-      [1, 4],
-      [4, 3],
-      [3, 0],
-      [0, 2],
       [1, 2],
+      [2, 3],
+      [3, 4],
+      [4, 5],
       [5, 6],
-      [5, 7],
       [6, 7],
-      [5, 0],
-      [5, 1],
-      [5, 3],
-      [5, 4],
+      [7, 0],
+      [8, 9],
+      [10, 9],
+      [9, 11],
+      [9, 12],
+      [12, 13],
+      [12, 14],
     ],
-    mags: [2, 2, 2, 2, 2, 2, 2, 2],
+    mags: [2, 2, 2, 2, 2, 2, 2, 2, 1.2, 2, 2, 2, 2, 2, 2],
   },
   ORION_STARS,
   CANCER_STARS,
 ];
 
-const ICON_SVGS = [laptopSvg, penSvg, cameraSvg];
+const ICON_SVGS = [laptopSvg, penSvg, accessibilitySvg];
 
 const tintSvg = (raw: string, r: number, g: number, b: number) => {
   const fill = `fill="rgb(${r},${g},${b})"`;
+  const stroke = `stroke="rgb(${r},${g},${b})"`;
   return raw
     .replace(/fill="#000000"/gi, fill)
     .replace(/fill="#000"/gi, fill)
-    .replace(/fill="black"/gi, fill);
+    .replace(/fill="black"/gi, fill)
+    .replace(/stroke="#000000"/gi, stroke)
+    .replace(/stroke="#000"/gi, stroke)
+    .replace(/stroke="black"/gi, stroke)
+    .replace(/stroke="currentColor"/gi, stroke)
+    .replace(/stroke:\s*(?:#000000|#000|currentColor)\s*;/gi, `stroke:rgb(${r},${g},${b});`)
+    .replace(/<path(?![^>]*\bfill=)/gi, `<path ${fill}`);
 };
 
 const drawStarShape = (
@@ -271,7 +291,7 @@ const drawConstellationGlow = (
 
 function buildShapes(): ConstShape[] {
   return RAW.map((c, idx) => {
-    // place shapes in the same cyclic order the chips read (BUILD→DESIGN→CAPTURE)
+    // place shapes in the same cyclic order the chips read (BUILD→DESIGN→ACCESS)
     // so the natural drift and the shortest hover path share a direction
     const theta = (-idx * 2 * Math.PI) / RAW.length;
     const sinT = Math.sin(theta);
@@ -899,6 +919,13 @@ export default function HeroStarfield() {
           projPts = projPts.map((p) => ({ ...p, sx: p.sx + dx, sy: p.sy + dy }));
         }
 
+        if (c.label === "ACCESSIBLE") {
+          const figureOffsetY = -iconSize * 0.08;
+          projPts = projPts.map((p, index) =>
+            index >= 8 ? { ...p, sy: p.sy + figureOffsetY } : p,
+          );
+        }
+
         let bMinYFinal = Infinity;
         for (const p of projPts) {
           if (p.sy < bMinYFinal) bMinYFinal = p.sy;
@@ -981,12 +1008,20 @@ export default function HeroStarfield() {
         const { glowFade, iconFade } = stagedReveal(shapeFade);
         const landingGlow = landingGlowFor(c.idx, glowFade);
 
-        // revealed illustration (BUILD / DESIGN / CAPTURE only)
+        // revealed illustration (BUILD / DESIGN / ACCESSIBLE only)
         const icon = !chartOnly && c.idx < ICON_SVGS.length ? icons[c.idx] : undefined;
         if (iconFade > 0.001 && icon && icon.complete && icon.naturalWidth > 0) {
+          const illustrationSize =
+            iconSize * (ILLUSTRATION_SCALE[c.idx] ?? ILLUSTRATION_SCALE[0]);
           ctx.save();
           ctx.globalAlpha = iconFade * 0.62;
-          ctx.drawImage(icon, bMx - iconSize / 2, bMy - iconSize / 2, iconSize, iconSize);
+          ctx.drawImage(
+            icon,
+            bMx - illustrationSize / 2,
+            bMy - illustrationSize / 2,
+            illustrationSize,
+            illustrationSize,
+          );
           ctx.restore();
         }
 
@@ -1068,9 +1103,11 @@ export default function HeroStarfield() {
           if (chartOnly) {
             labelY = bMinY - 10 * dpr;
           } else {
-            const iconTop = bMy - iconSize / 2;
+            const illustrationSize =
+              iconSize * (ILLUSTRATION_SCALE[c.idx] ?? ILLUSTRATION_SCALE[0]);
+            const iconTop = bMy - illustrationSize / 2;
             const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
-            const visibleTop = iconTop + iconSize * tune.inset;
+            const visibleTop = iconTop + illustrationSize * tune.inset;
             labelY = visibleTop - tune.gap * dpr;
           }
 

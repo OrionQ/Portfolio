@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 111 111">
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
+  <defs>
+    <style>
+      .st0 {
+        stroke-width: 9px;
+      }
+
+      .st0, .st1 {
+        stroke-linecap: round;
+      }
+
+      .st0, .st1, .st2, .st3, .st4 {
+        fill: none;
+        stroke: #000;
+      }
+
+      .st0, .st1, .st3 {
+        stroke-linejoin: round;
+      }
+
+      .st1 {
+        stroke-width: 8px;
+      }
+
+      .st2 {
+        stroke-miterlimit: 10;
+        stroke-width: 10px;
+      }
+
+      .st3 {
+        stroke-linecap: square;
+        stroke-width: 16px;
+      }
+
+      .st4 {
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <circle class="st4" cx="55.5" cy="55.5" r="54"/>
+  <circle class="st2" cx="55.5" cy="24" r="4.6"/>
+  <path class="st1" d="M22.5,34.5c11,3,33,4.5,33,4.5,0,0,22-1.5,33-4.5"/>
+  <g>
+    <line class="st3" x1="55.5" y1="43.3" x2="55.5" y2="57"/>
+    <line class="st0" x1="71.5" y1="89.5" x2="57.7" y2="58.8"/>
+    <line class="st0" x1="53.2" y1="58.8" x2="39.5" y2="89.5"/>
+  </g>
+</svg>

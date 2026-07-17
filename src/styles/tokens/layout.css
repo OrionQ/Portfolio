@@ -3,7 +3,7 @@
 /* --header-extend: extra width reserved for the expanded mobile menu surface */
 :root {
   --page-max-width: 100rem;
-  --page-gutter: 2rem;
+  --page-gutter: 1rem;
   --header-edge-gap: 0.5rem;
   --header-extend: 2rem;
   --header-control-padding: 0.5rem;

@@ -78,16 +78,10 @@ const websiteStructuredData = {
     <script is:inline>
       (function() {
         try {
-          var savedTheme = localStorage.getItem("colorTheme");
-          if (!savedTheme) {
-            var themes = ["blue", "pink", "green", "brown", "mono", "retro"];
-            savedTheme = themes[Math.floor(Math.random() * themes.length)];
-            localStorage.setItem("colorTheme", savedTheme);
-          }
           var savedMode = localStorage.getItem("theme");
           var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-          document.documentElement.setAttribute("data-theme", savedTheme);
+          document.documentElement.setAttribute("data-theme", "blue");
 
           var isDark =
             savedMode === "dark" || (savedMode !== "light" && prefersDark);

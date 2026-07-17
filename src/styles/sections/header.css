@@ -64,6 +64,13 @@ body:has(.skip-link:focus-visible) .header::before {
   );
 }
 
+@media (max-width: 639px) {
+  .header__inner {
+    padding-inline-start: 2rem;
+    padding-inline-end: calc(2rem - var(--header-control-padding));
+  }
+}
+
 .home-link:focus-visible {
   outline: 2px dashed rgba(var(--secondary-color), 1);
 }

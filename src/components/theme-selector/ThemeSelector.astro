@@ -1,75 +1,26 @@
 ---
 import { Icon } from "astro-icon/components";
+
+const themes = ["blue", "pink", "green", "brown", "mono", "retro"];
 ---
 
 <div class="theme-controls">
-  <!-- Screen reader announcement for theme changes -->
-  <div class="sr-only" role="status" aria-live="polite" id="themeAnnouncement">
+  <div class="sr-only" role="status" aria-live="polite" id="themeAnnouncement"></div>
+
+  <div class="theme-picker-desktop" role="group" aria-label="Color theme selector">
+    {themes.map((theme) => (
+      <button
+        class="theme-button"
+        data-theme={theme}
+        aria-label={`Select ${theme} theme`}
+        aria-pressed="false"
+        title={theme.charAt(0).toUpperCase() + theme.slice(1)}
+      >
+        <span class="color-swatch" aria-hidden="true"></span>
+      </button>
+    ))}
   </div>
 
-  <!-- Desktop: Always visible color picker -->
-  <div
-    class="theme-picker-desktop"
-    role="group"
-    aria-label="Color theme selector"
-  >
-    <button
-      class="theme-button"
-      data-theme="blue"
-      aria-label="Select blue theme"
-      aria-pressed="false"
-      title="Blue"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-    <button
-      class="theme-button"
-      data-theme="pink"
-      aria-label="Select pink theme"
-      aria-pressed="false"
-      title="Pink"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-    <button
-      class="theme-button"
-      data-theme="green"
-      aria-label="Select green theme"
-      aria-pressed="false"
-      title="Green"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-    <button
-      class="theme-button"
-      data-theme="brown"
-      aria-label="Select brown theme"
-      aria-pressed="false"
-      title="Brown"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-    <button
-      class="theme-button"
-      data-theme="mono"
-      aria-label="Select monochrome theme"
-      aria-pressed="false"
-      title="Monochrome"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-    <button
-      class="theme-button"
-      data-theme="retro"
-      aria-label="Select retro theme"
-      aria-pressed="false"
-      title="Retro"
-    >
-      <span class="color-swatch" aria-hidden="true"></span>
-    </button>
-  </div>
-
-  <!-- Mobile: Dropdown color picker -->
   <div class="theme-dropdown">
     <button
       class="theme-dropdown-button"
@@ -79,73 +30,19 @@ import { Icon } from "astro-icon/components";
     >
       <Icon name="swatch" size={24} aria-hidden="true" />
     </button>
-
-    <div
-      class="theme-picker-mobile"
-      id="themePicker"
-      role="menu"
-      aria-label="Color theme selector"
-    >
-      <button
-        class="theme-button"
-        data-theme="blue"
-        aria-label="Select blue theme"
-        aria-pressed="false"
-        title="Blue"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
-      <button
-        class="theme-button"
-        data-theme="pink"
-        aria-label="Select pink theme"
-        aria-pressed="false"
-        title="Pink"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
-      <button
-        class="theme-button"
-        data-theme="green"
-        aria-label="Select green theme"
-        aria-pressed="false"
-        title="Green"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
-      <button
-        class="theme-button"
-        data-theme="brown"
-        aria-label="Select brown theme"
-        aria-pressed="false"
-        title="Brown"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
-      <button
-        class="theme-button"
-        data-theme="mono"
-        aria-label="Select monochrome theme"
-        aria-pressed="false"
-        title="Monochrome"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
-      <button
-        class="theme-button"
-        data-theme="retro"
-        aria-label="Select retro theme"
-        aria-pressed="false"
-        title="Retro"
-        role="menuitem"
-      >
-        <span class="color-swatch" aria-hidden="true"></span>
-      </button>
+    <div id="themePicker" class="theme-picker-mobile" role="menu" aria-label="Color theme selector">
+      {themes.map((theme) => (
+        <button
+          class="theme-button"
+          data-theme={theme}
+          aria-label={`Select ${theme} theme`}
+          aria-pressed="false"
+          title={theme.charAt(0).toUpperCase() + theme.slice(1)}
+          role="menuitem"
+        >
+          <span class="color-swatch" aria-hidden="true"></span>
+        </button>
+      ))}
     </div>
   </div>
 
@@ -155,23 +52,12 @@ import { Icon } from "astro-icon/components";
     aria-label="Toggle light and dark mode"
     aria-pressed="false"
   >
-    <Icon
-      name="sun"
-      size={24}
-      class="theme-sun-icon theme-toggle-icon"
-      aria-hidden="true"
-    />
-    <Icon
-      name="moon"
-      size={24}
-      class="theme-moon-icon theme-toggle-icon"
-      aria-hidden="true"
-    />
+    <Icon name="sun" size={24} class="theme-sun-icon theme-toggle-icon" aria-hidden="true" />
+    <Icon name="moon" size={24} class="theme-moon-icon theme-toggle-icon" aria-hidden="true" />
   </button>
 </div>
 
 <script is:inline>
-  // Resolve dark/light: saved preference, or system when none
   const resolveDark = () => {
     const saved = localStorage.getItem("theme");
     if (saved === "dark") return true;
@@ -179,195 +65,82 @@ import { Icon } from "astro-icon/components";
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   };
 
+  const announceTheme = (message) => {
+    const el = document.getElementById("themeAnnouncement");
+    if (el) {
+      el.textContent = message;
+      setTimeout(() => { el.textContent = ""; }, 1000);
+    }
+  };
+
+  const updateThemeButtons = (theme) => {
+    document.querySelectorAll(".theme-button").forEach((button) => {
+      const active = button.dataset.theme === theme;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  };
+
   const applyColorMode = () => {
     const isDark = resolveDark();
     document.documentElement.classList.toggle("dark", isDark);
-    const btn = document.getElementById("darkModeToggle");
-    if (btn) btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+    document
+      .getElementById("darkModeToggle")
+      ?.setAttribute("aria-pressed", isDark ? "true" : "false");
   };
 
-  const initTheme = (() => {
-    let savedTheme = localStorage?.getItem("colorTheme");
-    if (!savedTheme) {
-      const themes = ["blue", "pink", "green", "brown", "mono"];
-      savedTheme = themes[Math.floor(Math.random() * themes.length)];
-      localStorage.setItem("colorTheme", savedTheme);
-    }
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    applyColorMode();
-    localStorage.setItem("colorTheme", savedTheme);
-    return { theme: savedTheme };
-  })();
+  // Blue is the first-visit default. A visitor's deliberate picker choice is retained.
+  const initialTheme = localStorage.getItem("colorTheme") || "blue";
+  document.documentElement.setAttribute("data-theme", initialTheme);
+  updateThemeButtons(initialTheme);
+  applyColorMode();
 
-  // Announce to screen readers
-  const announceTheme = (message) => {
-    const el = document.getElementById("themeAnnouncement");
-    if (el) { el.textContent = message; setTimeout(() => { el.textContent = ""; }, 1000); }
-  };
-
-  // Toggle between light and dark (explicit choice)
-  const handleToggleClick = () => {
+  document.getElementById("darkModeToggle")?.addEventListener("click", () => {
     const isDark = document.documentElement.classList.contains("dark");
     const next = isDark ? "light" : "dark";
     localStorage.setItem("theme", next);
     document.documentElement.classList.toggle("dark", !isDark);
-    const btn = document.getElementById("darkModeToggle");
-    if (btn) btn.setAttribute("aria-pressed", !isDark ? "true" : "false");
+    document
+      .getElementById("darkModeToggle")
+      ?.setAttribute("aria-pressed", !isDark ? "true" : "false");
     announceTheme(`${next === "dark" ? "Dark" : "Light"} mode activated`);
-  };
-
-  // Change color theme
-  const handleThemeChange = (theme) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("colorTheme", theme);
-
-    // Update active state and aria-pressed for both desktop and mobile buttons
-    document.querySelectorAll(".theme-button").forEach((btn) => {
-      const isActive = btn.dataset.theme === theme;
-      btn.classList.toggle("active", isActive);
-      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-    });
-
-    // Close dropdown after selection on mobile
-    const dropdownButton = document.getElementById("themeDropdownButton");
-    const themePicker = document.getElementById("themePicker");
-    if (dropdownButton && themePicker) {
-      themePicker.classList.remove("show");
-      dropdownButton.setAttribute("aria-expanded", "false");
-    }
-
-    // Announce change
-    const themeName = theme.charAt(0).toUpperCase() + theme.slice(1);
-    announceTheme(`${themeName} theme selected`);
-  };
-
-  // Event listeners
-  const darkModeToggle = document.getElementById("darkModeToggle");
-  if (darkModeToggle) {
-    darkModeToggle.addEventListener("click", handleToggleClick);
-  }
-
-  // Add listeners to all theme buttons (both desktop and mobile)
-  document.querySelectorAll(".theme-button").forEach((button) => {
-    button.addEventListener("click", () => handleThemeChange(button.dataset.theme));
-    const isActive = button.dataset.theme === initTheme.theme;
-    if (isActive) { button.classList.add("active"); button.setAttribute("aria-pressed", "true"); }
   });
 
-  // Mobile dropdown
-  const dropdownButton = document.getElementById("themeDropdownButton");
-  const themePicker = document.getElementById("themePicker");
-  if (dropdownButton && themePicker) {
-    dropdownButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = themePicker.classList.contains("show");
-      themePicker.classList.toggle("show", !isOpen);
-      dropdownButton.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+  document.querySelectorAll(".theme-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const theme = button.dataset.theme;
+      if (!theme) return;
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("colorTheme", theme);
+      updateThemeButtons(theme);
+      document.getElementById("themePicker")?.classList.remove("show");
+      document.getElementById("themeDropdownButton")?.setAttribute("aria-expanded", "false");
+      announceTheme(`${theme.charAt(0).toUpperCase() + theme.slice(1)} theme selected`);
     });
-    document.addEventListener("click", (e) => {
-      if (themePicker.classList.contains("show") &&
-          !themePicker.contains(e.target) && e.target !== dropdownButton) {
-        themePicker.classList.remove("show");
-        dropdownButton.setAttribute("aria-expanded", "false");
-      }
-    });
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && themePicker.classList.contains("show")) {
-        themePicker.classList.remove("show");
-        dropdownButton.setAttribute("aria-expanded", "false");
-        dropdownButton.focus();
-      }
-    });
-  }
+  });
 
-  // Follow system preference when the user hasn't chosen light/dark explicitly
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+  const dropdownButton = document.getElementById("themeDropdownButton");
+  const picker = document.getElementById("themePicker");
+  dropdownButton?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const open = picker?.classList.toggle("show") ?? false;
+    dropdownButton.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!picker?.classList.contains("show")) return;
+    if (!picker.contains(event.target) && event.target !== dropdownButton) {
+      picker.classList.remove("show");
+      dropdownButton?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (event) => {
     const saved = localStorage.getItem("theme");
     if (saved === "dark" || saved === "light") return;
-
-    document.documentElement.classList.toggle("dark", e.matches);
-    const btn = document.getElementById("darkModeToggle");
-    if (btn) btn.setAttribute("aria-pressed", e.matches ? "true" : "false");
+    document.documentElement.classList.toggle("dark", event.matches);
+    document
+      .getElementById("darkModeToggle")
+      ?.setAttribute("aria-pressed", event.matches ? "true" : "false");
   });
-</script>
-
-<script>
-  // Floating UI positioning (only on mobile)
-  import {
-    computePosition,
-    flip,
-    shift,
-    offset,
-    autoUpdate,
-  } from "@floating-ui/dom";
-
-  let cleanup: (() => void) | null = null;
-
-  const updatePosition = () => {
-    const dropdownButton = document.getElementById("themeDropdownButton");
-    const themePicker = document.getElementById("themePicker");
-
-    if (
-      !dropdownButton ||
-      !themePicker ||
-      !themePicker.classList.contains("show")
-    )
-      return;
-
-    computePosition(dropdownButton, themePicker, {
-      placement: "bottom",
-      strategy: "absolute",
-      middleware: [
-        offset(12),
-        flip({
-          fallbackPlacements: ["top", "bottom-start", "bottom-end"],
-          padding: 8,
-        }),
-        shift({
-          padding: 8,
-        }),
-      ],
-    }).then(({ x, y }) => {
-      Object.assign(themePicker.style, {
-        left: `${x}px`,
-        top: `${y}px`,
-      });
-    });
-  };
-
-  // Set up positioning when dropdown opens
-  const observeDropdown = () => {
-    const dropdownButton = document.getElementById("themeDropdownButton");
-    const themePicker = document.getElementById("themePicker");
-
-    if (!dropdownButton || !themePicker) return;
-
-    // Watch for class changes on themePicker
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "class") {
-          const isOpen = themePicker.classList.contains("show");
-
-          if (isOpen && window.innerWidth < 1000) {
-            // Start positioning
-            if (cleanup) cleanup();
-            cleanup = autoUpdate(dropdownButton, themePicker, updatePosition);
-          } else if (cleanup) {
-            // Stop positioning
-            cleanup();
-            cleanup = null;
-          }
-        }
-      });
-    });
-
-    observer.observe(themePicker, { attributes: true });
-  };
-
-  // Initialize
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", observeDropdown);
-  } else {
-    observeDropdown();
-  }
 </script>

@@ -20,5 +20,9 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      // Allow Cloudflare quick tunnels (and similar) for phone previews
+      allowedHosts: true,
+    },
   },
 });

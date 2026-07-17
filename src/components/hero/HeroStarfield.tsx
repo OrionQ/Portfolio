@@ -97,7 +97,8 @@ const pickLayout = (cssW: number) => {
 const LABEL_TUNE = [
   { inset: 0.13, gap: 5 }, // BUILD — laptop
   { inset: 0.06, gap: 12 }, // DESIGN — pen cap sits high in the SVG
-  { inset: 0.13, gap: 5 }, // ACCESSIBLE — universal access symbol
+  // Circle rim fills the SVG — sit just above it (esp. mobile) without climbing into the role chips
+  { inset: 0, gap: 16 }, // ACCESSIBLE
 ];
 // icon + constellation nudge when revealed (fraction of iconSize)
 const ICON_OFFSET = [
@@ -1109,6 +1110,13 @@ export default function HeroStarfield() {
             const tune = LABEL_TUNE[c.idx] ?? LABEL_TUNE[0];
             const visibleTop = iconTop + illustrationSize * tune.inset;
             labelY = visibleTop - tune.gap * dpr;
+            if (c.label === "ACCESSIBLE") {
+              // Scaled SVG sits inside the star ring — clear both, with a little
+              // extra lift on mobile, without climbing into the role chips.
+              const starClearance = bMinY - 8 * dpr;
+              labelY = Math.min(labelY, starClearance);
+              if (!wide) labelY -= 4 * dpr;
+            }
           }
 
           ctx.save();

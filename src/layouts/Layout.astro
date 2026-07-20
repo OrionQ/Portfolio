@@ -21,7 +21,7 @@ const siteUrl =
 const baseUrl = `${siteUrl}${import.meta.env.BASE_URL || "/"}`.replace(/\/$/, "");
 const imageUrl = image.startsWith("http")
   ? image
-  : `${baseUrl}${image.startsWith("/") ? "" : "/"}${image}?v=2`;
+  : `${baseUrl}${image.startsWith("/") ? "" : "/"}${image}?v=5`;
 const websiteStructuredData = {
   "@context": "https://schema.org",
   "@type": "WebSite",

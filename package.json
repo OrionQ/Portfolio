@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "5.2.7",
+  "version": "5.2.8",
   "scripts": {
     "dev": "astro dev",
     "dev:host": "astro dev --host",

@@ -77,6 +77,14 @@
   min-width: 0;
   max-width: 100%;
   overflow-x: clip;
+  /*
+   * overflow-x: clip cuts right at this box's own edges. Push the edges out
+   * with padding, then pull the box back with an equal negative margin so
+   * nothing visually shifts — this just gives child box-shadows (e.g. the
+   * role tags) room to bleed without getting clipped.
+   */
+  padding-inline: 6px;
+  margin-inline: -6px;
 }
 
 .hero-secret-trigger {

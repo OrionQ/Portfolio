@@ -430,6 +430,14 @@ const pageDescription =
       lastScrollFocus = i;
       window.dispatchEvent(new CustomEvent("hero-focus", { detail: i }));
     });
+    chip.addEventListener("mousemove", (e) => {
+      if (!canHoverChips()) return;
+      const rect = chip.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      chip.style.setProperty("--spot-x", `${x}%`);
+      chip.style.setProperty("--spot-y", `${y}%`);
+    });
     chip.addEventListener("mouseleave", () => {
       if (!canHoverChips()) return;
       releaseChipHover();

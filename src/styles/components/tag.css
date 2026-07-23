@@ -11,9 +11,51 @@
   padding-inline: 0.75rem;
 }
 
+
 /* Role chips are scroll-driven on the pinned hero — not hover targets */
 @media (max-width: 430px) {
   .roles .tag {
     cursor: default;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 431px) {
+  .roles .tag {
+    --spot-x: 50%;
+    --spot-y: 50%;
+    position: relative;
+    transition:
+      background-color 0.2s,
+      backdrop-filter 0.2s,
+      color 0.2s;
+  }
+
+  .roles .tag:hover {
+    background-color: rgb(var(--ambience-color));
+    backdrop-filter: none;
+    color: rgb(var(--primary-color));
+  }
+
+  .roles .tag::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      100px circle at var(--spot-x) var(--spot-y),
+      rgba(var(--pointer-color), 0.35),
+      transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+
+  .roles .tag:hover::after {
+    opacity: 0.5;
+  }
+
+  .roles .tag > * {
+    position: relative;
   }
 }

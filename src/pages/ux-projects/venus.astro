@@ -4,7 +4,6 @@ import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
 import Chip from "../../components/chip/Chip.astro";
-import Disclosure from "../../components/disclosure/Disclosure.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
@@ -214,7 +213,8 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           quality={100}
         />
       </div>
-      <Disclosure title="Components & the design system" className="cs-detail">
+      <div class="cs-inline-detail">
+        <p class="cs-subhead">Components &amp; the design system</p>
         <p class="project-description">
           18+ components, consistent radius and spacing. A teammate added
           color variables for hover and active states, so we could move
@@ -226,9 +226,9 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           alt="Venus design system components"
           width={900}
           quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full mt-4"
+          class="rounded-[var(--border-radius)] object-cover w-full"
         />
-      </Disclosure>
+      </div>
       <PageLink
         aria-label="Full design system (opens a new window)"
         href="https://www.figma.com/design/vJ7tcgxj5pqgSlNJf5xfUD/Venus-UXerrrs-Prototype?node-id=534-10197&t=RUaaQ9s8gLW5PpKw-1"
@@ -296,8 +296,9 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           <p>Current matches, and how they&apos;re going.</p>
         </Card>
       </div>
-      <Disclosure title="Microanimations" className="cs-detail">
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center pt-2">
+      <div class="cs-inline-detail">
+        <p class="cs-subhead">Microanimations</p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
           <Image
             src={venusMessageHifi}
             alt="Hi-fi prototype of the message screen with animation"
@@ -320,7 +321,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
             class="rounded-[2.7rem] object-cover"
           />
         </div>
-      </Disclosure>
+      </div>
     </div>
 
     <SectionHeading
@@ -394,106 +395,106 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         the experience.
       </p>
 
-      <Disclosure title="6.1 Onboarding" className="cs-detail">
-        <p class="project-description">
-          <strong>Issue:</strong> too many tooltips at once — nobody
-          remembered any of it.
-          <strong>Fix:</strong> one pop-up per screen, shown only the first
-          time you land there.
-        </p>
-        <Image
-          format="jpeg"
-          src={venusOnboardingFix}
-          alt="Fix on the onboarding screen"
-          width={900}
-          quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full mt-4"
-        />
-      </Disclosure>
-
-      <Disclosure title="6.2 Milestones & Cupid's recommendations" className="cs-detail">
-        <p class="project-description">
-          <strong>Issue:</strong> milestones and match trends looked the
-          same, and the progress bar said nothing useful.
-          <strong>Fix:</strong> dropped the progress bar, reordered
-          milestones, added &ldquo;Cupid&apos;s dating ideas&rdquo; — date
-          suggestions pulled straight from your chats.
-        </p>
-        <Image
-          format="jpeg"
-          src={venusHomepageFix}
-          alt="Fix on the homepage screen"
-          width={900}
-          quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full mt-4"
-        />
-      </Disclosure>
-
-      <Disclosure title="6.3 Match trends" className="cs-detail">
-        <p class="project-description">
-          <strong>Issue:</strong> trends felt disconnected from real
-          matches. <strong>Fix:</strong> combined Cupid&apos;s notes with
-          trends, and showed match profiles next to &ldquo;my match
-          pattern.&rdquo;
-        </p>
-        <Image
-          format="jpeg"
-          src={venusTrendsFix}
-          alt="Fix on the trends screen"
-          width={900}
-          quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full mt-4"
-        />
-      </Disclosure>
-
-      <Disclosure title="6.4 Match profile" className="cs-detail">
-        <p class="project-description">
-          <strong>Issue:</strong> tapping a match in chat did nothing, and
-          you couldn&apos;t unmatch mid-conversation. <strong>Fix:</strong>
-          tap the photo to open their profile. Unmatch from there.
-        </p>
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center pt-4">
+      <div class="cs-card-grid">
+        <Card cardType="secondary">
+          <h3>6.1 Onboarding</h3>
+          <p>
+            <strong>Issue:</strong> too many tooltips at once — nobody
+            remembered any of it.
+            <strong>Fix:</strong> one pop-up per screen, shown only the
+            first time you land there.
+          </p>
           <Image
-            src={venusMatchProfileFix}
-            alt="Fix on the match profile screen"
-            width={220}
+            format="jpeg"
+            src={venusOnboardingFix}
+            alt="Fix on the onboarding screen"
+            width={500}
             quality={100}
-            class="rounded-[2.7rem] object-cover"
+            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
           />
+        </Card>
+        <Card cardType="secondary">
+          <h3>6.2 Milestones &amp; Cupid&apos;s recommendations</h3>
+          <p>
+            <strong>Issue:</strong> milestones and match trends looked the
+            same. <strong>Fix:</strong> dropped the progress bar, reordered
+            milestones, added &ldquo;Cupid&apos;s dating ideas.&rdquo;
+          </p>
           <Image
-            src={venusMatchUnmatchFix}
-            alt="Fix on being able to unmatch from the match profile screen"
-            width={220}
+            format="jpeg"
+            src={venusHomepageFix}
+            alt="Fix on the homepage screen"
+            width={500}
             quality={100}
-            class="rounded-[2.7rem] object-cover"
+            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
           />
-        </div>
-      </Disclosure>
-
-      <Disclosure title="6.5 Icebreaker" className="cs-detail">
-        <p class="project-description">
-          <strong>Issue:</strong> no names on match photos, and unclear if
-          results reached your match. <strong>Fix:</strong> names below
-          every photo, and the questionnaire now looks nothing like chat.
-        </p>
-        <Image
-          format="jpeg"
-          src={venusIcebreakerFix}
-          alt="Fix on the icebreaker screen"
-          width={900}
-          quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full mt-4"
-        />
-        <div class="flex justify-center pt-4">
+        </Card>
+        <Card cardType="secondary">
+          <h3>6.3 Match trends</h3>
+          <p>
+            <strong>Issue:</strong> trends felt disconnected from real
+            matches. <strong>Fix:</strong> combined Cupid&apos;s notes with
+            trends and match profiles.
+          </p>
           <Image
-            src={venusIcebreakerDesignFix}
-            alt="Icebreaker screen transition"
-            width={220}
+            format="jpeg"
+            src={venusTrendsFix}
+            alt="Fix on the trends screen"
+            width={500}
             quality={100}
-            class="rounded-[2.7rem] object-cover"
+            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
           />
-        </div>
-      </Disclosure>
+        </Card>
+        <Card cardType="secondary">
+          <h3>6.4 Match profile</h3>
+          <p>
+            <strong>Issue:</strong> tapping a match in chat did nothing.
+            <strong>Fix:</strong> tap the photo to open their profile.
+            Unmatch from there.
+          </p>
+          <div class="flex gap-3 justify-center pt-2">
+            <Image
+              src={venusMatchProfileFix}
+              alt="Fix on the match profile screen"
+              width={150}
+              quality={100}
+              class="rounded-[2rem] object-cover"
+            />
+            <Image
+              src={venusMatchUnmatchFix}
+              alt="Fix on being able to unmatch from the match profile screen"
+              width={150}
+              quality={100}
+              class="rounded-[2rem] object-cover"
+            />
+          </div>
+        </Card>
+        <Card cardType="secondary" className="md:col-span-2">
+          <h3>6.5 Icebreaker</h3>
+          <p>
+            <strong>Issue:</strong> no names on match photos.
+            <strong>Fix:</strong> names below every photo, and the
+            questionnaire now looks nothing like chat.
+          </p>
+          <Image
+            format="jpeg"
+            src={venusIcebreakerFix}
+            alt="Fix on the icebreaker screen"
+            width={900}
+            quality={100}
+            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+          />
+          <div class="flex justify-center mt-3">
+            <Image
+              src={venusIcebreakerDesignFix}
+              alt="Icebreaker screen transition"
+              width={220}
+              quality={100}
+              class="rounded-[2.7rem] object-cover"
+            />
+          </div>
+        </Card>
+      </div>
 
       <p class="project-description">
         With conditional logic and micro-animations added throughout, here

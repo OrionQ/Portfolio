@@ -3,7 +3,6 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
-import Disclosure from "../../components/disclosure/Disclosure.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
 import Stat from "../../components/case-study/Stat.astro";
@@ -328,7 +327,8 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
             />
           </Card>
         </div>
-        <Disclosure title="Example sharing flow, with redlines" className="cs-detail">
+        <div class="cs-inline-detail">
+          <p class="cs-subhead">Example sharing flow, with redlines</p>
           <Image
             src={sageSharingFlow}
             alt="UT Sage sharing flow"
@@ -336,10 +336,10 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
             quality={100}
             class="rounded-[var(--border-radius)] object-cover w-full"
           />
-          <p class="project-description mt-3">
+          <p class="project-description">
             Bigger font sizes, more accessible colors.
           </p>
-        </Disclosure>
+        </div>
       </div>
 
       <SectionHeading
@@ -493,29 +493,31 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           then turned it into a scorecard any instructor could read —
           grounded in real classroom teaching moves.
         </p>
-        <Disclosure title="8 evaluation dimensions — response quality" className="cs-detail">
-          <ul class="list-disc pl-6 space-y-2 project-description">
-            <li><strong>D1 Instruction-following</strong> — honors faculty special instructions.</li>
-            <li><strong>D2 Truthfulness</strong> — accurate explanations; no hallucinated content.</li>
-            <li><strong>D3 Style / tone</strong> — warm yet academically rigorous.</li>
-            <li><strong>D4 Visual reasoning</strong> — interprets diagrams or graphs.</li>
-            <li><strong>D5 Visual perception</strong> — reads visual inputs learners share.</li>
-            <li><strong>D6 Calibration</strong> — pacing fits the learner profile.</li>
-            <li><strong>D7 Conciseness</strong> — replies stay appropriately scoped.</li>
-            <li><strong>D8 Emotional responsiveness</strong> — addresses frustration constructively.</li>
-          </ul>
-        </Disclosure>
-        <Disclosure title="7 tutoring skills — instructional behaviors" className="cs-detail">
-          <ul class="list-disc pl-6 space-y-2 project-description">
-            <li><strong>T1</strong> Identifies misconceptions explicitly.</li>
-            <li><strong>T2</strong> Guides with questions instead of giving answers outright.</li>
-            <li><strong>T3</strong> Uses examples and analogies to demystify ideas.</li>
-            <li><strong>T4</strong> Offers alternate solution paths.</li>
-            <li><strong>T5</strong> Scaffolds step-by-step when problems are dense.</li>
-            <li><strong>T6</strong> Recalls syllabus or uploaded resources when relevant.</li>
-            <li><strong>T7</strong> Judges correct/incorrect steps in learner work accurately.</li>
-          </ul>
-        </Disclosure>
+        <div class="cs-card-grid">
+          <Card title="8 evaluation dimensions — response quality" cardType="secondary">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li><strong>D1 Instruction-following</strong> — honors special instructions.</li>
+              <li><strong>D2 Truthfulness</strong> — no hallucinated content.</li>
+              <li><strong>D3 Style / tone</strong> — warm yet academically rigorous.</li>
+              <li><strong>D4 Visual reasoning</strong> — interprets diagrams or graphs.</li>
+              <li><strong>D5 Visual perception</strong> — reads visual inputs learners share.</li>
+              <li><strong>D6 Calibration</strong> — pacing fits the learner.</li>
+              <li><strong>D7 Conciseness</strong> — replies stay scoped.</li>
+              <li><strong>D8 Emotional responsiveness</strong> — addresses frustration constructively.</li>
+            </ul>
+          </Card>
+          <Card title="7 tutoring skills — instructional behaviors" cardType="secondary">
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li><strong>T1</strong> Identifies misconceptions explicitly.</li>
+              <li><strong>T2</strong> Guides with questions, not answers.</li>
+              <li><strong>T3</strong> Uses examples and analogies.</li>
+              <li><strong>T4</strong> Offers alternate solution paths.</li>
+              <li><strong>T5</strong> Scaffolds step-by-step when problems are dense.</li>
+              <li><strong>T6</strong> Recalls syllabus or uploaded resources.</li>
+              <li><strong>T7</strong> Judges correct/incorrect steps accurately.</li>
+            </ul>
+          </Card>
+        </div>
       </div>
 
       <SectionHeading

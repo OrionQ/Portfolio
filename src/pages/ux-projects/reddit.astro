@@ -3,7 +3,6 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
-import Disclosure from "../../components/disclosure/Disclosure.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
@@ -132,7 +131,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         notes and observed while my teammate ran the sessions. Afterward,
         everyone filled out the SUS survey.
       </p>
-      <Disclosure title="Screener & participant criteria" className="cs-detail">
+      <div class="cs-inline-detail">
+        <p class="cs-subhead">Screener &amp; participant criteria</p>
         <p class="project-description">
           We recruited from Reddit&apos;s core 18–35 age range, split by
           how long they&apos;d used the app. Same tasks, two very different
@@ -141,10 +141,9 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         <PageLink
           aria-label="Full screener script (opens a new window)"
           href="https://docs.google.com/document/d/1x-zslARgMfu9iEPc4ffhQpUENTSlQ9qVtZLiQgEm2c4/edit?usp=sharing"
-          newTab
-          className="mt-4">Screener script</PageLink
+          newTab>Screener script</PageLink
         >
-      </Disclosure>
+      </div>
       <PageLink
         aria-label="Interview notes and affinity diagram (opens a new window)"
         href="https://www.figma.com/board/8dh600rWLY9PgjRnjfmTAQ/Testing---Affinity-Map?node-id=0-1&t=Dv4R52kVhPGPJI0m-1"
@@ -203,30 +202,32 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       id="what-i-learned-from-this-experience"
     />
     <div class="cs-section-body">
-      <Disclosure title="Our assumptions will surprise us" className="cs-detail">
-        <p class="project-description">
-          I expected some tasks to be nightmares. Some users breezed
-          through; others hit issues I never predicted. You&apos;re not the
-          user — watching real people is the only way to know.
-        </p>
-      </Disclosure>
-      <Disclosure title="Pilot testing is non-negotiable" className="cs-detail">
-        <p class="project-description">
-          We piloted first. Small things still broke — a confusing prompt,
-          an awkward flow. Skipping that step would have cost us real
-          sessions.
-        </p>
-      </Disclosure>
-      <Disclosure
-        title="5 participants reveal a lot — more would reveal even more"
-        className="cs-detail"
-      >
-        <p class="project-description">
-          Five people surfaced plenty. But research is never
-          &ldquo;done.&rdquo; Enough to act on here; for production,
-          we&apos;d test more.
-        </p>
-      </Disclosure>
+      <div class="cs-card-grid">
+        <Card cardType="secondary">
+          <h3>Our assumptions will surprise us</h3>
+          <p>
+            I expected some tasks to be nightmares. Some users breezed
+            through; others hit issues I never predicted. You&apos;re not
+            the user — watching real people is the only way to know.
+          </p>
+        </Card>
+        <Card cardType="secondary">
+          <h3>Pilot testing is non-negotiable</h3>
+          <p>
+            We piloted first. Small things still broke — a confusing
+            prompt, an awkward flow. Skipping that step would have cost us
+            real sessions.
+          </p>
+        </Card>
+        <Card cardType="secondary" className="md:col-span-2">
+          <h3>5 participants reveal a lot — more would reveal even more</h3>
+          <p>
+            Five people surfaced plenty. But research is never
+            &ldquo;done.&rdquo; Enough to act on here; for production,
+            we&apos;d test more.
+          </p>
+        </Card>
+      </div>
     </div>
 
     <SectionHeading

@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
-import Disclosure from "../../components/disclosure/Disclosure.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
 import Stat from "../../components/case-study/Stat.astro";
@@ -90,14 +89,15 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
           width={420}
         />
       </div>
-      <Disclosure title="Design system details" className="cs-detail">
+      <div class="cs-inline-detail">
+        <p class="cs-subhead">Design system details</p>
         <p class="project-description">
           Near-black on near-white, like Apple News. Blue for actions;
           green and red for &ldquo;verified&rdquo; and &ldquo;not
           verified&rdquo; — colors people already read instinctively.
           Georgia for headlines, Arial for body text, Montserrat for the UI.
         </p>
-      </Disclosure>
+      </div>
     </div>
 
     <SectionHeading index="03" title="User flow" id="user-flow" />
@@ -122,12 +122,13 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
           width={320}
         />
       </div>
-      <Disclosure title="Handling misinformation" className="cs-detail">
+      <div class="cs-inline-detail">
+        <p class="cs-subhead">Handling misinformation</p>
         <p class="project-description">
           If an article turns out false, anyone who read it gets notified —
           with links to what actually happened.
         </p>
-      </Disclosure>
+      </div>
       <p class="project-description">
         Try the prototype: <Link
           aria-label="Adobe XD Prototype (opens a new window)"

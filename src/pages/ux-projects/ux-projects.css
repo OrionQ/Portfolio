@@ -253,10 +253,11 @@
   line-height: 1.45;
 }
 
-/* Deep-dive disclosures: keeps default view scannable, detail on demand */
-.cs-detail summary h4,
-.cs-detail .summary-heading h4 {
-  font-size: 1.0625rem;
+/* Supporting detail shown inline, always visible */
+.cs-inline-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .cs-subhead {
@@ -286,7 +287,8 @@
   margin-bottom: 0.25rem;
 }
 
-.cs-card-grid .card p {
+.cs-card-grid .card p,
+.cs-card-grid .card ul {
   font-size: 0.9375rem;
   line-height: 1.55;
 }

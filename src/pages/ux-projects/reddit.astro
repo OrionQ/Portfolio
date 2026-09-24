@@ -24,7 +24,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <CaseStudyHero
       kicker="Case study — UX research"
       title="Reddit Usability Test"
-      tagline="Reddit is one of the biggest platforms on the internet, but its everyday flows still trip people up. We ran a full research sprint to find out where, why, and what to do about it."
+      tagline="Reddit is huge, but its everyday flows still trip people up. We ran a research sprint to find out where — and what to fix."
     >
       <Fragment slot="meta">
         <MetaItem label="Role">
@@ -68,15 +68,12 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <div class="cs-section-columns cs-columns-text-first">
       <div class="cs-section-body">
         <p class="project-description">
-          Screen by screen, flow by flow, we combed through the app against
-          Nielsen&apos;s 10 usability heuristics. Five areas stood out as the
-          most impactful: <strong>consistency and standards</strong>,
-          <strong>aesthetics</strong>, <strong
-            >flexibility and efficiency of use</strong
-          >, <strong>user control and freedom</strong>, and
-          <strong>help and documentation</strong>. Many issues violated more
-          than one heuristic at once — individually minor, but compounding
-          into real friction over time.
+          <strong>Problem:</strong> we checked every screen against Nielsen&apos;s
+          10 usability heuristics. Five kept breaking:
+          <strong>consistency</strong>, <strong>aesthetics</strong>,
+          <strong>flexibility</strong>, <strong>user control</strong>, and
+          <strong>help &amp; documentation</strong>. Small issues, but they
+          stack up.
         </p>
         <PageLink
           aria-label="Full heuristic evaluation (opens a new window)"
@@ -107,16 +104,15 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       </div>
       <div class="cs-section-body">
         <p class="project-description">
-          We compared Reddit against three direct competitors
-          (<strong>Quora, Stack Exchange, X</strong>) and three indirect ones
-          (<strong>Discord, Tumblr, TikTok</strong>) to find what Reddit does
-          well, and where it falls behind.
+          We compared Reddit to six apps: <strong>Quora, Stack Exchange, X,
+          Discord, Tumblr, TikTok</strong>. Where does Reddit win, and where
+          does it fall short?
         </p>
         <div class="cs-callout">
           <p>
-            &ldquo;Reddit remains a powerhouse for community-driven content,
-            but its UI and flows lag behind — navigation feels heavier, and
-            key actions take more effort than they should.&rdquo;
+            &ldquo;Reddit wins on community content. It loses on ease —
+            navigation is heavier, and key actions take more taps than they
+            should.&rdquo;
           </p>
         </div>
         <PageLink
@@ -130,20 +126,17 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="03" title="Usability testing" id="usability-testing" />
     <div class="cs-section-body">
       <p class="project-description">
-        6 tasks. 5 participants. 45 minutes each. We split testers into
-        two groups — <strong>Reddit regulars</strong> (6+ months of use) and
-        <strong>curious newcomers</strong> — because power users and first-timers
-        hit completely different friction. I ran the sessions as note taker
-        and observer while my teammate facilitated; afterward, each
-        participant completed the SUS questionnaire so we could pair the
-        stories with a number.
+        6 tasks. 5 participants. 45 minutes each. We tested two groups —
+        <strong>Reddit regulars</strong> and <strong>curious
+        newcomers</strong> — because they hit different friction. I took
+        notes and observed while my teammate ran the sessions. Afterward,
+        everyone filled out the SUS survey.
       </p>
       <Disclosure title="Screener & participant criteria" className="cs-detail">
         <p class="project-description">
-          We recruited within Reddit&apos;s core 18–35 demographic and split
-          participants by tenure, so watching both groups navigate identical
-          tasks surfaced where real friction actually lives — not just where
-          we assumed it would.
+          We recruited from Reddit&apos;s core 18–35 age range, split by
+          how long they&apos;d used the app. Same tasks, two very different
+          experiences.
         </p>
         <PageLink
           aria-label="Full screener script (opens a new window)"
@@ -162,44 +155,38 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="04" title="Final report" id="final-report" />
     <div class="cs-section-body">
       <p class="project-description">
-        Most participants finished the tasks — eventually. The average SUS
-        score landed at <strong>74</strong>: the app works, but it
-        doesn&apos;t shine. The bumps in the journey clustered into four
-        recurring problems.
+        <strong>Problem:</strong> most people finished the tasks, but it
+        wasn&apos;t smooth. Average SUS score: <strong>74</strong>. Works, but
+        doesn&apos;t shine. Four issues kept showing up.
       </p>
       <div class="cs-card-grid">
         <Card cardType="secondary">
           <h3>1. Browsing works, creating doesn&apos;t</h3>
           <p>
-            Everyone could find content. But Reddit-specific actions —
-            awarding badges, creating communities — tripped people up.
-            <em>&ldquo;This feels like it&apos;s for more skilled
-            users.&rdquo;</em> The gap between consuming and contributing is
-            too wide.
+            Everyone found content fast. But posting or joining a community
+            tripped people up. <em>&ldquo;This feels like it&apos;s for more
+            skilled users.&rdquo;</em>
           </p>
         </Card>
         <Card cardType="secondary">
           <h3>2. Too much, all at once</h3>
           <p>
-            Search feels heavier than on other platforms. Content floods in
-            without enough structure, and the endless scroll of community
-            topics is more noise than signal.
+            Search feels heavier than on other apps. Content floods in with
+            no structure. More noise than signal.
           </p>
         </Card>
         <Card cardType="secondary">
-          <h3>3. Terminology that doesn&apos;t travel</h3>
+          <h3>3. Words that don&apos;t travel</h3>
           <p>
-            What&apos;s the difference between &ldquo;reply&rdquo; and
-            &ldquo;join a conversation&rdquo;? Reddit&apos;s own language left
-            newcomers guessing instead of feeling guided.
+            &ldquo;Reply&rdquo; vs. &ldquo;join a conversation&rdquo;?
+            Reddit&apos;s own language left newcomers guessing.
           </p>
         </Card>
         <Card cardType="secondary">
-          <h3>4. Hidden affordances, unclear feedback</h3>
+          <h3>4. Unclear feedback</h3>
           <p>
-            Collapsing comments, moderator rules, error states — none of it
-            gave participants clear enough signal about what had just
-            happened.
+            Collapsing comments, mod rules, error states — none gave a
+            clear signal about what just happened.
           </p>
         </Card>
       </div>
@@ -218,17 +205,16 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <div class="cs-section-body">
       <Disclosure title="Our assumptions will surprise us" className="cs-detail">
         <p class="project-description">
-          I expected certain tasks to be nightmares. Some users learned them
-          far faster than we thought; others never hit the issue at all.
-          You&apos;re not the user — watching real people is the only way to
-          know.
+          I expected some tasks to be nightmares. Some users breezed
+          through; others hit issues I never predicted. You&apos;re not the
+          user — watching real people is the only way to know.
         </p>
       </Disclosure>
       <Disclosure title="Pilot testing is non-negotiable" className="cs-detail">
         <p class="project-description">
-          We piloted before the real sessions, and small things kept going
-          wrong: a confusing prompt, a flow that broke the rhythm. Skipping
-          that step would have cost us sessions and trust.
+          We piloted first. Small things still broke — a confusing prompt,
+          an awkward flow. Skipping that step would have cost us real
+          sessions.
         </p>
       </Disclosure>
       <Disclosure
@@ -236,9 +222,9 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         className="cs-detail"
       >
         <p class="project-description">
-          Five people surfaced plenty of unexpected bugs and behaviors, but
-          research is never &ldquo;done.&rdquo; It was enough to act on here;
-          for production, we&apos;d aim for more.
+          Five people surfaced plenty. But research is never
+          &ldquo;done.&rdquo; Enough to act on here; for production,
+          we&apos;d test more.
         </p>
       </Disclosure>
     </div>

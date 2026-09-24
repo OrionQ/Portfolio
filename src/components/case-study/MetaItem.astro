@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="cs-meta-item">
+  <p class="cs-meta-label">{label}</p>
+  <div class="cs-meta-value">
+    <slot />
+  </div>
+</div>

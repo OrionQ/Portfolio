@@ -1,10 +1,15 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
+import Disclosure from "../../components/disclosure/Disclosure.astro";
+import MetaItem from "../../components/case-study/MetaItem.astro";
+import SectionHeading from "../../components/case-study/SectionHeading.astro";
+import Stat from "../../components/case-study/Stat.astro";
+import StatRow from "../../components/case-study/StatRow.astro";
 import Link from "../../components/link/Link.astro";
-import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/tag/Tag.astro";
-import Divider from "../../components/divider/Divider.astro";
+import Layout from "../../layouts/Layout.astro";
 import "./ux-projects.css";
 
 import trustyLoading from "../../images/Trusty-Loading-screen.png";
@@ -19,287 +24,149 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
 
 <Layout title="Trusty - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
-    <Link href="/" underline
-      ><Icon name="arrow-left-long" />Go back to the home page</Link
+    <CaseStudyHero
+      kicker="Adobe Creative Jam — Mobile UI"
+      title="Trusty"
+      tagline="Your guide to credible news. A mobile app that filters misinformation at a glance, so users can tell what to trust before they share it."
     >
-    <h1 class="project-title">Trusty</h1>
-    <p class="project-introduction">Your Guide to Credible News.</p>
-    <div class="flex flex-row flex-wrap gap-2 pb-12">
-      <Tag>Mobile UI Design</Tag>
-      <Tag>Interaction Design</Tag>
-      <Tag>Branding</Tag>
-      <Tag>Adobe Creative Jam</Tag>
+      <Fragment slot="meta">
+        <MetaItem label="Role">
+          <Tag>UI designer</Tag>
+          <Tag>Brand designer</Tag>
+        </MetaItem>
+        <MetaItem label="Tools">
+          <Tag>Adobe XD</Tag>
+          <Tag>Figma</Tag>
+          <Tag>Illustrator</Tag>
+        </MetaItem>
+        <MetaItem label="Result">
+          <p class="cs-inline-result">Top 20 of 315 — honorable mention</p>
+        </MetaItem>
+      </Fragment>
+    </CaseStudyHero>
+
+    <div class="cs-gallery">
+      <Image format="jpeg" src={trustyLoading} alt="Trusty loading screen" width={320} />
+      <Image format="jpeg" src={trustyLanding} alt="Trusty landing page" width={320} />
+      <Image format="jpeg" src={trustyExplain} alt="Trusty explanation screen" width={320} />
     </div>
 
-    <h2 class="project-subtitle">Project Overview</h2>
-    <div class="project-overview w-full">
+    <StatRow>
+      <Stat value="315" label="teams competed in the Adobe Creative Jam" />
+      <Stat value="Top 20" label="finish, earning an honorable mention" />
+      <Stat value="48 hrs" label="from brief to finished prototype" />
+    </StatRow>
+
+    <SectionHeading index="01" title="Research" id="research" />
+    <div class="cs-section-body">
       <p class="project-description">
-        A mobile app designed to help users easily verify the credibility of news.
-        With a user-friendly interface, it allows users to filter out
-        misinformation from social media at the app level. Trusty provides
-        convenient visual cues for assessing news credibility and lets users
-        choose their trusted news sources for a cleaner, smoother experience.
-        This project was created during the 2021 Adobe Creative Jam, where we were delighted
-        to receive an honorable mention, ranking in the top 20 out of 315 competitors.
+        We audited major news apps — Apple News, The New York Times — to find
+        what makes a platform read as serious and unbiased: a neutral, clean,
+        transparent interface. Survey time was limited by the Jam&apos;s
+        clock, so those principles became our north star instead.
       </p>
-      <Divider dividerType="tertiary" />
-      <div
-        class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
-      >
-        <div class="project-toc flex-1 min-w-0">
-          <strong>Table of Contents</strong>
-          <ul class="project-toc-list">
-            <li>
-              <Link href="#research" className="scroll-link" underline
-                >1. Research</Link
-              >
-            </li>
-            <li>
-              <Link href="#design" className="scroll-link" underline
-                >2. Design</Link
-              >
-            </li>
-            <li>
-              <Link href="#user-flow" className="scroll-link" underline
-                >3. User flow</Link
-              >
-            </li>
-            <li>
-              <Link href="#feedback" className="scroll-link" underline
-                >4. Feedback</Link
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div class="project-meta flex-1 min-w-0">
-          <div class="project-description flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              <strong>My Role:</strong>
-              <div class="flex flex-row flex-wrap gap-2">
-                <Tag>UI designer</Tag>
-                <Tag>Brand designer</Tag>
-                <Tag>UX designer</Tag>
-              </div>
-            </div>
-            <div class="flex flex-col gap-2">
-              <strong>Tools Used:</strong>
-              <div class="flex flex-row flex-wrap gap-2">
-                <Tag>Adobe XD</Tag>
-                <Tag>Figma</Tag>
-                <Tag>Adobe Illustrator</Tag>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center px-4">
-      <Image
-        format="jpeg"
-        src={trustyLoading}
-        alt="first page of the app in a phone mock up"
-        width={250}
-      />
-      <Image
-        format="jpeg"
-        src={trustyLanding}
-        alt="landing page of the app in a phone mock up"
-        width={250}
-      />
-      <Image
-        format="jpeg"
-        src={trustyExplain}
-        alt="explanation page of the app in a phone mock up"
-        width={250}
-      />
     </div>
-    </div>
-    <div class="process-section lg:px-2">
-      <h2 class="project-subtitle">Design Process</h2>
-      <div>
-        <div class="process-item" id="research">
-          <h3>1. Research</h3>
-          <p>
-            To guide our design process, we conducted an in-depth analysis of
-            major mobile news apps, including Apple News and The New York Times.
-            We identified key elements for building a serious and unbiased news
-            platform - a neutral, clean, and transparent user interface. These
-            principles shaped the core of our app&apos;s design. Despite the
-            strict time constraints of the Creative Jam, which limited our
-            ability to conduct surveys, we focused on leveraging these insights
-            to create a reliable user experience.
-          </p>
-        </div>
+
+    <SectionHeading index="02" title="Design" id="design" />
+    <div class="cs-section-body">
+      <p class="cs-subhead">Branding</p>
+      <p class="project-description">
+        Dark gray and creamy white for a tone that&apos;s neutral, not
+        cold. A serif &ldquo;T&rdquo; wordmark borrows the formality of
+        print newspapers — a nod to <em>The New York Times</em> and the
+        trust that comes with it.
+      </p>
+      <div class="cs-gallery">
+        <Image
+          format="jpeg"
+          src={trustyBranding}
+          alt="Branding of Trusty app"
+          width={420}
+        />
+        <Image
+          format="jpeg"
+          src={trustyDS}
+          alt="Design system of Trusty app"
+          width={420}
+        />
       </div>
-      <div class="flex lg:flex-row w-full gap-4 flex-col">
-        <div class="process-item" id="design">
-          <h3>2. Design</h3>
-          <br />
-          <h4 class="font-bold text-base">2.1 Branding</h4>
-          <p>
-            We began our design process by focusing on the branding. Our goal
-            was to create an app that feels neutral yet inviting, so we opted
-            for a color palette of dark gray and creamy white. For the logo, we
-            chose a simple serif letter “T” to convey a formal and trustworthy
-            tone. This font choice was also intended to evoke the classic feel
-            of the print in newspaper media, reminiscent of the typeface used by
-            The New York Times, reinforcing the app&apos;s commitment to
-            reliable and credible information.
-          </p>
-          <br />
-          <h4 class="font-bold text-base">2.2 Design System</h4>
-          <p>
-            With branding completed, we turned our attention to finding a
-            simplistic solution for user engagement with the app. We opted for a
-            near-black font on a near-white background, similar to the aesthetic
-            of Apple News. This choice aims to create a cleaner appearance while
-            ensuring the information presented is serious and credible. Our
-            action color is blue, which serves as a neutral tone for users to
-            process information. Additionally, to signal different statuses, we
-            chose green and red to represent “verified” and “not verified,”
-            respectively, as these colors are widely recognized in the
-            mainstream society. For typography, we selected Georgia for
-            headlines to establish a formal tone, while Arial serves as our main
-            text for optimal readability and compatibility. Finally, we opted
-            for Montserrat as the system font, providing a bold and modern look
-            that complements the overall design without conflicting with the
-            main content of the news app.
-          </p>
-        </div>
-        <div
-          class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
-        >
-          <Image
-            format="jpeg"
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-            src={trustyBranding}
-            alt="Branding of Trusty app"
-            width={250}
-            class="rounded-[var(--border-radius)] m-1 object-cover"
-          />
-          <Image
-            format="jpeg"
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-            src={trustyDS}
-            alt="Design system of Trusty app"
-            width={250}
-            class="rounded-[var(--border-radius)] m-1 object-cover"
-          />
-        </div>
-      </div>
-      <div class="flex flex-col-reverse lg:flex-row w-full gap-4">
-        <div
-          class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
-        >
-          <Image
-            format="jpeg"
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-            src={trustyPersonalization}
-            alt="On the category preference setting page"
-            width={250}
-            class="rounded-[var(--border-radius)] m-1 object-cover"
-          />
-          <Image
-            format="jpeg"
-            style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-            src={trustyNewsPage}
-            alt="Example news page with verification"
-            width={250}
-            class="rounded-[var(--border-radius)] m-1 object-cover"
-          />
-        </div>
-        <div class="process-item flex flex-col justify-between" id="user-flow">
-          <div>
-            <h3>3. User Flow</h3>
-            <br />
-            <h4 class="font-bold text-base">3.1 Understanding User Intent</h4>
-            <p>
-              To design our product, we focused on the user&apos;s mindset while
-              engaging with a news app. We recognized that first-time users
-              typically seek to establish source preferences and understand how
-              the app operates.
-            </p>
-            <br />
-            <h4 class="font-bold text-base">3.2 Onboarding Experience</h4>
-            <p>
-              Upon launching the app for the first time, users are presented
-              with an option to select their preferred news categories and
-              sources. This personalized onboarding ensures that users can
-              curate their news feed according to their interests.
-            </p>
-            <br />
-            <h4 class="font-bold text-base">3.3 Home Page Introduction</h4>
-            <p>
-              Once users land on the home page, we provide an overview of our
-              verification system, clearly outlining how we gather and assess
-              information. This transparency fosters trust and sets the stage
-              for user engagement.
-            </p>
-            <br />
-            <h4 class="font-bold text-base">
-              3.4 News Verification Indication & Accessing Additional Sources
-            </h4>
-            As users begin to interact with the app, we enhance their experience by
-            offering clear verification indicators for each piece of news. Verified
-            news will feature a green checkmark below the headline, while debunked
-            news will display a red “X.” This visual cue allows users to quickly assess
-            the credibility of the information.Each news item includes a link that
-            directs users to additional sources reporting the same information. This
-            feature empowers users to independently verify the credibility of news
-            articles, especially when they question the accuracy of the information
-            presented.
-            <br />
-            <br />
-            <h4 class="font-bold text-base">3.5 Handling Misinformation</h4>
-            <p>
-              In cases where a news article is proven to be misinformation, we
-              send a notification to users who have previously engaged with that
-              article. This timely alert ensures that users stay informed about
-              updates. Additionally, we provide links to related articles
-              discussing the misinformation, enabling users to access accurate
-              and updated information seamlessly.
-            </p>
-            <br />
-          </div>
-          <p>
-            Click this link to try out the prototype: <Link
-              aria-label="Adobe XD Prototype(opens a new window)"
-              href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
-              newTab
-              underline
-              >Adobe XD Prototype</Link
-            >
-          </p>
-        </div>
-      </div>
-      <Image
-        format="jpeg"
-        style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
-        src={trustyFlow}
-        alt="Flow of Trusty app"
-        class="rounded-[var(--border-radius)] m-1 object-cover"
-      />
-      <div class="process-item" id="feedback">
-        <h3>4. Feedback</h3>
-        <p>
-          After submitting our design, we received significant attention during
-          the showcase at the end of the Jam. While we didn&apos;t have
-          comprehensive user feedback, we learned valuable insights, such as the
-          potential for incorporating more color, increasing font size and
-          weight for better readability, and following accessibility standards
-          for whitespace and spacing. Due to the tight timeline, we
-          couldn&apos;t fully develop a more detailed user flow or simulate
-          real-world scenarios in our outcomes. We also gained inspiration from
-          other teams, whose diverse approaches encouraged us to refine our
-          process and create a prototype that is both more accessible and
-          innovative.
+      <Disclosure title="Design system details" className="cs-detail">
+        <p class="project-description">
+          Near-black text on near-white, echoing Apple News&apos; clarity.
+          Blue stays neutral for actions; green and red flag
+          &ldquo;verified&rdquo; and &ldquo;not verified&rdquo; using
+          colors people already read instinctively. Georgia carries
+          headlines for formality, Arial handles body copy for
+          readability, and Montserrat rounds out the system with a bold,
+          modern UI voice.
         </p>
+      </Disclosure>
+    </div>
+
+    <SectionHeading index="03" title="User flow" id="user-flow" />
+    <div class="cs-section-body">
+      <p class="project-description">
+        First-time users onboard by picking preferred sources and
+        categories, then land on a home page that plainly explains how
+        verification works. Every headline carries a clear cue: a green
+        check for verified, a red &ldquo;X&rdquo; for debunked, and a
+        link out to other outlets covering the same story.
+      </p>
+      <div class="cs-gallery">
+        <Image
+          format="jpeg"
+          src={trustyPersonalization}
+          alt="Category preference setting page"
+          width={320}
+        />
+        <Image
+          format="jpeg"
+          src={trustyNewsPage}
+          alt="Example news page with verification indicator"
+          width={320}
+        />
       </div>
+      <Disclosure title="Handling misinformation" className="cs-detail">
+        <p class="project-description">
+          When an article is proven false, anyone who engaged with it gets
+          a timely notification plus links to related coverage — keeping
+          users current without making them go looking for the correction.
+        </p>
+      </Disclosure>
+      <p class="project-description">
+        Try the prototype: <Link
+          aria-label="Adobe XD Prototype (opens a new window)"
+          href="https://xd.adobe.com/view/3e5904f8-347a-412f-9f67-bb6cd05324f1-6b0a/"
+          newTab
+          underline>Adobe XD Prototype</Link
+        >
+      </p>
+    </div>
+
+    <div class="cs-hero-image">
+      <Image
+        format="jpeg"
+        src={trustyFlow}
+        alt="Full user flow of the Trusty app"
+      />
+    </div>
+
+    <SectionHeading index="04" title="Feedback" id="feedback" />
+    <div class="cs-section-body">
+      <p class="project-description">
+        The showcase drew real attention, even without a full round of user
+        testing. Judges and peers pointed us toward more color, bigger and
+        bolder type, and stricter spacing for accessibility. The tight
+        timeline kept us from mapping a deeper flow or simulating real-world
+        scenarios — but other teams&apos; approaches gave us plenty to bring
+        into the next iteration.
+      </p>
+    </div>
+
+    <div class="cs-footer-nav">
+      <Link href="/" underline
+        ><Icon name="arrow-left-long" />Go back to the home page</Link
+      >
     </div>
   </div>
-  <br />
-  <Link href="/" underline
-    ><Icon name="arrow-left-long" />Go back to the home page</Link
-  >
 </Layout>

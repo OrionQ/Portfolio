@@ -2,10 +2,13 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
-import Chip from "../../components/chip/Chip.astro";
-import Divider from "../../components/divider/Divider.astro";
+import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
+import Disclosure from "../../components/disclosure/Disclosure.astro";
+import MetaItem from "../../components/case-study/MetaItem.astro";
+import SectionHeading from "../../components/case-study/SectionHeading.astro";
+import Stat from "../../components/case-study/Stat.astro";
+import StatRow from "../../components/case-study/StatRow.astro";
 import Link from "../../components/link/Link.astro";
-import Tag from "../../components/tag/Tag.astro";
 import Layout from "../../layouts/Layout.astro";
 import "./ux-projects.css";
 
@@ -125,26 +128,22 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 
 <Layout title="UT Sage: Redesign + Tutor Evaluation | Xiaolei Qin's Portfolio">
   <div class="project-container">
-    <Link href="/" underline
-      ><Icon name="arrow-left-long" />Go back to the home page</Link
+    <CaseStudyHero
+      kicker="Professional experience — Design system + AI evaluation"
+      title="UT Sage"
+      tagline="End-to-end product design for UT Austin's AI tutor platform: a shipped design-system redesign, and an AI-powered evaluation workflow for faculty."
     >
-
-    <h1 class="project-title">UT Sage: Redesign + Tutor Evaluation</h1>
-    <p class="project-introduction">
-      End-to-end product design for UT Austin's AI tutor platform, from design
-      system redesign (shipped in production!) to an AI-powered faculty
-      evaluation workflow.
-    </p>
-
-    <div class="flex flex-row flex-wrap gap-2 pb-12">
-      <Tag>Professional experience</Tag>
-      <Tag>Capstone project</Tag>
-      <Tag>AI chatbot</Tag>
-      <Tag>Design system</Tag>
-      <Tag>AI evaluation</Tag>
-      <Tag>UX research</Tag>
-      <Tag>End-to-end product design</Tag>
-    </div>
+      <Fragment slot="meta">
+        <MetaItem label="Learn more">
+          <Link
+            aria-label="UT Sage website (opens a new window)"
+            href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+            newTab
+            underline>ut-sage.utexas.edu</Link
+          >
+        </MetaItem>
+      </Fragment>
+    </CaseStudyHero>
 
     <div
       class="tabs-container flex flex-row flex-wrap mt-2 mb-4 min-w-0"
@@ -160,7 +159,7 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
         data-category="redesignCase"
         id="tab-redesign-case"
         role="tab"
-        ><h3>Case Study 1: Product Redesign</h3></button
+        ><h3>Case 1 — Product redesign</h3></button
       >
       <button
         type="button"
@@ -170,7 +169,7 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
         data-category="capstoneCase"
         id="tab-capstone-case"
         role="tab"
-        ><h3>Case Study 2: Faculty Evaluation Workflow</h3></button
+        ><h3>Case 2 — Faculty evaluation workflow</h3></button
       >
     </div>
 
@@ -180,479 +179,270 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       role="tabpanel"
       aria-labelledby="tab-redesign-case"
     >
-      <h2 class="project-subtitle">Project Overview: Product Redesign</h2>
-      <div class="project-overview w-full">
-        UT Sage is the University of Texas at Austin's campus-wide AI tutor
-        platform. After the beta launch, I took over the design process to fully
-        redesign the interface, focusing on building a unified and user-friendly
-        experience through a comprehensive design system.
-        <Link
-          className="inline-flex"
-          aria-label="UT Sage website (opens a new window)"
-          href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
-          newTab
-          underline>Learn more about UT Sage</Link
-        >
-        <Divider dividerType="tertiary" />
-        <div
-          class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
-        >
-          <div class="project-toc flex-1 min-w-0">
-            <strong>Table of Contents</strong>
-            <ul class="project-toc-list">
-              <li>
-                <Link href="#where-do-i-start" className="scroll-link" underline
-                  >1. Where do I start?</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#get-feedback-from-the-users-and-stakeholders"
-                  className="scroll-link"
-                  underline
-                  >2. Get feedback from the users and stakeholders</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#build-the-new-design-system"
-                  className="scroll-link"
-                  underline>3. Build the new design system</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#recreate-the-pages"
-                  className="scroll-link"
-                  underline>4. Recreate the pages</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#validation-and-results"
-                  className="scroll-link"
-                  underline>5. Validation and results</Link
-                >
-              </li>
-              <li>
-                <Link href="#outcomes" className="scroll-link" underline
-                  >6. Outcomes</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#reflection-and-next-steps"
-                  className="scroll-link"
-                  underline>7. Reflection and next steps</Link
-                >
-              </li>
-            </ul>
-          </div>
+      <div class="cs-hero-image">
+        <Image
+          src={sageConfigurePage}
+          alt="UT Sage product sample page"
+          width={1600}
+          quality={100}
+        />
+      </div>
 
-          <div class="project-meta flex-1 min-w-0">
-            <div class="project-description flex flex-col gap-4">
-              <div class="flex flex-col gap-2">
-                <strong>My Role:</strong>
-                <div class="flex flex-row flex-wrap gap-2">
-                  <Tag>Product designer</Tag>
-                  <Tag>Design system designer</Tag>
-                  <Tag>UI/UX designer</Tag>
-                  <Tag>Interaction designer</Tag>
-                </div>
-              </div>
-              <div class="flex flex-col gap-2">
-                <strong>Tools Used:</strong>
-                <div class="flex flex-row flex-wrap gap-2">
-                  <Chip title="Figma" level="professional">
-                    <Icon
-                      slot="icon"
-                      name="figma-brands-solid-full"
-                      size={18}
-                      aria-hidden
-                    />
-                  </Chip>
-                  <Chip title="GitHub" level="professional">
-                    <Icon slot="icon" name="github" size={18} aria-hidden />
-                  </Chip>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <StatRow>
+        <Stat value="25+" label="components in the new design system" />
+        <Stat value="4 mo" label="from audit to shipped redesign" />
+        <Stat value="AA" label="WCAG 2.2 accessibility target" />
+      </StatRow>
 
-        <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+      <div class="cs-section-body">
+        <p class="project-description">
+          UT Sage had just launched its beta to faculty and students
+          campus-wide. The core features worked, but the interface was
+          fragmented: inconsistent components, accessibility gaps, and
+          missed details left people confused. As the sole designer, my
+          goal was a unified, accessible experience that could scale as the
+          platform grew.
+        </p>
+      </div>
+
+      <SectionHeading index="01" title="Where do I start?" id="where-do-i-start" />
+      <div class="cs-section-body">
+        <p class="project-description">
+          Testing the platform surfaced inconsistent icons, font sizes, and
+          styles across pages, plus real accessibility gaps — poor
+          contrast, small text, no keyboard navigation. That was the
+          moment I decided to rebuild the design system from scratch.
+        </p>
+        <div class="cs-gallery">
           <Image
-            src={sageConfigurePage}
-            alt="UT Sage product sample page"
-            width={2000}
+            src={sageOriginalDesign1}
+            alt="Original UT Sage design - issue 1"
+            width={420}
             quality={100}
-            class="rounded-xl object-cover"
+          />
+          <Image
+            src={sageOriginalDesign2}
+            alt="Original UT Sage design - issue 2"
+            width={420}
+            quality={100}
+          />
+          <Image
+            src={sageOriginalIssueList}
+            alt="Original UT Sage design - issue list"
+            width={420}
+            quality={100}
           />
         </div>
       </div>
 
-      <h2 class="project-subtitle">The Problem</h2>
-      <p class="project-description">
-        When I joined UT Sage as the sole designer, the platform had just
-        launched its beta to faculty and students across UT Austin. While UT
-        Sage's core features were functional, the user interface felt fragmented
-        and lacked visual cohesion. Inconsistent design elements, gaps in
-        accessibility, and missed UI details made faculty and students confused
-        and frustrated.
-      </p>
-      <p class="project-description">
-        <strong>The challenge:</strong> How could I elevate UT Sage's design quality
-        and accessibility to create a polished, professional experience worthy of
-        a college-level learning platform?
-      </p>
-
-      <h2 class="project-subtitle">The Goal</h2>
-      <p class="project-description">
-        My goal was to overhaul the platform to provide a unified, accessible
-        experience for both students and faculty, while ensuring the new design
-        would be sustainable for future development and growth. Oh, and make it
-        look nice too!
-      </p>
-
-      <div class="process-section">
-        <h2 class="project-subtitle flex">Design Process</h2>
-
-        <!-- 1. Where do I start? -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full"
-            id="where-do-i-start"
-          >
-            <div>
-              <h3>1. Where do I start?</h3>
-              <br />
-              <p>
-                As the sole designer joining UT Sage, I started by testing the
-                platform and quickly found inconsistent icons, font sizes, and
-                styles across pages, along with major accessibility issues like
-                poor contrast, small text, and lack of keyboard navigation. That
-                is when I decided to rebuild a new design system from scratch.
-              </p>
-            </div>
-            <div
-              class="flex flex-row flex-wrap gap-4 min-w-0 w-full items-center"
-            >
-              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
-                <Image
-                  src={sageOriginalDesign1}
-                  alt="Original UT Sage design - issue 1"
-                  width={2000}
-                  height={1500}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain max-w-full"
-                />
-              </div>
-              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
-                <Image
-                  src={sageOriginalDesign2}
-                  alt="Original UT Sage design - issue 2"
-                  width={2000}
-                  height={1500}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain max-w-full"
-                />
-              </div>
-              <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
-                <Image
-                  src={sageOriginalIssueList}
-                  alt="Original UT Sage design - issue list"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain max-w-full"
-                />
-              </div>
-            </div>
-          </div>
+      <SectionHeading
+        index="02"
+        title="Feedback from users & stakeholders"
+        id="get-feedback-from-the-users-and-stakeholders"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          Before jumping to solutions, I learned the existing design
+          language: talked with the previous designer about her rationale,
+          pulled lo-fi sketches from my manager to trace the product&apos;s
+          evolution, and stayed in a regular feedback loop as she relayed
+          insight from users and researchers.
+        </p>
+        <div class="cs-gallery">
+          <Image src={sageLofi} alt="UT Sage lo-fi design" width={500} quality={100} />
+          <Image
+            src={sageOriginalToggle}
+            alt="UT Sage original toggle design"
+            width={500}
+            quality={100}
+          />
         </div>
+      </div>
 
-        <!-- 2. Get feedback from the users and stakeholders -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="get-feedback-from-the-users-and-stakeholders"
-          >
-            <div>
-              <h3>2. Get feedback from the users and stakeholders</h3>
-              <br />
-              <p>
-                Before diving into solutions, I learned the existing design
-                language and gathered context. I reached out to the previous
-                designer to learn her design rationale, and requested lo-fi
-                sketch-ups from my manager to understand the product's
-                evolution. Besides learning on my own, I regularly gathered
-                feedback from my manager, who summarized insights from users and
-                researchers.
-              </p>
-              <Image
-                src={sageLofi}
-                alt="UT Sage lo-fi design"
-                width={2000}
-                quality={100}
-                class="rounded-xl object-cover"
-              />
-              <Image
-                src={sageOriginalToggle}
-                alt="UT Sage original toggle design"
-                width={2000}
-                quality={100}
-                class="rounded-xl object-cover"
-              />
-            </div>
-          </div>
+      <SectionHeading
+        index="03"
+        title="Build the new design system"
+        id="build-the-new-design-system"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          25+ standardized components, WCAG 2.2 AA accessibility baked in
+          at the component level, and Figma tokens from day one — built to
+          be scalable and future-proof, not a one-time patch.
+        </p>
+        <div class="cs-gallery">
+          <Image src={sageFoundations} alt="UT Sage foundations" width={500} quality={100} />
+          <Image src={sageButtons} alt="UT Sage buttons" width={500} quality={100} />
+          <Image
+            src={sageExampleComponents}
+            alt="UT Sage example components"
+            width={500}
+            quality={100}
+          />
         </div>
+      </div>
 
-        <!-- 3. Build the new design system -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full"
-            id="build-the-new-design-system"
-          >
-            <h3>3. Build the new design system</h3>
-            <br />
-            <p>
-              After gathering insights, I created a new design system consisting
-              of 25+ standardized components, ensuring web accessibility (WCAG
-              2.2 Level AA) on the component level, and consistency with Figma
-              tokens from the start, making sure the new design system is
-              scalable and future-proof.
-            </p>
+      <SectionHeading index="04" title="Recreate the pages" id="recreate-the-pages" />
+      <div class="cs-section-body">
+        <p class="project-description">
+          Using the new system, I iterated quickly page by page, updating
+          components as needed. My design-engineering background helped —
+          I worked closely with the lead front-end engineer, designing
+          within real technical constraints instead of around them.
+        </p>
+        <div class="cs-card-grid">
+          <Card cardType="secondary">
+            <h3>Toggle redesign</h3>
             <Image
-              src={sageFoundations}
-              alt="UT Sage foundations"
-              width={2000}
+              src={sageToggleIteration}
+              alt="UT Sage toggle iteration"
+              width={500}
               quality={100}
-              class="rounded-xl object-cover"
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
             />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Edit page</h3>
             <Image
-              src={sageButtons}
-              alt="UT Sage buttons"
-              width={2000}
+              src={sageEditPage}
+              alt="UT Sage edit page"
+              width={500}
               quality={100}
-              class="rounded-xl object-cover"
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
             />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Home screen</h3>
             <Image
-              src={sageExampleComponents}
-              alt="UT Sage example components"
-              width={2000}
+              src={sageHomepageTransition}
+              alt="UT Sage homepage transition"
+              width={500}
               quality={100}
-              class="rounded-xl object-cover"
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
             />
-          </div>
+          </Card>
+          <Card cardType="secondary">
+            <h3>Help center</h3>
+            <Image
+              src={sageHelpCenterPage}
+              alt="UT Sage help center page"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
         </div>
+        <Disclosure title="Example sharing flow, with redlines" className="cs-detail">
+          <Image
+            src={sageSharingFlow}
+            alt="UT Sage sharing flow"
+            width={900}
+            quality={100}
+            class="rounded-[var(--border-radius)] object-cover w-full"
+          />
+          <p class="project-description mt-3">
+            Updated sharing flow with more accessible font sizes and colors.
+          </p>
+        </Disclosure>
+      </div>
 
-        <!-- 4. Recreate the pages -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="recreate-the-pages"
-          >
-            <h3>4. Recreate the pages</h3>
-            <br />
-            <p>
-              Using the new design system, I quickly iterated on each page and
-              updated components as needed. My background as a design engineer
-              helped a lot here. I worked closely with the lead front-end
-              engineer, understanding technical constraints upfront and
-              designing solutions that were both user-friendly and technically
-              sustainable.
-            </p>
-            <ul class="flex flex-col gap-8 items-center">
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Toggle redesign</strong>
-                <Image
-                  src={sageToggleIteration}
-                  alt="UT Sage toggle iteration"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Edit page</strong>
-                <Image
-                  src={sageEditPage}
-                  alt="UT Sage edit page"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Home screen</strong>
-                <Image
-                  src={sageHomepageTransition}
-                  alt="UT Sage homepage transition"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Help center</strong>
-                <Image
-                  src={sageHelpCenterPage}
-                  alt="UT Sage help center page"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Example Sharing flow with redlines</strong>
-                <Image
-                  src={sageSharingFlow}
-                  alt="UT Sage sharing flow"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-                <p>
-                  Updated sharing flow with more accessible font sizes and
-                  colors.
-                </p>
-              </li>
-            </ul>
-          </div>
+      <SectionHeading
+        index="05"
+        title="Validation & results"
+        id="validation-and-results"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          After four months, I delivered a more accessible, unified UT Sage
+          prototype. The engineering team used the design system to rebuild
+          pages faster, with far better consistency.
+        </p>
+        <div class="cs-card-grid">
+          <Card cardType="secondary">
+            <h3>Home screen</h3>
+            <Image
+              src={sageHomepageProduction}
+              alt="UT Sage homepage production"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Edit screen</h3>
+            <Image
+              src={sageEditPageProduction}
+              alt="UT Sage edit page production"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary" className="md:col-span-2">
+            <h3>Chat screen</h3>
+            <Image
+              src={sageChatPageProduction}
+              alt="UT Sage chat page production"
+              width={900}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
         </div>
+      </div>
 
-        <!-- 5. Validation and results -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full"
-            id="validation-and-results"
-          >
-            <h3>5. Validation and results</h3>
-            <br />
+      <SectionHeading index="06" title="Outcomes" id="outcomes" />
+      <div class="cs-section-body">
+        <p class="project-description">
+          This redesign turned UT Sage from a half-finished beta into a
+          coherent, accessible educational platform.
+        </p>
+        <div class="cs-card-grid">
+          <Card title="Accessibility" cardType="secondary">
             <p>
-              After four months, I delivered a more accessible, unified UT Sage
-              prototype. The engineering team used my design system to quickly
-              rebuild pages with improved consistency and accessibility.
+              WCAG 2.2 AA target across all components — color contrast,
+              font sizing, keyboard navigation.
             </p>
-            <br />
-            <ul class="flex flex-col gap-8 items-center">
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Home screen</strong>
-                <Image
-                  src={sageHomepageProduction}
-                  alt="UT Sage homepage production"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Edit screen</strong>
-                <Image
-                  src={sageEditPageProduction}
-                  alt="UT Sage edit page production"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-              <li class="flex flex-col gap-4 items-center">
-                <strong>Chat screen</strong>
-                <Image
-                  src={sageChatPageProduction}
-                  alt="UT Sage chat page production"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl object-cover"
-                />
-              </li>
-            </ul>
-          </div>
+          </Card>
+          <Card title="Consistency" cardType="secondary">
+            <p>
+              A 25+ component design system with Figma tokens, consistent
+              across the whole platform.
+            </p>
+          </Card>
+          <Card title="Developer efficiency" cardType="secondary">
+            <p>
+              Engineering now builds pages significantly faster using the
+              systematized components.
+            </p>
+          </Card>
+          <Card title="Design sustainability" cardType="secondary">
+            <p>New features can be designed quickly on top of a robust system.</p>
+          </Card>
         </div>
+      </div>
 
-        <!-- 6. Outcomes -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="outcomes"
-          >
-            <h3>6. Outcomes</h3>
-            <br />
-            <p>
-              This redesign transformed UT Sage from a half-finished beta into a
-              coherent, accessible educational platform:
-            </p>
-            <div
-              class="outcomes-card-list grid grid-cols-1 md:grid-cols-2 gap-4 my-4"
-            >
-              <Card title="Accessibility" cardType="secondary">
-                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                  Aiming for WCAG 2.2 Level AA compliance across all components,
-                  addressing color contrast, font sizing, and keyboard
-                  navigation
-                </p>
-              </Card>
-              <Card title="Consistency" cardType="secondary">
-                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                  Established a 25+ component design system with Figma tokens,
-                  ensuring consistent design across the platform
-                </p>
-              </Card>
-              <Card title="Developer efficiency" cardType="secondary">
-                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                  Engineering team can now build pages significantly faster
-                  using the systematized design system
-                </p>
-              </Card>
-              <Card title="Design sustainability" cardType="secondary">
-                <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                  If new features are added, the new pages can be designed
-                  quickly using the robust design system
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. Reflection and next steps -->
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full"
-            id="reflection-and-next-steps"
-          >
-            <h3>7. Reflection and next steps</h3>
-            <br />
-            <p>
-              This project showed that a solid design system is essential for
-              scalable, high-quality results. My design engineering skills
-              helped bridge design and development for a more practical,
-              polished solution.
-              <br />
-              <br />
-              However, I would have asked for more detailed feedback from the users
-              and stakeholders, which could have helped me rethink some of the design
-              decisions and user flows.
-            </p>
-            <br />
-            <p>
-              <strong>Next steps:</strong>
-            </p>
-            <br />
-            <ul class="list-disc pl-6 space-y-2">
-              <li>
-                Dark mode (yay!) implementation to improve accessibility and
-                user choice
-              </li>
-              <li>
-                Broader user testing to gather feedback from diverse faculty and
-                student populations
-              </li>
-              <li>
-                Iterative improvements based on testing insights to continuously
-                refine the experience
-              </li>
-            </ul>
-          </div>
-        </div>
+      <SectionHeading
+        index="07"
+        title="Reflection & next steps"
+        id="reflection-and-next-steps"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          A solid design system turned out to be the difference between
+          scalable, high-quality results and constant rework — and my
+          design-engineering background helped bridge design and
+          development into something practical. If I did it again, I would
+          have pushed for more detailed feedback from users and
+          stakeholders earlier, to stress-test some of the flow decisions
+          sooner.
+        </p>
+        <p class="cs-subhead">Next steps</p>
+        <ul class="flex flex-col gap-2 project-description">
+          <li>Dark mode, to improve accessibility and give users a choice.</li>
+          <li>Broader user testing across diverse faculty and student populations.</li>
+          <li>Iterative improvements as testing surfaces new insight.</li>
+        </ul>
       </div>
     </div>
 
@@ -663,476 +453,300 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       aria-labelledby="tab-capstone-case"
       hidden
     >
-      <h2 class="project-subtitle">
-        Project Overview: Faculty Evaluation Workflow
-      </h2>
-      <div class="project-overview w-full">
-        <p class="project-description">
-          UT Sage lowers the barrier for faculty to configure AI tutors, but the
-          product still lacked a reliable way for instructors to test quality,
-          misconceptions, and pedagogy before exposing students to a tutor.
-          Plus, the new faculty still lacks an onboarding process to learn and
-          use the evaluation tool.
-        </p>
-        <Divider dividerType="tertiary" />
-        <div
-          class="toc-and-meta flex flex-col md:flex-row gap-8 md:gap-12 w-full md:items-start"
-        >
-          <div class="project-toc flex-1 min-w-0">
-            <strong>Table of Contents</strong>
-            <ul class="project-toc-list">
-              <li>
-                <Link href="#capstone-goal" className="scroll-link" underline
-                  >1. Goal</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#capstone-research"
-                  className="scroll-link"
-                  underline>2. Research and evaluation framework</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#capstone-prototyping"
-                  className="scroll-link"
-                  underline>3. Prototyping (tutorial + dashboard)</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#capstone-interviews"
-                  className="scroll-link"
-                  underline>4. Faculty research — usability findings</Link
-                >
-              </li>
-              <li>
-                <Link
-                  href="#capstone-iteration"
-                  className="scroll-link"
-                  underline>5. Iteration — reduce information overload</Link
-                >
-              </li>
-              <li>
-                <Link href="#capstone-future" className="scroll-link" underline
-                  >6. Future directions</Link
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="project-meta flex-1 min-w-0">
-            <div class="project-description flex flex-col gap-4">
-              <div class="flex flex-col gap-2">
-                <strong>My Role:</strong>
-                <div class="flex flex-row flex-wrap gap-2">
-                  <Tag>UX designer</Tag>
-                  <Tag>UX Researcher</Tag>
-                  <Tag>Interaction designer</Tag>
-                </div>
-              </div>
-              <div class="flex flex-col gap-2">
-                <strong>Tools Used:</strong>
-                <div class="flex flex-row flex-wrap gap-2">
-                  <Chip title="Figma" level="professional">
-                    <Icon
-                      slot="icon"
-                      name="figma-brands-solid-full"
-                      size={18}
-                      aria-hidden
-                    />
-                  </Chip>
-                  <Chip title="Claude" level="professional">
-                    <Icon
-                      slot="icon"
-                      name="claude-brands-solid-full"
-                      size={18}
-                      aria-hidden
-                    />
-                  </Chip>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <figure class="capstone-hero-thumb pb-8">
-          <Image
-            format="png"
-            src={facultyEvalRecommendations}
-            alt="Tutor evaluation dashboard — key findings, overview, and Suggestions & Recommendations"
-            width={2000}
-            quality={100}
-            class="rounded-xl w-full h-auto object-contain"
-          />
-        </figure>
+      <div class="cs-hero-image">
+        <Image
+          format="png"
+          src={facultyEvalRecommendations}
+          alt="Tutor evaluation dashboard — key findings, overview, and suggestions & recommendations"
+          width={1600}
+          quality={100}
+        />
       </div>
 
-      <div class="process-section">
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full"
-            id="capstone-goal"
-          >
-            <h3>1. Goal</h3>
-            <br />
+      <StatRow>
+        <Stat value="8" label="response-quality evaluation dimensions" />
+        <Stat value="7" label="instructional tutoring-skill dimensions" />
+      </StatRow>
+
+      <div class="cs-section-body">
+        <p class="project-description">
+          UT Sage made it easy for faculty to configure AI tutors — but gave
+          them no reliable way to test quality, misconceptions, or pedagogy
+          before exposing students to a tutor, and no onboarding to learn
+          the evaluation tool.
+        </p>
+      </div>
+
+      <SectionHeading index="01" title="Goal" id="capstone-goal" />
+      <div class="cs-section-body">
+        <p class="project-description">
+          <strong>Problem:</strong> faculty could scaffold and publish tutors,
+          but had no repeatable way to simulate learners, stress-test tutoring
+          behavior, or reconcile configuration with pedagogical outcomes.
+        </p>
+        <div class="cs-card-grid">
+          <Card title="How might we?" cardType="secondary">
             <p>
-              <strong>Problem:</strong> faculty could scaffold and publish tutors,
-              but lacked a repeatable way to simulate learners, stress-test tutoring
-              behavior, and reconcile configuration with pedagogical outcomes.
+              Help faculty confidently assess and refine tutor
+              configurations before deployment — surfacing observable
+              evidence, explainable ratings, and updates they can approve?
             </p>
-            <br />
-            <Card title="How might we?" cardType="secondary">
-              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                Help faculty confidently assess and refine tutor configurations
-                before deployments, surfacing observable evidence, explainable
-                ratings, and updates they can approve?
-              </p>
-            </Card>
-            <br />
-            <Card title="Design goal" cardType="secondary">
-              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                Pair approachable onboarding that builds mental models of each
-                configuration fields with an evaluation dashboard that routes
-                faculty from high-level warnings to granular checks,
-                suggestions, examples, and simulated dialogue.
-              </p>
-            </Card>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="capstone-research"
-          >
-            <h3>2. Research and evaluation framework</h3>
-            <br />
+          </Card>
+          <Card title="Design goal" cardType="secondary">
             <p>
-              I paired secondary research with history user interview data from
-              existing UT Sage papers to uncover configuration gaps, then
-              translated benchmarks from AI evaluation literature into an
-              instructor-readable scorecard anchored in classroom teaching
-              moves.
+              Pair approachable onboarding that builds mental models of each
+              config field with a dashboard that routes faculty from
+              high-level warnings down to granular checks and examples.
             </p>
-            <br />
-            <Card
-              title="8 evaluation dimensions (response quality)"
-              cardType="secondary"
-            >
-              <ul
-                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
-              >
-                <li>
-                  D1 Instruction-following — Honors faculty special
-                  instructions.
-                </li>
-                <li>
-                  D2 Truthfulness — Keeps explanations accurate; avoids
-                  hallucinated content.
-                </li>
-                <li>
-                  D3 Style / tone — Language is warm yet academically rigorous.
-                </li>
-                <li>
-                  D4 Visual reasoning — Interprets and reasons about diagrams or
-                  graphs.
-                </li>
-                <li>
-                  D5 Visual perception — Reads visual inputs shared by learners.
-                </li>
-                <li>D6 Calibration — Pacing fits the learner profile.</li>
-                <li>D7 Conciseness — Keeps replies scoped appropriately.</li>
-                <li>
-                  D8 Emotional responsiveness — Addresses frustration
-                  constructively.
-                </li>
-              </ul>
-            </Card>
-            <br />
-            <Card
-              title="7 tutoring skills (instructional behaviors)"
-              cardType="secondary"
-            >
-              <ul
-                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
-              >
-                <li>T1 Identifies misconceptions explicitly.</li>
-                <li>
-                  T2 Guides with questions instead of giving answers outright.
-                </li>
-                <li>T3 Uses examples and analogies to demystify ideas.</li>
-                <li>T4 Offers alternate solution paths.</li>
-                <li>T5 Scaffolds step-by-step when problems are dense.</li>
-                <li>
-                  T6 Recalls syllabus or uploaded resources when relevant.
-                </li>
-                <li>
-                  T7 Judges correct/incorrect steps in learner work accurately.
-                </li>
-              </ul>
-            </Card>
-          </div>
+          </Card>
         </div>
+      </div>
 
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full gap-4"
-            id="capstone-prototyping"
-          >
-            <h3>3. Prototyping</h3>
+      <SectionHeading
+        index="02"
+        title="Research & evaluation framework"
+        id="capstone-research"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          I paired secondary research with historical user-interview data
+          from existing UT Sage studies, then translated AI-evaluation
+          literature into an instructor-readable scorecard anchored in
+          classroom teaching moves.
+        </p>
+        <Disclosure title="8 evaluation dimensions — response quality" className="cs-detail">
+          <ul class="list-disc pl-6 space-y-2 project-description">
+            <li><strong>D1 Instruction-following</strong> — honors faculty special instructions.</li>
+            <li><strong>D2 Truthfulness</strong> — accurate explanations; no hallucinated content.</li>
+            <li><strong>D3 Style / tone</strong> — warm yet academically rigorous.</li>
+            <li><strong>D4 Visual reasoning</strong> — interprets diagrams or graphs.</li>
+            <li><strong>D5 Visual perception</strong> — reads visual inputs learners share.</li>
+            <li><strong>D6 Calibration</strong> — pacing fits the learner profile.</li>
+            <li><strong>D7 Conciseness</strong> — replies stay appropriately scoped.</li>
+            <li><strong>D8 Emotional responsiveness</strong> — addresses frustration constructively.</li>
+          </ul>
+        </Disclosure>
+        <Disclosure title="7 tutoring skills — instructional behaviors" className="cs-detail">
+          <ul class="list-disc pl-6 space-y-2 project-description">
+            <li><strong>T1</strong> Identifies misconceptions explicitly.</li>
+            <li><strong>T2</strong> Guides with questions instead of giving answers outright.</li>
+            <li><strong>T3</strong> Uses examples and analogies to demystify ideas.</li>
+            <li><strong>T4</strong> Offers alternate solution paths.</li>
+            <li><strong>T5</strong> Scaffolds step-by-step when problems are dense.</li>
+            <li><strong>T6</strong> Recalls syllabus or uploaded resources when relevant.</li>
+            <li><strong>T7</strong> Judges correct/incorrect steps in learner work accurately.</li>
+          </ul>
+        </Disclosure>
+      </div>
+
+      <SectionHeading
+        index="03"
+        title="Prototyping"
+        id="capstone-prototyping"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          I iterated in Figma on two intertwined surfaces: contextual
+          tutorial overlays explaining how Create, Configure, and Train map
+          tutor memory, plus a consolidated evaluation concept that
+          surfaced key findings before the detail tabs.
+        </p>
+        <div class="cs-card-grid">
+          <Card cardType="secondary">
+            <h3>Welcome modal</h3>
+            <p>Sets expectations and scope guardrails.</p>
+            <Image
+              format="png"
+              src={facultyEvalTutorialModal}
+              alt="Welcome to Create Your UT Sage Tutor modal"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Orientation step</h3>
+            <p>Contextualizes Create, Configure, and Train.</p>
+            <Image
+              format="png"
+              src={facultyEvalTutorialStep}
+              alt="Tutorial explaining Create Configure and Train sections"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Chat scaffolding</h3>
+            <p>An alternative to typing every field manually.</p>
+            <Image
+              format="png"
+              src={facultyEvalChatStep}
+              alt="Tutorial tooltip on tutor creation chat syncing fields"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Configure cue</h3>
+            <p>Anchors fields that feed calibration logic.</p>
+            <Image
+              format="png"
+              src={facultyEvalConfigureStep}
+              alt="Tutorial tooltip on learner characteristics in Configure tab"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+        </div>
+        <p class="cs-subhead">Early evaluation dashboard</p>
+        <p class="project-description">How the AI surfaces cross-field risks to faculty.</p>
+        <div class="cs-hero-image">
+          <Image
+            format="png"
+            src={facultyEvalThumbnail}
+            alt="Full tutor evaluation concept showing key findings and overview"
+            width={1400}
+            quality={100}
+          />
+        </div>
+      </div>
+
+      <SectionHeading
+        index="04"
+        title="Faculty research — usability findings"
+        id="capstone-interviews"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          Moderated remote think-alouds (30–45 min) with UT Austin faculty
+          and instructional partners, evaluating two Figma prototypes: the
+          guided tutorial overlay and the tutor evaluation UI.
+        </p>
+        <div class="cs-card-grid">
+          <Card cardType="secondary">
+            <h3>Tutorial & language</h3>
             <p>
-              I iterated in Figma on two intertwined surfaces: contextual
-              tutorial overlays explaining how Create, Configure, and Train map
-              tutor memory, plus a consolidated evaluation concept that surfaced
-              key findings before detail tabs.
+              Confusing language didn&apos;t support the learning process;
+              several participants wanted more concrete examples.
             </p>
-            <div
-              class="capstone-proto-grid grid grid-cols-1 md:grid-cols-2 gap-4"
-            >
-              <figure class="capstone-figure">
-                <figcaption
-                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
-                >
-                  Welcome modal — sets expectations and scope guardrails.
-                </figcaption>
-                <Image
-                  format="png"
-                  src={facultyEvalTutorialModal}
-                  alt="Welcome to Create Your UT Sage Tutor modal"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
-                />
-              </figure>
-              <figure class="capstone-figure">
-                <figcaption
-                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
-                >
-                  Orientation step — contextualizes Create, Configure, and
-                  Train.
-                </figcaption>
-                <Image
-                  format="png"
-                  src={facultyEvalTutorialStep}
-                  alt="Tutorial explaining Create Configure and Train sections"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
-                />
-              </figure>
-              <figure class="capstone-figure">
-                <figcaption
-                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
-                >
-                  Chat scaffolding — alternative to manually type in every
-                  field.
-                </figcaption>
-                <Image
-                  format="png"
-                  src={facultyEvalChatStep}
-                  alt="Tutorial tooltip on tutor creation chat syncing fields"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
-                />
-              </figure>
-              <figure class="capstone-figure">
-                <figcaption
-                  class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
-                >
-                  Configure cue — anchors different fields feeding calibration
-                  logic.
-                </figcaption>
-                <Image
-                  format="png"
-                  src={facultyEvalConfigureStep}
-                  alt="Tutorial tooltip on learner characteristics in Configure tab"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
-                />
-              </figure>
-            </div>
-            <figure class="capstone-hero-thumb mt-2">
-              <figcaption
-                class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
-              >
-                Early evaluation dashboard — How AI surfaces cross-field risks
-                to the faculty.
-              </figcaption>
-              <Image
-                format="png"
-                src={facultyEvalThumbnail}
-                alt="Full tutor evaluation concept showing key findings and overview"
-                width={2000}
-                quality={100}
-                class="rounded-xl w-full h-auto object-contain"
-              />
-            </figure>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="capstone-interviews"
-          >
-            <h3>4. Faculty research — usability findings</h3>
-            <br />
-            <Card title="Method" cardType="secondary">
-              <p class="text-base text-[rgba(var(--foreground-color),0.85)]">
-                Moderated remote think-aloud (30–45 min) with UT Austin faculty
-                / instructional partners evaluating two Figma prototypes: guided
-                tutorial overlay + tutor evaluation UI.
-              </p>
-            </Card>
-            <br />
-            <Card title="Key findings" cardType="secondary">
-              <ul
-                class="list-disc pl-6 space-y-2 text-[rgba(var(--foreground-color),0.85)] text-base"
-              >
-                <li>
-                  <strong>Tutorial &amp; language:</strong> The use of language is
-                  confusing and doesn't contribute to the learning process, and multiple
-                  participants mentioned that they would like to see more concrete
-                  examples.
-                </li>
-                <li>
-                  <strong>Cognitive load:</strong> empty states swung straight into
-                  exhaustive detail on the evaluation page, and faculty feels overwhelmed
-                  by the amount of information.
-                </li>
-                <li>
-                  <strong>Fitness of the model:</strong> Faculty would like to see
-                  if there is a way to customize the evaluation prompts to fit their
-                  needs.
-                </li>
-                <li>
-                  <strong>Surfacing severity:</strong> While the color coding is helpful,
-                  some faculty would like to make sure accessibility is considered,
-                  and additional color coding to grab their attention for critical
-                  issues.
-                  <li>
-                    <strong>Evidence &amp; authenticity:</strong> Participants think
-                    that auto-fix and heavy nudging need visible scope/consent boundaries
-                    that protect instructor-authored ideas.
-                  </li>
-                </li>
-              </ul>
-            </Card>
-          </div>
-        </div>
-
-        <div class="flex gap-4">
-          <div
-            class="process-item-odd flex flex-col justify-center w-full gap-6"
-            id="capstone-iteration"
-          >
-            <h3>5. Iteration — reduce information overload</h3>
+          </Card>
+          <Card cardType="secondary">
+            <h3>Cognitive load</h3>
             <p>
-              Research converged on the need to stage complexity: summarize
-              risk, funnel faculty into prioritized remediations, only then
-              expose field-by-field adjudication or bespoke simulation prompts.
+              Empty states jumped straight into exhaustive detail — faculty
+              felt overwhelmed by the volume of information.
             </p>
+          </Card>
+          <Card cardType="secondary">
+            <h3>Fitness of the model</h3>
+            <p>Faculty wanted a way to customize evaluation prompts to fit their needs.</p>
+          </Card>
+          <Card cardType="secondary">
+            <h3>Surfacing severity</h3>
             <p>
-              Each tab below isolates workloads to prevent the “everything at
-              once” fatigue cited in moderated sessions while keeping
-              cross-links for deep dives intact.
+              Color coding helped, but needed an accessibility pass and
+              stronger signal for critical issues.
             </p>
-
-            <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-              <div
-                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
-              >
-                <strong>Suggestions &amp; Recommendations</strong>
-                <Image
-                  format="png"
-                  src={facultyEvalRecommendations}
-                  alt="Tutor Evaluation tab showing key findings overview and suggestion cards"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain"
-                />
-              </div>
-              <div
-                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
-              >
-                <strong>Evaluation by field</strong>
-                <Image
-                  format="png"
-                  src={facultyEvalByField}
-                  alt="Evaluation by field table"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain"
-                />
-              </div>
-              <div
-                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
-              >
-                <strong>File management</strong>
-                <Image
-                  format="png"
-                  src={facultyEvalFileManagement}
-                  alt="File management tab listing syllabus and documents with statuses"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain"
-                />
-              </div>
-              <div
-                class="capstone-iteration-figure flex min-w-0 flex-col gap-2"
-              >
-                <strong
-                  >Customize evaluation - An added feature from feedback</strong
-                >
-                <Image
-                  format="png"
-                  src={facultyEvalCustomize}
-                  alt="Customize evaluation tab for additional benchmark questions"
-                  width={2000}
-                  quality={100}
-                  class="rounded-xl w-full h-auto object-contain"
-                />
-              </div>
-            </div>
-          </div>
+          </Card>
+          <Card cardType="secondary" className="md:col-span-2">
+            <h3>Evidence & authenticity</h3>
+            <p>
+              Auto-fix and heavy nudging need visible scope/consent
+              boundaries that protect instructor-authored ideas.
+            </p>
+          </Card>
         </div>
+      </div>
 
-        <div class="flex gap-4">
-          <div
-            class="process-item-even flex flex-col justify-center w-full"
-            id="capstone-future"
-          >
-            <h3>6. Future directions</h3>
-
-            <ul class="list-disc pl-6 space-y-2 project-description">
-              <li>
-                Ship tutorial copy that aligns highlight, narration, and live UI
-                state causality plus concrete examples to further clarify the
-                configuration fields.
-              </li>
-              <li>
-                Build explainable modality + labeling for simulations (simulated
-                learner transcripts vs telemetry) and rethink Auto-fix so
-                faculty stay authors of misconception content unless they
-                opt-in.
-              </li>
-              <li>
-                Follow-up moderated tests with Humanities + STEM instructors
-                after engineering implementation; extend benchmark suites per
-                discipline as adoption grows.
-              </li>
-            </ul>
-          </div>
+      <SectionHeading
+        index="05"
+        title="Iteration — reduce information overload"
+        id="capstone-iteration"
+      />
+      <div class="cs-section-body">
+        <p class="project-description">
+          Research converged on staging complexity: summarize risk first,
+          funnel faculty into prioritized remediations, and only then
+          expose field-by-field adjudication or bespoke simulation prompts.
+          Each tab below isolates a workload to prevent the &ldquo;everything
+          at once&rdquo; fatigue moderated sessions flagged, while keeping
+          cross-links for deep dives intact.
+        </p>
+        <div class="cs-card-grid">
+          <Card cardType="secondary">
+            <h3>Suggestions & recommendations</h3>
+            <Image
+              format="png"
+              src={facultyEvalRecommendations}
+              alt="Tutor Evaluation tab showing key findings overview and suggestion cards"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Evaluation by field</h3>
+            <Image
+              format="png"
+              src={facultyEvalByField}
+              alt="Evaluation by field table"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>File management</h3>
+            <Image
+              format="png"
+              src={facultyEvalFileManagement}
+              alt="File management tab listing syllabus and documents with statuses"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
+          <Card cardType="secondary">
+            <h3>Customize evaluation</h3>
+            <p>Added feature, from faculty feedback.</p>
+            <Image
+              format="png"
+              src={facultyEvalCustomize}
+              alt="Customize evaluation tab for additional benchmark questions"
+              width={500}
+              quality={100}
+              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+            />
+          </Card>
         </div>
+      </div>
+
+      <SectionHeading index="06" title="Future directions" id="capstone-future" />
+      <div class="cs-section-body">
+        <ul class="list-disc pl-6 space-y-2 project-description">
+          <li>
+            Ship tutorial copy that ties highlight, narration, and live UI
+            state together, with concrete examples for each config field.
+          </li>
+          <li>
+            Build explainable labeling for simulations (simulated-learner
+            transcripts vs. telemetry), and rethink Auto-fix so faculty stay
+            authors of misconception content unless they opt in.
+          </li>
+          <li>
+            Follow-up moderated tests with Humanities and STEM instructors
+            post-launch; extend benchmark suites per discipline as adoption
+            grows.
+          </li>
+        </ul>
       </div>
     </div>
 
-    <br />
-    <div class="flex flex-row gap-8 justify-between w-full">
-      <Link href="/" underline><Icon name="arrow-left-long" />Go back home</Link
-      >
+    <div class="cs-footer-nav">
+      <Link href="/" underline><Icon name="arrow-left-long" />Go back home</Link>
       <Link href="/ux-projects/venus" underline
         >Next case study: Venus<Icon name="arrow-right-long" /></Link
       >
@@ -1142,6 +756,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 
 <style>
   .case-category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     width: 100%;
   }
 
@@ -1163,6 +780,7 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
   .tab-button h3 {
     align-items: center;
     display: flex;
+    font-size: 1.0625rem;
     gap: 0.5rem;
     justify-content: center;
   }
@@ -1225,12 +843,5 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
     justify-content: center;
     padding: 0.25rem;
     position: relative;
-  }
-
-  .capstone-hero-thumb,
-  .capstone-figure,
-  .capstone-iteration-figure {
-    margin-inline: auto;
-    max-width: min(1100px, 100%);
   }
 </style>

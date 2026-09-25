@@ -1,85 +1,360 @@
 /* Shared styles for UX project case study pages */
 
-.gallery img {
-  border-radius: 0.5rem;
-  width: 100%;
-}
+.project-container,
+.case-category {
+  --cs-space-sm: 1rem;
+  --cs-space-md: 1.5rem;
+  --cs-space-lg: 3rem;
+  --cs-space-xl: 5rem;
 
-.process-item {
-  background-color: rgba(var(--floating-color), 1);
-}
+  --cs-fs-label: 0.875rem;
+  --cs-fs-body: 1.125rem;
+  --cs-fs-h3: 1.375rem;
+  --cs-fs-h2: clamp(1.5rem, 2.6vw, 2rem);
+  --cs-fs-display: clamp(1.75rem, 3.6vw, 2.5rem);
+  --cs-fs-title: 2.5rem;
 
-.process-item h3 {
-  color: rgba(var(--primary-color), 1);
-  font-size: 1.5rem;
-}
-
-.process-item-even {
-  background-color: rgba(var(--background), 1);
-}
-
-.process-item-even h3,
-.process-item-odd h3 {
-  color: rgba(var(--primary-color), 1);
-  font-size: 1.5rem;
-}
-
-.process-item-odd {
-  background-color: rgba(var(--floating-color), 1);
-}
-
-.process-section {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-
-.process-section > * {
-  width: 100%;
+  --cs-fw-regular: 400;
+  --cs-fw-medium: 500;
+  --cs-fw-strong: 600;
 }
 
 .project-container {
+  font-size: var(--cs-fs-body);
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-top: 1.5rem;
+  gap: var(--cs-space-md);
+  padding-top: var(--cs-space-sm);
   width: 100%;
 }
 
-.project-overview {
+.case-category {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--cs-space-md);
+  width: 100%;
 }
 
-.project-introduction {
-  font-size: 1.5rem;
+/* Content is a narrow column by default; `.cs-wide` opts a block out to full width. */
+.project-container > :not(.cs-wide),
+.case-category > :not(.cs-wide) {
+  margin-inline: auto;
+  max-width: 60rem;
+  width: 100%;
 }
 
-.project-subtitle {
-  color: rgba(var(--primary-color), 1);
-  font-size: 1.5rem;
+.cs-section-body img:not([class*="2.7rem"]) {
+  height: auto;
+  width: 100%;
 }
 
-.project-title {
-  font-size: 2.5rem;
+.cs-section-body > ul > li {
+  width: 100%;
 }
 
-.project-toc {
+.cs-hero-media img {
+  height: auto;
+  max-width: 100%;
+}
+
+.project-container strong {
+  font-weight: var(--cs-fw-strong);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.cs-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-block: 0.5rem var(--cs-space-md);
+}
+
+.cs-hero-back {
+  margin-bottom: var(--cs-space-sm);
+}
+
+.cs-title {
+  font-size: var(--cs-fs-title);
+  font-weight: var(--cs-fw-regular);
+  line-height: 1.2;
+  max-width: 20ch;
+}
+
+.cs-tagline {
+  color: rgba(var(--foreground), 0.75);
+  font-size: var(--cs-fs-h3);
+  font-weight: var(--cs-fw-regular);
+  line-height: 1.4;
+  max-width: 64ch;
+  margin-top: 0.5rem;
+}
+
+.cs-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  margin-top: var(--cs-space-md);
+  padding-top: var(--cs-space-md);
+  border-top: 1.5px solid rgba(var(--floating-color), 1);
+}
+
+.cs-meta.cs-meta-plain {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.cs-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.cs-meta-label {
+  color: rgba(var(--foreground), 0.55);
+  font-size: var(--cs-fs-label);
+  font-weight: var(--cs-fw-strong);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cs-meta-value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cs-inline-result {
+  color: rgba(var(--foreground), 1);
+  font-weight: var(--cs-fw-strong);
+}
+
+/* ============================================
+   STATS
+   ============================================ */
+
+.cs-stat-row {
+  display: grid;
+  gap: var(--cs-space-md);
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  margin-bottom: var(--cs-space-xl);
+  width: 100%;
+}
+
+.cs-stat-row + .cs-section-heading {
+  margin-top: 0;
+}
+
+.cs-stat {
+  border-left: 2px solid rgba(var(--primary-color), 1);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  margin: 0;
+  padding-left: 1rem;
 }
 
-.project-toc ul,
-.project-toc-list {
+.cs-stat-value {
+  color: rgba(var(--primary-color), 1);
+  font-size: var(--cs-fs-display);
+  font-weight: var(--cs-fw-strong);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.cs-stat-label {
+  color: rgba(var(--foreground), 0.7);
+  font-size: var(--cs-fs-body);
+  line-height: 1.35;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+.project-description {
+  line-height: 1.6;
+}
+
+.cs-section-heading {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--cs-space-sm);
+  margin-top: var(--cs-space-xl);
+}
+
+.cs-section-index {
+  color: rgba(var(--primary-color), 1);
+  flex-shrink: 0;
+  font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  font-size: var(--cs-fs-h2);
+  font-weight: var(--cs-fw-regular);
+  line-height: 1.15;
+}
+
+.cs-section-title {
+  font-size: var(--cs-fs-h2);
+  font-weight: var(--cs-fw-regular);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.cs-question {
+  font-size: var(--cs-fs-display);
+  font-weight: var(--cs-fw-medium);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: center;
+  text-wrap: balance;
+  width: 100%;
+}
+
+.cs-question-long {
+  font-size: var(--cs-fs-h2);
+  line-height: 1.3;
+}
+
+.cs-question ~ .project-description {
+  text-align: center;
+}
+
+.cs-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-space-md);
+}
+
+/* Big centered quote — a standalone breathing-room moment, not a boxed callout */
+.cs-pull-quote {
+  padding-block: 1rem;
+  text-align: center;
+}
+
+.cs-pull-quote p {
+  color: rgba(var(--foreground), 0.9);
+  font-size: var(--cs-fs-h2);
+  font-style: italic;
+  line-height: 1.35;
+  margin-inline: auto;
+  max-width: 34ch;
+}
+
+.cs-pull-quote cite {
+  display: block;
+  color: rgba(var(--foreground), 0.55);
+  font-size: var(--cs-fs-label);
+  font-style: normal;
+  font-weight: var(--cs-fw-strong);
+  letter-spacing: 0.04em;
+  margin-top: 1rem;
+}
+
+/* Supporting detail shown inline, always visible */
+.cs-inline-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-space-sm);
+}
+
+.cs-subhead {
+  font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  font-size: var(--cs-fs-h3);
+  font-weight: var(--cs-fw-medium);
+}
+
+/* ============================================
+   POINTS (numbered findings, takeaways, fixes)
+   ============================================ */
+
+.cs-points {
+  counter-reset: cs-point;
+  display: grid;
+  gap: var(--cs-space-md);
+  grid-template-columns: 1fr;
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  width: 100%;
 }
 
-.toc-and-meta {
-  padding-block: 2rem;
+@media (min-width: 768px) {
+  .cs-points-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-points-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cs-point {
+  border: 1px solid rgba(var(--foreground), 0.14);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: var(--cs-space-md);
+}
+
+.cs-points-numbered .cs-point::before {
+  color: rgba(var(--primary-color), 1);
+  content: counter(cs-point, decimal-leading-zero);
+  counter-increment: cs-point;
+  font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  font-size: var(--cs-fs-h3);
+  line-height: 1;
+}
+
+.cs-point-title {
+  font-size: var(--cs-fs-h3);
+  font-weight: var(--cs-fw-medium);
+  line-height: 1.25;
+}
+
+.cs-point-body {
+  color: rgba(var(--foreground), 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cs-point-body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ============================================
+   FOOTER NAV
+   ============================================ */
+
+.cs-footer-nav {
+  align-items: center;
+  border-top: 1.5px solid rgba(var(--floating-color), 1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--cs-space-sm);
+  justify-content: space-between;
+  margin-top: calc(var(--cs-space-xl) + var(--cs-space-md));
+  padding-top: var(--cs-space-lg);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .cs-footer-nav {
+    flex-direction: row;
+  }
+}
+
+.divider {
+  border-radius: 2rem;
+}
+
+.cs-footer-nav.cs-footer-nav-plain {
+  border-top: 0;
+  padding-top: 0;
 }

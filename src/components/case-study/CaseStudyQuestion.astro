@@ -1,0 +1,13 @@
+---
+interface Props {
+  question: string;
+  long?: boolean;
+}
+
+const { question, long = false } = Astro.props;
+---
+
+<div class="cs-section-body">
+  <h2 class:list={["cs-question", { "cs-question-long": long }]}>{question}</h2>
+  <slot />
+</div>

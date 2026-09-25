@@ -1,0 +1,18 @@
+---
+interface Props {
+  columns?: 1 | 2 | 3;
+  numbered?: boolean;
+}
+
+const { columns = 2, numbered = true } = Astro.props;
+---
+
+<ol
+  class:list={[
+    "cs-points",
+    `cs-points-${columns}`,
+    { "cs-points-numbered": numbered },
+  ]}
+>
+  <slot />
+</ol>

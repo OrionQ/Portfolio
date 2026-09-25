@@ -178,12 +178,17 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       role="tabpanel"
       aria-labelledby="tab-redesign-case"
     >
-      <div class="cs-hero-image">
+      <MetaItem label="Role">
+        <p class="cs-inline-result">Product Designer</p>
+      </MetaItem>
+
+      <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
         <Image
           src={sageConfigurePage}
           alt="UT Sage product sample page"
-          width={1800}
+          width={2000}
           quality={100}
+          class="rounded-xl object-cover"
         />
       </div>
 
@@ -210,25 +215,38 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           was the moment I decided to rebuild the design system from
           scratch.
         </p>
-        <div class="cs-gallery">
-          <Image
-            src={sageOriginalDesign1}
-            alt="Original UT Sage design - issue 1"
-            width={800}
-            quality={100}
-          />
-          <Image
-            src={sageOriginalDesign2}
-            alt="Original UT Sage design - issue 2"
-            width={800}
-            quality={100}
-          />
-          <Image
-            src={sageOriginalIssueList}
-            alt="Original UT Sage design - issue list"
-            width={800}
-            quality={100}
-          />
+        <div
+          class="flex flex-row flex-wrap gap-4 min-w-0 w-full items-center"
+        >
+          <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+            <Image
+              src={sageOriginalDesign1}
+              alt="Original UT Sage design - issue 1"
+              width={2000}
+              height={1500}
+              quality={100}
+              class="rounded-xl w-full h-auto object-contain max-w-full"
+            />
+          </div>
+          <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+            <Image
+              src={sageOriginalDesign2}
+              alt="Original UT Sage design - issue 2"
+              width={2000}
+              height={1500}
+              quality={100}
+              class="rounded-xl w-full h-auto object-contain max-w-full"
+            />
+          </div>
+          <div class="flex-1 min-w-[min(280px,100%)] overflow-hidden">
+            <Image
+              src={sageOriginalIssueList}
+              alt="Original UT Sage design - issue list"
+              width={2000}
+              quality={100}
+              class="rounded-xl w-full h-auto object-contain max-w-full"
+            />
+          </div>
         </div>
       </div>
 
@@ -244,15 +262,20 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           from my manager, and stayed in a regular loop with users and
           researchers.
         </p>
-        <div class="cs-gallery">
-          <Image src={sageLofi} alt="UT Sage lo-fi design" width={900} quality={100} />
-          <Image
-            src={sageOriginalToggle}
-            alt="UT Sage original toggle design"
-            width={900}
-            quality={100}
-          />
-        </div>
+        <Image
+          src={sageLofi}
+          alt="UT Sage lo-fi design"
+          width={2000}
+          quality={100}
+          class="rounded-xl object-cover"
+        />
+        <Image
+          src={sageOriginalToggle}
+          alt="UT Sage original toggle design"
+          width={2000}
+          quality={100}
+          class="rounded-xl object-cover"
+        />
       </div>
 
       <SectionHeading
@@ -266,16 +289,27 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           AA baked in from the start. Figma tokens from day one — built to
           scale, not patch.
         </p>
-        <div class="cs-gallery">
-          <Image src={sageFoundations} alt="UT Sage foundations" width={900} quality={100} />
-          <Image src={sageButtons} alt="UT Sage buttons" width={900} quality={100} />
-          <Image
-            src={sageExampleComponents}
-            alt="UT Sage example components"
-            width={900}
-            quality={100}
-          />
-        </div>
+        <Image
+          src={sageFoundations}
+          alt="UT Sage foundations"
+          width={2000}
+          quality={100}
+          class="rounded-xl object-cover"
+        />
+        <Image
+          src={sageButtons}
+          alt="UT Sage buttons"
+          width={2000}
+          quality={100}
+          class="rounded-xl object-cover"
+        />
+        <Image
+          src={sageExampleComponents}
+          alt="UT Sage example components"
+          width={2000}
+          quality={100}
+          class="rounded-xl object-cover"
+        />
       </div>
 
       <SectionHeading index="04" title="Recreate the pages" id="recreate-the-pages" />
@@ -285,61 +319,59 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           background helped: I worked closely with the lead engineer,
           designing within real technical limits instead of around them.
         </p>
-        <div class="cs-card-grid">
-          <Card cardType="secondary">
-            <h3>Toggle redesign</h3>
+        <ul class="flex flex-col gap-8 items-center">
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Toggle redesign</strong>
             <Image
               src={sageToggleIteration}
               alt="UT Sage toggle iteration"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Edit page</h3>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Edit page</strong>
             <Image
               src={sageEditPage}
               alt="UT Sage edit page"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Home screen</h3>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Home screen</strong>
             <Image
               src={sageHomepageTransition}
               alt="UT Sage homepage transition"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Help center</h3>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Help center</strong>
             <Image
               src={sageHelpCenterPage}
               alt="UT Sage help center page"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-        </div>
-        <div class="cs-inline-detail">
-          <p class="cs-subhead">Example sharing flow, with redlines</p>
-          <Image
-            src={sageSharingFlow}
-            alt="UT Sage sharing flow"
-            width={1300}
-            quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full"
-          />
-          <p class="project-description">
-            Bigger font sizes, more accessible colors.
-          </p>
-        </div>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Example sharing flow, with redlines</strong>
+            <Image
+              src={sageSharingFlow}
+              alt="UT Sage sharing flow"
+              width={2000}
+              quality={100}
+              class="rounded-xl object-cover"
+            />
+            <p>Bigger font sizes, more accessible colors.</p>
+          </li>
+        </ul>
       </div>
 
       <SectionHeading
@@ -352,38 +384,38 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           Four months later: a more accessible, unified prototype.
           Engineering rebuilt pages faster, and far more consistently.
         </p>
-        <div class="cs-card-grid">
-          <Card cardType="secondary">
-            <h3>Home screen</h3>
+        <ul class="flex flex-col gap-8 items-center">
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Home screen</strong>
             <Image
               src={sageHomepageProduction}
               alt="UT Sage homepage production"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Edit screen</h3>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Edit screen</strong>
             <Image
               src={sageEditPageProduction}
               alt="UT Sage edit page production"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-          <Card cardType="secondary" className="md:col-span-2">
-            <h3>Chat screen</h3>
+          </li>
+          <li class="flex flex-col gap-4 items-center">
+            <strong>Chat screen</strong>
             <Image
               src={sageChatPageProduction}
               alt="UT Sage chat page production"
-              width={1300}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl object-cover"
             />
-          </Card>
-        </div>
+          </li>
+        </ul>
       </div>
 
       <SectionHeading index="06" title="Outcomes" id="outcomes" />
@@ -436,15 +468,20 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       aria-labelledby="tab-capstone-case"
       hidden
     >
-      <div class="cs-hero-image">
+      <MetaItem label="Role">
+        <p class="cs-inline-result">UX Designer</p>
+      </MetaItem>
+
+      <figure class="capstone-hero-thumb pb-8">
         <Image
           format="png"
           src={facultyEvalRecommendations}
           alt="Tutor evaluation dashboard — key findings, overview, and suggestions & recommendations"
-          width={1800}
+          width={2000}
           quality={100}
+          class="rounded-xl w-full h-auto object-contain"
         />
-      </div>
+      </figure>
 
       <StatRow>
         <Stat value="8" label="response-quality evaluation dimensions" />
@@ -531,67 +568,86 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           explain Create, Configure, and Train, and an evaluation view that
           leads with key findings before the details.
         </p>
-        <div class="cs-card-grid">
-          <Card cardType="secondary">
-            <h3>Welcome modal</h3>
-            <p>Sets expectations and scope guardrails.</p>
+        <div
+          class="capstone-proto-grid grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <figure class="capstone-figure">
+            <figcaption
+              class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+            >
+              Welcome modal — sets expectations and scope guardrails.
+            </figcaption>
             <Image
               format="png"
               src={facultyEvalTutorialModal}
               alt="Welcome to Create Your UT Sage Tutor modal"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Orientation step</h3>
-            <p>Contextualizes Create, Configure, and Train.</p>
+          </figure>
+          <figure class="capstone-figure">
+            <figcaption
+              class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+            >
+              Orientation step — contextualizes Create, Configure, and Train.
+            </figcaption>
             <Image
               format="png"
               src={facultyEvalTutorialStep}
               alt="Tutorial explaining Create Configure and Train sections"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Chat scaffolding</h3>
-            <p>An alternative to typing every field manually.</p>
+          </figure>
+          <figure class="capstone-figure">
+            <figcaption
+              class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+            >
+              Chat scaffolding — alternative to typing every field manually.
+            </figcaption>
             <Image
               format="png"
               src={facultyEvalChatStep}
               alt="Tutorial tooltip on tutor creation chat syncing fields"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Configure cue</h3>
-            <p>Points to the fields that shape how the tutor calibrates.</p>
+          </figure>
+          <figure class="capstone-figure">
+            <figcaption
+              class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+            >
+              Configure cue — anchors fields that feed calibration logic.
+            </figcaption>
             <Image
               format="png"
               src={facultyEvalConfigureStep}
               alt="Tutorial tooltip on learner characteristics in Configure tab"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain bg-[rgba(var(--floating-color),0.35)]"
             />
-          </Card>
+          </figure>
         </div>
-        <p class="cs-subhead">Early evaluation dashboard</p>
-        <p class="project-description">How the AI surfaces cross-field risks to faculty.</p>
-        <div class="cs-hero-image">
+        <figure class="capstone-hero-thumb mt-2">
+          <figcaption
+            class="text-sm pb-2 text-[rgba(var(--foreground-color),0.72)] font-medium"
+          >
+            Early evaluation dashboard — how AI surfaces cross-field risks to
+            faculty.
+          </figcaption>
           <Image
             format="png"
             src={facultyEvalThumbnail}
             alt="Full tutor evaluation concept showing key findings and overview"
-            width={1600}
+            width={2000}
             quality={100}
+            class="rounded-xl w-full h-auto object-contain"
           />
-        </div>
+        </figure>
       </div>
 
       <SectionHeading
@@ -640,52 +696,51 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           drill down. Each tab below handles one job, so nothing hits them
           all at once.
         </p>
-        <div class="cs-card-grid">
-          <Card cardType="secondary">
-            <h3>Suggestions & recommendations</h3>
+        <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+          <div class="capstone-iteration-figure flex min-w-0 flex-col gap-2">
+            <strong>Suggestions & recommendations</strong>
             <Image
               format="png"
               src={facultyEvalRecommendations}
               alt="Tutor Evaluation tab showing key findings overview and suggestion cards"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Evaluation by field</h3>
+          </div>
+          <div class="capstone-iteration-figure flex min-w-0 flex-col gap-2">
+            <strong>Evaluation by field</strong>
             <Image
               format="png"
               src={facultyEvalByField}
               alt="Evaluation by field table"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>File management</h3>
+          </div>
+          <div class="capstone-iteration-figure flex min-w-0 flex-col gap-2">
+            <strong>File management</strong>
             <Image
               format="png"
               src={facultyEvalFileManagement}
               alt="File management tab listing syllabus and documents with statuses"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain"
             />
-          </Card>
-          <Card cardType="secondary">
-            <h3>Customize evaluation</h3>
-            <p>Added feature, from faculty feedback.</p>
+          </div>
+          <div class="capstone-iteration-figure flex min-w-0 flex-col gap-2">
+            <strong>Customize evaluation — added feature from feedback</strong>
             <Image
               format="png"
               src={facultyEvalCustomize}
               alt="Customize evaluation tab for additional benchmark questions"
-              width={900}
+              width={2000}
               quality={100}
-              class="rounded-[var(--border-radius)] object-cover w-full mt-2"
+              class="rounded-xl w-full h-auto object-contain"
             />
-          </Card>
+          </div>
         </div>
       </div>
 
@@ -797,5 +852,12 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
     justify-content: center;
     padding: 0.25rem;
     position: relative;
+  }
+
+  .capstone-hero-thumb,
+  .capstone-figure,
+  .capstone-iteration-figure {
+    margin-inline: auto;
+    max-width: min(1100px, 100%);
   }
 </style>

@@ -48,9 +48,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     >
       <Fragment slot="meta">
         <MetaItem label="Role">
-          <p class="cs-inline-result">
-            Design system, interactions, usability fixes
-          </p>
+          <p class="cs-inline-result">Product Designer</p>
         </MetaItem>
         <MetaItem label="Tools">
           <Chip title="Figma" level="professional" showLevel={false}>
@@ -66,12 +64,13 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
       </Fragment>
     </CaseStudyHero>
 
-    <div class="cs-hero-image">
+    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
       <Image
         format="jpeg"
         src={venusThumbnail}
         alt="Venus app shown in a phone mockup"
-        width={1800}
+        width={1500}
+        class="rounded-[var(--border-radius)] object-cover"
       />
     </div>
 
@@ -81,27 +80,26 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
       <Stat value="22–34" label="age range of test participants" />
     </StatRow>
 
-    <div class="cs-section-columns cs-columns-image-first">
-      <div class="cs-section-image">
-        <Image
-          format="jpeg"
-          src={venusArt}
-          alt="Still Life with Silver and Gold Vessels, Fruit, and Flowers at Blanton Museum"
-          width={1100}
-        />
-      </div>
-      <div class="cs-section-body">
-        <p class="cs-subhead">Inspired by the art, built by the team</p>
-        <p class="project-description">
-          The idea started at a museum, in front of Pierre Nicolas
-          Huilliot&apos;s <em
-            >Still Life with Silver and Gold Vessels, Fruit, and
-            Flowers</em
-          >. Venus watches over the scene; Cupid stands beside her. So the
-          app became Venus — with an AI matchmaker, Cupid, doing the
-          suggesting.
-        </p>
-      </div>
+    <p class="cs-subhead">Inspired by the art, built by the team</p>
+    <div
+      class="flex flex-row gap-4 flex-wrap md:flex-nowrap justify-center items-center"
+    >
+      <Image
+        format="jpeg"
+        src={venusArt}
+        alt="Still Life with Silver and Gold Vessels, Fruit, and Flowers at Blanton Museum"
+        width={300}
+        class="rounded-[var(--border-radius)] object-cover flex basis-1/2 w-full h-full"
+      />
+      <p class="project-description">
+        The idea started at a museum, in front of Pierre Nicolas
+        Huilliot&apos;s <em
+          >Still Life with Silver and Gold Vessels, Fruit, and
+          Flowers</em
+        >. Venus watches over the scene; Cupid stands beside her. So the
+        app became Venus — with an AI matchmaker, Cupid, doing the
+        suggesting.
+      </p>
     </div>
 
     <SectionHeading
@@ -116,20 +114,22 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         hated in dating apps today, then mapped it into a story map of what
         the product needed to do.
       </p>
-      <div class="cs-gallery">
+      <div class="flex flex-row gap-4 md:flex-nowrap flex-wrap">
         <Image
           format="jpeg"
           src={venusStoryboard}
           alt="Venus storyboard"
-          width={900}
-        />
-        <Image
-          format="jpeg"
-          src={venusStoryMap}
-          alt="Venus story map"
-          width={1000}
+          width={450}
+          class="rounded-[var(--border-radius)] object-cover"
         />
       </div>
+      <Image
+        format="jpeg"
+        src={venusStoryMap}
+        alt="Venus story map"
+        width={2000}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
       <PageLink
         aria-label="Story map (opens a new window)"
         href="https://www.figma.com/board/mY9oUJMC48AIhXsCqZJhRi/UXerrrs---Venus?node-id=97-240&t=nX3I4yIU5zZSiI9B-1"
@@ -147,35 +147,35 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         I built the match flow: how users see Cupid&apos;s picks, and what
         they can do with each one.
       </p>
-      <div class="cs-card-grid">
-        <Card cardType="secondary">
-          <h3>Match screen</h3>
+      <ul class="flex flex-col gap-8 items-center">
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Match screen</strong>
           <Image
             format="jpeg"
             src={venusMatchLofi}
             alt="Low-fi prototype of the match screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>
             No swiping. Open a profile, choose to talk. Unmatching lets you
             pick a reason, or write your own.
           </p>
-        </Card>
-        <Card cardType="secondary">
-          <h3>Progress screen</h3>
+        </li>
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Progress screen</strong>
           <Image
             format="jpeg"
             src={venusProgressLofi}
             alt="Low-fi prototype of the progress screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>Current matches, and trends in who you like.</p>
-        </Card>
-      </div>
+        </li>
+      </ul>
       <PageLink
         aria-label="Lo-fi and mid-fi screens (opens a new window)"
         href="https://www.figma.com/design/vJ7tcgxj5pqgSlNJf5xfUD/Venus-UXerrrs-Prototype?node-id=0-1&t=RUaaQ9s8gLW5PpKw-1"
@@ -197,22 +197,22 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         mythological roots; <strong>Poppins</strong> keeps body text
         readable on small screens.
       </p>
-      <div class="cs-gallery">
-        <Image
-          format="jpeg"
-          src={venusColor}
-          alt="Venus design system color palette"
-          width={900}
-          quality={100}
-        />
-        <Image
-          format="jpeg"
-          src={venusFont}
-          alt="Venus design system font"
-          width={900}
-          quality={100}
-        />
-      </div>
+      <Image
+        format="jpeg"
+        src={venusColor}
+        alt="Venus design system color palette"
+        width={1200}
+        quality={100}
+        class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
+      />
+      <Image
+        format="jpeg"
+        src={venusFont}
+        alt="Venus design system font"
+        width={1200}
+        quality={100}
+        class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
+      />
       <div class="cs-inline-detail">
         <p class="cs-subhead">Components &amp; the design system</p>
         <p class="project-description">
@@ -224,9 +224,9 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           format="jpeg"
           src={venusDesignSystem}
           alt="Venus design system components"
-          width={1300}
+          width={1200}
           quality={100}
-          class="rounded-[var(--border-radius)] object-cover w-full"
+          class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
         />
       </div>
       <PageLink
@@ -246,81 +246,81 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         We brought the design system into a hi-fi prototype with
         micro-animations and real interactions.
       </p>
-      <div class="cs-card-grid">
-        <Card cardType="secondary">
-          <h3>Onboarding</h3>
+      <ul class="flex flex-col gap-8 items-center">
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Onboarding</strong>
           <Image
             format="jpeg"
             src={venusOnboardHifi}
             alt="Hi-fi prototype of the onboarding screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>Profile setup and app mechanics. Testing later flagged this for rework.</p>
-        </Card>
-        <Card cardType="secondary">
-          <h3>Match screen</h3>
+        </li>
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Match screen</strong>
           <Image
             format="jpeg"
             src={venusMatchHifi}
             alt="Hi-fi prototype of the match screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>Match and unmatch, with reasons to pick from.</p>
-        </Card>
-        <Card cardType="secondary">
-          <h3>Chat & icebreaker</h3>
+        </li>
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Chat & icebreaker</strong>
           <Image
             format="jpeg"
             src={venusChatHifi}
             alt="Hi-fi prototype of the chat screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>A game to learn about a match before you message them.</p>
-        </Card>
-        <Card cardType="secondary">
-          <h3>Home / progress</h3>
+        </li>
+        <li class="flex flex-col gap-4 items-center">
+          <strong>Home / progress</strong>
           <Image
             format="jpeg"
             src={venusProgressHifi}
             alt="Hi-fi prototype of the home/progress screen"
-            width={900}
+            width={800}
             quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full my-2"
+            class="rounded-[var(--border-radius)] object-cover"
           />
           <p>Current matches, and how they&apos;re going.</p>
-        </Card>
-      </div>
-      <div class="cs-inline-detail">
-        <p class="cs-subhead">Microanimations</p>
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-          <Image
-            src={venusMessageHifi}
-            alt="Hi-fi prototype of the message screen with animation"
-            width={220}
-            quality={100}
-            class="rounded-[2.7rem] object-cover"
-          />
-          <Image
-            src={venusIcebreakerHifi}
-            alt="Hi-fi prototype of the icebreaker screen with animation"
-            width={220}
-            quality={100}
-            class="rounded-[2.7rem] object-cover"
-          />
-          <Image
-            src={venusMilestoneHifi}
-            alt="Hi-fi prototype of the milestone screen with animation"
-            width={220}
-            quality={100}
-            class="rounded-[2.7rem] object-cover"
-          />
-        </div>
+        </li>
+      </ul>
+      <p>Some microanimations we added:</p>
+      <div
+        class="flex flex-col lg:flex-row gap-8 justify-center items-center"
+      >
+        <Image
+          src={venusMessageHifi}
+          alt="Hi-fi prototype of the message screen with animation"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
+        <Image
+          src={venusIcebreakerHifi}
+          alt="Hi-fi prototype of the icebreaker screen with animation"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
+        <Image
+          src={venusMilestoneHifi}
+          alt="Hi-fi prototype of the milestone screen with animation"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
       </div>
     </div>
 
@@ -335,15 +335,14 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         <strong>2 participants</strong> (ages 22–34). Notes and post-task
         forms went into a shared feedback board.
       </p>
-      <div class="cs-hero-image">
-        <Image
-          format="jpeg"
-          src={venusFeedback}
-          alt="Usability testing feedback and affinity diagram"
-          width={1600}
-          quality={100}
-        />
-      </div>
+      <Image
+        format="jpeg"
+        src={venusFeedback}
+        alt="Usability testing feedback and affinity diagram"
+        width={1500}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
       <p class="cs-subhead">Key findings we acted on</p>
       <div class="cs-card-grid">
         <Card cardType="secondary">
@@ -395,105 +394,104 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         the experience.
       </p>
 
-      <div class="cs-card-grid">
-        <Card cardType="secondary">
-          <h3>6.1 Onboarding</h3>
-          <p>
-            <strong>Issue:</strong> too many tooltips at once — nobody
-            remembered any of it.
-            <strong>Fix:</strong> one pop-up per screen, shown only the
-            first time you land there.
-          </p>
-          <Image
-            format="jpeg"
-            src={venusOnboardingFix}
-            alt="Fix on the onboarding screen"
-            width={900}
-            quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
-          />
-        </Card>
-        <Card cardType="secondary">
-          <h3>6.2 Milestones &amp; Cupid&apos;s recommendations</h3>
-          <p>
-            <strong>Issue:</strong> milestones and match trends looked the
-            same. <strong>Fix:</strong> dropped the progress bar, reordered
-            milestones, added &ldquo;Cupid&apos;s dating ideas.&rdquo;
-          </p>
-          <Image
-            format="jpeg"
-            src={venusHomepageFix}
-            alt="Fix on the homepage screen"
-            width={900}
-            quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
-          />
-        </Card>
-        <Card cardType="secondary">
-          <h3>6.3 Match trends</h3>
-          <p>
-            <strong>Issue:</strong> trends felt disconnected from real
-            matches. <strong>Fix:</strong> combined Cupid&apos;s notes with
-            trends and match profiles.
-          </p>
-          <Image
-            format="jpeg"
-            src={venusTrendsFix}
-            alt="Fix on the trends screen"
-            width={900}
-            quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
-          />
-        </Card>
-        <Card cardType="secondary">
-          <h3>6.4 Match profile</h3>
-          <p>
-            <strong>Issue:</strong> tapping a match in chat did nothing.
-            <strong>Fix:</strong> tap the photo to open their profile.
-            Unmatch from there.
-          </p>
-          <div class="flex gap-3 justify-center pt-2">
-            <Image
-              src={venusMatchProfileFix}
-              alt="Fix on the match profile screen"
-              width={150}
-              quality={100}
-              class="rounded-[2rem] object-cover"
-            />
-            <Image
-              src={venusMatchUnmatchFix}
-              alt="Fix on being able to unmatch from the match profile screen"
-              width={150}
-              quality={100}
-              class="rounded-[2rem] object-cover"
-            />
-          </div>
-        </Card>
-        <Card cardType="secondary" className="md:col-span-2">
-          <h3>6.5 Icebreaker</h3>
-          <p>
-            <strong>Issue:</strong> no names on match photos.
-            <strong>Fix:</strong> names below every photo, and the
-            questionnaire now looks nothing like chat.
-          </p>
-          <Image
-            format="jpeg"
-            src={venusIcebreakerFix}
-            alt="Fix on the icebreaker screen"
-            width={1300}
-            quality={100}
-            class="rounded-[var(--border-radius)] object-cover w-full mt-2"
-          />
-          <div class="flex justify-center mt-3">
-            <Image
-              src={venusIcebreakerDesignFix}
-              alt="Icebreaker screen transition"
-              width={220}
-              quality={100}
-              class="rounded-[2.7rem] object-cover"
-            />
-          </div>
-        </Card>
+      <Card cardType="secondary" className="flex flex-col gap-2">
+        <h3>6.1 Onboarding</h3>
+        <p>
+          <strong>Issue:</strong> too many tooltips at once — nobody
+          remembered any of it.
+          <strong>Fix:</strong> one pop-up per screen, shown only the
+          first time you land there.
+        </p>
+      </Card>
+      <Image
+        format="jpeg"
+        src={venusOnboardingFix}
+        alt="Fix on the onboarding screen"
+        width={1500}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
+      <Card cardType="secondary" className="flex flex-col gap-2">
+        <h3>6.2 Milestones &amp; Cupid&apos;s recommendations</h3>
+        <p>
+          <strong>Issue:</strong> milestones and match trends looked the
+          same. <strong>Fix:</strong> dropped the progress bar, reordered
+          milestones, added &ldquo;Cupid&apos;s dating ideas.&rdquo;
+        </p>
+      </Card>
+      <Image
+        format="jpeg"
+        src={venusHomepageFix}
+        alt="Fix on the homepage screen"
+        width={1500}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
+      <Card cardType="secondary" className="flex flex-col gap-2">
+        <h3>6.3 Match trends</h3>
+        <p>
+          <strong>Issue:</strong> trends felt disconnected from real
+          matches. <strong>Fix:</strong> combined Cupid&apos;s notes with
+          trends and match profiles.
+        </p>
+      </Card>
+      <Image
+        format="jpeg"
+        src={venusTrendsFix}
+        alt="Fix on the trends screen"
+        width={1500}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
+      <Card cardType="secondary" className="flex flex-col gap-2">
+        <h3>6.4 Match profile</h3>
+        <p>
+          <strong>Issue:</strong> tapping a match in chat did nothing.
+          <strong>Fix:</strong> tap the photo to open their profile.
+          Unmatch from there.
+        </p>
+      </Card>
+      <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+        <Image
+          src={venusMatchProfileFix}
+          alt="Fix on the match profile screen"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
+        <Image
+          src={venusMatchUnmatchFix}
+          alt="Fix on being able to unmatch from the match profile screen"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
+      </div>
+      <Card cardType="secondary" className="flex flex-col gap-2">
+        <h3>6.5 Icebreaker</h3>
+        <p>
+          <strong>Issue:</strong> no names on match photos.
+          <strong>Fix:</strong> names below every photo, and the
+          questionnaire now looks nothing like chat.
+        </p>
+      </Card>
+      <Image
+        format="jpeg"
+        src={venusIcebreakerFix}
+        alt="Fix on the icebreaker screen"
+        width={1500}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover"
+      />
+      <p>Transition between icebreaker screens:</p>
+      <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+        <Image
+          src={venusIcebreakerDesignFix}
+          alt="Icebreaker screen transition"
+          width={250}
+          quality={100}
+          class="rounded-[2.7rem] object-cover"
+        />
       </div>
 
       <p class="project-description">

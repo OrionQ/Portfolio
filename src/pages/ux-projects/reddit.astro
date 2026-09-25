@@ -27,9 +27,7 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     >
       <Fragment slot="meta">
         <MetaItem label="Role">
-          <Tag>Researcher</Tag>
-          <Tag>Interviewer</Tag>
-          <Tag>Note taker</Tag>
+          <p class="cs-inline-result">UX Researcher</p>
         </MetaItem>
         <MetaItem label="Tools">
           <Tag>Figma</Tag>
@@ -47,12 +45,13 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       </Fragment>
     </CaseStudyHero>
 
-    <div class="cs-hero-image">
+    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
       <Image
         format="jpeg"
         src={redditThumbnail}
         alt="First screen of the Reddit app shown in a phone mock up"
-        width={1800}
+        width={1500}
+        class="rounded-[var(--border-radius)] object-cover"
       />
     </div>
 
@@ -64,63 +63,61 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     </StatRow>
 
     <SectionHeading index="01" title="Heuristic evaluation" id="heuristic-evaluation" />
-    <div class="cs-section-columns cs-columns-text-first">
-      <div class="cs-section-body">
-        <p class="project-description">
-          <strong>Problem:</strong> we checked every screen against Nielsen&apos;s
-          10 usability heuristics. Five kept breaking:
-          <strong>consistency</strong>, <strong>aesthetics</strong>,
-          <strong>flexibility</strong>, <strong>user control</strong>, and
-          <strong>help &amp; documentation</strong>. Small issues, but they
-          stack up.
-        </p>
-        <PageLink
-          aria-label="Full heuristic evaluation (opens a new window)"
-          href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
-          newTab>Full heuristic evaluation</PageLink
-        >
-      </div>
-      <div class="cs-section-image">
+    <div class="cs-section-body">
+      <div class="flex lg:flex-row flex-col gap-4">
+        <div class="flex flex-col gap-4 justify-center">
+          <p class="project-description">
+            <strong>Problem:</strong> we checked every screen against Nielsen&apos;s
+            10 usability heuristics. Five kept breaking:
+            <strong>consistency</strong>, <strong>aesthetics</strong>,
+            <strong>flexibility</strong>, <strong>user control</strong>, and
+            <strong>help &amp; documentation</strong>. Small issues, but they
+            stack up.
+          </p>
+          <PageLink
+            aria-label="Full heuristic evaluation (opens a new window)"
+            href="https://www.canva.com/design/DAGeHG1Nzgs/KvdTPQFX7i1tluBLWcfSfg/view?utm_content=DAGeHG1Nzgs&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h71bafc9315"
+            newTab>Full heuristic evaluation</PageLink
+          >
+        </div>
         <Image
           format="jpeg"
           src={redditHE}
           alt="Five heuristics we prioritized: consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, and recover from errors; help and documentation"
           width={1300}
+          class="rounded-[var(--border-radius)] object-cover w-full h-full"
         />
       </div>
     </div>
 
     <SectionHeading index="02" title="Competitive analysis" id="competitive-analysis" />
-    <div class="cs-section-columns cs-columns-image-first">
-      <div class="cs-section-image">
-        <Image
-          format="jpeg"
-          src={redditCA}
-          alt="Competitive analysis comparing Reddit against Quora, Stack Exchange, X, Discord, Tumblr, and TikTok"
-          width={1300}
-          quality={100}
-        />
-      </div>
-      <div class="cs-section-body">
-        <p class="project-description">
-          We compared Reddit to six apps: <strong>Quora, Stack Exchange, X,
-          Discord, Tumblr, TikTok</strong>. Where does Reddit win, and where
-          does it fall short?
-        </p>
-        <PageLink
-          aria-label="Full competitive analysis (opens a new window)"
-          href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
-          newTab>Full competitive analysis</PageLink
-        >
-      </div>
-    </div>
-    <blockquote class="cs-pull-quote">
-      <p>
-        &ldquo;Reddit wins on community content. It loses on ease —
-        navigation is heavier, and key actions take more taps than they
-        should.&rdquo;
+    <div class="cs-section-body">
+      <p class="project-description">
+        We compared Reddit to six apps: <strong>Quora, Stack Exchange, X,
+        Discord, Tumblr, TikTok</strong>. Where does Reddit win, and where
+        does it fall short?
       </p>
-    </blockquote>
+      <PageLink
+        aria-label="Full competitive analysis (opens a new window)"
+        href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
+        newTab>Full competitive analysis</PageLink
+      >
+      <Image
+        format="jpeg"
+        src={redditCA}
+        alt="Competitive analysis comparing Reddit against Quora, Stack Exchange, X, Discord, Tumblr, and TikTok"
+        width={2000}
+        quality={100}
+        class="rounded-[var(--border-radius)] object-cover w-full h-full"
+      />
+      <blockquote class="cs-pull-quote">
+        <p>
+          &ldquo;Reddit wins on community content. It loses on ease —
+          navigation is heavier, and key actions take more taps than they
+          should.&rdquo;
+        </p>
+      </blockquote>
+    </div>
 
     <SectionHeading index="03" title="Usability testing" id="usability-testing" />
     <div class="cs-section-body">

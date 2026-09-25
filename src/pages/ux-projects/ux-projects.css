@@ -131,7 +131,7 @@
 }
 
 .cs-stat {
-  border-left: 3px solid rgba(var(--secondary-color), 1);
+  border-left: 2px solid rgba(var(--primary-color), 1);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -139,7 +139,7 @@
 }
 
 .cs-stat-value {
-  color: rgba(var(--secondary-color), 1);
+  color: rgba(var(--primary-color), 1);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -184,7 +184,7 @@
 }
 
 .cs-section-index {
-  color: rgba(var(--secondary-color), 1);
+  color: rgba(var(--primary-color), 1);
   font-size: 0.8125rem;
   font-weight: 800;
   letter-spacing: 0.14em;

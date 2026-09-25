@@ -131,18 +131,18 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       kicker="Professional experience — Design system + AI evaluation"
       title="UT Sage"
       tagline="Product design for UT Austin's AI tutor platform: a shipped design-system redesign, and an AI evaluation workflow for faculty."
-    >
-      <Fragment slot="meta">
-        <MetaItem label="Learn more">
-          <Link
-            aria-label="UT Sage website (opens a new window)"
-            href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
-            newTab
-            underline>ut-sage.utexas.edu</Link
-          >
-        </MetaItem>
-      </Fragment>
-    </CaseStudyHero>
+    />
+
+    <div class="cs-meta">
+      <MetaItem label="Learn more">
+        <Link
+          aria-label="UT Sage website (opens a new window)"
+          href="https://provost.utexas.edu/the-office/academic-affairs/office-of-academic-technology/ut-sage/"
+          newTab
+          underline>ut-sage.utexas.edu</Link
+        >
+      </MetaItem>
+    </div>
 
     <div
       class="tabs-container flex flex-row flex-wrap mt-2 mb-4 min-w-0"
@@ -178,10 +178,6 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       role="tabpanel"
       aria-labelledby="tab-redesign-case"
     >
-      <MetaItem label="Role">
-        <p class="cs-inline-result">Product Designer</p>
-      </MetaItem>
-
       <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
         <Image
           src={sageConfigurePage}
@@ -190,6 +186,12 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           quality={100}
           class="rounded-xl object-cover"
         />
+      </div>
+
+      <div class="cs-meta">
+        <MetaItem label="Role">
+          <p class="cs-inline-result">Product Designer</p>
+        </MetaItem>
       </div>
 
       <StatRow>
@@ -468,10 +470,6 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       aria-labelledby="tab-capstone-case"
       hidden
     >
-      <MetaItem label="Role">
-        <p class="cs-inline-result">UX Designer</p>
-      </MetaItem>
-
       <figure class="capstone-hero-thumb pb-8">
         <Image
           format="png"
@@ -482,6 +480,12 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           class="rounded-xl w-full h-auto object-contain"
         />
       </figure>
+
+      <div class="cs-meta">
+        <MetaItem label="Role">
+          <p class="cs-inline-result">UX Designer</p>
+        </MetaItem>
+      </div>
 
       <StatRow>
         <Stat value="8" label="response-quality evaluation dimensions" />

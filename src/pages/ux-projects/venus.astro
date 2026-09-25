@@ -45,24 +45,7 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
       kicker="Team project — UX prototyping"
       title="Venus"
       tagline="Most dating apps turn love into a numbers game. Venus helps you find matches worth investing in — and plan the date after."
-    >
-      <Fragment slot="meta">
-        <MetaItem label="Role">
-          <p class="cs-inline-result">Product Designer</p>
-        </MetaItem>
-        <MetaItem label="Tools">
-          <Chip title="Figma" level="professional" showLevel={false}>
-            <Icon slot="icon" name="figma-brands-solid-full" size={18} aria-hidden />
-          </Chip>
-          <Chip title="Framer" level="proficient" showLevel={false}>
-            <Icon slot="icon" name="framer" size={18} aria-hidden />
-          </Chip>
-          <Chip title="FigJam" level="professional" showLevel={false}>
-            <Icon slot="icon" name="figma-brands-solid-full" size={18} aria-hidden />
-          </Chip>
-        </MetaItem>
-      </Fragment>
-    </CaseStudyHero>
+    />
 
     <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
       <Image
@@ -72,6 +55,23 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
         width={1500}
         class="rounded-[var(--border-radius)] object-cover"
       />
+    </div>
+
+    <div class="cs-meta">
+      <MetaItem label="Role">
+        <p class="cs-inline-result">Product Designer</p>
+      </MetaItem>
+      <MetaItem label="Tools">
+        <Chip title="Figma" level="professional" showLevel={false}>
+          <Icon slot="icon" name="figma-brands-solid-full" size={18} aria-hidden />
+        </Chip>
+        <Chip title="Framer" level="proficient" showLevel={false}>
+          <Icon slot="icon" name="framer" size={18} aria-hidden />
+        </Chip>
+        <Chip title="FigJam" level="professional" showLevel={false}>
+          <Icon slot="icon" name="figma-brands-solid-full" size={18} aria-hidden />
+        </Chip>
+      </MetaItem>
     </div>
 
     <StatRow>

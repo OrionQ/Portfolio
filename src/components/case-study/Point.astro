@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<li class="cs-point">
+  <h3 class="cs-point-title">{title}</h3>
+  <div class="cs-point-body">
+    <slot />
+  </div>
+</li>

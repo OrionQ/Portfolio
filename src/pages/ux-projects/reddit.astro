@@ -1,8 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import Card from "../../components/card/Card.astro";
 import CaseStudyFooterNav from "../../components/case-study/CaseStudyFooterNav.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
+import Point from "../../components/case-study/Point.astro";
+import Points from "../../components/case-study/Points.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
@@ -70,16 +71,15 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <div class="cs-section-body">
       <p class="cs-subhead">The problem we found</p>
       <p class="project-description">
-        Reddit is one of the largest platforms in the world, yet my team and I
-        kept hitting the same friction: confusing icons, unclear flows, and
-        features that felt like they belonged to another app. Why did it sometimes
-        feel hard to learn the basics?
+        Reddit is one of the largest platforms in the world, yet my team kept
+        hitting the same friction: confusing icons, unclear flows, and features
+        that felt out of place.
       </p>
       <p class="cs-subhead">The goal</p>
       <p class="project-description">
-        We ran a full usability study, combining a heuristic evaluation, a
-        competitive analysis, and live user interviews, to find what is broken,
-        who it affects, and where the biggest opportunities are.
+        Find out what is broken, who it affects, and where the biggest
+        opportunities are, through a heuristic evaluation, a competitive
+        analysis, and live user interviews.
       </p>
     </div>
 
@@ -88,14 +88,12 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       <div class="flex lg:flex-row flex-col gap-8 items-start">
         <div class="flex flex-col gap-4 justify-center lg:basis-3/5">
           <p class="project-description">
-            Using Nielsen&apos;s 10 usability heuristics, we reviewed the app screen
-            by screen and found <strong>27 usability issues</strong>, each rated on
-            Nielsen&apos;s severity scale. Five areas stood out:
+            We reviewed the app against Nielsen&apos;s 10 heuristics and found
+            <strong>27 usability issues</strong>. Five stood out:
             <strong>consistency and standards</strong>, <strong>aesthetics</strong>,
             <strong>flexibility and efficiency of use</strong>,
             <strong>user control and freedom</strong>, and
-            <strong>help and documentation</strong>. Many issues violated multiple
-            heuristics, and even minor ones could overwhelm users over time.
+            <strong>help and documentation</strong>.
           </p>
           <PageLink
             aria-label="Full heuristic evaluation (opens a new window)"
@@ -117,10 +115,9 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="02" title="Competitive analysis" id="competitive-analysis" />
     <div class="cs-section-body">
       <p class="project-description">
-        We compared Reddit to three direct competitors,
-        <strong>Quora, Stack Exchange, and X</strong>, and three indirect ones,
-        <strong>Discord, Tumblr, and TikTok</strong>, to see what Reddit does well
-        and where others do it better.
+        We compared Reddit to three direct competitors
+        (<strong>Quora, Stack Exchange, X</strong>) and three indirect ones
+        (<strong>Discord, Tumblr, TikTok</strong>).
       </p>
       <PageLink
         aria-label="Full competitive analysis (opens a new window)"
@@ -137,8 +134,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       />
       <blockquote class="cs-pull-quote">
         <p>
-          Reddit is still a powerhouse for community-driven content, but its UI and
-          flows lag behind. Navigation feels heavier, and key actions take more
+          Reddit is a powerhouse for community content, but its UI and flows
+          lag behind. Navigation feels heavier, and key actions take more
           effort.
         </p>
       </blockquote>
@@ -147,19 +144,16 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="03" title="Usability testing" id="usability-testing" />
     <div class="cs-section-body">
       <p class="project-description">
-        6 tasks. 5 participants. 45 minutes each. We recorded every session. I took
-        notes and observed while my teammate facilitated. Afterward,
-        participants completed the SUS (System Usability Scale) questionnaire so
-        we could quantify what we observed.
+        6 tasks, 5 participants, 45 minutes each. I took notes and observed
+        while my teammate facilitated, and participants finished with the SUS
+        questionnaire.
       </p>
       <div class="cs-inline-detail">
         <p class="cs-subhead">Screener &amp; participant criteria</p>
         <p class="project-description">
-          We recruited 18 to 35 year olds, Reddit&apos;s core demographic, in two
-          groups: people who had used Reddit for at least six months, and people
-          who had never used it but knew what it was. Power users and newcomers
-          experience the app very differently, so comparing them showed where the
-          friction really lives.
+          We recruited 18 to 35 year olds, Reddit&apos;s core demographic: people
+          who had used it for six months or more, and people who knew it but
+          had never used it.
         </p>
         <PageLink
           aria-label="Full screener script (opens a new window)"
@@ -177,48 +171,38 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="04" title="Final report" id="final-report" />
     <div class="cs-section-body">
       <p class="project-description">
-        The average SUS score was <strong>74</strong>, not terrible but not great
-        either. The app works, but it doesn&apos;t shine: most participants
-        finished the tasks, but small hiccups piled up in four areas.
+        The average SUS score was <strong>74</strong>: the app works, but it
+        doesn&apos;t shine. Most participants finished the tasks, but small
+        hiccups piled up in four areas.
       </p>
-      <div class="cs-card-grid">
-        <Card cardType="outline">
-          <h3>1. Browsing works, creating doesn&apos;t</h3>
+      <Points>
+        <Point title="Browsing works, creating doesn&apos;t">
           <p>
-            Everyone could find content, but Reddit-specific actions like awarding
-            badges or creating communities tripped people up. More than once we heard
-            the same sentiment: <em>&ldquo;This feels like it&apos;s for more skilled
-            users.&rdquo;</em> The gap between consuming and contributing is too
-            wide.
+            Everyone found content, but awarding badges or creating communities
+            tripped people up. <em>&ldquo;This feels like it&apos;s for more
+            skilled users.&rdquo;</em>
           </p>
-        </Card>
-        <Card cardType="outline">
-          <h3>2. Too much stuff, all at once</h3>
+        </Point>
+        <Point title="Too much stuff, all at once">
           <p>
-            Search feels heavier than on other platforms, and content arrives without
-            enough structure. Participants clicked through more screens than expected
-            to reach the right thread, and endless community topics added more noise
-            than signal.
+            Search feels heavier than elsewhere, and content arrives without
+            enough structure. More noise than signal.
           </p>
-        </Card>
-        <Card cardType="outline">
-          <h3>3. Terminology that doesn&apos;t travel</h3>
+        </Point>
+        <Point title="Terminology that doesn&apos;t travel">
           <p>
-            What is the difference between &ldquo;reply&rdquo; and &ldquo;join a
-            conversation&rdquo;? What do &ldquo;upvote&rdquo; and &ldquo;awards&rdquo;
-            mean to a newcomer? Reddit&apos;s own language left users relying on trial
-            and error instead of feeling guided.
+            &ldquo;Reply&rdquo; versus &ldquo;join a conversation,&rdquo;
+            &ldquo;upvote,&rdquo; &ldquo;awards&rdquo;: newcomers relied on
+            trial and error.
           </p>
-        </Card>
-        <Card cardType="outline">
-          <h3>4. Hidden affordances, unclear feedback</h3>
+        </Point>
+        <Point title="Hidden affordances, unclear feedback">
           <p>
-            Some functions aren&apos;t clear, such as collapsing and expanding
-            comments. Adding moderator rules breaks the flow of creating a
-            community, and error messages are never clear to participants.
+            Collapsing comments and moderator rules were unclear, and error
+            messages never explained what went wrong.
           </p>
-        </Card>
-      </div>
+        </Point>
+      </Points>
       <PageLink
         aria-label="Final report (opens a new window)"
         href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
@@ -232,33 +216,25 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       id="what-i-learned-from-this-experience"
     />
     <div class="cs-section-body">
-      <div class="cs-card-grid">
-        <Card cardType="outline">
-          <h3>Our assumptions will surprise us</h3>
+      <Points columns={3}>
+        <Point title="Our assumptions will surprise us">
           <p>
-            I expected certain tasks to be nightmares, but some users picked them up
-            faster than we thought and others never hit the issue. You&apos;re not the
-            user, and watching real people is the only way to know.
+            I expected some tasks to be nightmares, but users picked them up
+            faster than expected. Watching real people is the only way to know.
           </p>
-        </Card>
-        <Card cardType="outline">
-          <h3>Pilot testing is non-negotiable</h3>
+        </Point>
+        <Point title="Pilot testing is non-negotiable">
           <p>
-            We ran pilots before the real sessions, and small things still went wrong,
-            like a confusing prompt or a flow that broke the rhythm. Every pilot
-            surfaced something we would have missed.
+            Pilots surfaced problems we would have missed, like a confusing
+            prompt and a flow that broke the rhythm.
           </p>
-        </Card>
-        <Card cardType="outline" className="md:col-span-2">
-          <h3>5 participants reveal a lot, but more would be better</h3>
+        </Point>
+        <Point title="Five participants reveal a lot, more would reveal more">
           <p>
-            Five people uncovered plenty, including unexpected bugs and behaviors.
-            But research is never &ldquo;done,&rdquo; and more participants would give
-            us stronger patterns and confidence. Five was enough to act on here, but
-            production work should aim higher.
+            Five was enough to act on, but production work should test more.
           </p>
-        </Card>
-      </div>
+        </Point>
+      </Points>
     </div>
 
     <SectionHeading

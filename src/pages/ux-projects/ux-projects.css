@@ -268,32 +268,64 @@
 }
 
 /* ============================================
-   CARD GRID (key findings, etc.)
+   POINTS (numbered findings, takeaways, fixes)
    ============================================ */
 
-.cs-card-grid {
+.cs-points {
+  counter-reset: cs-point;
   display: grid;
   gap: var(--cs-space-md);
   grid-template-columns: 1fr;
+  list-style: none;
+  padding: 0;
   width: 100%;
 }
 
 @media (min-width: 768px) {
-  .cs-card-grid {
-    grid-template-columns: 1fr 1fr;
+  .cs-points-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cs-points-3 {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.project-container .card h3 {
-  font-size: var(--cs-fs-h3);
-  font-weight: var(--cs-fw-medium);
-  margin-bottom: 0.25rem;
+.cs-point {
+  border: 1px solid rgba(var(--foreground), 0.14);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: var(--cs-space-md);
 }
 
-.cs-card-grid .card p,
-.cs-card-grid .card ul {
-  font-size: var(--cs-fs-body);
-  line-height: 1.55;
+.cs-points-numbered .cs-point::before {
+  color: rgba(var(--primary-color), 1);
+  content: counter(cs-point, decimal-leading-zero);
+  counter-increment: cs-point;
+  font-family: "Gabarito", Arial, Helvetica, sans-serif;
+  font-size: var(--cs-fs-h3);
+  line-height: 1;
+}
+
+.cs-point-title {
+  font-size: var(--cs-fs-h3);
+  font-weight: var(--cs-fw-medium);
+  line-height: 1.25;
+}
+
+.cs-point-body {
+  color: rgba(var(--foreground), 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cs-point-body ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 /* ============================================

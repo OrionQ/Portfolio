@@ -2,10 +2,11 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Chip from "../../components/chip/Chip.astro";
-import Card from "../../components/card/Card.astro";
 import CaseStudyFooterNav from "../../components/case-study/CaseStudyFooterNav.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
 import CaseStudyQuestion from "../../components/case-study/CaseStudyQuestion.astro";
+import Point from "../../components/case-study/Point.astro";
+import Points from "../../components/case-study/Points.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
 import Stat from "../../components/case-study/Stat.astro";
@@ -215,22 +216,19 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 
       <CaseStudyQuestion question="How do you turn a fragmented interface into one experience that scales?">
         <p class="project-description">
-          When I joined as the sole designer, UT Sage had just launched its beta to
-          faculty and students across UT Austin. The core features worked, but the
-          interface felt fragmented, with inconsistent design, accessibility gaps,
-          and missed UI details that left users confused and frustrated. My goal was
-          a unified, accessible experience that could grow with the product, and
-          look good too.
+          UT Sage had just launched its beta to UT Austin faculty and students. The
+          features worked, but the interface felt fragmented and left users confused.
+          As the sole designer, I set out to build a unified, accessible experience
+          that could scale.
         </p>
       </CaseStudyQuestion>
 
       <SectionHeading index="01" title="Where do I start?" id="where-do-i-start" />
       <div class="cs-section-body">
         <p class="project-description">
-          I started by testing the platform myself and found inconsistent icons,
-          font sizes, and styles, plus major accessibility issues like poor
-          contrast, small text, and no keyboard navigation. That is when I decided
-          to rebuild the design system from scratch.
+          I tested the platform myself and found inconsistent icons and styles plus
+          major accessibility issues: poor contrast, small text, and no keyboard
+          navigation. So I decided to rebuild the design system from scratch.
         </p>
         <div
           class="flex flex-row flex-wrap gap-4 min-w-0 w-full items-center"
@@ -274,10 +272,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          Before designing, I learned the existing design language. I asked the
-          previous designer about her rationale, requested lo-fi sketches from my
-          manager to see how the product evolved, and gathered regular feedback from
-          my manager, who summarized insights from users and researchers.
+          I studied the existing design language by talking to the previous designer,
+          reviewing my manager&apos;s lo-fi sketches, and gathering regular feedback
+          from my manager, who relayed insights from users and researchers.
         </p>
         <Image
           src={sageLofi}
@@ -302,9 +299,8 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          I created a new design system of 25+ standardized components, built to
-          meet WCAG 2.2 Level AA at the component level and backed by Figma tokens
-          from the start, so it scales and stays future-proof.
+          I built a design system of 25+ standardized components, meeting WCAG 2.2
+          Level AA at the component level and backed by Figma tokens so it scales.
         </p>
         <Image
           src={sageFoundations}
@@ -332,11 +328,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       <SectionHeading index="04" title="Recreate the pages" id="recreate-the-pages" />
       <div class="cs-section-body">
         <p class="project-description">
-          Using the new system, I iterated quickly on each page and updated
-          components as needed. My design engineering background helped here: I
-          worked closely with the lead front-end engineer to understand technical
-          constraints early and design solutions that were user-friendly and
-          technically sustainable.
+          I iterated on each page with the new system, working closely with the lead
+          front-end engineer so designs respected technical constraints. My design
+          engineering background helped.
         </p>
         <ul class="flex flex-col gap-8 items-center">
           <li class="flex flex-col gap-4 items-center">
@@ -400,9 +394,8 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          After nine months, I delivered a more accessible, unified UT Sage
-          prototype. The engineering team used my design system to rebuild
-          pages quickly, with better consistency and accessibility.
+          After nine months, I delivered a more accessible, unified prototype, and
+          engineers used the design system to rebuild pages quickly and consistently.
         </p>
         <ul class="flex flex-col gap-8 items-center">
           <li class="flex flex-col gap-4 items-center">
@@ -441,23 +434,22 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       <SectionHeading index="06" title="Outcomes" id="outcomes" />
       <div class="cs-section-body">
         <p class="project-description">
-          This redesign transformed UT Sage from a half-finished beta into a
-          coherent, accessible educational platform.
+          UT Sage went from a half-finished beta to a coherent, accessible platform.
         </p>
-        <div class="cs-card-grid">
-          <Card title="Accessibility" cardType="outline">
-            <p>Aiming for WCAG 2.2 Level AA compliance across all components, addressing color contrast, font sizing, and keyboard navigation.</p>
-          </Card>
-          <Card title="Consistency" cardType="outline">
-            <p>A 25+ component design system with Figma tokens keeps the design consistent across the platform.</p>
-          </Card>
-          <Card title="Developer efficiency" cardType="outline">
-            <p>The engineering team can build pages significantly faster with the systematized design system.</p>
-          </Card>
-          <Card title="Design sustainability" cardType="outline">
-            <p>When new features are added, their pages can be designed quickly on top of a robust design system.</p>
-          </Card>
-        </div>
+        <Points numbered={false}>
+          <Point title="Accessibility">
+            <p>WCAG 2.2 Level AA across all components: contrast, font sizing, and keyboard navigation.</p>
+          </Point>
+          <Point title="Consistency">
+            <p>25+ components with Figma tokens keep design consistent across the platform.</p>
+          </Point>
+          <Point title="Developer efficiency">
+            <p>Engineers build pages significantly faster.</p>
+          </Point>
+          <Point title="Design sustainability">
+            <p>New features can be designed quickly on the same system.</p>
+          </Point>
+        </Points>
       </div>
 
       <SectionHeading
@@ -467,17 +459,15 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          A solid design system is essential for scalable, high-quality results, and
-          my design engineering skills helped bridge design and development. If I
-          did it again, I would ask for more detailed feedback from users and
-          stakeholders, which could have improved some design decisions and user
-          flows.
+          A solid design system is essential for scalable results, and my design
+          engineering skills helped bridge design and development. Next time, I would
+          ask for more detailed feedback from users and stakeholders earlier.
         </p>
         <p class="cs-subhead">Next steps</p>
         <ul class="flex flex-col gap-2 project-description">
-          <li>Implement dark mode to improve accessibility and user choice.</li>
-          <li>Run broader user testing to gather feedback from diverse faculty and student populations.</li>
-          <li>Make iterative improvements based on testing insights to keep refining the experience.</li>
+          <li>Add dark mode for accessibility and user choice.</li>
+          <li>Test more broadly with diverse faculty and student populations.</li>
+          <li>Keep iterating from testing insights.</li>
         </ul>
       </div>
     </div>
@@ -524,10 +514,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
 
       <CaseStudyQuestion question="How can faculty trust an AI tutor before students ever see it?">
         <p class="project-description">
-          UT Sage lowers the barrier for faculty to configure AI tutors, but there
-          was no reliable way to test quality, misconceptions, and pedagogy before
-          students used a tutor. New faculty also had no onboarding to learn the
-          evaluation tool.
+          Faculty can configure AI tutors easily, but had no reliable way to test
+          quality, misconceptions, or pedagogy before students used one, and no
+          onboarding to learn the evaluation tool.
         </p>
       </CaseStudyQuestion>
 
@@ -537,23 +526,20 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
           Faculty could publish a tutor, but had no repeatable way to test
           how it would actually teach.
         </p>
-        <div class="cs-card-grid">
-          <Card title="How might we?" cardType="outline">
+        <Points numbered={false}>
+          <Point title="How might we?">
             <p>
-              Help faculty confidently assess and refine a tutor before it
-              goes live, with clear evidence, explainable ratings, and
-              updates they can approve?
+              Help faculty assess and refine a tutor before it goes live, with
+              clear evidence, explainable ratings, and updates they can approve?
             </p>
-          </Card>
-          <Card title="Design goal" cardType="outline">
+          </Point>
+          <Point title="Design goal">
             <p>
-              Pair approachable onboarding that builds a mental model of each
-              configuration field with an evaluation dashboard that takes
-              faculty from high-level warnings to granular checks,
-              suggestions, examples, and simulated dialogue.
+              Pair simple onboarding for each configuration field with a
+              dashboard that moves from high-level warnings to granular checks.
             </p>
-          </Card>
-        </div>
+          </Point>
+        </Points>
       </div>
 
       <SectionHeading
@@ -563,36 +549,35 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          I paired secondary research with historical interview data from UT Sage
-          papers to uncover configuration gaps, then translated AI evaluation
-          benchmarks into a scorecard instructors can read, anchored in classroom
-          teaching moves.
+          I paired secondary research with past UT Sage interview data to find
+          configuration gaps, then turned AI evaluation benchmarks into a scorecard
+          instructors can read.
         </p>
-        <div class="cs-card-grid">
-          <Card title="8 evaluation dimensions: response quality" cardType="outline">
+        <Points numbered={false}>
+          <Point title="8 evaluation dimensions: response quality">
             <ul class="list-disc pl-5 space-y-1.5">
-              <li><strong>D1 Instruction-following:</strong> honors faculty special instructions.</li>
-              <li><strong>D2 Truthfulness:</strong> keeps explanations accurate and avoids hallucinated content.</li>
-              <li><strong>D3 Style / tone:</strong> language is warm yet academically rigorous.</li>
-              <li><strong>D4 Visual reasoning:</strong> interprets and reasons about diagrams or graphs.</li>
-              <li><strong>D5 Visual perception:</strong> reads visual inputs shared by learners.</li>
-              <li><strong>D6 Calibration:</strong> pacing fits the learner profile.</li>
-              <li><strong>D7 Conciseness:</strong> keeps replies scoped appropriately.</li>
-              <li><strong>D8 Emotional responsiveness:</strong> addresses frustration constructively.</li>
+              <li><strong>D1 Instruction-following:</strong> honors faculty instructions.</li>
+              <li><strong>D2 Truthfulness:</strong> accurate, no hallucinated content.</li>
+              <li><strong>D3 Style / tone:</strong> warm yet academically rigorous.</li>
+              <li><strong>D4 Visual reasoning:</strong> interprets diagrams and graphs.</li>
+              <li><strong>D5 Visual perception:</strong> reads visual inputs from learners.</li>
+              <li><strong>D6 Calibration:</strong> pacing fits the learner.</li>
+              <li><strong>D7 Conciseness:</strong> replies stay scoped.</li>
+              <li><strong>D8 Emotional responsiveness:</strong> handles frustration constructively.</li>
             </ul>
-          </Card>
-          <Card title="7 tutoring skills: instructional behaviors" cardType="outline">
+          </Point>
+          <Point title="7 tutoring skills: instructional behaviors">
             <ul class="list-disc pl-5 space-y-1.5">
               <li><strong>T1</strong> Identifies misconceptions explicitly.</li>
-              <li><strong>T2</strong> Guides with questions instead of giving answers outright.</li>
-              <li><strong>T3</strong> Uses examples and analogies to demystify ideas.</li>
+              <li><strong>T2</strong> Guides with questions, not answers.</li>
+              <li><strong>T3</strong> Uses examples and analogies.</li>
               <li><strong>T4</strong> Offers alternate solution paths.</li>
               <li><strong>T5</strong> Scaffolds step-by-step when problems are dense.</li>
-              <li><strong>T6</strong> Recalls syllabus or uploaded resources when relevant.</li>
-              <li><strong>T7</strong> Accurately judges correct and incorrect steps in learner work.</li>
+              <li><strong>T6</strong> Recalls syllabus or uploaded resources.</li>
+              <li><strong>T7</strong> Judges correct and incorrect steps accurately.</li>
             </ul>
-          </Card>
-        </div>
+          </Point>
+        </Points>
       </div>
 
       <SectionHeading
@@ -602,9 +587,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          I iterated in Figma on two connected surfaces: tutorial overlays that
-          explain how Create, Configure, and Train map to tutor memory, and an
-          evaluation concept that surfaces key findings before the detail tabs.
+          Two surfaces, designed together in Figma: tutorial overlays explaining
+          Create, Configure, and Train, and an evaluation view that leads with key
+          findings.
         </p>
         <div
           class="capstone-proto-grid grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -695,33 +680,26 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          We ran moderated remote think-aloud sessions (30 to 45 minutes) with
-          four UT Austin faculty and instructional partners, who evaluated two
-          Figma prototypes: a guided tutorial overlay and the tutor
-          evaluation UI.
+          Four faculty and instructional partners tested two Figma prototypes in
+          moderated remote think-aloud sessions (30 to 45 minutes).
         </p>
-        <div class="cs-card-grid">
-          <Card cardType="outline">
-            <h3>Tutorial & language</h3>
-            <p>The language was confusing and didn&apos;t support learning, and several participants wanted more concrete examples.</p>
-          </Card>
-          <Card cardType="outline">
-            <h3>Cognitive load</h3>
-            <p>Empty states jumped straight into exhaustive detail on the evaluation page, and faculty felt overwhelmed by the amount of information.</p>
-          </Card>
-          <Card cardType="outline">
-            <h3>Fitness of the model</h3>
-            <p>Faculty wanted a way to customize the evaluation prompts to fit their needs.</p>
-          </Card>
-          <Card cardType="outline">
-            <h3>Surfacing severity</h3>
-            <p>Color coding helped, but some faculty wanted accessibility considered and extra cues to draw attention to critical issues.</p>
-          </Card>
-          <Card cardType="outline" className="md:col-span-2">
-            <h3>Evidence & authenticity</h3>
-            <p>Participants felt auto-fix and heavy nudging need visible scope and consent boundaries that protect instructor-authored ideas.</p>
-          </Card>
-        </div>
+        <Points>
+          <Point title="Tutorial &amp; language">
+            <p>The wording was confusing, and people wanted concrete examples.</p>
+          </Point>
+          <Point title="Cognitive load">
+            <p>Empty states jumped straight into exhaustive detail, and faculty felt overwhelmed.</p>
+          </Point>
+          <Point title="Fitness of the model">
+            <p>Faculty wanted to customize the evaluation prompts.</p>
+          </Point>
+          <Point title="Surfacing severity">
+            <p>Color coding helped, but critical issues needed extra cues and accessibility support.</p>
+          </Point>
+          <Point title="Evidence &amp; authenticity">
+            <p>Auto-fix and heavy nudging need visible scope and consent boundaries that protect instructors&apos; ideas.</p>
+          </Point>
+        </Points>
       </div>
 
       <SectionHeading
@@ -731,10 +709,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       />
       <div class="cs-section-body">
         <p class="project-description">
-          Research showed the need to stage complexity: summarize risk first, guide
-          faculty to prioritized fixes, and only then expose field-by-field review
-          or custom simulation prompts. Each tab isolates one workload to prevent
-          the &ldquo;everything at once&rdquo; fatigue faculty described.
+          I staged complexity: risk summary first, prioritized fixes next,
+          field-by-field detail last. Each tab isolates one job to avoid the
+          &ldquo;everything at once&rdquo; fatigue faculty described.
         </p>
         <div class="grid w-full grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           <div class="capstone-iteration-figure flex min-w-0 flex-col gap-2">
@@ -787,9 +764,9 @@ import facultyEvalTutorialStep from "../../images/faculty-eval-tutorial-step.png
       <SectionHeading index="06" title="Future directions" id="capstone-future" />
       <div class="cs-section-body">
         <ul class="list-disc pl-6 space-y-2 project-description">
-          <li>Ship tutorial copy that aligns highlights, narration, and live UI state, with concrete examples to further clarify the configuration fields.</li>
-          <li>Build explainable labeling for simulations (simulated learner transcripts vs. telemetry) and rethink Auto-fix so faculty stay the authors of misconception content unless they opt in.</li>
-          <li>Run follow-up moderated tests with Humanities and STEM instructors after engineering implementation, and extend benchmark suites per discipline as adoption grows.</li>
+          <li>Ship tutorial copy with concrete examples, aligned to highlights and live UI state.</li>
+          <li>Label simulations clearly and make Auto-fix opt-in so faculty stay the authors.</li>
+          <li>Run follow-up tests with Humanities and STEM instructors after implementation, and extend benchmarks per discipline.</li>
         </ul>
       </div>
     </div>

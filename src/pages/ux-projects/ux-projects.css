@@ -77,14 +77,6 @@
   margin-bottom: var(--cs-space-sm);
 }
 
-.cs-kicker {
-  color: rgba(var(--primary-color), 1);
-  font-size: var(--cs-fs-label);
-  font-weight: var(--cs-fw-strong);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
 .cs-title {
   font-size: var(--cs-fs-title);
   font-weight: var(--cs-fw-regular);

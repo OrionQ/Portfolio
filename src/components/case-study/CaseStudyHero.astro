@@ -3,20 +3,18 @@ import { Icon } from "astro-icon/components";
 import Link from "../link/Link.astro";
 
 interface Props {
-  kicker: string;
   title: string;
   tagline: string;
   prevHref?: string;
 }
 
-const { kicker, title, tagline, prevHref = "/#projects" } = Astro.props;
+const { title, tagline, prevHref = "/#projects" } = Astro.props;
 ---
 
 <header class="cs-hero cs-wide">
   <Link href={prevHref} underline className="cs-hero-back"
     ><Icon name="arrow-left-long" />Back to projects</Link
   >
-  <p class="cs-kicker">{kicker}</p>
   <h1 class="cs-title">{title}</h1>
   <p class="cs-tagline">{tagline}</p>
 </header>

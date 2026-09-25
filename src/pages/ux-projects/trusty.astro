@@ -24,21 +24,38 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
 <Layout title="Trusty - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <CaseStudyHero
-      kicker="Adobe Creative Jam, mobile UI"
       title="Trusty"
       tagline="A mobile app that helps users check the credibility of the news they read, with clear visual cues and a feed built from the sources they trust."
     />
 
     <div class="cs-hero-media cs-wide flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image format="jpeg" src={trustyLoading} alt="Trusty loading screen" width={473}
-          quality={100} />
-      <Image format="jpeg" src={trustyLanding} alt="Trusty landing page" width={473}
-          quality={100} />
-      <Image format="jpeg" src={trustyExplain} alt="Trusty explanation screen" width={488}
-          quality={100} />
+      <Image
+        format="jpeg"
+        src={trustyLoading}
+        alt="Trusty loading screen"
+        width={473}
+        quality={100}
+      />
+      <Image
+        format="jpeg"
+        src={trustyLanding}
+        alt="Trusty landing page"
+        width={473}
+        quality={100}
+      />
+      <Image
+        format="jpeg"
+        src={trustyExplain}
+        alt="Trusty explanation screen"
+        width={488}
+        quality={100}
+      />
     </div>
 
     <div class="cs-meta cs-wide">
+      <MetaItem label="Project type">
+        <p class="cs-inline-result">Adobe Creative Jam, mobile UI</p>
+      </MetaItem>
       <MetaItem label="My role">
         <Tag>UI designer</Tag>
         <Tag>Brand designer</Tag>
@@ -81,21 +98,23 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
       <div
         class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
       >
-        <Image format="jpeg"
-          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
+        <Image
+          format="jpeg"
           src={trustyBranding}
           alt="Branding of Trusty app"
           width={430}
           quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
-        />
-        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
+        />
+        <Image
+          format="jpeg"
           src={trustyDS}
           alt="Design system of Trusty app"
           width={458}
           quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
+          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
         />
       </div>
       <div class="cs-inline-detail">
@@ -123,21 +142,23 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
       <div
         class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
       >
-        <Image format="jpeg"
-          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
+        <Image
+          format="jpeg"
           src={trustyPersonalization}
           alt="Category preference setting page"
           width={390}
           quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
-        />
-        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
+        />
+        <Image
+          format="jpeg"
           src={trustyNewsPage}
           alt="Example news page with verification indicator"
           width={390}
           quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
+          style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
         />
       </div>
       <div class="cs-inline-detail">
@@ -158,13 +179,14 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
       </p>
     </div>
 
-    <Image format="jpeg"
-      style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
+    <Image
+      format="jpeg"
       src={trustyFlow}
-          width={2320}
-          quality={100}
       alt="Full user flow of the Trusty app"
+      width={2320}
+      quality={100}
       class="rounded-[var(--border-radius)] m-1 object-cover"
+      style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
     />
 
     <SectionHeading index="04" title="Feedback" id="feedback" />
@@ -179,7 +201,7 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
     </div>
 
     <CaseStudyFooterNav
-      prev={{ href: "/#projects", label: "Go back to the home page" }}
+      prev={{ href: "/#projects", label: "Back to all projects" }}
     />
   </div>
 </Layout>

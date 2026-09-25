@@ -21,22 +21,25 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 <Layout title="Reddit Usability Testing - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <CaseStudyHero
-      kicker="UX research case study"
       title="Reddit Usability Test"
       tagline="Reddit is one of the biggest platforms in the world, but its everyday flows still trip people up. We ran a comprehensive usability study of the mobile app to find out where, and what to fix."
     />
 
     <div class="cs-hero-media cs-wide flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image format="jpeg"
+      <Image
+        format="jpeg"
         src={redditThumbnail}
         alt="First screen of the Reddit app shown in a phone mock up"
         width={3000}
-          quality={100}
+        quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
     </div>
 
     <div class="cs-meta cs-wide">
+      <MetaItem label="Project type">
+        <p class="cs-inline-result">UX research case study</p>
+      </MetaItem>
       <MetaItem label="My role">
         <p class="cs-inline-result">UX Researcher</p>
       </MetaItem>
@@ -124,7 +127,8 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
         href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
         newTab>Full competitive analysis</PageLink
       >
-      <Image format="jpeg"
+      <Image
+        format="jpeg"
         src={redditCA}
         alt="Competitive analysis comparing Reddit against Quora, Stack Exchange, X, Discord, Tumblr, and TikTok"
         width={2400}

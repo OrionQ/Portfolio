@@ -33,7 +33,7 @@
 
 .cs-title {
   font-size: clamp(2.75rem, 7vw, 5.5rem);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 0.98;
   max-width: 20ch;
@@ -113,7 +113,7 @@
   box-shadow: 0 1px 4px rgba(var(--shadow-color));
   flex-shrink: 0;
   height: auto;
-  max-height: 26rem;
+  max-height: 32rem;
   object-fit: cover;
   width: auto;
 }
@@ -131,7 +131,7 @@
 }
 
 .cs-stat {
-  border-left: 2px solid rgba(var(--primary-color), 1);
+  border-left: 3px solid rgba(var(--secondary-color), 1);
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -139,7 +139,7 @@
 }
 
 .cs-stat-value {
-  color: rgba(var(--primary-color), 1);
+  color: rgba(var(--secondary-color), 1);
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -184,9 +184,9 @@
 }
 
 .cs-section-index {
-  color: rgba(var(--primary-color), 1);
-  font-size: 0.75rem;
-  font-weight: 700;
+  color: rgba(var(--secondary-color), 1);
+  font-size: 0.8125rem;
+  font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }

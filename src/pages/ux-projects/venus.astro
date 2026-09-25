@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
+import CaseStudyFooterNav from "../../components/case-study/CaseStudyFooterNav.astro";
+import CaseStudyQuestion from "../../components/case-study/CaseStudyQuestion.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
 import Chip from "../../components/chip/Chip.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
@@ -9,7 +11,6 @@ import PageLink from "../../components/page-link/PageLink.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
 import Stat from "../../components/case-study/Stat.astro";
 import StatRow from "../../components/case-study/StatRow.astro";
-import Link from "../../components/link/Link.astro";
 import Layout from "../../layouts/Layout.astro";
 import "./ux-projects.css";
 
@@ -42,23 +43,23 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
 <Layout title="Venus - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <CaseStudyHero
-      kicker="Team project — UX prototyping"
+      kicker="Team project, UX prototyping"
       title="Venus"
-      tagline="Most dating apps turn love into a numbers game. Venus helps you find matches worth investing in — and plan the date after."
+      tagline="Most dating apps turn love into a numbers game. Venus helps you find your best matches and plan your dates."
     />
 
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image
-        format="jpeg"
+    <div class="cs-hero-media cs-wide flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+      <Image format="jpeg"
         src={venusThumbnail}
         alt="Venus app shown in a phone mockup"
-        width={1500}
+        width={1080}
+          quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
     </div>
 
-    <div class="cs-meta">
-      <MetaItem label="Role">
+    <div class="cs-meta cs-wide">
+      <MetaItem label="My role">
         <p class="cs-inline-result">Product Designer</p>
       </MetaItem>
       <MetaItem label="Tools">
@@ -76,29 +77,33 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
 
     <StatRow>
       <Stat value="18+" label="components in the design system" />
-      <Stat value="7" label="tasks tested with 14 total participants" />
+      <Stat value="7" label="tasks in face-to-face moderated usability tests" />
       <Stat value="22–34" label="age range of test participants" />
     </StatRow>
 
-    <p class="cs-subhead">Inspired by the art, built by the team</p>
+    <CaseStudyQuestion
+      long
+      question="Endless swiping keeps people chasing better matches while they grow less invested in the ones they already have, and we set out to change that."
+    />
+
     <div
       class="flex flex-row gap-4 flex-wrap md:flex-nowrap justify-center items-center"
     >
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusArt}
         alt="Still Life with Silver and Gold Vessels, Fruit, and Flowers at Blanton Museum"
-        width={300}
+        width={600}
+          quality={100}
         class="rounded-[var(--border-radius)] object-cover flex basis-1/2 w-full h-full"
       />
       <p class="project-description">
-        The idea started at a museum, in front of Pierre Nicolas
+        The idea started at the Blanton Museum of Art, in front of Pierre Nicolas
         Huilliot&apos;s <em
-          >Still Life with Silver and Gold Vessels, Fruit, and
-          Flowers</em
-        >. Venus watches over the scene; Cupid stands beside her. So the
-        app became Venus — with an AI matchmaker, Cupid, doing the
-        suggesting.
+        >Still Life with Silver and Gold Vessels, Fruit, and
+        Flowers</em
+        >. Venus, the goddess of love, watches over the scene with Cupid beside
+        her, so we imagined the app as Venus guiding users to love, with Cupid
+        suggesting matches and dates.
       </p>
     </div>
 
@@ -109,25 +114,26 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <p class="project-description">
-        I sketched the storyboard first: Cupid hand-picks matches, users
-        plan dates in-app. We interviewed people about what they liked and
-        hated in dating apps today, then mapped it into a story map of what
-        the product needed to do.
+        I sketched a storyboard first: Cupid, an AI assistant, acts as a
+        matchmaker, users get hand-picked matches, and they can plan dates in the
+        app. We then interviewed people about what they like and dislike in
+        current dating apps, built an affinity diagram, and mapped the tasks we
+        wanted to support.
       </p>
-      <div class="flex flex-row gap-4 md:flex-nowrap flex-wrap">
-        <Image
-          format="jpeg"
+      <div class="flex flex-row gap-4 md:flex-nowrap flex-wrap justify-center">
+        <Image format="jpeg"
           src={venusStoryboard}
           alt="Venus storyboard"
-          width={450}
+          width={1509}
+          quality={100}
           class="rounded-[var(--border-radius)] object-cover"
         />
       </div>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusStoryMap}
         alt="Venus story map"
-        width={2000}
+        width={1724}
+          quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
       <PageLink
@@ -144,36 +150,36 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <p class="project-description">
-        I built the match flow: how users see Cupid&apos;s picks, and what
-        they can do with each one.
+        I created the match flow: how users see Cupid&apos;s picks and what
+        they can do with each match. The team covered onboarding, edit
+        profile, progress, and the icebreaker game.
       </p>
       <ul class="flex flex-col gap-8 items-center">
         <li class="flex flex-col gap-4 items-center">
           <strong>Match screen</strong>
-          <Image
-            format="jpeg"
+          <Image format="jpeg"
             src={venusMatchLofi}
             alt="Low-fi prototype of the match screen"
-            width={800}
+            width={1870}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
           <p>
-            No swiping. Open a profile, choose to talk. Unmatching lets you
-            pick a reason, or write your own.
+            No swiping: users open a recommended profile and choose to talk. I also
+            added an unmatch flow where they can pick a common reason or describe
+            their own.
           </p>
         </li>
         <li class="flex flex-col gap-4 items-center">
           <strong>Progress screen</strong>
-          <Image
-            format="jpeg"
+          <Image format="jpeg"
             src={venusProgressLofi}
             alt="Low-fi prototype of the progress screen"
-            width={800}
+            width={1378}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
-          <p>Current matches, and trends in who you like.</p>
+          <p>How users are doing with current matches, and trends in who they like.</p>
         </li>
       </ul>
       <PageLink
@@ -190,43 +196,42 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <p class="project-description">
-        No reds or pinks — we skipped &ldquo;love at first swipe.&rdquo;
-        <strong>Ice blue</strong> and <strong>Storm</strong> carry the
-        palette instead: calm, trustworthy, different from every other
-        dating app. <strong>Playwright US Trad</strong> nods to Venus&apos;
-        mythological roots; <strong>Poppins</strong> keeps body text
-        readable on small screens.
+        I skipped aggressive reds and pinks so the app wouldn&apos;t feel like
+        &ldquo;love at first swipe.&rdquo; <strong>Ice blue</strong> is our primary
+        color and <strong>Storm</strong> is our action color, both calm and
+        trustworthy, and different from other dating apps. Since the app is named
+        after Venus, a classic Greek figure, the logo font is
+        <strong>Playwrite US Trad</strong> for a classic feel, with
+        <strong>Poppins</strong> for readable body text on small screens.
       </p>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusColor}
         alt="Venus design system color palette"
-        width={1200}
+        width={1526}
         quality={100}
-        class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
+        class="rounded-[var(--border-radius)] block mx-auto max-w-full h-auto object-cover"
       />
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusFont}
         alt="Venus design system font"
-        width={1200}
+        width={1114}
         quality={100}
-        class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
+        class="rounded-[var(--border-radius)] block mx-auto max-w-full h-auto object-cover"
       />
       <div class="cs-inline-detail">
         <p class="cs-subhead">Components &amp; the design system</p>
         <p class="project-description">
-          18+ components, consistent radius and spacing. A teammate added
-          color variables for hover and active states, so we could move
-          fast without breaking consistency.
+          A good design system keeps design consistent and efficient, and building
+          it is one of my favorite parts of the process. I built 18+ components with
+          consistent radius and spacing, and a teammate added color variables for
+          states like hover and active, which kept the hi-fi prototype consistent.
         </p>
-        <Image
-          format="jpeg"
+        <Image format="jpeg"
           src={venusDesignSystem}
           alt="Venus design system components"
-          width={1200}
+          width={1712}
           quality={100}
-          class="block mx-auto max-w-full h-auto rounded-[var(--border-radius)] object-cover"
+          class="rounded-[var(--border-radius)] block mx-auto max-w-full h-auto object-cover"
         />
       </div>
       <PageLink
@@ -244,56 +249,52 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     <div class="cs-section-body">
       <p class="project-description">
         We brought the design system into a hi-fi prototype with
-        micro-animations and real interactions.
+        microanimations and interactions.
       </p>
       <ul class="flex flex-col gap-8 items-center">
         <li class="flex flex-col gap-4 items-center">
           <strong>Onboarding</strong>
-          <Image
-            format="jpeg"
+          <Image format="png"
             src={venusOnboardHifi}
             alt="Hi-fi prototype of the onboarding screen"
-            width={800}
+            width={1025}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
-          <p>Profile setup and app mechanics. Testing later flagged this for rework.</p>
+          <p>Profile setup and app mechanics. Testing later showed issues here.</p>
         </li>
         <li class="flex flex-col gap-4 items-center">
           <strong>Match screen</strong>
-          <Image
-            format="jpeg"
+          <Image format="png"
             src={venusMatchHifi}
             alt="Hi-fi prototype of the match screen"
-            width={800}
+            width={1025}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
-          <p>Match and unmatch, with reasons to pick from.</p>
+          <p>The match and unmatch flow, with reasons users can pick from.</p>
         </li>
         <li class="flex flex-col gap-4 items-center">
           <strong>Chat & icebreaker</strong>
-          <Image
-            format="jpeg"
+          <Image format="png"
             src={venusChatHifi}
             alt="Hi-fi prototype of the chat screen"
-            width={800}
+            width={1025}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
-          <p>A game to learn about a match before you message them.</p>
+          <p>The chat screen, plus an icebreaker game so users can learn about a match before messaging.</p>
         </li>
         <li class="flex flex-col gap-4 items-center">
           <strong>Home / progress</strong>
-          <Image
-            format="jpeg"
+          <Image format="png"
             src={venusProgressHifi}
             alt="Hi-fi prototype of the home/progress screen"
-            width={800}
+            width={1024}
             quality={100}
             class="rounded-[var(--border-radius)] object-cover"
           />
-          <p>Current matches, and how they&apos;re going.</p>
+          <p>Current matches and how they&apos;re doing in the app.</p>
         </li>
       </ul>
       <p>Some microanimations we added:</p>
@@ -331,47 +332,55 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <p class="project-description">
-        We tested face-to-face: <strong>7 tasks</strong>, each of us with
-        <strong>2 participants</strong> (ages 22–34). Notes and post-task
-        forms went into a shared feedback board.
+        We didn&apos;t want the app built in a small dark room by a group of
+        designers, so we put it in front of real users. We ran moderated,
+        face-to-face tests with <strong>7 tasks</strong>, and each of us tested
+        <strong>2 participants</strong> (ages 22 to 34, mixed gender and
+        sexuality). Notes and post-task forms went into a feedback board, which we
+        synthesized into what worked and what didn&apos;t.
       </p>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusFeedback}
         alt="Usability testing feedback and affinity diagram"
-        width={1500}
+        width={2400}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
       <p class="cs-subhead">Key findings we acted on</p>
       <div class="cs-card-grid">
-        <Card cardType="secondary">
+        <Card cardType="outline">
           <h3>Most liked ✅ Icebreaker</h3>
           <p>
-            Eased first-contact tension: <em
+            It eased first-contact tension: <em
               >&ldquo;This is a fun way to interact from the
               beginning.&rdquo;</em
+            > and <em
+              >&ldquo;Makes me feel more comfortable and will help spark
+              conversation.&rdquo;</em
             >
           </p>
         </Card>
-        <Card cardType="secondary">
+        <Card cardType="outline">
           <h3>Least liked 🙅 Milestones</h3>
           <p>
-            <em
+            Milestones caused the most trouble, so we knew we had to rethink
+            them: <em>&ldquo;Don&apos;t really understand the point.&rdquo;</em>
+            and <em
               >&ldquo;Don&apos;t see the point if the app is meant to make
               meaningful connections.&rdquo;</em
             >
           </p>
         </Card>
-        <Card cardType="secondary" className="md:col-span-2">
+        <Card cardType="outline" className="md:col-span-2">
           <h3>Main confusion 😵‍💫 Onboarding & unmatching</h3>
           <p>
-            <em
-              >&ldquo;Tutorial was confusing — too much text right off the
-              bat.&rdquo;</em
+            Many users found the onboarding tutorials overwhelming and had
+            trouble unmatching: <em
+              >&ldquo;Tutorial was confusing and hard to follow, there was too
+              much text/info right off the bat.&rdquo;</em
             > and <em
-              >&ldquo;Difficult to unmatch — would expect that button in the
-              chat.&rdquo;</em
+              >&ldquo;Difficult to unmatch — would expect the unmatch button to
+              be in the chat.&rdquo;</em
             >
           </p>
         </Card>
@@ -390,65 +399,67 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <p class="project-description">
-        With limited time left, I prioritized the fixes most impactful to
-        the experience.
+        After classifying the issues, I focused on the major ones from our
+        feedback summary. With limited time, I prioritized the issues that
+        most affected the user experience.
       </p>
 
-      <Card cardType="secondary" className="flex flex-col gap-2">
+      <Card cardType="outline" className="flex flex-col gap-2">
         <h3>6.1 Onboarding</h3>
         <p>
-          <strong>Issue:</strong> too many tooltips at once — nobody
-          remembered any of it.
-          <strong>Fix:</strong> one pop-up per screen, shown only the
-          first time you land there.
+          <strong>Issue:</strong> too many tooltips and instruction pages at once,
+          so people couldn&apos;t take it in or use it later.
+          <strong>Fix:</strong> contextual pop-ups shown the first time a user
+          reaches each screen, with a dimmed background and one focused message.
         </p>
       </Card>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusOnboardingFix}
         alt="Fix on the onboarding screen"
-        width={1500}
+        width={2400}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
-      <Card cardType="secondary" className="flex flex-col gap-2">
+      <Card cardType="outline" className="flex flex-col gap-2">
         <h3>6.2 Milestones &amp; Cupid&apos;s recommendations</h3>
         <p>
-          <strong>Issue:</strong> milestones and match trends looked the
-          same. <strong>Fix:</strong> dropped the progress bar, reordered
-          milestones, added &ldquo;Cupid&apos;s dating ideas.&rdquo;
+          <strong>Issue:</strong> people couldn&apos;t tell milestones from match
+          trends, and the progress bar conveyed little. <strong>Fix:</strong> I
+          reordered the milestones, dropped the progress bar, and added
+          &ldquo;Cupid&apos;s dating ideas,&rdquo; which suggest dates (locations,
+          availability) based on ongoing conversations.
         </p>
       </Card>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusHomepageFix}
         alt="Fix on the homepage screen"
-        width={1500}
+        width={2400}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
-      <Card cardType="secondary" className="flex flex-col gap-2">
+      <Card cardType="outline" className="flex flex-col gap-2">
         <h3>6.3 Match trends</h3>
         <p>
-          <strong>Issue:</strong> trends felt disconnected from real
-          matches. <strong>Fix:</strong> combined Cupid&apos;s notes with
-          trends and match profiles.
+          <strong>Issue:</strong> trends didn&apos;t feel tied to actual matches, and
+          the layout felt flat. <strong>Fix:</strong> I combined Cupid&apos;s notes
+          with trends and added match profiles beside &ldquo;my match pattern,&rdquo;
+          so users can see who fits those trends.
         </p>
       </Card>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusTrendsFix}
         alt="Fix on the trends screen"
-        width={1500}
+        width={2176}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
-      <Card cardType="secondary" className="flex flex-col gap-2">
+      <Card cardType="outline" className="flex flex-col gap-2">
         <h3>6.4 Match profile</h3>
         <p>
-          <strong>Issue:</strong> tapping a match in chat did nothing.
-          <strong>Fix:</strong> tap the photo to open their profile.
-          Unmatch from there.
+          <strong>Issue:</strong> in chat, tapping a match gave no feedback, and
+          users couldn&apos;t unmatch once a conversation started.
+          <strong>Fix:</strong> tapping a match&apos;s picture now opens their full
+          profile, where users can also unmatch.
         </p>
       </Card>
       <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
@@ -467,19 +478,20 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
           class="rounded-[2.7rem] object-cover"
         />
       </div>
-      <Card cardType="secondary" className="flex flex-col gap-2">
+      <Card cardType="outline" className="flex flex-col gap-2">
         <h3>6.5 Icebreaker</h3>
         <p>
-          <strong>Issue:</strong> no names on match photos.
-          <strong>Fix:</strong> names below every photo, and the
-          questionnaire now looks nothing like chat.
+          <strong>Issue:</strong> match images had no names, so people couldn&apos;t
+          tell who was who, and it was unclear whether results went to the match or
+          needed a message afterward. <strong>Fix:</strong> profile cards follow the
+          &ldquo;Today&apos;s match&rdquo; style with names below the photo, and the
+          questionnaire is visually distinct from chat.
         </p>
       </Card>
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={venusIcebreakerFix}
         alt="Fix on the icebreaker screen"
-        width={1500}
+        width={2400}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
@@ -495,8 +507,9 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
       </div>
 
       <p class="project-description">
-        With conditional logic and micro-animations added throughout, here
-        is the finished prototype — give it a spin.
+        After this round, I finalized the hi-fi prototype by adding conditional
+        logic and microanimations. Give it a spin through the link or the embedded
+        version below.
       </p>
       <PageLink
         aria-label="Final prototype (opens a new window)"
@@ -523,37 +536,34 @@ import venusThumbnail from "../../images/Venus_thumbnail.jpeg";
     <div class="cs-section-body">
       <p class="cs-subhead">Future plans</p>
       <ul class="flex flex-col gap-2 project-description">
-        <li>Wider, more comprehensive rounds of usability testing.</li>
-        <li>Integrate Cupid further — shortcuts to reservations and calendar blocking.</li>
-        <li>Have Cupid surface safety tips and flag unhealthy conversation patterns.</li>
-        <li>Keep iterating on design and content.</li>
+        <li>Run more comprehensive usability tests with a wider range of participants.</li>
+        <li>Integrate Cupid more deeply, with shortcuts for making reservations and blocking out your calendar.</li>
+        <li>Have Cupid suggest safety tips and help users recognize unhealthy conversations or warning signs.</li>
+        <li>Continue iterating on the design and content.</li>
       </ul>
       <p class="cs-subhead">What I learned</p>
       <div class="cs-card-grid">
-        <Card cardType="secondary">
-          <h3>Collaboration is hard but worth it</h3>
-          <p>Different backgrounds, different habits. Clear ownership and good communication made it work.</p>
+        <Card cardType="outline">
+          <h3>Collaborating with teammates is challenging but rewarding</h3>
+          <p>Different backgrounds and experience levels meant we had to work at understanding each other. Clear ownership, good communication, and leaning on each other&apos;s strengths made it work.</p>
         </Card>
-        <Card cardType="secondary">
-          <h3>Stay open-minded</h3>
-          <p>I wanted dark green; the team picked ice blue. Users liked ice blue. Letting go was the right call.</p>
+        <Card cardType="outline">
+          <h3>Be open-minded with opinions</h3>
+          <p>I originally pushed for dark green as our primary color, but the team
+preferred ice blue, and users liked it. Letting go of that preference was
+the right call.</p>
         </Card>
-        <Card cardType="secondary" className="md:col-span-2">
+        <Card cardType="outline" className="md:col-span-2">
           <h3>Prioritize when time is limited</h3>
-          <p>We couldn&apos;t build everything we imagined. Focusing on what mattered most shipped something usable.</p>
+          <p>We couldn&apos;t build everything we imagined. Focusing on the most important features and iterating from feedback helped us ship something usable and learn from it.</p>
         </Card>
       </div>
     </div>
 
-    <div class="cs-footer-nav">
-      <Link href="/ux-projects/ut-sage" underline
-        ><Icon name="arrow-left-long" />Previous case study: UT Sage</Link
-      >
-      <Link href="/ux-projects/reddit" underline
-        >Next case study: Reddit Usability Test<Icon
-          name="arrow-right-long"
-        /></Link
-      >
-    </div>
+    <CaseStudyFooterNav
+      prev={{ href: "/ux-projects/ut-sage", label: "Previous case study: UT Sage" }}
+      next={{ href: "/ux-projects/reddit", label: "Next case study: Reddit Usability Test" }}
+      divider={false}
+    />
   </div>
 </Layout>

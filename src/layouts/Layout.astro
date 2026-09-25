@@ -130,27 +130,33 @@ const websiteStructuredData = {
           .forEach((el) => observer.observe(el));
       });
       document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".scroll-link").forEach((link) => {
-          link.addEventListener(
-            "click",
-            function (this: HTMLAnchorElement, event) {
-              const isHomePage = window.location.pathname === "/";
-              if (isHomePage) {
-                event.preventDefault(); // Prevent default jump
-              }
-              const targetId = this.getAttribute("href")?.substring(1);
-              const target = targetId
-                ? document.getElementById(targetId)
-                : null;
-              const offset = 150; // Adjust this value based on your header height
+        const offset = 150;
+        const scrollToId = (id: string, behavior: ScrollBehavior) => {
+          const target = document.getElementById(id);
+          if (!target) return;
+          const top =
+            target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: Math.max(0, top), behavior });
+        };
 
-              if (target) {
-                const topPosition = target.offsetTop - offset;
-                window.scrollTo({ top: topPosition, behavior: "smooth" });
-              }
-            },
-          );
+        document.querySelectorAll(".scroll-link").forEach((link) => {
+          link.addEventListener("click", function (this: HTMLAnchorElement, event) {
+            if (window.location.pathname !== "/") return;
+            event.preventDefault();
+            const targetId = this.getAttribute("href")?.split("#")[1];
+            if (targetId) scrollToId(targetId, "smooth");
+          });
         });
+
+        const initialHash = window.location.hash.slice(1);
+        if (initialHash === "projects") {
+          window.addEventListener(
+            "load",
+            () => scrollToId(initialHash, "auto"),
+            { once: true },
+          );
+          if (document.readyState === "complete") scrollToId(initialHash, "auto");
+        }
       });
     </script>
   </body>

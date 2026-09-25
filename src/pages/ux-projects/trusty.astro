@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import CaseStudyFooterNav from "../../components/case-study/CaseStudyFooterNav.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import SectionHeading from "../../components/case-study/SectionHeading.astro";
@@ -24,19 +24,22 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
 <Layout title="Trusty - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <CaseStudyHero
-      kicker="Adobe Creative Jam — Mobile UI"
+      kicker="Adobe Creative Jam, mobile UI"
       title="Trusty"
-      tagline="Your guide to credible news. Trusty flags misinformation at a glance, so you know what to trust before you share it."
+      tagline="A mobile app that helps users check the credibility of the news they read, with clear visual cues and a feed built from the sources they trust."
     />
 
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image format="jpeg" src={trustyLoading} alt="Trusty loading screen" width={250} />
-      <Image format="jpeg" src={trustyLanding} alt="Trusty landing page" width={250} />
-      <Image format="jpeg" src={trustyExplain} alt="Trusty explanation screen" width={250} />
+    <div class="cs-hero-media cs-wide flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+      <Image format="jpeg" src={trustyLoading} alt="Trusty loading screen" width={473}
+          quality={100} />
+      <Image format="jpeg" src={trustyLanding} alt="Trusty landing page" width={473}
+          quality={100} />
+      <Image format="jpeg" src={trustyExplain} alt="Trusty explanation screen" width={488}
+          quality={100} />
     </div>
 
-    <div class="cs-meta">
-      <MetaItem label="Role">
+    <div class="cs-meta cs-wide">
+      <MetaItem label="My role">
         <Tag>UI designer</Tag>
         <Tag>Brand designer</Tag>
       </MetaItem>
@@ -46,24 +49,23 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
         <Tag>Illustrator</Tag>
       </MetaItem>
       <MetaItem label="Result">
-        <p class="cs-inline-result">Top 20 of 315 — honorable mention</p>
+        <p class="cs-inline-result">Honorable mention, top 20 of 315</p>
       </MetaItem>
     </div>
 
     <StatRow>
-      <Stat value="315" label="teams competed in the Adobe Creative Jam" />
+      <Stat value="315" label="competitors in the 2021 Adobe Creative Jam" />
       <Stat value="Top 20" label="finish, earning an honorable mention" />
-      <Stat value="48 hrs" label="from brief to finished prototype" />
     </StatRow>
 
     <SectionHeading index="01" title="Research" id="research" />
     <div class="cs-section-body">
       <p class="project-description">
-        <strong>Problem:</strong> most people can&apos;t tell fact from
-        misinformation on social media. We had no time to survey users — the
-        Jam&apos;s clock was ticking. So we studied trusted apps instead:
-        Apple News, The New York Times. What makes a platform feel serious
-        and unbiased? A clean, neutral interface.
+        People struggle to verify the credibility of the news they see on social
+        media. We analyzed major news apps, including Apple News and The New York
+        Times, and found that a neutral, clean, and transparent interface makes a
+        platform feel serious and unbiased. The Jam&apos;s tight schedule left no
+        time for user surveys, so we built our design on those insights.
       </p>
     </div>
 
@@ -71,37 +73,41 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
     <div class="cs-section-body">
       <p class="cs-subhead">Branding</p>
       <p class="project-description">
-        Dark gray and creamy white — neutral, not cold. A serif
-        &ldquo;T&rdquo; wordmark borrows the formality of print, a nod to
+        We started with the branding. To feel neutral yet inviting, we chose dark
+        gray and creamy white, plus a simple serif &ldquo;T&rdquo; for the logo
+        that conveys a formal, trustworthy tone and recalls print newspapers like
         <em>The New York Times</em>.
       </p>
       <div
         class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
       >
-        <Image
-          format="jpeg"
+        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
           src={trustyBranding}
           alt="Branding of Trusty app"
-          width={250}
+          width={430}
+          quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
         />
-        <Image
-          format="jpeg"
+        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
           src={trustyDS}
           alt="Design system of Trusty app"
-          width={250}
+          width={458}
+          quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
         />
       </div>
       <div class="cs-inline-detail">
         <p class="cs-subhead">Design system details</p>
         <p class="project-description">
-          Near-black on near-white, like Apple News. Blue for actions;
-          green and red for &ldquo;verified&rdquo; and &ldquo;not
-          verified&rdquo; — colors people already read instinctively.
-          Georgia for headlines, Arial for body text, Montserrat for the UI.
+          We used near-black text on a near-white background, like Apple News, to
+          keep the information serious and credible. Blue is our neutral action
+          color, and green and red mark &ldquo;verified&rdquo; and &ldquo;not
+          verified,&rdquo; since most people already recognize what they mean.
+          Georgia sets a formal tone for headlines, Arial keeps body text readable,
+          and Montserrat gives the system a modern look that doesn&apos;t compete
+          with the news.
         </p>
       </div>
     </div>
@@ -109,36 +115,37 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
     <SectionHeading index="03" title="User flow" id="user-flow" />
     <div class="cs-section-body">
       <p class="project-description">
-        <strong>Solution:</strong> new users pick their trusted sources
-        first. Then every headline gets a clear cue: a green check for
-        verified, a red &ldquo;X&rdquo; for debunked, plus a link to other
-        outlets covering the same story.
+        New users start by choosing their preferred news categories and sources.
+        Each headline then shows a green check if verified or a red
+        &ldquo;X&rdquo; if debunked, with a link to other outlets covering the
+        same story so users can check it themselves.
       </p>
       <div
         class="flex lg:flex-col flex-shrink-0 justify-evenly overflow-x-auto"
       >
-        <Image
-          format="jpeg"
+        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
           src={trustyPersonalization}
           alt="Category preference setting page"
-          width={250}
+          width={390}
+          quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
         />
-        <Image
-          format="jpeg"
+        <Image format="jpeg"
           style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
           src={trustyNewsPage}
           alt="Example news page with verification indicator"
-          width={250}
+          width={390}
+          quality={100}
           class="rounded-[var(--border-radius)] m-1 object-cover"
         />
       </div>
       <div class="cs-inline-detail">
         <p class="cs-subhead">Handling misinformation</p>
         <p class="project-description">
-          If an article turns out false, anyone who read it gets notified —
-          with links to what actually happened.
+          If an article is later proven to be misinformation, everyone who
+          engaged with it gets a notification, along with links to articles
+          that explain what actually happened.
         </p>
       </div>
       <p class="project-description">
@@ -151,10 +158,11 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
       </p>
     </div>
 
-    <Image
-      format="jpeg"
+    <Image format="jpeg"
       style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.15)" }}
       src={trustyFlow}
+          width={2320}
+          quality={100}
       alt="Full user flow of the Trusty app"
       class="rounded-[var(--border-radius)] m-1 object-cover"
     />
@@ -162,17 +170,16 @@ import trustyPersonalization from "../../images/Trusty-personalization.png";
     <SectionHeading index="04" title="Feedback" id="feedback" />
     <div class="cs-section-body">
       <p class="project-description">
-        We didn&apos;t have time to user-test, but the showcase drew real
-        attention. Judges pointed us toward more color, bolder type, and
-        stricter spacing for accessibility — all good notes for the next
-        round.
+        Our design drew a lot of attention at the showcase. We didn&apos;t have
+        comprehensive user feedback, but we learned it could use more color,
+        larger and heavier type for readability, and spacing that follows
+        accessibility standards. Other teams&apos; approaches also gave us ideas
+        for making our prototype more accessible and innovative.
       </p>
     </div>
 
-    <div class="cs-footer-nav">
-      <Link href="/" underline
-        ><Icon name="arrow-left-long" />Go back to the home page</Link
-      >
-    </div>
+    <CaseStudyFooterNav
+      prev={{ href: "/#projects", label: "Go back to the home page" }}
+    />
   </div>
 </Layout>

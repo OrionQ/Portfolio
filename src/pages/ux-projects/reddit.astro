@@ -1,7 +1,7 @@
 ---
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Card from "../../components/card/Card.astro";
+import CaseStudyFooterNav from "../../components/case-study/CaseStudyFooterNav.astro";
 import CaseStudyHero from "../../components/case-study/CaseStudyHero.astro";
 import MetaItem from "../../components/case-study/MetaItem.astro";
 import PageLink from "../../components/page-link/PageLink.astro";
@@ -21,32 +21,34 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
 <Layout title="Reddit Usability Testing - UX Project | Xiaolei Qin's Portfolio">
   <div class="project-container">
     <CaseStudyHero
-      kicker="Case study — UX research"
+      kicker="UX research case study"
       title="Reddit Usability Test"
-      tagline="Reddit is huge, but its everyday flows still trip people up. We ran a research sprint to find out where — and what to fix."
+      tagline="Reddit is one of the biggest platforms in the world, but its everyday flows still trip people up. We ran a comprehensive usability study of the mobile app to find out where, and what to fix."
     />
 
-    <div class="flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
-      <Image
-        format="jpeg"
+    <div class="cs-hero-media cs-wide flex md:flex-row gap-4 overflow-x-auto lg:justify-center">
+      <Image format="jpeg"
         src={redditThumbnail}
         alt="First screen of the Reddit app shown in a phone mock up"
-        width={1500}
+        width={3000}
+          quality={100}
         class="rounded-[var(--border-radius)] object-cover"
       />
     </div>
 
-    <div class="cs-meta">
-      <MetaItem label="Role">
+    <div class="cs-meta cs-wide">
+      <MetaItem label="My role">
         <p class="cs-inline-result">UX Researcher</p>
       </MetaItem>
       <MetaItem label="Tools">
         <Tag>Figma</Tag>
         <Tag>Miro</Tag>
         <Tag>Canva</Tag>
+        <Tag>Google Docs</Tag>
+        <Tag>Google Forms</Tag>
         <Tag>Zoom</Tag>
       </MetaItem>
-      <MetaItem label="Read it as a deck">
+      <MetaItem label="Prefer a presentation?">
         <PageLink
           aria-label="Final report (opens a new window)"
           href="https://www.canva.com/design/DAGkBKFw-OM/RQgTUzrfN2INXlD2s_C2QA/view?utm_content=DAGkBKFw-OM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcc176fb3c2"
@@ -56,23 +58,41 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     </div>
 
     <StatRow>
-      <Stat value="27" label="usability issues found across the app" />
-      <Stat value="6" label="Nielsen heuristics used to evaluate every flow" />
-      <Stat value="5" label="participants across two user segments" />
-      <Stat value="74" label="average SUS score — solid, not shining" />
+      <Stat value="27" label="usability issues found in the heuristic evaluation" />
+      <Stat value="10" label="Nielsen heuristics used to evaluate the app" />
+      <Stat value="5" label="participants across two user groups" />
+      <Stat value="74" label="average SUS score" />
     </StatRow>
+
+    <div class="cs-section-body">
+      <p class="cs-subhead">The problem we found</p>
+      <p class="project-description">
+        Reddit is one of the largest platforms in the world, yet my team and I
+        kept hitting the same friction: confusing icons, unclear flows, and
+        features that felt like they belonged to another app. Why did it sometimes
+        feel hard to learn the basics?
+      </p>
+      <p class="cs-subhead">The goal</p>
+      <p class="project-description">
+        We ran a full usability study, combining a heuristic evaluation, a
+        competitive analysis, and live user interviews, to find what is broken,
+        who it affects, and where the biggest opportunities are.
+      </p>
+    </div>
 
     <SectionHeading index="01" title="Heuristic evaluation" id="heuristic-evaluation" />
     <div class="cs-section-body">
-      <div class="flex lg:flex-row flex-col gap-4">
-        <div class="flex flex-col gap-4 justify-center">
+      <div class="flex lg:flex-row flex-col gap-8 items-start">
+        <div class="flex flex-col gap-4 justify-center lg:basis-3/5">
           <p class="project-description">
-            <strong>Problem:</strong> we checked every screen against Nielsen&apos;s
-            10 usability heuristics. Five kept breaking:
-            <strong>consistency</strong>, <strong>aesthetics</strong>,
-            <strong>flexibility</strong>, <strong>user control</strong>, and
-            <strong>help &amp; documentation</strong>. Small issues, but they
-            stack up.
+            Using Nielsen&apos;s 10 usability heuristics, we reviewed the app screen
+            by screen and found <strong>27 usability issues</strong>, each rated on
+            Nielsen&apos;s severity scale. Five areas stood out:
+            <strong>consistency and standards</strong>, <strong>aesthetics</strong>,
+            <strong>flexibility and efficiency of use</strong>,
+            <strong>user control and freedom</strong>, and
+            <strong>help and documentation</strong>. Many issues violated multiple
+            heuristics, and even minor ones could overwhelm users over time.
           </p>
           <PageLink
             aria-label="Full heuristic evaluation (opens a new window)"
@@ -84,8 +104,9 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
           format="jpeg"
           src={redditHE}
           alt="Five heuristics we prioritized: consistency of standards; flexibility and efficiency of use; aesthetic and minimalist design; help users recognize, diagnose, and recover from errors; help and documentation"
-          width={1300}
-          class="rounded-[var(--border-radius)] object-cover w-full h-full"
+          width={772}
+          quality={100}
+          class="rounded-[var(--border-radius)] object-cover lg:basis-2/5 lg:max-w-[22rem] w-full h-auto"
         />
       </div>
     </div>
@@ -93,28 +114,28 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="02" title="Competitive analysis" id="competitive-analysis" />
     <div class="cs-section-body">
       <p class="project-description">
-        We compared Reddit to six apps: <strong>Quora, Stack Exchange, X,
-        Discord, Tumblr, TikTok</strong>. Where does Reddit win, and where
-        does it fall short?
+        We compared Reddit to three direct competitors,
+        <strong>Quora, Stack Exchange, and X</strong>, and three indirect ones,
+        <strong>Discord, Tumblr, and TikTok</strong>, to see what Reddit does well
+        and where others do it better.
       </p>
       <PageLink
         aria-label="Full competitive analysis (opens a new window)"
         href="https://www.canva.com/design/DAGe8G6NhbA/RKMjFCkoP5bBLE0NgogfIw/view?utm_content=DAGe8G6NhbA&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0be0717be7"
         newTab>Full competitive analysis</PageLink
       >
-      <Image
-        format="jpeg"
+      <Image format="jpeg"
         src={redditCA}
         alt="Competitive analysis comparing Reddit against Quora, Stack Exchange, X, Discord, Tumblr, and TikTok"
-        width={2000}
+        width={2400}
         quality={100}
         class="rounded-[var(--border-radius)] object-cover w-full h-full"
       />
       <blockquote class="cs-pull-quote">
         <p>
-          &ldquo;Reddit wins on community content. It loses on ease —
-          navigation is heavier, and key actions take more taps than they
-          should.&rdquo;
+          Reddit is still a powerhouse for community-driven content, but its UI and
+          flows lag behind. Navigation feels heavier, and key actions take more
+          effort.
         </p>
       </blockquote>
     </div>
@@ -122,18 +143,19 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="03" title="Usability testing" id="usability-testing" />
     <div class="cs-section-body">
       <p class="project-description">
-        6 tasks. 5 participants. 45 minutes each. We tested two groups —
-        <strong>Reddit regulars</strong> and <strong>curious
-        newcomers</strong> — because they hit different friction. I took
-        notes and observed while my teammate ran the sessions. Afterward,
-        everyone filled out the SUS survey.
+        6 tasks. 5 participants. 45 minutes each. We recorded every session. I took
+        notes and observed while my teammate facilitated. Afterward,
+        participants completed the SUS (System Usability Scale) questionnaire so
+        we could quantify what we observed.
       </p>
       <div class="cs-inline-detail">
         <p class="cs-subhead">Screener &amp; participant criteria</p>
         <p class="project-description">
-          We recruited from Reddit&apos;s core 18–35 age range, split by
-          how long they&apos;d used the app. Same tasks, two very different
-          experiences.
+          We recruited 18 to 35 year olds, Reddit&apos;s core demographic, in two
+          groups: people who had used Reddit for at least six months, and people
+          who had never used it but knew what it was. Power users and newcomers
+          experience the app very differently, so comparing them showed where the
+          friction really lives.
         </p>
         <PageLink
           aria-label="Full screener script (opens a new window)"
@@ -151,38 +173,45 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     <SectionHeading index="04" title="Final report" id="final-report" />
     <div class="cs-section-body">
       <p class="project-description">
-        <strong>Problem:</strong> most people finished the tasks, but it
-        wasn&apos;t smooth. Average SUS score: <strong>74</strong>. Works, but
-        doesn&apos;t shine. Four issues kept showing up.
+        The average SUS score was <strong>74</strong>, not terrible but not great
+        either. The app works, but it doesn&apos;t shine: most participants
+        finished the tasks, but small hiccups piled up in four areas.
       </p>
       <div class="cs-card-grid">
-        <Card cardType="secondary">
+        <Card cardType="outline">
           <h3>1. Browsing works, creating doesn&apos;t</h3>
           <p>
-            Everyone found content fast. But posting or joining a community
-            tripped people up. <em>&ldquo;This feels like it&apos;s for more
-            skilled users.&rdquo;</em>
+            Everyone could find content, but Reddit-specific actions like awarding
+            badges or creating communities tripped people up. More than once we heard
+            the same sentiment: <em>&ldquo;This feels like it&apos;s for more skilled
+            users.&rdquo;</em> The gap between consuming and contributing is too
+            wide.
           </p>
         </Card>
-        <Card cardType="secondary">
-          <h3>2. Too much, all at once</h3>
+        <Card cardType="outline">
+          <h3>2. Too much stuff, all at once</h3>
           <p>
-            Search feels heavier than on other apps. Content floods in with
-            no structure. More noise than signal.
+            Search feels heavier than on other platforms, and content arrives without
+            enough structure. Participants clicked through more screens than expected
+            to reach the right thread, and endless community topics added more noise
+            than signal.
           </p>
         </Card>
-        <Card cardType="secondary">
-          <h3>3. Words that don&apos;t travel</h3>
+        <Card cardType="outline">
+          <h3>3. Terminology that doesn&apos;t travel</h3>
           <p>
-            &ldquo;Reply&rdquo; vs. &ldquo;join a conversation&rdquo;?
-            Reddit&apos;s own language left newcomers guessing.
+            What is the difference between &ldquo;reply&rdquo; and &ldquo;join a
+            conversation&rdquo;? What do &ldquo;upvote&rdquo; and &ldquo;awards&rdquo;
+            mean to a newcomer? Reddit&apos;s own language left users relying on trial
+            and error instead of feeling guided.
           </p>
         </Card>
-        <Card cardType="secondary">
-          <h3>4. Unclear feedback</h3>
+        <Card cardType="outline">
+          <h3>4. Hidden affordances, unclear feedback</h3>
           <p>
-            Collapsing comments, mod rules, error states — none gave a
-            clear signal about what just happened.
+            Some functions aren&apos;t clear, such as collapsing and expanding
+            comments. Adding moderator rules breaks the flow of creating a
+            community, and error messages are never clear to participants.
           </p>
         </Card>
       </div>
@@ -200,28 +229,29 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
     />
     <div class="cs-section-body">
       <div class="cs-card-grid">
-        <Card cardType="secondary">
+        <Card cardType="outline">
           <h3>Our assumptions will surprise us</h3>
           <p>
-            I expected some tasks to be nightmares. Some users breezed
-            through; others hit issues I never predicted. You&apos;re not
-            the user — watching real people is the only way to know.
+            I expected certain tasks to be nightmares, but some users picked them up
+            faster than we thought and others never hit the issue. You&apos;re not the
+            user, and watching real people is the only way to know.
           </p>
         </Card>
-        <Card cardType="secondary">
+        <Card cardType="outline">
           <h3>Pilot testing is non-negotiable</h3>
           <p>
-            We piloted first. Small things still broke — a confusing
-            prompt, an awkward flow. Skipping that step would have cost us
-            real sessions.
+            We ran pilots before the real sessions, and small things still went wrong,
+            like a confusing prompt or a flow that broke the rhythm. Every pilot
+            surfaced something we would have missed.
           </p>
         </Card>
-        <Card cardType="secondary" className="md:col-span-2">
-          <h3>5 participants reveal a lot — more would reveal even more</h3>
+        <Card cardType="outline" className="md:col-span-2">
+          <h3>5 participants reveal a lot, but more would be better</h3>
           <p>
-            Five people surfaced plenty. But research is never
-            &ldquo;done.&rdquo; Enough to act on here; for production,
-            we&apos;d test more.
+            Five people uncovered plenty, including unexpected bugs and behaviors.
+            But research is never &ldquo;done,&rdquo; and more participants would give
+            us stronger patterns and confidence. Five was enough to act on here, but
+            production work should aim higher.
           </p>
         </Card>
       </div>
@@ -271,13 +301,10 @@ import redditThumbnail from "../../images/Reddit_thumbnail.jpeg";
       >
     </div>
 
-    <div class="cs-footer-nav">
-      <Link href="/ux-projects/venus" underline
-        ><Icon name="arrow-left-long" />Previous case study: Venus</Link
-      >
-      <Link href="https://nexusbythecosmos.framer.website/" newTab underline
-        >Next case study: Nexus</Link
-      >
-    </div>
+    <CaseStudyFooterNav
+      prev={{ href: "/ux-projects/venus", label: "Previous case study: Venus" }}
+      next={{ href: "https://nexusbythecosmos.framer.website/", label: "Next case study: Nexus", newTab: true }}
+      divider={false}
+    />
   </div>
 </Layout>

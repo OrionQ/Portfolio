@@ -1,0 +1,37 @@
+---
+import { Icon } from "astro-icon/components";
+import Link from "../link/Link.astro";
+
+interface NavLink {
+  href: string;
+  label: string;
+  newTab?: boolean;
+}
+
+interface Props {
+  prev?: NavLink;
+  next?: NavLink;
+  divider?: boolean;
+}
+
+const { prev, next, divider = true } = Astro.props;
+---
+
+<nav class:list={["cs-footer-nav", "cs-wide", { "cs-footer-nav-plain": !divider }]}>
+  {
+    prev && (
+      <Link href={prev.href} underline>
+        <Icon name="arrow-left-long" />
+        {prev.label}
+      </Link>
+    )
+  }
+  {
+    next && (
+      <Link href={next.href} newTab={next.newTab} underline>
+        {next.label}
+        {!next.newTab && <Icon name="arrow-right-long" />}
+      </Link>
+    )
+  }
+</nav>

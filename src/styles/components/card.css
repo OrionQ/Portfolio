@@ -17,6 +17,12 @@
   border: 2px solid rgba(var(--secondary-color), 1);
 }
 
+.card-outline {
+  background-color: transparent;
+  border: 1px solid rgba(var(--foreground), 0.14);
+  box-shadow: none;
+}
+
 @media (prefers-contrast: more) {
   .card {
     border: 2px solid black;

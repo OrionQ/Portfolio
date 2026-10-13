@@ -49,7 +49,7 @@ const isHomePage = Astro.url.pathname === "/";
 
     <!-- Desktop Navigation -->
     <div class="header__actions flex gap-4 flex-row items-center">
-      <div class="gap-8 items-center hidden md:flex md:flex-row">
+      <div class="header__links gap-8 items-center hidden md:flex md:flex-row">
         <Link
           href={isHomePage ? "#projects" : "/#projects"}
           className="scroll-link">Projects</Link

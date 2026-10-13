@@ -145,6 +145,40 @@
   padding-inline: 0.5rem;
 }
 
+.theme-picker-desktop .theme-button {
+  max-inline-size: 2.5rem;
+  overflow: hidden;
+  transition:
+    max-inline-size 0.3s ease,
+    margin-inline-start 0.3s ease,
+    opacity 0.25s ease,
+    padding-inline 0.3s ease,
+    border-width 0.3s ease;
+}
+
+@media (min-width: 1000px) and (hover: hover) and (pointer: fine) {
+  .theme-picker-desktop {
+    gap: 0;
+  }
+
+  .theme-picker-desktop .theme-button + .theme-button {
+    margin-inline-start: 0.5rem;
+  }
+
+  .theme-picker-desktop:not(:hover):not(:has(:focus-visible)) .theme-button:not(.active) {
+    border-inline-width: 0;
+    margin-inline-start: 0;
+    max-inline-size: 0;
+    opacity: 0;
+    padding-inline: 0;
+    pointer-events: none;
+  }
+
+  .theme-picker-desktop:not(:hover):not(:has(:focus-visible)) .theme-button.active {
+    margin-inline-start: 0;
+  }
+}
+
 .theme-picker-mobile {
   background-color: rgba(var(--floating-color), 0.8);
   backdrop-filter: blur(10px);
@@ -152,16 +186,16 @@
   box-shadow: 0 4px 16px rgba(var(--shadow-color));
   display: none;
   gap: 0.5rem;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  padding-block: 0.5rem;
-  padding-inline: 0.5rem;
+  grid-template-columns: repeat(3, auto);
+  inset-block-start: calc(100% + 0.5rem);
+  inset-inline-end: 0;
+  padding: 0.5rem;
   position: absolute;
   z-index: 1000;
 }
 
 .theme-picker-mobile.show {
-  display: flex;
+  display: grid;
 }
 
 @media (min-width: 1000px) {
@@ -171,5 +205,11 @@
 
   .theme-picker-desktop {
     display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-picker-desktop .theme-button {
+    transition: none;
   }
 }

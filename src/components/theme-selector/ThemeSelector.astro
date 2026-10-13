@@ -25,12 +25,13 @@ const themes = ["blue", "pink", "green", "brown", "mono", "retro"];
     <button
       class="theme-dropdown-button"
       id="themeDropdownButton"
-      aria-label="Open color theme menu"
+      aria-label="Color theme"
+      aria-controls="themePicker"
       aria-expanded="false"
     >
       <Icon name="swatch" size={24} aria-hidden="true" />
     </button>
-    <div id="themePicker" class="theme-picker-mobile" role="menu" aria-label="Color theme selector">
+    <div id="themePicker" class="theme-picker-mobile" role="group" aria-label="Color theme selector">
       {themes.map((theme) => (
         <button
           class="theme-button"
@@ -38,7 +39,6 @@ const themes = ["blue", "pink", "green", "brown", "mono", "retro"];
           aria-label={`Select ${theme} theme`}
           aria-pressed="false"
           title={theme.charAt(0).toUpperCase() + theme.slice(1)}
-          role="menuitem"
         >
           <span class="color-swatch" aria-hidden="true"></span>
         </button>
@@ -113,8 +113,13 @@ const themes = ["blue", "pink", "green", "brown", "mono", "retro"];
       document.documentElement.setAttribute("data-theme", theme);
       localStorage.setItem("colorTheme", theme);
       updateThemeButtons(theme);
-      document.getElementById("themePicker")?.classList.remove("show");
-      document.getElementById("themeDropdownButton")?.setAttribute("aria-expanded", "false");
+      const pickerEl = document.getElementById("themePicker");
+      if (pickerEl?.classList.contains("show")) {
+        pickerEl.classList.remove("show");
+        const toggle = document.getElementById("themeDropdownButton");
+        toggle?.setAttribute("aria-expanded", "false");
+        toggle?.focus();
+      }
       announceTheme(`${theme.charAt(0).toUpperCase() + theme.slice(1)} theme selected`);
     });
   });
@@ -125,6 +130,16 @@ const themes = ["blue", "pink", "green", "brown", "mono", "retro"];
     event.stopPropagation();
     const open = picker?.classList.toggle("show") ?? false;
     dropdownButton.setAttribute("aria-expanded", open ? "true" : "false");
+    if (open && event.detail === 0) {
+      (picker?.querySelector(".theme-button.active") ?? picker?.querySelector(".theme-button"))?.focus();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !picker?.classList.contains("show")) return;
+    picker.classList.remove("show");
+    dropdownButton?.setAttribute("aria-expanded", "false");
+    dropdownButton?.focus();
   });
 
   document.addEventListener("click", (event) => {
